@@ -15,7 +15,8 @@
   use_timestep_estimator = .true.
 
   ode_max_steps = 1000
-  scaling_method = 1
+  scaling_method = 2
+  ode_method = 1
   retry_burn = .false.
   renormalize_abundances = .false.
 
@@ -27,6 +28,6 @@
   atol_temp = 1.0d-9
 
   small_x = 1.d-16
-  SMALL_X_SAFE = 1.d-20
+  SMALL_X_SAFE = 1.d-16
   
 /
