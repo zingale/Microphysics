@@ -53,7 +53,17 @@ contains
 
   end subroutine network_init
 
+  
+  subroutine network_finalize
 
+    implicit none
+
+    ! Call the actual network finalize subroutine.
+    call actual_network_finalize()
+    
+  end subroutine network_finalize
+
+  
   function network_species_index(name) result(r)
 
     character(len=*) :: name
