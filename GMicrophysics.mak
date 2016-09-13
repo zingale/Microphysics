@@ -158,3 +158,4 @@ clean ::
 
 realclean ::
 	$(RM) helm_table.dat
+	$(RM) 23Na-23Ne_electroncapture.dat 23Ne-23Na_betadecay.dat
