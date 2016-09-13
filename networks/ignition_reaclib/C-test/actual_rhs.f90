@@ -16,16 +16,30 @@ module actual_rhs_module
   type :: rate_eval_t
      double precision :: unscreened_rates(4, nrates)
      double precision :: screened_rates(nrates)
-     double precision :: dqweak(nrat_tabular)
-     double precision :: epart(nrat_tabular)
   end type rate_eval_t
   
 contains
 
-  subroutine actual_rhs_init()
-    ! STUB FOR MAESTRO'S TEST_REACT. ALL THE INIT IS DONE BY BURNER_INIT
-    return
+  subroutine actual_rhs_init
+    use reaclib_rates, only: init_reaclib, net_screening_init
+    use table_rates, only: init_tabular
+
+    implicit none
+    
+    call init_reaclib
+    call init_tabular
+    call net_screening_init
   end subroutine actual_rhs_init
+  
+  subroutine actual_rhs_finalize
+    use reaclib_rates, only: term_reaclib
+    use table_rates, only: term_tabular
+
+    implicit none
+    
+    call term_reaclib
+    call term_tabular
+  end subroutine actual_rhs_finalize
   
   subroutine update_unevolved_species(state)
     ! STUB FOR INTEGRATOR
@@ -34,6 +48,8 @@ contains
   end subroutine update_unevolved_species
 
   subroutine evaluate_rates(state, rate_eval)
+    !$acc routine seq
+    
     type(burn_t)     :: state
     type(rate_eval_t), intent(out) :: rate_eval
     type(plasma_state) :: pstate

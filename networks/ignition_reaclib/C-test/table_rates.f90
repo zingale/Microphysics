@@ -39,42 +39,42 @@ module table_rates
      integer :: num_header 
   end type table_read_info
 
-  type(table_info), dimension(num_tables) :: table_meta
-  type(table_read_info), dimension(num_tables) :: table_read_meta
+  ! type(table_info), dimension(num_tables) :: table_meta
+  ! type(table_read_info), dimension(num_tables) :: table_read_meta
 
-  ! Create the device pointers for this array of derived type.
-  !$acc declare create(table_meta)    
+  ! ! Create the device pointers for this array of derived type.
+  ! !$acc declare create(table_meta)    
   
 contains
 
   subroutine init_tabular()
-    integer :: n
+    ! integer :: n
 
     
-    do n = 1, num_tables
-       call init_tab_info(table_meta(n), table_read_meta(n))
-       ! For scalars or arrays with size known at compile-time, do update device
-       ! to move them to the device and point the derived type pointers at them.
-       !$acc update device(table_meta(n)%num_rhoy)
-       !$acc update device(table_meta(n)%num_temp)
-       !$acc update device(table_meta(n)%num_vars)
+    ! do n = 1, num_tables
+    !    call init_tab_info(table_meta(n), table_read_meta(n))
+    !    ! For scalars or arrays with size known at compile-time, do update device
+    !    ! to move them to the device and point the derived type pointers at them.
+    !    !$acc update device(table_meta(n)%num_rhoy)
+    !    !$acc update device(table_meta(n)%num_temp)
+    !    !$acc update device(table_meta(n)%num_vars)
 
-       ! For dynamic arrays, do enter data copyin to move their data to the device
-       ! and then point the derived type pointers to these arrays on the device.
-       ! If you do update device instead, the device gets the host memory addresses
-       ! for these dynamic arrays instead of device memory addresses.
-       !$acc enter data copyin(table_meta(n)%rate_table)
-       !$acc enter data copyin(table_meta(n)%rhoy_table)
-       !$acc enter data copyin(table_meta(n)%temp_table)
-    end do
+    !    ! For dynamic arrays, do enter data copyin to move their data to the device
+    !    ! and then point the derived type pointers to these arrays on the device.
+    !    ! If you do update device instead, the device gets the host memory addresses
+    !    ! for these dynamic arrays instead of device memory addresses.
+    !    !$acc enter data copyin(table_meta(n)%rate_table)
+    !    !$acc enter data copyin(table_meta(n)%rhoy_table)
+    !    !$acc enter data copyin(table_meta(n)%temp_table)
+    ! end do
   end subroutine init_tabular
 
-  subroutine term_table_meta()
-    integer :: n
-    do n = 1, num_tables
-       call term_tab_info(table_meta(n))
-    end do
-  end subroutine term_table_meta
+  subroutine term_tabular
+    ! integer :: n
+    ! do n = 1, num_tables
+    !    call term_tab_info(table_meta(n))
+    ! end do
+  end subroutine term_tabular
 
   subroutine init_tab_info(self, self_read)
     type(table_info) :: self
