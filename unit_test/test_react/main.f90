@@ -124,10 +124,6 @@ program test_react
   nX = extent(mla%mba%pd(1),3)
 
   allocate(state(0:nrho-1, 0:nT-1, 0:nX-1, pf % n_plot_comps))
-
-  ! Allocate the flattened/sorted state
-  flatlen = nrho * nT * nX
-  allocate(state_flat_sort(flatlen, pf % n_plot_comps))
   
   dlogrho = (log10(dens_max) - log10(dens_min))/(nrho - 1)
   dlogT   = (log10(temp_max) - log10(temp_min))/(nT - 1)
@@ -231,6 +227,10 @@ program test_react
      end do
 
      write(*,*) 'Sorted linked list created'
+
+     ! Allocate the flattened/sorted state
+     flatlen = (hi(3)-lo(3)+1) * (hi(2)-lo(2)+1) * (hi(1)-lo(1)+1)
+     allocate(state_flat_sort(flatlen, pf % n_plot_comps))
      
      ! Create flattened and sorted state
      ii = 1
@@ -340,6 +340,10 @@ program test_react
 
      ! Store outgoing state
      sp(:,:,:,:) = state(:,:,:,:)
+
+     ! Cleanup flattened/sorted state and linked list
+     deallocate(state_flat_sort)
+     call trunk % delete_children
   enddo
 
   ! note: integer division
@@ -358,13 +362,7 @@ program test_react
   call write_job_info(out_name, mla%mba)
 
 
-  ! if you (or a subroutine) built it, destroy it!
-  
-  ! Deallocate flattened/sorted state
-  deallocate(state_flat_sort)
-  ! Deallocate linked list
-  call trunk % delete_children
-  
+  ! if you (or a subroutine) built it, destroy it!  
   do n = 1,nlevs
     call destroy(s(n))
   end do
