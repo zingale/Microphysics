@@ -179,7 +179,7 @@ program test_react
 
      write(*,*) 'Incoming state created'
 
-     ! Create a linked list containing the sorted incoming state
+     ! Create a linked list containing the indices for the sorted incoming state
      do kk = lo(3), hi(3)
         do jj = lo(2), hi(2)
            do ii = lo(1), hi(1)
