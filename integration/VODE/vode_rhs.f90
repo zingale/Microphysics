@@ -4,7 +4,7 @@
 
   subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
 
-    use actual_network, only: aion, nspec_evolve
+    use actual_network, only: aion, nspec_evolve, ihe4, ini56
     use bl_types, only: dp_t
     use burn_type_module, only: burn_t, net_ienuc, net_itemp
     use bl_constants_module, only: ZERO, ONE
@@ -14,7 +14,7 @@
                                     integrate_temperature, integrate_energy
     use vode_type_module, only: clean_state, renormalize_species, update_thermodynamics, &
                                 burn_to_vode, vode_to_burn
-    use rpar_indices, only: n_rpar_comps, irp_y_init, irp_t_sound, irp_i
+    use rpar_indices, only: n_rpar_comps, irp_y_init, irp_t_sound, irp_i, irp_t0, irp_dens
 
     implicit none
 
@@ -26,6 +26,8 @@
     type (burn_t) :: burn_state
 
     real(dp_t) :: limit_factor, t_sound, t_enuc
+
+    integer :: lun
 
     ! We are integrating a system of
     !
@@ -55,6 +57,24 @@
 
     burn_state % time = time
     call actual_rhs(burn_state)
+
+    if (rpar(irp_i) == 250.0) then
+       open(newunit=lun, file="zone_250.0", status="unknown", position="append")
+       write(lun, *) time+rpar(irp_t0), rpar(irp_dens), y(ihe4), y(ini56)
+       close(lun)
+    endif
+
+    if (rpar(irp_i) == 300.0) then
+       open(newunit=lun, file="zone_300.0", status="unknown", position="append")
+       write(lun, *) time+rpar(irp_t0), rpar(irp_dens), y(ihe4), y(ini56)
+       close(lun)
+    endif
+
+    if (rpar(irp_i) == 350.0) then
+       open(newunit=lun, file="zone_350.0", status="unknown", position="append")
+       write(lun, *) time+rpar(irp_t0), rpar(irp_dens), y(ihe4), y(ini56)
+       close(lun)
+    endif
 
     ! We integrate X, not Y
     burn_state % ydot(1:nspec_evolve) = &

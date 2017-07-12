@@ -5,7 +5,7 @@
 
 subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
 
-  use actual_network, only: aion, nspec_evolve
+  use actual_network, only: aion, nspec_evolve, ihe4, ini56
   use bl_types, only: dp_t
   use burn_type_module, only: burn_t, net_ienuc, net_itemp
   use bl_constants_module, only: ZERO, ONE
@@ -13,6 +13,7 @@ subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
   use vode_type_module, only: clean_state, renormalize_species, &
        rhs_to_vode, vode_to_burn
   use rpar_indices
+  use sdc_type_module
 
   implicit none
 
@@ -22,6 +23,8 @@ subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
   real(dp_t), intent(  OUT) :: ydot(neq)
 
   type (burn_t) :: burn_state
+
+  integer :: lun
 
   ydot = ZERO
 
@@ -38,6 +41,24 @@ subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
   ! call the specific network to get the RHS
 
   call actual_rhs(burn_state)
+
+    if (rpar(irp_i) == 250.0) then
+       open(newunit=lun, file="zone_250.0.sdc", status="unknown", position="append")
+       write(lun, *) time+rpar(irp_t0), rpar(irp_SRHO), y(SFS-1+ihe4), y(SFS-1+ini56)
+       close(lun)
+    endif
+
+    if (rpar(irp_i) == 300.0) then
+       open(newunit=lun, file="zone_300.0.sdc", status="unknown", position="append")
+       write(lun, *) time+rpar(irp_t0), rpar(irp_SRHO), y(SFS-1+ihe4), y(SFS-1+ini56)
+       close(lun)
+    endif
+
+    if (rpar(irp_i) == 350.0) then
+       open(newunit=lun, file="zone_350.0.sdc", status="unknown", position="append")
+       write(lun, *) time+rpar(irp_t0), rpar(irp_SRHO), y(SFS-1+ihe4), y(SFS-1+ini56)
+       close(lun)
+    endif
 
   ! convert back to the vode type -- this will add the advective terms
 
