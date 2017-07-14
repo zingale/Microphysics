@@ -60,6 +60,12 @@ subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
        close(lun)
     endif
 
+    if (rpar(irp_i) == 400.0) then
+       open(newunit=lun, file="zone_400.0.sdc", status="unknown", position="append")
+       write(lun, *) time+rpar(irp_t0), rpar(irp_SRHO), y(SFS-1+ihe4), y(SFS-1+ini56)
+       close(lun)
+    endif
+
   ! convert back to the vode type -- this will add the advective terms
 
   call rhs_to_vode(time, burn_state, y, ydot, rpar)

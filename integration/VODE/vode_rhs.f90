@@ -76,6 +76,12 @@
        close(lun)
     endif
 
+    if (rpar(irp_i) == 400.0) then
+       open(newunit=lun, file="zone_400.0", status="unknown", position="append")
+       write(lun, *) time+rpar(irp_t0), rpar(irp_dens), y(ihe4), y(ini56)
+       close(lun)
+    endif
+
     ! We integrate X, not Y
     burn_state % ydot(1:nspec_evolve) = &
          burn_state % ydot(1:nspec_evolve) * aion(1:nspec_evolve)
