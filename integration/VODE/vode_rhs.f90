@@ -28,6 +28,7 @@
     real(dp_t) :: limit_factor, t_sound, t_enuc
 
     integer :: lun
+    character (len=5) :: szone
 
     ! We are integrating a system of
     !
@@ -58,29 +59,17 @@
     burn_state % time = time
     call actual_rhs(burn_state)
 
-    if (rpar(irp_i) == 250.0) then
-       open(newunit=lun, file="zone_250.0", status="unknown", position="append")
-       write(lun, *) time+rpar(irp_t0), rpar(irp_dens), y(ihe4), y(ini56)
+    if (rpar(irp_i) == 250.0 .or. &
+        rpar(irp_i) == 300.0 .or. &
+        rpar(irp_i) == 350.0 .or. &
+        rpar(irp_i) == 400.0) then
+
+       write(szone, "(i0.5)") int(rpar(irp_i))
+       open(newunit=lun, file="zone_info." // szone, status="unknown", position="append")
+       write(lun, *) time+rpar(irp_t0), int(rpar(irp_i)), rpar(irp_dens), y(ihe4), y(ini56)
        close(lun)
     endif
 
-    if (rpar(irp_i) == 300.0) then
-       open(newunit=lun, file="zone_300.0", status="unknown", position="append")
-       write(lun, *) time+rpar(irp_t0), rpar(irp_dens), y(ihe4), y(ini56)
-       close(lun)
-    endif
-
-    if (rpar(irp_i) == 350.0) then
-       open(newunit=lun, file="zone_350.0", status="unknown", position="append")
-       write(lun, *) time+rpar(irp_t0), rpar(irp_dens), y(ihe4), y(ini56)
-       close(lun)
-    endif
-
-    if (rpar(irp_i) == 400.0) then
-       open(newunit=lun, file="zone_400.0", status="unknown", position="append")
-       write(lun, *) time+rpar(irp_t0), rpar(irp_dens), y(ihe4), y(ini56)
-       close(lun)
-    endif
 
     ! We integrate X, not Y
     burn_state % ydot(1:nspec_evolve) = &

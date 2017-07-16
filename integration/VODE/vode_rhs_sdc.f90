@@ -21,6 +21,7 @@ subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
   real(dp_t), intent(INOUT) :: time, y(neq)
   real(dp_t), intent(INOUT) :: rpar(n_rpar_comps)
   real(dp_t), intent(  OUT) :: ydot(neq)
+  character (len=5) :: szone
 
   type (burn_t) :: burn_state
 
@@ -42,29 +43,17 @@ subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
 
   call actual_rhs(burn_state)
 
-    if (rpar(irp_i) == 250.0) then
-       open(newunit=lun, file="zone_250.0.sdc", status="unknown", position="append")
-       write(lun, *) time+rpar(irp_t0), rpar(irp_SRHO), y(SFS-1+ihe4), y(SFS-1+ini56)
-       close(lun)
-    endif
+  if (rpar(irp_i) == 250.0 .or. &
+      rpar(irp_i) == 300.0 .or. &
+      rpar(irp_i) == 350.0 .or. &
+      rpar(irp_i) == 400.0) then
 
-    if (rpar(irp_i) == 300.0) then
-       open(newunit=lun, file="zone_300.0.sdc", status="unknown", position="append")
-       write(lun, *) time+rpar(irp_t0), rpar(irp_SRHO), y(SFS-1+ihe4), y(SFS-1+ini56)
-       close(lun)
-    endif
-
-    if (rpar(irp_i) == 350.0) then
-       open(newunit=lun, file="zone_350.0.sdc", status="unknown", position="append")
-       write(lun, *) time+rpar(irp_t0), rpar(irp_SRHO), y(SFS-1+ihe4), y(SFS-1+ini56)
-       close(lun)
-    endif
-
-    if (rpar(irp_i) == 400.0) then
-       open(newunit=lun, file="zone_400.0.sdc", status="unknown", position="append")
-       write(lun, *) time+rpar(irp_t0), rpar(irp_SRHO), y(SFS-1+ihe4), y(SFS-1+ini56)
-       close(lun)
-    endif
+     write(szone, "(i0.5)") int(rpar(irp_i))
+     open(newunit=lun, file="zone_info.sdc." // szone, status="unknown", position="append")
+     write(lun, *) time+rpar(irp_t0), int(rpar(irp_iter)), int(rpar(irp_i)), &
+          rpar(irp_SRHO), y(SFS-1+ihe4)/rpar(irp_SRHO), y(SFS-1+ini56)/rpar(irp_SRHO)
+     close(lun)
+  endif
 
   ! convert back to the vode type -- this will add the advective terms
 
