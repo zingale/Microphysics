@@ -1,7 +1,7 @@
 ! Common variables and routines for burners
 ! that use VODE for their integration.
 
-module actual_integrator_module
+module vode_integrator_module
 
   use eos_module, only : eos
   use eos_type_module, only: eos_t, eos_input_rt
@@ -10,6 +10,7 @@ module actual_integrator_module
   use vode_type_module
   use burn_type_module
   use bl_types
+  use bl_error_module
 
   implicit none
 
@@ -54,27 +55,24 @@ module actual_integrator_module
 
 contains
 
-  subroutine actual_integrator_init()
+  subroutine vode_integrator_init()
 
     implicit none
 
-  end subroutine actual_integrator_init
+  end subroutine vode_integrator_init
 
 
 
   ! Main interface
 
-  subroutine actual_integrator(state_in, state_out, dt, time)
+  subroutine vode_integrator(state_in, state_out, dt, time, status)
 
     use rpar_indices
     use extern_probin_module, only: jacobian, burner_verbose, &
-                                    rtol_spec, rtol_temp, rtol_enuc, &
-                                    atol_spec, atol_temp, atol_enuc, &
-                                    burning_mode, retry_burn, &
-                                    retry_burn_factor, retry_burn_max_change, &
-                                    call_eos_in_rhs, dT_crit
+                                    burning_mode, call_eos_in_rhs, dT_crit
     use actual_rhs_module, only : update_unevolved_species
     use bl_constants_module, only : ZERO, ONE
+    use integration_data, only: integration_status_t
 
     implicit none
 
@@ -83,6 +81,7 @@ contains
     type (burn_t), intent(in   ) :: state_in
     type (burn_t), intent(inout) :: state_out
     real(dp_t),    intent(in   ) :: dt, time
+    type (integration_status_t), intent(inout) :: status
 
     ! Local variables
 
@@ -111,6 +110,9 @@ contains
 
     real(dp_t) :: ener_offset
 
+    logical :: integration_failed
+    real(dp_t), parameter :: failure_tolerance = 1.d-2
+
     EXTERNAL jac, f_rhs
 
     if (jacobian == 1) then ! Analytical
@@ -118,8 +120,10 @@ contains
     else if (jacobian == 2) then ! Numerical
        MF_JAC = MF_NUMERICAL_JAC
     else
-       call bl_error("Error: unknown Jacobian mode in actual_integrator.f90.")
+       call bl_error("Error: unknown Jacobian mode in vode_integrator.f90.")
     endif
+
+    integration_failed = .false.
 
     ! Set the tolerances.  We will be more relaxed on the temperature
     ! since it is only used in evaluating the rates.
@@ -128,13 +132,13 @@ contains
     ! to (a) decrease dT_crit, (b) increase the maximum number of
     ! steps allowed.
 
-    atol(1:nspec_evolve) = atol_spec ! mass fractions
-    atol(net_itemp)      = atol_temp ! temperature
-    atol(net_ienuc)      = atol_enuc ! energy generated
+    atol(1:nspec_evolve) = status % atol_spec ! mass fractions
+    atol(net_itemp)      = status % atol_temp ! temperature
+    atol(net_ienuc)      = status % atol_enuc ! energy generated
 
-    rtol(1:nspec_evolve) = rtol_spec ! mass fractions
-    rtol(net_itemp)      = rtol_temp ! temperature
-    rtol(net_ienuc)      = rtol_enuc ! energy generated
+    rtol(1:nspec_evolve) = status % rtol_spec ! mass fractions
+    rtol(net_itemp)      = status % rtol_temp ! temperature
+    rtol(net_ienuc)      = status % rtol_enuc ! energy generated
 
     ! We want VODE to re-initialize each time we call it.
 
@@ -189,7 +193,7 @@ contains
     else if (burning_mode == 1 .or. burning_mode == 3) then
        rpar(irp_self_heat) = ONE
     else
-       call bl_error("Error: unknown burning_mode in actual_integrator.f90.")
+       call bl_error("Error: unknown burning_mode in vode_integrator.f90.")
     endif
 
     ! Copy in the zone size.
@@ -271,8 +275,27 @@ contains
     endif
 
     ! If we still failed, print out the current state of the integration.
+    ! VODE does not always fail even though it can lead to unphysical states,
+    ! so add some sanity checks that trigger a retry even if VODE thinks
+    ! the integration was successful.
 
     if (istate < 0) then
+       integration_failed = .true.
+    end if
+
+    if (y(net_itemp) < ZERO) then
+       integration_failed = .true.
+    end if
+
+    if (any(y(1:nspec_evolve) < -failure_tolerance)) then
+       integration_failed = .true.
+    end if
+
+    if (any(y(1:nspec_evolve) > 1.d0 + failure_tolerance)) then
+       integration_failed = .true.
+    end if
+
+    if (integration_failed) then
        print *, 'ERROR: integration failed in net'
        print *, 'istate = ', istate
        print *, 'time = ', local_time
@@ -280,63 +303,11 @@ contains
        print *, 'temp start = ', state_in % T
        print *, 'xn start = ', state_in % xn
        print *, 'temp current = ', y(net_itemp)
-       print *, 'xn current = ', y(1:nspec_evolve) * aion(1:nspec_evolve), &
-            rpar(irp_nspec:irp_nspec+n_not_evolved-1) * aion(nspec_evolve+1:)
+       print *, 'xn current = ', y(1:nspec_evolve), rpar(irp_nspec:irp_nspec+n_not_evolved-1)
        print *, 'energy generated = ', y(net_ienuc) - ener_offset
 
-       if (.not. retry_burn) then
-
-          call bl_error("ERROR in burner: integration failed")
-
-       else
-
-          print *, 'Retrying burn with looser tolerances'
-
-          retry_change_factor = ONE
-
-          do while (istate < 0 .and. retry_change_factor <= retry_burn_max_change)
-
-             retry_change_factor = retry_change_factor * retry_burn_factor
-
-             istate = 1
-
-             rwork(:) = ZERO
-             iwork(:) = 0
-
-             atol = atol * retry_burn_factor
-             rtol = rtol * retry_burn_factor
-
-             iwork(6) = 150000
-
-             local_time = ZERO
-
-             call eos_to_vode(eos_state_in, y, rpar)
-
-             rpar(irp_Told) = eos_state_in % T
-
-             if (dT_crit < 1.0d19) then
-
-                rpar(irp_dcvdt) = (eos_state_temp % cv - eos_state_in % cv) / (eos_state_temp % T - eos_state_in % T)
-                rpar(irp_dcpdt) = (eos_state_temp % cp - eos_state_in % cp) / (eos_state_temp % T - eos_state_in % T)
-
-             endif
-
-             y(net_ienuc) = ener_offset
-
-             call dvode(f_rhs, neqs, y, local_time, local_time + dt, &
-                        ITOL, rtol, atol, ITASK, &
-                        istate, IOPT, rwork, LRW, iwork, LIW, jac, MF_JAC, rpar, ipar)
-
-          enddo
-
-          if (retry_change_factor > retry_burn_max_change .and. istate < 0) then
-
-             call bl_error("ERROR in burner: integration failed")
-
-          endif
-
-       endif
-
+       status % integration_complete = .false.
+       return
     endif
 
     ! Subtract the energy offset
@@ -345,6 +316,19 @@ contains
     ! Store the final data, and then normalize abundances.
     call vode_to_burn(y, rpar, state_out)
 
+    if (state_in % rho == 18522771.246038310d0) then
+       print *, 'oops'
+       print *, 'istate = ', istate
+       print *, 'time = ', local_time
+       print *, 'dens = ', state_in % rho
+       print *, 'temp start = ', state_in % T
+       print *, 'xn start = ', state_in % xn
+       print *, 'temp current = ', state_out % T
+       print *, 'xn current = ', state_out % xn
+       print *, 'energy generated = ', state_out % e - state_in % e
+    end if
+
+    ! Subtract the energy offset
     ! get the number of RHS calls and jac evaluations from the VODE
     ! work arrays
     state_out % n_rhs = iwork(12)
@@ -368,6 +352,6 @@ contains
 
     endif
 
-  end subroutine actual_integrator
+  end subroutine vode_integrator
 
-end module actual_integrator_module
+end module vode_integrator_module

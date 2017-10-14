@@ -15,8 +15,8 @@ EOS_DIR := helmholtz
 #NETWORK_DIR := rprox
 #NETWORK_DIR := triple_alpha_plus_cago
 #NETWORK_DIR := ignition_chamulak
-#NETWORK_DIR := aprox13
-NETWORK_DIR := ignition_reaclib/URCA-simple
+NETWORK_DIR := aprox13
+#NETWORK_DIR := ignition_reaclib/URCA-simple
 
 INTEGRATOR_DIR := BS
 
@@ -33,8 +33,7 @@ include $(MICROPHYSICS_HOME)/GMicrophysics.mak
 ALL: $(pnames)
 
 # include the fParallel Makefile rules
-include $(BOXLIB_HOME)/Tools/F_mk/GMakerules.mak
-
+include $(AMREX_HOME)/Tools/F_mk/GMakerules.mak
 
 
 

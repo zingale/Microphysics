@@ -181,6 +181,10 @@ contains
 #endif
        endif
 
+       if (ierr /= IERR_NONE) then
+          exit
+       end if
+
        ! finished?
        if (bs % t - tmax >= ZERO) then
           finished = .true.
@@ -190,6 +194,7 @@ contains
 
        if (bs % dt < dt_min) then
           ierr = IERR_DT_TOO_SMALL
+          exit
        endif
 
        if (finished) exit
@@ -579,8 +584,9 @@ contains
     if (.not. converged .and. ierr == IERR_NONE) then
        ierr = IERR_NO_CONVERGENCE
 #ifndef ACC
+       print *, "Integration failed due to non-convergence in single_step_bs"
        call dump_bs_state(bs)
-       call bl_error("Error: non convergence in single_step_bs, something has gone wrong.")
+       return
 #endif       
     endif
 
