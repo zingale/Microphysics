@@ -55,6 +55,9 @@ else ifeq ($(INTEGRATOR_DIR),VODE90)
   INT_DIRS += $(MICROPHYSICS_HOME)/integration/VODE90/cuVODE/source
   INT_DIRS += $(MICROPHYSICS_HOME)/integration/VODE90/cuVODE/linear_algebra_modules
 
+  # Include BS
+  INT_DIRS += $(MICROPHYSICS_HOME)/integration/BS
+
 else
 
   INT_DIRS += $(MICROPHYSICS_HOME)/integration/$(INTEGRATOR_DIR)

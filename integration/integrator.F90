@@ -11,7 +11,7 @@ contains
   subroutine integrator_init()
 
     use integrator_scaling_module, only: integrator_scaling_init
-#if ((INTEGRATOR == 0 || INTEGRATOR == 1) && !defined(CUDA))
+#if ((INTEGRATOR == 0 || INTEGRATOR == 1 || INTEGRATOR == 3) && !defined(CUDA))
     use vode_integrator_module, only: vode_integrator_init
     use bs_integrator_module, only: bs_integrator_init
 #else
@@ -22,7 +22,7 @@ contains
     implicit none
 
     call integrator_scaling_init()
-#if ((INTEGRATOR == 0 || INTEGRATOR == 1) && !defined(CUDA))
+#if ((INTEGRATOR == 0 || INTEGRATOR == 1 || INTEGRATOR == 3) && !defined(CUDA))
     call vode_integrator_init()
     call bs_integrator_init()
 #else
@@ -38,7 +38,7 @@ contains
 
     !$acc routine seq
 
-#if ((INTEGRATOR == 0 || INTEGRATOR == 1) && !defined(CUDA))
+#if ((INTEGRATOR == 0 || INTEGRATOR == 1 || INTEGRATOR == 3) && !defined(CUDA))
     use vode_integrator_module, only: vode_integrator
     use bs_integrator_module, only: bs_integrator
 #else
@@ -61,7 +61,7 @@ contains
 
     !$gpu
 
-#if ((INTEGRATOR == 0 || INTEGRATOR == 1) && !defined(CUDA))
+#if ((INTEGRATOR == 0 || INTEGRATOR == 1 || INTEGRATOR == 3) && !defined(CUDA))
     type (integration_status_t) :: status
     real(rt) :: retry_change_factor
     integer :: current_integrator
@@ -91,7 +91,7 @@ contains
 
        do
 
-#if (INTEGRATOR == 0)
+#if (INTEGRATOR == 0 || INTEGRATOR == 3)
           if (current_integrator == 0) then
              call vode_integrator(state_in, state_out, dt, time, status)
           else if (current_integrator == 1) then
@@ -132,7 +132,7 @@ contains
 
              if (current_integrator < 1) then
 
-#if (INTEGRATOR == 0)
+#if (INTEGRATOR == 0 || INTEGRATOR == 3)
                 print *, "Retrying burn with BS integrator"
 #elif (INTEGRATOR == 1)
                 print *, "Retrying burn with VODE integrator"

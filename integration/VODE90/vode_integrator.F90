@@ -13,6 +13,12 @@ module vode_integrator_module
 
   implicit none
 
+  integer, allocatable :: max_steps
+
+#ifdef AMREX_USE_CUDA
+  attributes(managed) :: max_steps
+#endif
+
 contains
 
   subroutine vode_integrator_init()
@@ -21,6 +27,7 @@ contains
 
     implicit none
 
+    allocate(max_steps)
     max_steps = ode_max_steps
 
   end subroutine vode_integrator_init
@@ -46,6 +53,7 @@ contains
     use eos_type_module, only: eos_t, copy_eos_t
     use cuvode_types_module, only: dvode_t, rwork_t
     use amrex_constants_module, only: ZERO, ONE
+    use amrex_error_module, only: amrex_error
     use integration_data, only: integration_status_t
     use integrator_scaling_module, only: temp_scale, ener_scale, inv_ener_scale
     use temperature_integration_module, only: self_heat
