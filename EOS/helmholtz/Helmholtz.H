@@ -4,6 +4,7 @@
 #include "Eos.H"
 #include "Array1D.H"
 #include "Array2D.H"
+#include "AMReX_REAL.H"
 
 /*
   Frank Timmes Helmholtz based Equation of State
@@ -40,107 +41,107 @@ class Helmholtz : public Eos, public UnifiedMemoryClass {
 
   int itmax, jtmax;
 
-  static Array1D<double, imax> d;
-  static Array1D<double, jmax> t;
+  static Array1D<amrex::Real, imax> d;
+  static Array1D<amrex::Real, jmax> t;
 
-  double tlo, thi, tstp, tstpi;
-  double dlo, dhi, dstp, dstpi;
-  double ttol, dtol;
+  amrex::Real tlo, thi, tstp, tstpi;
+  amrex::Real dlo, dhi, dstp, dstpi;
+  amrex::Real ttol, dtol;
 
   // ..for the helmholtz free energy tables (2D)
-  static Array2D<double, imax, jmax> f;
-  static Array2D<double, imax, jmax> fd;
-  static Array2D<double, imax, jmax> ft;
-  static Array2D<double, imax, jmax> fdd;
-  static Array2D<double, imax, jmax> ftt;
-  static Array2D<double, imax, jmax> fdt;
-  static Array2D<double, imax, jmax> fddt;
-  static Array2D<double, imax, jmax> fdtt;
-  static Array2D<double, imax, jmax> fddtt;
+  static Array2D<amrex::Real, imax, jmax> f;
+  static Array2D<amrex::Real, imax, jmax> fd;
+  static Array2D<amrex::Real, imax, jmax> ft;
+  static Array2D<amrex::Real, imax, jmax> fdd;
+  static Array2D<amrex::Real, imax, jmax> ftt;
+  static Array2D<amrex::Real, imax, jmax> fdt;
+  static Array2D<amrex::Real, imax, jmax> fddt;
+  static Array2D<amrex::Real, imax, jmax> fdtt;
+  static Array2D<amrex::Real, imax, jmax> fddtt;
 
   // ..for the pressure derivative with density ables
-  static Array2D<double, imax, jmax> dpdf;
-  static Array2D<double, imax, jmax> dpdfd;
-  static Array2D<double, imax, jmax> dpdft;
-  static Array2D<double, imax, jmax> dpdfdt;
+  static Array2D<amrex::Real, imax, jmax> dpdf;
+  static Array2D<amrex::Real, imax, jmax> dpdfd;
+  static Array2D<amrex::Real, imax, jmax> dpdft;
+  static Array2D<amrex::Real, imax, jmax> dpdfdt;
 
   // ..for chemical potential tables
-  static Array2D<double, imax, jmax> ef;
-  static Array2D<double, imax, jmax> efd;
-  static Array2D<double, imax, jmax> eft;
-  static Array2D<double, imax, jmax> efdt;
+  static Array2D<amrex::Real, imax, jmax> ef;
+  static Array2D<amrex::Real, imax, jmax> efd;
+  static Array2D<amrex::Real, imax, jmax> eft;
+  static Array2D<amrex::Real, imax, jmax> efdt;
 
   // ..for the number density tables
-  static Array2D<double, imax, jmax> xf;
-  static Array2D<double, imax, jmax> xfd;
-  static Array2D<double, imax, jmax> xft;
-  static Array2D<double, imax, jmax> xfdt;
+  static Array2D<amrex::Real, imax, jmax> xf;
+  static Array2D<amrex::Real, imax, jmax> xfd;
+  static Array2D<amrex::Real, imax, jmax> xft;
+  static Array2D<amrex::Real, imax, jmax> xfdt;
 
   // ..for storing the differences
-  static Array1D<double, jmax> dt_sav;
-  static Array1D<double, jmax> dt2_sav;
-  static Array1D<double, jmax> dti_sav;
-  static Array1D<double, jmax> dt2i_sav;
+  static Array1D<amrex::Real, jmax> dt_sav;
+  static Array1D<amrex::Real, jmax> dt2_sav;
+  static Array1D<amrex::Real, jmax> dti_sav;
+  static Array1D<amrex::Real, jmax> dt2i_sav;
   
-  static Array1D<double, imax> dd_sav;
-  static Array1D<double, imax> dd2_sav;
-  static Array1D<double, imax> ddi_sav;
-  static Array1D<double, imax> dd2i_sav;
+  static Array1D<amrex::Real, imax> dd_sav;
+  static Array1D<amrex::Real, imax> dd2_sav;
+  static Array1D<amrex::Real, imax> ddi_sav;
+  static Array1D<amrex::Real, imax> dd2i_sav;
 
   static const int max_newton = 100;
 
   // 2006 CODATA physical constants
 
   // Math constants
-  static const double pi       = 3.1415926535897932384e0;
+  static const amrex::Real pi       = 3.1415926535897932384e0;
 
   // Physical constants
-  static const double h       = 6.6260689633e-27;
-  static const double hbar    = 0.5e0 * h/pi;
-  static const double qe      = 4.8032042712e-10;
-  static const double avo_eos = 6.0221417930e23;
-  static const double clight  = 2.99792458e10;
-  static const double kerg    = 1.380650424e-16;
-  static const double ev2erg_eos  = 1.60217648740e-12;
-  static const double kev     = kerg/ev2erg_eos;
-  static const double amu     = 1.66053878283e-24;
-  static const double me_eos  = 9.1093821545e-28;
-  static const double rbohr   = hbar*hbar/(me_eos * qe * qe);
-  static const double fine    = qe*qe/(hbar*clight);
+  static const amrex::Real h       = 6.6260689633e-27;
+  static const amrex::Real hbar    = 0.5e0 * h/pi;
+  static const amrex::Real qe      = 4.8032042712e-10;
+  static const amrex::Real avo_eos = 6.0221417930e23;
+  static const amrex::Real clight  = 2.99792458e10;
+  static const amrex::Real kerg    = 1.380650424e-16;
+  static const amrex::Real ev2erg_eos  = 1.60217648740e-12;
+  static const amrex::Real kev     = kerg/ev2erg_eos;
+  static const amrex::Real amu     = 1.66053878283e-24;
+  static const amrex::Real me_eos  = 9.1093821545e-28;
+  static const amrex::Real rbohr   = hbar*hbar/(me_eos * qe * qe);
+  static const amrex::Real fine    = qe*qe/(hbar*clight);
 
 #ifdef RADIATION
-  static const double ssol    = 0.0e0;
+  static const amrex::Real ssol    = 0.0e0;
 #else
-  static const double ssol    = 5.67051e-5;
+  static const amrex::Real ssol    = 5.67051e-5;
 #endif
-  static const double asol    = 4.0d0 * ssol / clight;
-  static const double weinlam = h*clight/(kerg * 4.965114232e0);
-  static const double weinfre = 2.821439372e0*kerg/h;
+  static const amrex::Real asol    = 4.0d0 * ssol / clight;
+  static const amrex::Real weinlam = h*clight/(kerg * 4.965114232e0);
+  static const amrex::Real weinfre = 2.821439372e0*kerg/h;
 
   // Astronomical constants
-  static const double ly      = 9.460528e17;
-  static const double pc      = 3.261633e0 * ly;
+  static const amrex::Real ly      = 9.460528e17;
+  static const amrex::Real pc      = 3.261633e0 * ly;
 
   // Some other useful combinations of the constants
-  static const double sioncon = (2.0e0 * pi * amu * kerg)/(h*h);
-  static const double forth   = 4.0e0/3.0e0;
-  static const double forpi   = 4.0e0 * pi;
-  static const double kergavo = kerg * avo_eos;
-  static const double ikavo   = 1.0e0/kergavo;
-  static const double asoli3  = asol/3.0e0;
-  static const double light2  = clight * clight;
+  static const amrex::Real sioncon = (2.0e0 * pi * amu * kerg)/(h*h);
+  static const amrex::Real forth   = 4.0e0/3.0e0;
+  static const amrex::Real forpi   = 4.0e0 * pi;
+  static const amrex::Real kergavo = kerg * avo_eos;
+  static const amrex::Real ikavo   = 1.0e0/kergavo;
+  static const amrex::Real asoli3  = asol/3.0e0;
+  static const amrex::Real light2  = clight * clight;
 
   // Constants used for the Coulomb corrections
-  static const double a1    = -0.898004e0;
-  static const double b1    =  0.96786e0;
-  static const double c1    =  0.220703e0;
-  static const double d1    = -0.86097e0;
-  static const double e1    =  2.5269e0;
-  static const double a2    =  0.29561e0;
-  static const double b2    =  1.9885e0;
-  static const double c2    =  0.288675e0;
-  static const double onethird = 1.0e0/3.0e0;
-  static const double esqu = qe * qe;
+  static const amrex::Real a1    = -0.898004e0;
+  static const amrex::Real b1    =  0.96786e0;
+  static const amrex::Real c1    =  0.220703e0;
+  static const amrex::Real d1    = -0.86097e0;
+  static const amrex::Real e1    =  2.5269e0;
+  static const amrex::Real a2    =  0.29561e0;
+  static const amrex::Real b2    =  1.9885e0;
+  static const amrex::Real c2    =  0.288675e0;
+  static const amrex::Real onethird = 1.0e0/3.0e0;
+  static const amrex::Real esqu = qe * qe;
 
 public:
 
@@ -154,78 +155,78 @@ public:
   void eos(const EosInput input, EosState& state)
   {
 
-    const double ZERO = 0.0;
-    const double HALF = 0.5;
-    const double TWO = 2.0;
+    const amrex::Real ZERO = 0.0;
+    const amrex::Real HALF = 0.5;
+    const amrex::Real TWO = 2.0;
 
-    double temp_row, den_row, abar_row, zbar_row;
-    double ye_row, etot_row, ptot_row;
-    double cv_row, cp_row;
-    double xne_row, xnp_row;
-    double etaele_row, pele_row, ppos_row;
-    double dpd_row, dpt_row, dpa_row, dpz_row;
-    double ded_row, det_row, dea_row, dez_row;
-    double stot_row, dsd_row, dst_row, htot_row;
-    double dhd_row, dht_row, dpe_row, dpdr_e_row;
-    double gam1_row, cs_row;
+    amrex::Real temp_row, den_row, abar_row, zbar_row;
+    amrex::Real ye_row, etot_row, ptot_row;
+    amrex::Real cv_row, cp_row;
+    amrex::Real xne_row, xnp_row;
+    amrex::Real etaele_row, pele_row, ppos_row;
+    amrex::Real dpd_row, dpt_row, dpa_row, dpz_row;
+    amrex::Real ded_row, det_row, dea_row, dez_row;
+    amrex::Real stot_row, dsd_row, dst_row, htot_row;
+    amrex::Real dhd_row, dht_row, dpe_row, dpdr_e_row;
+    amrex::Real gam1_row, cs_row;
 
     bool single_iter, double_iter, converged;
     int var, dvar, var1, var2, iter;
-    double v_want;
-    double v1_want, v2_want;
-    double xnew, xtol, dvdx, smallx, error, v;
-    double v1, v2, dv1dt, dv1dr, dv2dt,dv2dr, delr;
-    double error1, error2, told, rold, tnew, rnew, v1i, v2i;
+    amrex::Real v_want;
+    amrex::Real v1_want, v2_want;
+    amrex::Real xnew, xtol, dvdx, smallx, error, v;
+    amrex::Real v1, v2, dv1dt, dv1dr, dv2dt,dv2dr, delr;
+    amrex::Real error1, error2, told, rold, tnew, rnew, v1i, v2i;
 
-    double x,y,zz,zzi,deni,tempi,xni,dxnidd,dxnida;
-    double dpepdt,dpepdd,deepdt,deepdd,dsepdd,dsepdt;
-    double dpraddd,dpraddt,deraddd,deraddt,dpiondd,dpiondt;
-    double deiondd,deiondt,dsraddd,dsraddt,dsiondd,dsiondt;
-    double dse,dpe,dsp,kt,ktinv,prad,erad,srad,pion,eion;
-    double sion,xnem,pele,eele,sele,pres,ener,entr,dpresdd;
-    double dpresdt,denerdd,denerdt,dentrdd,dentrdt,cv,cp;
-    double gam1,gam2,gam3,chit,chid,nabad,sound,etaele;
-    double detadt,detadd,xnefer,dxnedt,dxnedd,s;
-    double temp,den,abar,zbar,ytot1,ye;
+    amrex::Real x,y,zz,zzi,deni,tempi,xni,dxnidd,dxnida;
+    amrex::Real dpepdt,dpepdd,deepdt,deepdd,dsepdd,dsepdt;
+    amrex::Real dpraddd,dpraddt,deraddd,deraddt,dpiondd,dpiondt;
+    amrex::Real deiondd,deiondt,dsraddd,dsraddt,dsiondd,dsiondt;
+    amrex::Real dse,dpe,dsp,kt,ktinv,prad,erad,srad,pion,eion;
+    amrex::Real sion,xnem,pele,eele,sele,pres,ener,entr,dpresdd;
+    amrex::Real dpresdt,denerdd,denerdt,dentrdd,dentrdt,cv,cp;
+    amrex::Real gam1,gam2,gam3,chit,chid,nabad,sound,etaele;
+    amrex::Real detadt,detadd,xnefer,dxnedt,dxnedd,s;
+    amrex::Real temp,den,abar,zbar,ytot1,ye;
 
 #ifdef EXTRA_THERMO
     // ..for the abar derivatives
-    double dpradda,deradda,dsradda;
-    double dpionda,deionda,dsionda;
-    double dpepda,deepda,dsepda;
-    double dpresda,denerda,dentrda;
-    double detada,dxneda;
+    amrex::Real dpradda,deradda,dsradda;
+    amrex::Real dpionda,deionda,dsionda;
+    amrex::Real dpepda,deepda,dsepda;
+    amrex::Real dpresda,denerda,dentrda;
+    amrex::Real detada,dxneda;
 
 
     // ..for the zbar derivatives
-    double dpraddz,deraddz,dsraddz;
-    double dpiondz,deiondz,dsiondz;
-    double dpepdz,deepdz,dsepdz;
-    double dpresdz,denerdz,dentrdz;
-    double detadz,dxnedz;
+    amrex::Real dpraddz,deraddz,dsraddz;
+    amrex::Real dpiondz,deiondz,dsiondz;
+    amrex::Real dpepdz,deepdz,dsepdz;
+    amrex::Real dpresdz,denerdz,dentrdz;
+    amrex::Real detadz,dxnedz;
 #endif
 
 
     // ..for the interpolations
     int iat,jat;
-    double free,df_d,df_t,df_tt,df_dt;
-    double xt,xd,mxt,mxd;
-    double si0t,si1t,si2t,si0mt,si1mt,si2mt;
-    double si0d,si1d,si2d,si0md,si1md,si2md;
-    double dsi0t,dsi1t,dsi2t,dsi0mt,dsi1mt,dsi2mt;
-    double dsi0d,dsi1d,dsi2d,dsi0md,dsi1md,dsi2md;
-    double ddsi0t,ddsi1t,ddsi2t,ddsi0mt,ddsi1mt,ddsi2mt;
-    double z,din;
-    Array1D<double, 36> fi;
+    amrex::Real free,df_d,df_t,df_tt,df_dt;
+    amrex::Real xt,xd,mxt,mxd;
+    amrex::Real si0t,si1t,si2t,si0mt,si1mt,si2mt;
+    amrex::Real si0d,si1d,si2d,si0md,si1md,si2md;
+    amrex::Real dsi0t,dsi1t,dsi2t,dsi0mt,dsi1mt,dsi2mt;
+    amrex::Real dsi0d,dsi1d,dsi2d,dsi0md,dsi1md,dsi2md;
+    amrex::Real ddsi0t,ddsi1t,ddsi2t,ddsi0mt,ddsi1mt,ddsi2mt;
+    amrex::Real z,din;
+    Array1D<amrex::Real, 36> fi;
 
     // ..for the coulomb corrections
-    double dsdd,dsda,lami,inv_lami,lamida,lamidd;
-    double plasg,plasgdd,plasgdt,plasgda,plasgdz;
-    double ecoul,decouldd,decouldt,decoulda,decouldz;
-    double pcoul,dpcouldd,dpcouldt,dpcoulda,dpcouldz;
-    double scoul,dscouldd,dscouldt,dscoulda,dscouldz;
+    amrex::Real dsdd,dsda,lami,inv_lami,lamida,lamidd;
+    amrex::Real plasg,plasgdd,plasgdt,plasgda,plasgdz;
+    amrex::Real ecoul,decouldd,decouldt,decoulda,decouldz;
+    amrex::Real pcoul,dpcouldd,dpcouldt,dpcoulda,dpcouldz;
+    amrex::Real scoul,dscouldd,dscouldt,dscoulda,dscouldz;
 
-    double p_temp, e_temp;
+    amrex::Real p_temp, e_temp;
 
     temp_row = state.T;
     den_row  = state.rho;
@@ -1196,9 +1197,9 @@ public:
 
     //  use extern_probin_module, only: eos_input_is_constant, use_eos_coulomb, eos_ttol, eos_dtol
 
-    double dth, dt2, dti, dt2i;
-    double dd, dd2, ddi, dd2i;
-    double tsav, dsav;
+    amrex::Real dth, dt2, dti, dt2i;
+    amrex::Real dd, dd2, ddi, dd2i;
+    amrex::Real tsav, dsav;
     int i, j;
     int status;
 
@@ -1347,78 +1348,78 @@ public:
   // quintic hermite polynomial functions
   // psi0 and its derivatives
   AMREX_GPU_HOST_DEVICE AMREX_INLINE
-  double psi0(double z)
+  amrex::Real psi0(amrex::Real z)
   {
-    double psi0r = pow(z, 3) * ( z * (-6.0e0*z + 15.0e0) -10.0e0) + 1.0e0;
+    amrex::Real psi0r = pow(z, 3) * ( z * (-6.0e0*z + 15.0e0) -10.0e0) + 1.0e0;
     return psi0r;
   }
 
   AMREX_GPU_HOST_DEVICE AMREX_INLINE  
-  double dpsi0(double z)
+  amrex::Real dpsi0(amrex::Real z)
   {
-    double dpsi0r = pow(z, 2) * ( z * (-30.0e0*z + 60.0e0) - 30.0e0);
+    amrex::Real dpsi0r = pow(z, 2) * ( z * (-30.0e0*z + 60.0e0) - 30.0e0);
     return dpsi0r;
   }
 
   AMREX_GPU_HOST_DEVICE AMREX_INLINE  
-  double ddpsi0(z)
+  amrex::Real ddpsi0(z)
   {
-    double ddpsi0r = z* ( z*( -120.0e0*z + 180.0e0) -60.0e0);
+    amrex::Real ddpsi0r = z* ( z*( -120.0e0*z + 180.0e0) -60.0e0);
     return ddpsi0r;
   }
 
   // psi1 and its derivatives
   AMREX_GPU_HOST_DEVICE AMREX_INLINE    
-  double psi1(z)
+  amrex::Real psi1(z)
   {
-    double psi1r = z* ( pow(z, 2) * ( z * (-3.0e0*z + 8.0e0) - 6.0e0) + 1.0e0);
+    amrex::Real psi1r = z* ( pow(z, 2) * ( z * (-3.0e0*z + 8.0e0) - 6.0e0) + 1.0e0);
     return psi1r;
   }
 
   AMREX_GPU_HOST_DEVICE AMREX_INLINE      
-  double dpsi1(z)
+  amrex::Real dpsi1(z)
   {
-    double dpsi1r = z*z * ( z * (-15.0e0*z + 32.0e0) - 18.0e0) + 1.0e0;
+    amrex::Real dpsi1r = z*z * ( z * (-15.0e0*z + 32.0e0) - 18.0e0) + 1.0e0;
     return dpsi1r;
   }
 
   AMREX_GPU_HOST_DEVICE AMREX_INLINE  
-  double ddpsi1(z)
+  amrex::Real ddpsi1(z)
   {
-    double ddpsi1r = z * (z * (-60.0e0*z + 96.0e0) -36.0e0);
+    amrex::Real ddpsi1r = z * (z * (-60.0e0*z + 96.0e0) -36.0e0);
     return ddpsi1r;
   }
 
   // psi2  and its derivatives
   AMREX_GPU_HOST_DEVICE AMREX_INLINE    
-  double psi2(z)
+  amrex::Real psi2(z)
   {
-    double psi2r = 0.5e0*z*z*( z* ( z * (-z + 3.0e0) - 3.0e0) + 1.0e0);
+    amrex::Real psi2r = 0.5e0*z*z*( z* ( z * (-z + 3.0e0) - 3.0e0) + 1.0e0);
     return psi2r;
   }
 
   AMREX_GPU_HOST_DEVICE AMREX_INLINE  
-  double dpsi2(z)
+  amrex::Real dpsi2(z)
   {
-    double dpsi2r = 0.5e0*z*( z*(z*(-5.0e0*z + 12.0e0) - 9.0e0) + 2.0e0);
+    amrex::Real dpsi2r = 0.5e0*z*( z*(z*(-5.0e0*z + 12.0e0) - 9.0e0) + 2.0e0);
     return dpsi2r;
   }
 
   AMREX_GPU_HOST_DEVICE AMREX_INLINE    
-  double ddpsi2(z)
+  amrex::Real ddpsi2(z)
   {
-    double ddpsi2r = 0.5e0*(z*( z * (-20.0e0*z + 36.0e0) - 18.0e0) + 2.0e0);
+    amrex::Real ddpsi2r = 0.5e0*(z*( z * (-20.0e0*z + 36.0e0) - 18.0e0) + 2.0e0);
     return ddpsi2r;
   }
 
   // biquintic hermite polynomial function
   AMREX_GPU_HOST_DEVICE AMREX_INLINE      
-  double h5(const Array1D<double, 36>& fi,
-            const double w0t, const double w1t, const double w2t, const double w0mt,
-            const double w1mt, const double w2mt, const double w0d, const double w1d,
-            const double w2d, const double w0md, const double w1md, const double w2md)
+  amrex::Real h5(const Array1D<amrex::Real, 36>& fi,
+            const amrex::Real w0t, const amrex::Real w1t, const amrex::Real w2t, const amrex::Real w0mt,
+            const amrex::Real w1mt, const amrex::Real w2mt, const amrex::Real w0d, const amrex::Real w1d,
+            const amrex::Real w2d, const amrex::Real w0md, const amrex::Real w1md, const amrex::Real w2md)
   {
-    double h5r;
+    amrex::Real h5r;
 
     h5r =  (fi(1)  *w0d*w0t   + fi(2)  *w0md*w0t 
             + fi(3)  *w0d*w0mt  + fi(4)  *w0md*w0mt 
@@ -1445,43 +1446,43 @@ public:
   // cubic hermite polynomial functions
   // psi0 & derivatives
   AMREX_GPU_HOST_DEVICE AMREX_INLINE        
-  double xpsi0(z)
+  amrex::Real xpsi0(z)
   {
-    double xpsi0r = z * z * (2.0e0*z - 3.0e0) + 1.0;
+    amrex::Real xpsi0r = z * z * (2.0e0*z - 3.0e0) + 1.0;
     return xpsi0r;
   }
 
   AMREX_GPU_HOST_DEVICE AMREX_INLINE          
   doubl xdpsi0(z)
   {
-    double xdpsi0r = z * (6.0e0*z - 6.0e0);
+    amrex::Real xdpsi0r = z * (6.0e0*z - 6.0e0);
     return xdpsi0r;
   }
 
 
   // psi1 & derivatives
   AMREX_GPU_HOST_DEVICE AMREX_INLINE            
-  double xpsi1(z)
+  amrex::Real xpsi1(z)
   {
-    double xpsi1r = z * ( z * (z - 2.0e0) + 1.0e0);
+    amrex::Real xpsi1r = z * ( z * (z - 2.0e0) + 1.0e0);
     return xpsi1r;
   }
 
   AMREX_GPU_HOST_DEVICE AMREX_INLINE            
-  double xdpsi1(z)
+  amrex::Real xdpsi1(z)
   {
-    double xdpsi1r = z * (3.0e0*z - 4.0e0) + 1.0e0;
+    amrex::Real xdpsi1r = z * (3.0e0*z - 4.0e0) + 1.0e0;
     return xdpsi1r;
   }
 
   // bicubic hermite polynomial function
   AMREX_GPU_HOST_DEVICE AMREX_INLINE              
-  double h3(const Array1D<double, 36>& fi,
-            const double w0t, const double w1t, const double w0mt,
-            const double w1mt, const double w0d, const double w1d,
-            const double w0md, const double w1md)
+  amrex::Real h3(const Array1D<amrex::Real, 36>& fi,
+            const amrex::Real w0t, const amrex::Real w1t, const amrex::Real w0mt,
+            const amrex::Real w1mt, const amrex::Real w0d, const amrex::Real w1d,
+            const amrex::Real w0md, const amrex::Real w1md)
   {
-    double h3r = (fi(1)  *w0d*w0t   +  fi(2)  *w0md*w0t 
+    amrex::Real h3r = (fi(1)  *w0d*w0t   +  fi(2)  *w0md*w0t 
                   + fi(3)  *w0d*w0mt  +  fi(4)  *w0md*w0mt 
                   + fi(5)  *w0d*w1t   +  fi(6)  *w0md*w1t 
                   + fi(7)  *w0d*w1mt  +  fi(8)  *w0md*w1mt 
