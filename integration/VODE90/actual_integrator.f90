@@ -9,8 +9,8 @@ module actual_integrator_module
   use rpar_indices
   use vode_type_module
   use burn_type_module
-  use bl_types
-  use bl_constants_module
+  use amrex_fort_module, only : rt => amrex_real
+  use amrex_constants_module
 
   implicit none
 
@@ -86,21 +86,21 @@ contains
 
     type (burn_t), intent(in   ) :: state_in
     type (burn_t), intent(inout) :: state_out
-    real(dp_t),    intent(in   ) :: dt, time
+    real(rt),    intent(in   ) :: dt, time
 
     ! Local variables
 
-    real(dp_t) :: local_time
+    real(rt) :: local_time
     type (eos_t) :: eos_state_in, eos_state_out, eos_state_temp
     type (dvode_t) :: dvode_state
 
     ! Work arrays
 
-    real(dp_t) :: y(neqs)
-    real(dp_t) :: atol(neqs), rtol(neqs)
-    real(dp_t), target :: rwork(LRW)
+    real(rt) :: y(neqs)
+    real(rt) :: atol(neqs), rtol(neqs)
+    real(rt), target :: rwork(LRW)
     integer    :: iwork(LIW)
-    real(dp_t) :: rpar(n_rpar_comps)
+    real(rt) :: rpar(n_rpar_comps)
 
     integer :: MF_JAC
 
@@ -111,10 +111,10 @@ contains
 
     integer :: ipar(n_ipar_comps)
 
-    real(dp_t) :: sum
-    real(dp_t) :: retry_change_factor
+    real(rt) :: sum
+    real(rt) :: retry_change_factor
 
-    real(dp_t) :: ener_offset
+    real(rt) :: ener_offset
 
     EXTERNAL jac, f_rhs
 
@@ -123,7 +123,7 @@ contains
     else if (jacobian == 2) then ! Numerical
        MF_JAC = MF_NUMERICAL_JAC
     else
-       call bl_error("Error: unknown Jacobian mode in actual_integrator.f90.")
+       call amrex_error("Error: unknown Jacobian mode in actual_integrator.f90.")
     endif
 
     ! Set the tolerances.  We will be more relaxed on the temperature
@@ -190,7 +190,7 @@ contains
     else if (burning_mode == 1 .or. burning_mode == 3) then
        rpar(irp_self_heat) = ONE
     else
-       call bl_error("Error: unknown burning_mode in actual_integrator.f90.")
+       call amrex_error("Error: unknown burning_mode in actual_integrator.f90.")
     endif
 
     ! Copy in the zone size.
@@ -289,7 +289,7 @@ contains
 
        if (.not. retry_burn) then
 
-          call bl_error("ERROR in burner: integration failed")
+          call amrex_error("ERROR in burner: integration failed")
 
        else
 
@@ -335,7 +335,7 @@ contains
 
           if (retry_change_factor > retry_burn_max_change .and. istate < 0) then
 
-             call bl_error("ERROR in burner: integration failed")
+             call amrex_error("ERROR in burner: integration failed")
 
           endif
 

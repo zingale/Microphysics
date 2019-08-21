@@ -3,9 +3,9 @@
 
 program testjacobian
 
-  use bl_types
-  use bl_constants_module
-  use bl_error_module
+  use amrex_fort_module, only : rt => amrex_real
+  use amrex_constants_module
+  use amrex_error_module
   use network
   use eos_module
   use burner_module
@@ -13,22 +13,22 @@ program testjacobian
 
   implicit none
 
-  real(kind=dp_t) :: dens, temp
-  real(kind=dp_t), dimension(nspec) :: Xin
-  real(kind=dp_t), dimension(nspec_advance+1) :: y, ydot
-  real(kind=dp_t), dimension(nspec_advance+1) :: yp, ym
-  real(kind=dp_t), dimension(nspec_advance+1) :: ydotp, ydotm
-  real(kind=dp_t), dimension(nspec_advance+1,nspec_advance+1) :: pd
-  real(kind=dp_t) :: enucdot
+  real(kind=rt) :: dens, temp
+  real(kind=rt), dimension(nspec) :: Xin
+  real(kind=rt), dimension(nspec_advance+1) :: y, ydot
+  real(kind=rt), dimension(nspec_advance+1) :: yp, ym
+  real(kind=rt), dimension(nspec_advance+1) :: ydotp, ydotm
+  real(kind=rt), dimension(nspec_advance+1,nspec_advance+1) :: pd
+  real(kind=rt) :: enucdot
 
-  real(kind=dp_t) :: rpar
+  real(kind=rt) :: rpar
   integer :: ipar
 
   integer :: ic12, io16, img24
   integer :: i, j, n
 
-  real(kind=dp_t), parameter :: delta = 0.001d0
-  real(kind=dp_t) :: num_jac
+  real(kind=rt), parameter :: delta = 0.001d0
+  real(kind=rt) :: num_jac
 
   call network_init()
   call eos_init()
@@ -38,15 +38,15 @@ program testjacobian
   img24 = network_species_index("magnesium-24")
 
   if (ic12 < 0 .or. io16 < 0 .or. img24 < 0) then
-     call bl_error("ERROR: species index not defined")
+     call amrex_error("ERROR: species index not defined")
   endif
   
-  dens = 2.6e9_dp_t
-  temp = 7.e8_dp_t
+  dens = 2.6e9_rt
+  temp = 7.e8_rt
 
-  Xin(ic12) = 0.5_dp_t
-  Xin(io16) = 0.5_dp_t
-  Xin(img24) = 0.0_dp_t
+  Xin(ic12) = 0.5_rt
+  Xin(io16) = 0.5_rt
+  Xin(img24) = 0.0_rt
 
 
   den_eos(1) = dens
