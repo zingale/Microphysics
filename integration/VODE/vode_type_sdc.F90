@@ -296,7 +296,7 @@ contains
 #if (SDC_METHOD == 2)
 
     use amrex_error_module
-    use probin_module, only: use_tfromp
+    use meth_params_module, only: use_tfromp
 
 #endif
 

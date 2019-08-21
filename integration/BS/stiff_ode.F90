@@ -1,7 +1,7 @@
 module stiff_ode
 
-  use bl_constants_module
-  use bl_types
+  use amrex_constants_module
+  use amrex_fort_module, only : rt => amrex_real
   use burn_type_module
   use bs_type_module
 #ifdef SDC
@@ -14,9 +14,9 @@ module stiff_ode
 
   implicit none
 
-  real(kind=dp_t), parameter, private :: dt_min = 1.d-24
-  real(kind=dp_t), parameter, private :: dt_ini = 1.d-16
-  real(kind=dp_t), parameter, private :: SMALL = 1.d-30
+  real(kind=rt), parameter, private :: dt_min = 1.d-24
+  real(kind=rt), parameter, private :: dt_ini = 1.d-16
+  real(kind=rt), parameter, private :: SMALL = 1.d-30
 
 
   ! error codes
@@ -30,46 +30,46 @@ module stiff_ode
 
 
   ! these are parameters for the BS method
-  real(kind=dp_t), parameter :: S1 = 0.25_dp_t
-  real(kind=dp_t), parameter :: S2 = 0.7_dp_t
+  real(kind=rt), parameter :: S1 = 0.25_rt
+  real(kind=rt), parameter :: S2 = 0.7_rt
 
-  real(kind=dp_t), parameter :: RED_BIG_FACTOR = 0.7_dp_t
-  real(kind=dp_t), parameter :: RED_SMALL_FACTOR = 1.e-5_dp_t
-  real(kind=dp_t), parameter :: SCALMX = 0.1_dp_t
+  real(kind=rt), parameter :: RED_BIG_FACTOR = 0.7_rt
+  real(kind=rt), parameter :: RED_SMALL_FACTOR = 1.e-5_rt
+  real(kind=rt), parameter :: SCALMX = 0.1_rt
 
   ! these are parameters for the Rosenbrock method
-  real(kind=dp_t), parameter :: GAMMA = HALF
-  real(kind=dp_t), parameter :: A21 = TWO
-  real(kind=dp_t), parameter :: A31 = 48.0_dp_t/25.0_dp_t
-  real(kind=dp_t), parameter :: A32 = SIX/25.0_dp_t
+  real(kind=rt), parameter :: GAMMA = HALF
+  real(kind=rt), parameter :: A21 = TWO
+  real(kind=rt), parameter :: A31 = 48.0_rt/25.0_rt
+  real(kind=rt), parameter :: A32 = SIX/25.0_rt
   ! note: we are using the fact here that for both the original Kaps
   ! and Rentrop params and the parameters from Shampine (that NR
   ! likes) we have A41 = A31, A42 = A32, and A43 = 0, so the last 2
   ! solves use the same intermediate y (see Stoer & Bulirsch, TAM,
   ! p. 492)
-  real(kind=dp_t), parameter :: C21 = -EIGHT
-  real(kind=dp_t), parameter :: C31 = 372.0_dp_t/25.0_dp_t
-  real(kind=dp_t), parameter :: C32 = TWELVE/FIVE
-  real(kind=dp_t), parameter :: C41 = -112.0_dp_t/125.0_dp_t
-  real(kind=dp_t), parameter :: C42 = -54.0_dp_t/125.0_dp_t
-  real(kind=dp_t), parameter :: C43 = -TWO/FIVE
-  real(kind=dp_t), parameter :: B1 = 19.0_dp_t/NINE
-  real(kind=dp_t), parameter :: B2 = HALF
-  real(kind=dp_t), parameter :: B3 = 25.0_dp_t/108.0_dp_t
-  real(kind=dp_t), parameter :: B4 = 125.0_dp_t/108.0_dp_t
-  real(kind=dp_t), parameter :: E1 = 17.0_dp_t/54.0_dp_t
-  real(kind=dp_t), parameter :: E2 = 7.0_dp_t/36.0_dp_t
-  real(kind=dp_t), parameter :: E3 = ZERO
-  real(kind=dp_t), parameter :: E4 = 125.0_dp_t/108.0_dp_t
-  real(kind=dp_t), parameter :: A2X = ONE
-  real(kind=dp_t), parameter :: A3X = THREE/FIVE
+  real(kind=rt), parameter :: C21 = -EIGHT
+  real(kind=rt), parameter :: C31 = 372.0_rt/25.0_rt
+  real(kind=rt), parameter :: C32 = TWELVE/FIVE
+  real(kind=rt), parameter :: C41 = -112.0_rt/125.0_rt
+  real(kind=rt), parameter :: C42 = -54.0_rt/125.0_rt
+  real(kind=rt), parameter :: C43 = -TWO/FIVE
+  real(kind=rt), parameter :: B1 = 19.0_rt/NINE
+  real(kind=rt), parameter :: B2 = HALF
+  real(kind=rt), parameter :: B3 = 25.0_rt/108.0_rt
+  real(kind=rt), parameter :: B4 = 125.0_rt/108.0_rt
+  real(kind=rt), parameter :: E1 = 17.0_rt/54.0_rt
+  real(kind=rt), parameter :: E2 = 7.0_rt/36.0_rt
+  real(kind=rt), parameter :: E3 = ZERO
+  real(kind=rt), parameter :: E4 = 125.0_rt/108.0_rt
+  real(kind=rt), parameter :: A2X = ONE
+  real(kind=rt), parameter :: A3X = THREE/FIVE
 
-  real(kind=dp_t), parameter :: SAFETY = 0.9_dp_t
-  real(kind=dp_t), parameter :: GROW = 1.5_dp_t
-  real(kind=dp_t), parameter :: PGROW = -0.25_dp_t
-  real(kind=dp_t), parameter :: SHRINK = HALF
-  real(kind=dp_t), parameter :: PSHRINK = -THIRD
-  real(kind=dp_t), parameter :: ERRCON = 0.1296_dp_t
+  real(kind=rt), parameter :: SAFETY = 0.9_rt
+  real(kind=rt), parameter :: GROW = 1.5_rt
+  real(kind=rt), parameter :: PGROW = -0.25_rt
+  real(kind=rt), parameter :: SHRINK = HALF
+  real(kind=rt), parameter :: PSHRINK = -THIRD
+  real(kind=rt), parameter :: ERRCON = 0.1296_rt
 
   integer, parameter :: MAX_TRY = 50
 
@@ -82,10 +82,10 @@ contains
 
     use extern_probin_module, only: safety_factor
     
-    real(kind=dp_t), intent(in) :: y_old(bs_neqs), y(bs_neqs)
+    real(kind=rt), intent(in) :: y_old(bs_neqs), y(bs_neqs)
     logical, intent(out) :: retry
 
-    real(kind=dp_t) :: ratio
+    real(kind=rt) :: ratio
 
     retry = .false.
 
@@ -116,17 +116,17 @@ contains
     use extern_probin_module, only: ode_max_steps, use_timestep_estimator, &
                                     scaling_method, ode_scale_floor, ode_method
 #ifndef ACC
-    use bl_error_module, only: bl_error
+    use amrex_error_module, only: amrex_error
 #endif
 
     type (bs_t), intent(inout) :: bs
 
-    real(kind=dp_t), intent(inout) :: t
-    real(kind=dp_t), intent(in) :: tmax
-    real(kind=dp_t), intent(in) :: eps
+    real(kind=rt), intent(inout) :: t
+    real(kind=rt), intent(in) :: tmax
+    real(kind=rt), intent(in) :: eps
     integer, intent(out) :: ierr
 
-    real(kind=dp_t) :: yscal(bs_neqs)
+    real(kind=rt) :: yscal(bs_neqs)
     logical :: finished
 
     integer :: n
@@ -165,7 +165,7 @@ contains
 
 #ifndef ACC
        else
-          call bl_error("Unknown scaling_method in ode")
+          call amrex_error("Unknown scaling_method in ode")
 #endif
        endif
 
@@ -181,7 +181,7 @@ contains
           call single_step_rosen(bs, eps, yscal, ierr)
 #ifndef ACC
        else
-          call bl_error("Unknown ode_method in ode")
+          call amrex_error("Unknown ode_method in ode")
 #endif
        endif
 
@@ -225,7 +225,7 @@ contains
     type (bs_t), intent(inout) :: bs
 
     type (bs_t) :: bs_temp
-    real(kind=dp_t) :: h, h_old, hL, hU, ddydtt(bs_neqs), eps, ewt(bs_neqs), yddnorm
+    real(kind=rt) :: h, h_old, hL, hU, ddydtt(bs_neqs), eps, ewt(bs_neqs), yddnorm
     integer :: n
 
     bs_temp = bs
@@ -297,15 +297,15 @@ contains
     !$acc routine(dgefa) seq
 
     type (bs_t), intent(inout) :: bs
-    real(kind=dp_t), intent(in) :: y(bs_neqs)
-    real(kind=dp_t), intent(in) :: dt_tot
+    real(kind=rt), intent(in) :: y(bs_neqs)
+    real(kind=rt), intent(in) :: dt_tot
     integer, intent(in) :: N_sub
-    real(kind=dp_t), intent(out) :: y_out(bs_neqs)
+    real(kind=rt), intent(out) :: y_out(bs_neqs)
     integer, intent(out) :: ierr
 
-    real(kind=dp_t) :: A(bs_neqs,bs_neqs)
-    real(kind=dp_t) :: del(bs_neqs)
-    real(kind=dp_t) :: h
+    real(kind=rt) :: A(bs_neqs,bs_neqs)
+    real(kind=rt) :: del(bs_neqs)
+    real(kind=rt) :: h
 
     integer :: n
 
@@ -313,7 +313,7 @@ contains
 
     type (bs_t) :: bs_temp
 
-    real(kind=dp_t) :: t
+    real(kind=rt) :: t
 
     ierr = IERR_NONE
 
@@ -412,21 +412,21 @@ contains
     !$acc routine seq
 
 #ifndef ACC
-    use bl_error_module, only: bl_error
+    use amrex_error_module, only: amrex_error
 #endif
 
     implicit none
 
     type (bs_t) :: bs
-    real(kind=dp_t), intent(in) :: eps
-    real(kind=dp_t), intent(in) :: yscal(bs_neqs)
+    real(kind=rt), intent(in) :: eps
+    real(kind=rt), intent(in) :: yscal(bs_neqs)
     integer, intent(out) :: ierr
 
-    real(kind=dp_t) :: y_save(bs_neqs), yerr(bs_neqs), yseq(bs_neqs)
-    real(kind=dp_t) :: err(KMAXX)
+    real(kind=rt) :: y_save(bs_neqs), yerr(bs_neqs), yseq(bs_neqs)
+    real(kind=rt) :: err(KMAXX)
 
-    real(kind=dp_t) :: dt, fac, scale, red, eps1, work, work_min, xest
-    real(kind=dp_t) :: err_max
+    real(kind=rt) :: dt, fac, scale, red, eps1, work, work_min, xest
+    real(kind=rt) :: err_max
 
     logical :: converged, reduce, skip_loop, retry
 
@@ -434,7 +434,7 @@ contains
     integer, parameter :: max_iters = 10 ! Should not need more than this
 
     ! for internal storage of the polynomial extrapolation
-    real(kind=dp_t) :: t_extrap(KMAXX+1), qcol(bs_neqs, KMAXX+1)
+    real(kind=rt) :: t_extrap(KMAXX+1), qcol(bs_neqs, KMAXX+1)
 
     ! reinitialize
     if (eps /= bs % eps_old) then
@@ -600,11 +600,11 @@ contains
     ! that means something went really wrong and we should abort.
 
     if (km < 0) then
-       call bl_error("Error: km < 0 in subroutine single_step_bs, something has gone wrong.")
+       call amrex_error("Error: km < 0 in subroutine single_step_bs, something has gone wrong.")
     endif
 
     if (kstop < 0) then
-       call bl_error("Error: kstop < 0 in subroutine single_step_bs, something has gone wrong.")
+       call amrex_error("Error: kstop < 0 in subroutine single_step_bs, something has gone wrong.")
     endif
 #endif
 
@@ -650,14 +650,14 @@ contains
     ! is iest
 
     integer, intent(in) :: iest
-    real(kind=dp_t), intent(in) :: test, yest(bs_neqs)
-    real(kind=dp_t), intent(inout) :: yz(bs_neqs), dy(bs_neqs)
+    real(kind=rt), intent(in) :: test, yest(bs_neqs)
+    real(kind=rt), intent(inout) :: yz(bs_neqs), dy(bs_neqs)
 
     ! these are for internal storage to save the state between calls
-    real(kind=dp_t), intent(inout) :: t(KMAXX+1), qcol(bs_neqs, KMAXX+1)
+    real(kind=rt), intent(inout) :: t(KMAXX+1), qcol(bs_neqs, KMAXX+1)
 
     integer :: j, k
-    real(kind=dp_t) :: delta, f1, f2, q, d(bs_neqs)
+    real(kind=rt) :: delta, f1, f2, q, d(bs_neqs)
 
     t(iest) = test
 
@@ -705,21 +705,21 @@ contains
     !$acc routine(dgefa) seq
 
 #ifndef ACC
-    use bl_error_module, only: bl_error
+    use amrex_error_module, only: amrex_error
 #endif
 
     implicit none
 
     type (bs_t) :: bs
-    real(kind=dp_t), intent(in) :: eps
-    real(kind=dp_t), intent(in) :: yscal(bs_neqs)
+    real(kind=rt), intent(in) :: eps
+    real(kind=rt), intent(in) :: yscal(bs_neqs)
     integer, intent(out) :: ierr
     
-    real(kind=dp_t) :: A(bs_neqs,bs_neqs)
-    real(kind=dp_t) :: g1(bs_neqs), g2(bs_neqs), g3(bs_neqs), g4(bs_neqs)
-    real(kind=dp_t) :: err(bs_neqs)
+    real(kind=rt) :: A(bs_neqs,bs_neqs)
+    real(kind=rt) :: g1(bs_neqs), g2(bs_neqs), g3(bs_neqs), g4(bs_neqs)
+    real(kind=rt) :: err(bs_neqs)
 
-    real(kind=dp_t) :: h, h_tmp, errmax
+    real(kind=rt) :: h, h_tmp, errmax
 
     integer :: q, n
 

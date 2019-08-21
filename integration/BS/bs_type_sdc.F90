@@ -1,7 +1,7 @@
 module bs_type_module
 
-  use bl_constants_module, only: HALF, ONE
-  use bl_types, only: dp_t
+  use amrex_constants_module, only: HALF, ONE
+  use amrex_fort_module, only : rt => amrex_real
   use sdc_type_module, only: SVAR, SVAR_EVOLVE
   use rpar_indices, only: n_rpar_comps
 
@@ -16,21 +16,21 @@ module bs_type_module
   type bs_t
 
      logical :: first
-     real(kind=dp_t) :: eps_old
-     real(kind=dp_t) :: dt_did
-     real(kind=dp_t) :: dt_next
-     real(kind=dp_t) :: a(KMAXX+1)
-     real(kind=dp_t) :: alpha(KMAXX, KMAXX)
-     real(kind=dp_t) :: t_new
+     real(kind=rt) :: eps_old
+     real(kind=rt) :: dt_did
+     real(kind=rt) :: dt_next
+     real(kind=rt) :: a(KMAXX+1)
+     real(kind=rt) :: alpha(KMAXX, KMAXX)
+     real(kind=rt) :: t_new
      integer :: kmax
      integer :: kopt
 
-     real(kind=dp_t) :: y(SVAR_EVOLVE), ydot(SVAR_EVOLVE), jac(SVAR_EVOLVE, SVAR_EVOLVE)
-     real(kind=dp_t) :: ydot_a(SVAR_EVOLVE)
-     real(kind=dp_t) :: atol(SVAR_EVOLVE), rtol(SVAR_EVOLVE)
-     real(kind=dp_t) :: y_init(SVAR_EVOLVE)
-     real(kind=dp_t) :: u(n_rpar_comps), u_init(n_rpar_comps), udot_a(n_rpar_comps)
-     real(kind=dp_t) :: t, dt, tmax
+     real(kind=rt) :: y(SVAR_EVOLVE), ydot(SVAR_EVOLVE), jac(SVAR_EVOLVE, SVAR_EVOLVE)
+     real(kind=rt) :: ydot_a(SVAR_EVOLVE)
+     real(kind=rt) :: atol(SVAR_EVOLVE), rtol(SVAR_EVOLVE)
+     real(kind=rt) :: y_init(SVAR_EVOLVE)
+     real(kind=rt) :: u(n_rpar_comps), u_init(n_rpar_comps), udot_a(n_rpar_comps)
+     real(kind=rt) :: t, dt, tmax
      integer         :: n
 
      integer         :: n_rhs, n_jac
@@ -73,9 +73,9 @@ contains
 #if (SDC_METHOD == 1)
 
     ! this should be larger than any reasonable temperature we will encounter
-    real (kind=dp_t), parameter :: MAX_TEMP = 1.0d11
+    real (kind=rt), parameter :: MAX_TEMP = 1.0d11
 
-    real (kind=dp_t) :: max_e, ke
+    real (kind=rt) :: max_e, ke
     type (eos_t) :: eos_state
 
 #endif
@@ -175,7 +175,7 @@ contains
 
     type (bs_t) :: state
 
-    real(dp_t) :: nspec_sum
+    real(rt) :: nspec_sum
 
     ! We only renormalize below for SDC_METHOD = 1 because
     ! in SDC_METHOD = 2, we define the density as
@@ -416,8 +416,8 @@ contains
 
     use actual_network, only: nspec
     use burn_type_module, only: burn_t, burn_to_eos, eos_to_burn
-    use bl_error_module
-    use bl_types, only: dp_t
+    use amrex_error_module
+    use amrex_fort_module, only : rt => amrex_real
 
 #if (SDC_METHOD == 1)
 
@@ -430,7 +430,7 @@ contains
     use eos_type_module, only: eos_input_rh, eos_t, eos_get_small_temp, eos_get_max_temp    
     use sdc_type_module, only: SENTH, SFS
     use rpar_indices, only: irp_SRHO, irp_p0
-    use probin_module, only: use_tfromp
+    use meth_params_module, only: use_tfromp
 
 #endif
 
@@ -442,7 +442,7 @@ contains
     type (burn_t) :: burn
     type (eos_t) :: eos_state
 
-    real(kind=dp_t) :: rhoInv, min_temp, max_temp
+    real(kind=rt) :: rhoInv, min_temp, max_temp
 
     ! Update rho, rho*u, etc.
 
@@ -483,7 +483,7 @@ contains
 
     if (use_tfromp) then
 
-       call bl_error("Error: SDC_METHOD = 2 requires use_tfromp = F")
+       call amrex_error("Error: SDC_METHOD = 2 requires use_tfromp = F")
 
     else
 
@@ -512,7 +512,7 @@ contains
 
   subroutine dump_bs_state(bs)
 
-    use bl_error_module
+    use amrex_error_module
 
 #if (SDC_METHOD == 1)
 
@@ -525,7 +525,7 @@ contains
     use eos_type_module, only: eos_input_rh, eos_t, eos_get_small_temp, eos_get_max_temp
     use sdc_type_module, only: SENTH, SFS
     use rpar_indices, only: irp_SRHO
-    use probin_module, only: use_tfromp
+    use meth_params_module, only: use_tfromp
 
 #endif
 
@@ -535,7 +535,7 @@ contains
     type (bs_t) :: bs
     type (eos_t) :: eos_state
 
-    real (kind=dp_t) :: rhoInv, min_temp, max_temp
+    real (kind=rt) :: rhoInv, min_temp, max_temp
 
     call fill_unevolved_variables(bs)
 
@@ -574,7 +574,7 @@ contains
 
     if (use_tfromp) then
 
-       call bl_error("Error: SDC_METHOD = 2 requires use_tfromp = F")
+       call amrex_error("Error: SDC_METHOD = 2 requires use_tfromp = F")
 
     else
 
