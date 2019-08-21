@@ -155,9 +155,9 @@ contains
 
         !$acc routine seq
 
-        use bl_error_module
-        use bl_types
-        use bl_constants_module, only: ZERO, HALF, TWO
+        use amrex_error_module
+        use amrex_fort_module, only : rt => amrex_real
+        use amrex_constants_module, only: ZERO, HALF, TWO
 
         implicit none
 
@@ -1234,9 +1234,11 @@ contains
 
     subroutine actual_eos_init
 
-        use bl_error_module
+        use amrex_error_module
         use extern_probin_module, only: eos_input_is_constant, use_eos_coulomb
-        use parallel, only: parallel_IOProcessor, parallel_bcast
+#ifndef COMPILE_WITH_F2PY
+        use amrex_paralleldescriptor_module, only: parallel_bcast => amrex_pd_bcast, amrex_pd_ioprocessor
+#endif
 
         implicit none
 
@@ -1297,7 +1299,9 @@ contains
         input_is_constant = eos_input_is_constant
         do_coulomb = use_eos_coulomb
 
-        if (parallel_IOProcessor()) then
+#ifndef COMPILE_WITH_F2PY
+        if (amrex_pd_ioprocessor()) then
+#endif
            print *, ''
            if (do_coulomb) then
               print *, "Initializing Helmholtz EOS and using Coulomb corrections."
@@ -1305,7 +1309,9 @@ contains
               print *, "Initializing Helmholtz EOS without using Coulomb corrections."
            endif
            print *, ''
+#ifndef COMPILE_WITH_F2PY
         endif
+#endif
 
         !..   read the helmholtz free energy table
         itmax = imax
@@ -1328,12 +1334,14 @@ contains
            end do
         end do
 
-        if (parallel_IOProcessor()) then
-
+#ifndef COMPILE_WITH_F2PY
+        if (amrex_pd_ioprocessor()) then
+#endif
+           
            !..   open the table
            open(unit=2,file='helm_table.dat',status='old',iostat=status,action='read')
            if (status > 0) then
-              call bl_error('actual_eos_init: Failed to open helm_table.dat')
+              call amrex_error('actual_eos_init: Failed to open helm_table.dat')
            endif
 
            !...  read in the free energy table
@@ -1365,8 +1373,11 @@ contains
               end do
            end do
 
+#ifndef COMPILE_WITH_F2PY
         end if
-
+#endif
+        
+#ifndef COMPILE_WITH_F2PY
         call parallel_bcast(f)
         call parallel_bcast(fd)
         call parallel_bcast(ft)
@@ -1388,7 +1399,8 @@ contains
         call parallel_bcast(xfd)
         call parallel_bcast(xft)
         call parallel_bcast(xfdt)
-
+#endif
+        
         !..   construct the temperature and density deltas and their inverses
         do j = 1, jmax-1
            dth         = t(j+1) - t(j)
@@ -1411,9 +1423,13 @@ contains
            dd2i_sav(i) = dd2i
         end do
 
-        if (parallel_IOProcessor()) then
+#ifndef COMPILE_WITH_F2PY
+        if (amrex_pd_ioprocessor()) then
+#endif
            close(unit=2)
+#ifndef COMPILE_WITH_F2PY
         endif
+#endif
 
         ! Set up the minimum and maximum possible densities.
 
