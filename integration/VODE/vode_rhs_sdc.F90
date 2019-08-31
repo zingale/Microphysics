@@ -14,6 +14,10 @@ subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
        rhs_to_vode, vode_to_burn
   use rpar_indices
 
+#ifdef NONAKA_PLOT
+  use nonaka_plot_module, only: nonaka_rhs
+#endif
+    
   implicit none
 
   integer,    intent(IN   ) :: neq, ipar
@@ -22,6 +26,10 @@ subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
   real(rt), intent(  OUT) :: ydot(neq)
 
   type (burn_t) :: burn_state
+
+#ifdef NONAKA_PLOT
+  real(rt) :: simulation_time
+#endif
 
   ydot = ZERO
 
@@ -38,6 +46,11 @@ subroutine f_rhs(neq, time, y, ydot, rpar, ipar)
   ! call the specific network to get the RHS
 
   call actual_rhs(burn_state)
+
+#ifdef NONAKA_PLOT
+  simulation_time = rpar(irp_t0) + time
+  call nonaka_rhs(burn_state, simulation_time)
+#endif
 
   ! convert back to the vode type -- this will add the advective terms
 

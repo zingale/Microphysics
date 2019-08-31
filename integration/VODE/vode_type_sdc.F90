@@ -207,6 +207,12 @@ contains
 
 #endif
 
+#ifdef NONAKA_PLOT
+    sdc % i = rpar(irp_i)
+    sdc % j = rpar(irp_j)
+    sdc % k = rpar(irp_k)
+#endif
+
   end subroutine vode_to_sdc
 
 
@@ -371,6 +377,12 @@ contains
 
 #endif
 
+#ifdef NONAKA_PLOT
+    burn_state % i = rpar(irp_i)
+    burn_state % j = rpar(irp_j)
+    burn_state % k = rpar(irp_k)
+#endif
+    
   end subroutine vode_to_burn
 
 end module vode_type_module
