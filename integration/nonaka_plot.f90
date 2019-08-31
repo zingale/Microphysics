@@ -53,8 +53,6 @@ contains
     character(len=20) :: vector_format = ''
     character(len=20) :: scalar_format = ''
 
-    print *,state%i,state%j,state%k
-    
     if (state % i == nonaka_i .and. &
         state % j == nonaka_j .and. &
         state % k == nonaka_k) then
