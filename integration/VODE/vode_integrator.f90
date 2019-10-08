@@ -74,6 +74,10 @@ contains
     use amrex_constants_module, only : ZERO, ONE
     use integration_data, only: integration_status_t
 
+#ifdef NONAKA_PLOT
+    use nonaka_plot_module
+#endif
+
     implicit none
 
     ! Input arguments
@@ -313,6 +317,10 @@ contains
     ! Store the final data, and then normalize abundances.
     call vode_to_burn(y, rpar, state_out)
 
+#ifdef NONAKA_PLOT
+    call nonaka_rhs(state_out, time+local_time, .true.)
+#endif
+    
     ! Get the number of RHS calls and jac evaluations from the VODE
     ! work arrays
     state_out % n_rhs = iwork(12)

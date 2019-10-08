@@ -64,6 +64,11 @@ contains
                                     burning_mode, call_eos_in_rhs, dT_crit
     use integration_data, only: integration_status_t
 
+#ifdef NONAKA_PLOT
+    use burn_type_module, only: burn_t
+    use nonaka_plot_module
+#endif
+
     ! Input arguments
 
     type (sdc_t), intent(in   ) :: state_in
@@ -75,6 +80,10 @@ contains
 
     real(rt) :: local_time
 
+#ifdef NONAKA_PLOT
+    type(burn_t) :: burn_state
+#endif
+    
     ! Work arrays
 
     real(rt) :: y(VODE_NEQS)
@@ -177,6 +186,11 @@ contains
                istate, IOPT, rwork, LRW, iwork, LIW, jac, MF_JAC, rpar, ipar)
 
 
+#ifdef NONAKA_PLOT
+    call vode_to_burn(time, y, rpar, burn_state)
+    call nonaka_rhs(burn_state, time+local_time, .true.)
+#endif
+    
     ! Store the final data
     call vode_to_sdc(time, y, rpar, state_out)
 

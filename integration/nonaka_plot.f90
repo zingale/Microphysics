@@ -36,7 +36,7 @@ contains
   end subroutine nonaka_init
 
 
-  subroutine nonaka_rhs(state, time)
+  subroutine nonaka_rhs(state, time, eot)
 
     use extern_probin_module, only: nonaka_i, nonaka_j, nonaka_k, nonaka_file
     use amrex_fort_module, only: rt => amrex_real
@@ -47,8 +47,13 @@ contains
 
     type (burn_t), intent(in) :: state
     real(rt), intent(in) :: time
+    
+    ! optional: end of timestep
+    logical,  intent(in), optional :: eot 
 
     integer :: nonaka_file_unit, j
+    integer :: i, nextline
+    real(rt) :: tprev
 
     character(len=20) :: vector_format = ''
     character(len=20) :: scalar_format = ''
@@ -63,8 +68,29 @@ contains
         write(vector_format, '("(", I0, "E30.16E5", ")")') nspec
         write(scalar_format, '("(", I0, "E30.16E5", ")")') 1
         
-        open(newunit=nonaka_file_unit, file=nonaka_file, status="old", position="append", action="write")
-        write(unit=nonaka_file_unit, fmt=scalar_format, advance="no") time
+        open(newunit=nonaka_file_unit, file=nonaka_file, status="old", position="append", action="readwrite", &
+             access="stream", form="formatted")
+
+        inquire(unit=nonaka_file_unit, pos=nextline)
+        
+        if (present(eot)) then
+           ! determine last timestep in file
+           nextline = nextline - ( 30*(1 + 2*nspec) + 1 )
+           read(unit=nonaka_file_unit, pos=nextline, fmt=scalar_format) tprev
+
+           i = 0
+           ! remove last rows where VODE took a much too large timestep
+           do while (tprev >= time .and. i < 2)
+              nextline = nextline - ( 30*(1 + 2*nspec) + 1 )
+              read(unit=nonaka_file_unit, pos=nextline, fmt=scalar_format) tprev
+              i = i + 1
+           end do
+
+           ! store where to write new data
+           nextline = nextline + ( 30*(1 + 2*nspec) + 1 )
+        end if
+           
+        write(unit=nonaka_file_unit, fmt=scalar_format, pos=nextline, advance="no") time
 
         ! Mass fractions X
         write(unit=nonaka_file_unit, fmt=vector_format, advance="no") (state % xn(j), j = 1, nspec)
