@@ -66,7 +66,7 @@ contains
 
 #ifdef NONAKA_PLOT
     use burn_type_module, only: burn_t
-    use nonaka_plot_module
+    use nonaka_plot_module, only: nonaka_rhs
 #endif
 
     ! Input arguments

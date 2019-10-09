@@ -75,7 +75,7 @@ contains
     use integration_data, only: integration_status_t
 
 #ifdef NONAKA_PLOT
-    use nonaka_plot_module
+    use nonaka_plot_module, only: nonaka_rhs
 #endif
 
     implicit none
