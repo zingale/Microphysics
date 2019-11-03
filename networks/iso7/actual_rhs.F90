@@ -159,7 +159,7 @@ contains
 
     use amrex_constants_module, only: ZERO, SIXTH
     use sneut_module, only: sneut5
-    use screening_module, only: fill_plasma_state
+    use screening_module, only: fill_plasma_state, screen5
     use tfactors_module, only: get_tfactors
     use temperature_integration_module, only: temperature_rhs
     use microphysics_math_module, only: esum5, esum6, esum15 ! function
@@ -189,6 +189,12 @@ contains
 
     type (plasma_state) :: pstate
     type (tf_t)         :: tf
+
+    integer :: jscr
+    double precision :: sc1a,sc1adt,sc1add,sc2a,sc2adt,sc2add, &
+                        sc3a,sc3adt,sc3add,ye,z2bar, &
+                        t992,t9i92,yeff_ca40,yeff_ca40dt,yeff_ti44,yeff_ti44dt, &
+                        denom,denomdt,denomdd,xx,zz
 
     double precision :: a(15)
 
@@ -237,9 +243,114 @@ contains
     ! Set up the state data, which is the same for all screening factors.
     call fill_plasma_state(pstate, temp, rho, y(1:nspec))
 
-    call screen_iso7(pstate, tf, rho, y,  &
-                     rate, dratedt, &
-                     dratedy1, dratedy2)
+    jscr = 1
+    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+    jscr = jscr + 1
+    call screen5(pstate,jscr,sc2a,sc2adt,sc2add)
+
+    sc3a   = sc1a * sc2a
+    sc3adt = sc1adt*sc2a + sc1a*sc2adt
+
+    dratedt(ir3a) = dratedt(ir3a) * sc3a + rate(ir3a) * sc3adt
+    rate(ir3a)    = rate(ir3a) * sc3a
+
+    ! c12 to o16
+    jscr = jscr + 1
+    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+    dratedt(ircag) = dratedt(ircag) * sc1a + rate(ircag) * sc1adt
+    rate(ircag)    = rate(ircag) * sc1a
+
+    ! c12 + c12
+    jscr = jscr + 1
+    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+    dratedt(ir1212) = dratedt(ir1212) * sc1a + rate(ir1212) * sc1adt
+    rate(ir1212)    = rate(ir1212) * sc1a
+
+    ! c12 + o16
+    jscr = jscr + 1
+    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+    dratedt(ir1216) = dratedt(ir1216) * sc1a + rate(ir1216) * sc1adt
+    rate(ir1216)    = rate(ir1216) * sc1a
+
+    ! o16 + o16
+    jscr = jscr + 1
+    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+    dratedt(ir1616) = dratedt(ir1616) * sc1a + rate(ir1616) * sc1adt
+    rate(ir1616)    = rate(ir1616) * sc1a
+
+    ! o16 to ne20
+    jscr = jscr + 1
+    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+    dratedt(iroag) = dratedt(iroag) * sc1a + rate(iroag) * sc1adt
+    rate(iroag)    = rate(iroag) * sc1a
+
+    ! o16 to mg24
+    jscr = jscr + 1
+    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+    dratedt(irneag) = dratedt(irneag) * sc1a + rate(irneag) * sc1adt
+    rate(irneag)    = rate(irneag) * sc1a
+
+    ! mg24 to si28
+    jscr = jscr + 1
+    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+    dratedt(irmgag) = dratedt(irmgag) * sc1a + rate(irmgag) * sc1adt
+    rate(irmgag)    = rate(irmgag) * sc1a
+
+    ! ca40 to ti44
+    jscr = jscr + 1
+    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+    dratedt(ircaag) = dratedt(ircaag) * sc1a + rate(ircaag) * sc1adt
+    rate(ircaag)    = rate(ircaag) * sc1a
+
+    ! the publication, timmes, woosley & hoffman apjs, 129, 377
+    ! has a typo on page 393, where it says "y(ic12)+y(io16) .gt. 0.004"
+    ! it should be less than or equal to, since the idea is this piece
+    ! gets activated during silicon burning, after all the c + o from
+    ! oxygen burning is gone.
+
+    if (tf%t9 .gt. 2.5 .and. y(ic12)+y(io16) .le. 4.0d-3) then
+
+       t992  = tf%t972 * tf%t9
+       t9i92 = 1.0d0/t992
+
+       yeff_ca40   = t9i92 * exp(239.42*tf%t9i - 74.741)
+       yeff_ca40dt = -yeff_ca40*(239.42*tf%t9i2 + 4.5d0*tf%t9i)
+
+       yeff_ti44   = t992  * exp(-274.12*tf%t9i + 74.914)
+       yeff_ti44dt = yeff_ti44*(274.12*tf%t9i2 + 4.5d0*tf%t9i)
+
+       denom     = (rho * y(ihe4))**3
+
+       rate(irsi2ni)     = yeff_ca40*denom*rate(ircaag)*y(isi28)
+       dratedy1(irsi2ni) = 3.0d0 * rate(irsi2ni)/y(ihe4)
+       dratedy2(irsi2ni) = yeff_ca40*denom*rate(ircaag)
+       dratedt(irsi2ni)  = (yeff_ca40dt*rate(ircaag) &
+            + yeff_ca40*dratedt(ircaag))*denom*y(isi28)*1.0d-9
+
+       if (denom .ne. 0.0) then
+
+          zz     = 1.0d0/denom
+          rate(irni2si) = min(1.0d10,yeff_ti44*rate(irtiga)*zz)
+
+          if (rate(irni2si) .eq. 1.0d10) then
+             dratedy1(irni2si) = 0.0d0
+             dratedt(irni2si)  = 0.0d0
+          else
+             dratedy1(irni2si) = -3.0d0 * rate(irni2si)/y(ihe4)
+             dratedt(irni2si)  = (yeff_ti44dt*rate(irtiga) &
+                  + yeff_ti44*dratedt(irtiga))*zz*1.0d-9
+          end if
+       endif
+    end if
 
     ! set up the system of ode's :
     ! 4he reactions
