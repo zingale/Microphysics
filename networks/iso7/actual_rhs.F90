@@ -57,7 +57,6 @@ contains
     double precision :: rho, temp
     double precision :: y(nspec)
 
-    double precision :: ratraw(nrates), dratrawdt(nrates)
     double precision :: ratdum(nrates), dratdumdt(nrates)
     double precision :: dratdumdy1(irsi2ni:irni2si), dratdumdy2(irsi2ni:irni2si)
 
@@ -70,11 +69,9 @@ contains
     y    = state % xn * aion_inv
 
     ! Get the raw reaction rates
-    call iso7tab(temp, rho, ratraw, dratrawdt)
+    call iso7tab(temp, rho, ratdum, dratdumdt)
 
     ! Do the screening here because the corrections depend on the composition
-    ratdum(:) = ratraw(:)
-    dratdumdt(:) = dratrawdt(:)
 
     call screen_iso7(temp, rho, y,      &
                      ratdum, dratdumdt, &
@@ -463,7 +460,7 @@ contains
 
 
 
-  subroutine iso7rat(btemp, bden, ratraw, dratrawdt)
+  subroutine iso7rat(btemp, bden, ratdum, dratdumdt)
 
     ! this routine generates unscreened
     ! nuclear reaction rates for the iso7 network.
@@ -474,7 +471,7 @@ contains
     use extern_probin_module, only: use_c12ag_deboer17
 
     double precision :: btemp, bden
-    double precision :: ratraw(nrates), dratrawdt(nrates)
+    double precision :: ratdum(nrates), dratdumdt(nrates)
 
     integer          :: i
     double precision :: rrate,drratedt,drratedd,drratedd2
@@ -484,8 +481,8 @@ contains
     !$gpu
     
     do i=1,nrates
-       ratraw(i)    = ZERO
-       dratrawdt(i) = ZERO
+       ratdum(i)    = ZERO
+       dratdumdt(i) = ZERO
     enddo
 
     if (btemp .lt. 1.0d6) return
@@ -498,54 +495,54 @@ contains
     if (use_c12ag_deboer17) then
     ! deboer + 2017 c12(a,g)o16 rate
        call rate_c12ag_deboer17(tf,bden, &
-                    ratraw(ircag),dratrawdt(ircag),drratedd, &
-                    ratraw(iroga),dratrawdt(iroga),drratedd2)
+                    ratdum(ircag),dratdumdt(ircag),drratedd, &
+                    ratdum(iroga),dratdumdt(iroga),drratedd2)
     else
     ! 1.7 times cf88 c12(a,g)o16 rate
        call rate_c12ag(tf,bden, &
-                    ratraw(ircag),dratrawdt(ircag),drratedd, &
-                    ratraw(iroga),dratrawdt(iroga),drratedd2)
+                    ratdum(ircag),dratdumdt(ircag),drratedd, &
+                    ratdum(iroga),dratdumdt(iroga),drratedd2)
     endif
 
     ! triple alpha to c12
     call rate_tripalf(tf,bden, &
-                      ratraw(ir3a),dratrawdt(ir3a),drratedd, &
-                      ratraw(irg3a),dratrawdt(irg3a),drratedd2)
+                      ratdum(ir3a),dratdumdt(ir3a),drratedd, &
+                      ratdum(irg3a),dratdumdt(irg3a),drratedd2)
 
     ! c12 + c12
     call rate_c12c12(tf,bden, &
-                     ratraw(ir1212),dratrawdt(ir1212),drratedd2, &
+                     ratdum(ir1212),dratdumdt(ir1212),drratedd2, &
                      rrate,drratedt,drratedd)
 
     ! c12 + o16
     call rate_c12o16(tf,bden, &
-                     ratraw(ir1216),dratrawdt(ir1216),drratedd2, &
+                     ratdum(ir1216),dratdumdt(ir1216),drratedd2, &
                      rrate,drratedt,drratedd)
 
     ! 16o + 16o
     call rate_o16o16(tf,bden, &
-                     ratraw(ir1616),dratrawdt(ir1616),drratedd2, &
+                     ratdum(ir1616),dratdumdt(ir1616),drratedd2, &
                      rrate,drratedt,drratedd)
 
     ! o16(a,g)ne20
     call rate_o16ag(tf,bden, &
-                    ratraw(iroag),dratrawdt(iroag),drratedd, &
-                    ratraw(irnega),dratrawdt(irnega),drratedd2)
+                    ratdum(iroag),dratdumdt(iroag),drratedd, &
+                    ratdum(irnega),dratdumdt(irnega),drratedd2)
 
     ! ne20(a,g)mg24
     call rate_ne20ag(tf,bden, &
-                     ratraw(irneag),dratrawdt(irneag),drratedd, &
-                     ratraw(irmgga),dratrawdt(irmgga),drratedd2)
+                     ratdum(irneag),dratdumdt(irneag),drratedd, &
+                     ratdum(irmgga),dratdumdt(irmgga),drratedd2)
 
     ! mg24(a,g)si28
     call rate_mg24ag(tf,bden, &
-                     ratraw(irmgag),dratrawdt(irmgag),drratedd, &
-                     ratraw(irsiga),dratrawdt(irsiga),drratedd2)
+                     ratdum(irmgag),dratdumdt(irmgag),drratedd, &
+                     ratdum(irsiga),dratdumdt(irsiga),drratedd2)
 
     ! ca40(a,g)ti44
     call rate_ca40ag(tf,bden, &
-                     ratraw(ircaag),dratrawdt(ircaag),drratedd, &
-                     ratraw(irtiga),dratrawdt(irtiga),drratedd2)
+                     ratdum(ircaag),dratdumdt(ircaag),drratedd, &
+                     ratdum(irtiga),dratdumdt(irtiga),drratedd2)
 
   end subroutine iso7rat
 
