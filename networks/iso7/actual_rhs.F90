@@ -196,7 +196,14 @@ contains
                         t992,t9i92,yeff_ca40,yeff_ca40dt,yeff_ti44,yeff_ti44dt, &
                         denom,denomdt,denomdd,xx,zz
 
-    double precision :: a(15)
+    integer, parameter :: mp = 4
+
+    integer          :: j, iat
+    double precision :: x, x1, x2, x3, x4
+    double precision :: a, b, c, d, e, f, g, h, p, q
+    double precision :: alfa, beta, gama, delt
+
+    double precision :: r(15)
 
     !$gpu
 
@@ -208,8 +215,45 @@ contains
     zbar = state % zbar
     y(:) = state % xn(:) * aion_inv(:)
 
-    ! Get the raw reaction rates
-    call iso7tab(temp, rate, dratedt)
+    ! hash locate
+    iat = int((log10(temp) - tab_tlo)/tab_tstp) + 1
+    iat = max(1, min(iat - mp / 2 + 1, tab_imax - mp + 1))
+
+    ! setup the lagrange interpolation coefficients for a cubic
+    x  = temp
+    x1 = ttab(iat)
+    x2 = ttab(iat+1)
+    x3 = ttab(iat+2)
+    x4 = ttab(iat+3)
+    a  = x - x1
+    b  = x - x2
+    c  = x - x3
+    d  = x - x4
+    e  = x1 - x2
+    f  = x1 - x3
+    g  = x1 - x4
+    h  = x2 - x3
+    p  = x2 - x4
+    q  = x3 - x4
+    alfa =  b*c*d/(e*f*g)
+    beta = -a*c*d/(e*h*p)
+    gama =  a*b*d/(f*h*q)
+    delt = -a*b*c/(g*p*q)
+
+    ! crank off the raw reaction rates
+    do j = 1, nrates
+
+       rate(j) = (alfa * rattab(j,iat) &
+                  + beta * rattab(j,iat+1) &
+                  + gama * rattab(j,iat+2) &
+                  + delt * rattab(j,iat+3) )
+
+       dratedt(j) = (alfa * drattabdt(j,iat) &
+                     + beta * drattabdt(j,iat+1) &
+                     + gama * drattabdt(j,iat+2) &
+                     + delt * drattabdt(j,iat+3) )
+
+    enddo
 
     ! Set the density dependence array
     dtab(ircag)  = rho
@@ -354,77 +398,77 @@ contains
 
     ! set up the system of ode's :
     ! 4he reactions
-    a(1)  =  3.0d0 * y(ic12) * rate(irg3a)
-    a(2)  = -0.5d0 * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
-    a(3)  =  y(io16) * rate(iroga)
-    a(4)  = -y(ic12) * y(ihe4) * rate(ircag)
-    a(5)  =  0.5d0 * y(ic12) * y(ic12) * rate(ir1212)
-    a(6)  =  0.5d0 * y(ic12) * y(io16) * rate(ir1216)
-    a(7)  =  0.5d0 * y(io16) * y(io16) * rate(ir1616)
-    a(8)  = -y(io16) * y(ihe4) * rate(iroag)
-    a(9)  =  y(ine20) * rate(irnega)
-    a(10) =  y(img24) * rate(irmgga)
-    a(11) = -y(ine20) * y(ihe4) * rate(irneag)
-    a(12) =  y(isi28) * rate(irsiga)
-    a(13) = -y(img24) * y(ihe4) * rate(irmgag)
-    a(14) = -7.0d0 * rate(irsi2ni) * y(ihe4)
-    a(15) =  7.0d0 * rate(irni2si) * y(ini56)
+    r(1)  =  3.0d0 * y(ic12) * rate(irg3a)
+    r(2)  = -0.5d0 * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
+    r(3)  =  y(io16) * rate(iroga)
+    r(4)  = -y(ic12) * y(ihe4) * rate(ircag)
+    r(5)  =  0.5d0 * y(ic12) * y(ic12) * rate(ir1212)
+    r(6)  =  0.5d0 * y(ic12) * y(io16) * rate(ir1216)
+    r(7)  =  0.5d0 * y(io16) * y(io16) * rate(ir1616)
+    r(8)  = -y(io16) * y(ihe4) * rate(iroag)
+    r(9)  =  y(ine20) * rate(irnega)
+    r(10) =  y(img24) * rate(irmgga)
+    r(11) = -y(ine20) * y(ihe4) * rate(irneag)
+    r(12) =  y(isi28) * rate(irsiga)
+    r(13) = -y(img24) * y(ihe4) * rate(irmgag)
+    r(14) = -7.0d0 * rate(irsi2ni) * y(ihe4)
+    r(15) =  7.0d0 * rate(irni2si) * y(ini56)
 
-    state % ydot(ihe4) = esum15(a)
+    state % ydot(ihe4) = esum15(r(1:15))
 
     ! 12c reactions
-    a(1) =  SIXTH * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
-    a(2) = -y(ic12) * rate(irg3a)
-    a(3) =  y(io16) * rate(iroga)
-    a(4) = -y(ic12) * y(ihe4) * rate(ircag)
-    a(5) = -y(ic12) * y(ic12) * rate(ir1212)
-    a(6) = -y(ic12) * y(io16) * rate(ir1216)
+    r(1) =  SIXTH * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
+    r(2) = -y(ic12) * rate(irg3a)
+    r(3) =  y(io16) * rate(iroga)
+    r(4) = -y(ic12) * y(ihe4) * rate(ircag)
+    r(5) = -y(ic12) * y(ic12) * rate(ir1212)
+    r(6) = -y(ic12) * y(io16) * rate(ir1216)
 
-    state % ydot(ic12) = esum6(a)
+    state % ydot(ic12) = esum6(r(1:6))
 
     ! 16o reactions
-    a(1) = -y(io16) * rate(iroga)
-    a(2) =  y(ic12) * y(ihe4) * rate(ircag)
-    a(3) = -y(ic12) * y(io16) * rate(ir1216)
-    a(4) = -y(io16) * y(io16) * rate(ir1616)
-    a(5) = -y(io16) * y(ihe4) * rate(iroag)
-    a(6) =  y(ine20) * rate(irnega)
+    r(1) = -y(io16) * rate(iroga)
+    r(2) =  y(ic12) * y(ihe4) * rate(ircag)
+    r(3) = -y(ic12) * y(io16) * rate(ir1216)
+    r(4) = -y(io16) * y(io16) * rate(ir1616)
+    r(5) = -y(io16) * y(ihe4) * rate(iroag)
+    r(6) =  y(ine20) * rate(irnega)
 
-    state % ydot(io16) = esum6(a)
+    state % ydot(io16) = esum6(r(1:6))
 
     ! 20ne reactions
-    a(1) =  0.5d0 * y(ic12) * y(ic12) * rate(ir1212)
-    a(2) =  y(io16) * y(ihe4) * rate(iroag)
-    a(3) = -y(ine20) * rate(irnega)
-    a(4) =  y(img24) * rate(irmgga)
-    a(5) = -y(ine20) * y(ihe4) * rate(irneag)
+    r(1) =  0.5d0 * y(ic12) * y(ic12) * rate(ir1212)
+    r(2) =  y(io16) * y(ihe4) * rate(iroag)
+    r(3) = -y(ine20) * rate(irnega)
+    r(4) =  y(img24) * rate(irmgga)
+    r(5) = -y(ine20) * y(ihe4) * rate(irneag)
 
-    state % ydot(ine20) = esum5(a)
+    state % ydot(ine20) = esum5(r(1:5))
 
     ! 24mg reactions
-    a(1) =  0.5d0 * y(ic12) * y(io16) * rate(ir1216)
-    a(2) = -y(img24) * rate(irmgga)
-    a(3) =  y(ine20) * y(ihe4) * rate(irneag)
-    a(4) =  y(isi28) * rate(irsiga)
-    a(5) = -y(img24) * y(ihe4) * rate(irmgag)
+    r(1) =  0.5d0 * y(ic12) * y(io16) * rate(ir1216)
+    r(2) = -y(img24) * rate(irmgga)
+    r(3) =  y(ine20) * y(ihe4) * rate(irneag)
+    r(4) =  y(isi28) * rate(irsiga)
+    r(5) = -y(img24) * y(ihe4) * rate(irmgag)
 
-    state % ydot(img24) = esum5(a)
+    state % ydot(img24) = esum5(r(1:5))
 
     ! 28si reactions
-    a(1) =  0.5d0 * y(ic12) * y(io16) * rate(ir1216)
-    a(2) =  0.5d0 * y(io16) * y(io16) * rate(ir1616)
-    a(3) = -y(isi28) * rate(irsiga)
-    a(4) =  y(img24) * y(ihe4) * rate(irmgag)
-    a(5) = -rate(irsi2ni) * y(ihe4)
-    a(6) =  rate(irni2si) * y(ini56)
+    r(1) =  0.5d0 * y(ic12) * y(io16) * rate(ir1216)
+    r(2) =  0.5d0 * y(io16) * y(io16) * rate(ir1616)
+    r(3) = -y(isi28) * rate(irsiga)
+    r(4) =  y(img24) * y(ihe4) * rate(irmgag)
+    r(5) = -rate(irsi2ni) * y(ihe4)
+    r(6) =  rate(irni2si) * y(ini56)
 
-    state % ydot(isi28) = esum6(a)
+    state % ydot(isi28) = esum6(r(1:6))
 
     ! ni56 reactions
-    a(1) =  rate(irsi2ni) * y(ihe4)
-    a(2) = -rate(irni2si) * y(ini56)
+    r(1) =  rate(irsi2ni) * y(ihe4)
+    r(2) = -rate(irni2si) * y(ini56)
 
-    state % ydot(ini56) = sum(a(1:2))
+    state % ydot(ini56) = sum(r(1:2))
 
     ! Instantaneous energy generation rate -- this needs molar fractions
 
