@@ -73,8 +73,10 @@ contains
     call iso7tab(temp, rho, ratraw, dratrawdt)
 
     ! Do the screening here because the corrections depend on the composition
+    ratdum(:) = ratraw(:)
+    dratdumdt(:) = dratrawdt(:)
+
     call screen_iso7(temp, rho, y,      &
-                     ratraw, dratrawdt, &
                      ratdum, dratdumdt, &
                      dratdumdy1, dratdumdy2)
 
@@ -550,7 +552,6 @@ contains
 
 
   subroutine screen_iso7(btemp, bden, y, &
-                         ratraw, dratrawdt, &
                          ratdum, dratdumdt, &
                          dratdumdy1, dratdumdy2)
 
@@ -565,7 +566,6 @@ contains
 
     double precision :: btemp, bden
     double precision :: y(nspec)
-    double precision :: ratraw(nrates), dratrawdt(nrates)
     double precision :: ratdum(nrates), dratdumdt(nrates)
     double precision :: dratdumdy1(irsi2ni:irni2si), dratdumdy2(irsi2ni:irni2si)
 
@@ -579,13 +579,8 @@ contains
     type (tf_t)         :: tf
 
     !$gpu
-    
-    ! initialize
-    do i = 1, nrates
-       ratdum(i)     = ratraw(i)
-       dratdumdt(i)  = dratrawdt(i)
-    enddo
 
+    ! initialize
     dratdumdy1(:) = ZERO
     dratdumdy2(:) = ZERO
 
@@ -606,96 +601,70 @@ contains
     sc3a   = sc1a * sc2a
     sc3adt = sc1adt*sc2a + sc1a*sc2adt
 
-    ratdum(ir3a)    = ratraw(ir3a) * sc3a
-    dratdumdt(ir3a) = dratrawdt(ir3a)*sc3a + ratraw(ir3a)*sc3adt
-
-
+    dratdumdt(ir3a) = dratdumdt(ir3a) * sc3a + ratdum(ir3a) * sc3adt
+    ratdum(ir3a)    = ratdum(ir3a) * sc3a
 
     ! c12 to o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    ratdum(ircag)     = ratraw(ircag) * sc1a
-    dratdumdt(ircag)  = dratrawdt(ircag)*sc1a + ratraw(ircag)*sc1adt
-
-
-
+    dratdumdt(ircag) = dratdumdt(ircag) * sc1a + ratdum(ircag) * sc1adt
+    ratdum(ircag)    = ratdum(ircag) * sc1a
 
     ! c12 + c12
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    ratdum(ir1212)    = ratraw(ir1212) * sc1a
-    dratdumdt(ir1212) = dratrawdt(ir1212)*sc1a + ratraw(ir1212)*sc1adt
-
-
-
+    dratdumdt(ir1212) = dratdumdt(ir1212) * sc1a + ratdum(ir1212) * sc1adt
+    ratdum(ir1212)    = ratdum(ir1212) * sc1a
 
     ! c12 + o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    ratdum(ir1216)    = ratraw(ir1216) * sc1a
-    dratdumdt(ir1216) = dratrawdt(ir1216)*sc1a + ratraw(ir1216)*sc1adt
-
-
-
+    dratdumdt(ir1216) = dratdumdt(ir1216) * sc1a + ratdum(ir1216) * sc1adt
+    ratdum(ir1216)    = ratdum(ir1216) * sc1a
 
     ! o16 + o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    ratdum(ir1616)    = ratraw(ir1616) * sc1a
-    dratdumdt(ir1616) = dratrawdt(ir1616)*sc1a + ratraw(ir1616)*sc1adt
-
-
-
+    dratdumdt(ir1616) = dratdumdt(ir1616) * sc1a + ratdum(ir1616) * sc1adt
+    ratdum(ir1616)    = ratdum(ir1616) * sc1a
 
     ! o16 to ne20
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    ratdum(iroag)    = ratraw(iroag) * sc1a
-    dratdumdt(iroag) = dratrawdt(iroag)*sc1a + ratraw(iroag)*sc1adt
-
-
-
+    dratdumdt(iroag) = dratdumdt(iroag) * sc1a + ratdum(iroag) * sc1adt
+    ratdum(iroag)    = ratdum(iroag) * sc1a
 
     ! o16 to mg24
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    ratdum(irneag)    = ratraw(irneag) * sc1a
-    dratdumdt(irneag) = dratrawdt(irneag)*sc1a + ratraw(irneag)*sc1adt
-
-
+    dratdumdt(irneag) = dratdumdt(irneag) * sc1a + ratdum(irneag) * sc1adt
+    ratdum(irneag)    = ratdum(irneag) * sc1a
 
     ! mg24 to si28
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    ratdum(irmgag)    = ratraw(irmgag) * sc1a
-    dratdumdt(irmgag) = dratrawdt(irmgag)*sc1a + ratraw(irmgag)*sc1adt
-
-
-
+    dratdumdt(irmgag) = dratdumdt(irmgag) * sc1a + ratdum(irmgag) * sc1adt
+    ratdum(irmgag)    = ratdum(irmgag) * sc1a
 
     ! ca40 to ti44
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    ratdum(ircaag)    = ratraw(ircaag) * sc1a
-    dratdumdt(ircaag) = dratrawdt(ircaag)*sc1a + ratraw(ircaag)*sc1adt
-
-
-
+    dratdumdt(ircaag) = dratdumdt(ircaag) * sc1a + ratdum(ircaag) * sc1adt
+    ratdum(ircaag)    = ratdum(ircaag) * sc1a
 
     ! the publication, timmes, woosley & hoffman apjs, 129, 377
-    ! has a typo on page 393, where its says "y(ic12)+y(io16) .gt. 0.004"
+    ! has a typo on page 393, where it says "y(ic12)+y(io16) .gt. 0.004"
     ! it should be less than or equal to, since the idea is this piece
-    ! gets activated during silicon buring, after all the c + o from
+    ! gets activated during silicon burning, after all the c + o from
     ! oxygen burning is gone.
-
 
     if (tf%t9 .gt. 2.5 .and. y(ic12)+y(io16) .le. 4.0d-3) then
 
@@ -716,7 +685,6 @@ contains
        dratdumdt(irsi2ni)  = (yeff_ca40dt*ratdum(ircaag) &
             + yeff_ca40*dratdumdt(ircaag))*denom*y(isi28)*1.0d-9
 
-
        if (denom .ne. 0.0) then
 
           zz     = 1.0d0/denom
@@ -725,7 +693,6 @@ contains
           if (ratdum(irni2si) .eq. 1.0d10) then
              dratdumdy1(irni2si) = 0.0d0
              dratdumdt(irni2si)  = 0.0d0
-
           else
              dratdumdy1(irni2si) = -3.0d0 * ratdum(irni2si)/y(ihe4)
              dratdumdt(irni2si)  = (yeff_ti44dt*ratdum(irtiga) &
