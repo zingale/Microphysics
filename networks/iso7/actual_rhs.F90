@@ -5,6 +5,8 @@ module actual_rhs_module
   use burn_type_module
   use actual_network, only: nrates
   use rate_type_module
+  use tfactors_module, only: tf_t
+  use screening_module, only: plasma_state
 
   implicit none
 
@@ -49,6 +51,10 @@ contains
 
   subroutine get_rates(state, rr)
 
+    use amrex_constants_module, only: ZERO
+    use screening_module, only: fill_plasma_state
+    use tfactors_module, only: get_tfactors
+
     implicit none
 
     type (burn_t), intent(in) :: state
@@ -61,6 +67,9 @@ contains
     double precision :: dratedy1(irsi2ni:irni2si), dratedy2(irsi2ni:irni2si)
 
     double precision :: dtab(nrates)
+
+    type (plasma_state) :: pstate
+    type (tf_t)         :: tf
 
     !$gpu
 
@@ -94,9 +103,18 @@ contains
 
     rate(:) = rate(:) * dtab(:)
     dratedt(:) = dratedt(:) * dtab(:)
+    dratedy1(:) = ZERO
+    dratedy2(:) = ZERO
 
     ! Do the screening here because the corrections depend on the composition
-    call screen_iso7(temp, rho, y,  &
+
+    ! Get the temperature factors
+    call get_tfactors(temp, tf)
+
+    ! Set up the state data, which is the same for all screening factors.
+    call fill_plasma_state(pstate, temp, rho, y(1:nspec))
+
+    call screen_iso7(pstate, tf, rho, y,  &
                      rate, dratedt, &
                      dratedy1, dratedy2)
 
@@ -550,20 +568,18 @@ contains
 
 
 
-  subroutine screen_iso7(btemp, bden, y, &
+  subroutine screen_iso7(pstate, tf, bden, y, &
                          rate, dratedt, &
                          dratedy1, dratedy2)
 
-    use amrex_constants_module, only: ZERO, ONE
-    use screening_module, only: screen5, plasma_state, fill_plasma_state
-    use tfactors_module
+    use screening_module, only: screen5
 
     ! this routine computes the screening factors
     ! and applies them to the raw reaction rates,
     ! producing the final reaction rates used by the
     ! right hand sides and jacobian matrix elements
 
-    double precision :: btemp, bden
+    double precision :: bden
     double precision :: y(nspec)
     double precision :: rate(nrates), dratedt(nrates)
     double precision :: dratedy1(irsi2ni:irni2si), dratedy2(irsi2ni:irni2si)
@@ -574,21 +590,10 @@ contains
                         t992,t9i92,yeff_ca40,yeff_ca40dt,yeff_ti44,yeff_ti44dt, &
                         denom,denomdt,denomdd,xx,zz
 
-    type (plasma_state) :: pstate
-    type (tf_t)         :: tf
+    type (plasma_state), intent(in) :: pstate
+    type (tf_t),         intent(in) :: tf
 
     !$gpu
-
-    ! initialize
-    dratedy1(:) = ZERO
-    dratedy2(:) = ZERO
-
-    ! get the temperature factors
-    call get_tfactors(btemp, tf)
-
-    ! Set up the state data, which is the same for all screening factors.
-
-    call fill_plasma_state(pstate, btemp, bden, y(1:nspec))
 
     ! first the always fun triple alpha and its inverse
     jscr = 1
