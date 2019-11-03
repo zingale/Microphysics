@@ -157,11 +157,12 @@ contains
 
   subroutine actual_rhs(state)
 
-    use amrex_constants_module, only: ZERO
+    use amrex_constants_module, only: ZERO, SIXTH
     use sneut_module, only: sneut5
     use screening_module, only: fill_plasma_state
     use tfactors_module, only: get_tfactors
     use temperature_integration_module, only: temperature_rhs
+    use microphysics_math_module, only: esum5, esum6, esum15 ! function
 
     implicit none
 
@@ -179,7 +180,7 @@ contains
     double precision :: enuc
 
     double precision :: rho, temp, abar, zbar
-    double precision :: y(nspec), ydot(nspec)
+    double precision :: y(nspec)
 
     double precision :: rate(nrates), dratedt(nrates)
     double precision :: dratedy1(irsi2ni:irni2si), dratedy2(irsi2ni:irni2si)
@@ -188,6 +189,8 @@ contains
 
     type (plasma_state) :: pstate
     type (tf_t)         :: tf
+
+    double precision :: a(15)
 
     !$gpu
 
@@ -238,11 +241,79 @@ contains
                      rate, dratedt, &
                      dratedy1, dratedy2)
 
-    ! Call the RHS to actually get dydt.
+    ! set up the system of ode's :
+    ! 4he reactions
+    a(1)  =  3.0d0 * y(ic12) * rate(irg3a)
+    a(2)  = -0.5d0 * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
+    a(3)  =  y(io16) * rate(iroga)
+    a(4)  = -y(ic12) * y(ihe4) * rate(ircag)
+    a(5)  =  0.5d0 * y(ic12) * y(ic12) * rate(ir1212)
+    a(6)  =  0.5d0 * y(ic12) * y(io16) * rate(ir1216)
+    a(7)  =  0.5d0 * y(io16) * y(io16) * rate(ir1616)
+    a(8)  = -y(io16) * y(ihe4) * rate(iroag)
+    a(9)  =  y(ine20) * rate(irnega)
+    a(10) =  y(img24) * rate(irmgga)
+    a(11) = -y(ine20) * y(ihe4) * rate(irneag)
+    a(12) =  y(isi28) * rate(irsiga)
+    a(13) = -y(img24) * y(ihe4) * rate(irmgag)
+    a(14) = -7.0d0 * rate(irsi2ni) * y(ihe4)
+    a(15) =  7.0d0 * rate(irni2si) * y(ini56)
 
-    deriva = .false.
-    call rhs(y, rate, ydot, deriva)
-    state % ydot(1:nspec) = ydot(1:nspec)
+    state % ydot(ihe4) = esum15(a)
+
+    ! 12c reactions
+    a(1) =  SIXTH * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
+    a(2) = -y(ic12) * rate(irg3a)
+    a(3) =  y(io16) * rate(iroga)
+    a(4) = -y(ic12) * y(ihe4) * rate(ircag)
+    a(5) = -y(ic12) * y(ic12) * rate(ir1212)
+    a(6) = -y(ic12) * y(io16) * rate(ir1216)
+
+    state % ydot(ic12) = esum6(a)
+
+    ! 16o reactions
+    a(1) = -y(io16) * rate(iroga)
+    a(2) =  y(ic12) * y(ihe4) * rate(ircag)
+    a(3) = -y(ic12) * y(io16) * rate(ir1216)
+    a(4) = -y(io16) * y(io16) * rate(ir1616)
+    a(5) = -y(io16) * y(ihe4) * rate(iroag)
+    a(6) =  y(ine20) * rate(irnega)
+
+    state % ydot(io16) = esum6(a)
+
+    ! 20ne reactions
+    a(1) =  0.5d0 * y(ic12) * y(ic12) * rate(ir1212)
+    a(2) =  y(io16) * y(ihe4) * rate(iroag)
+    a(3) = -y(ine20) * rate(irnega)
+    a(4) =  y(img24) * rate(irmgga)
+    a(5) = -y(ine20) * y(ihe4) * rate(irneag)
+
+    state % ydot(ine20) = esum5(a)
+
+    ! 24mg reactions
+    a(1) =  0.5d0 * y(ic12) * y(io16) * rate(ir1216)
+    a(2) = -y(img24) * rate(irmgga)
+    a(3) =  y(ine20) * y(ihe4) * rate(irneag)
+    a(4) =  y(isi28) * rate(irsiga)
+    a(5) = -y(img24) * y(ihe4) * rate(irmgag)
+
+    state % ydot(img24) = esum5(a)
+
+    ! 28si reactions
+    a(1) =  0.5d0 * y(ic12) * y(io16) * rate(ir1216)
+    a(2) =  0.5d0 * y(io16) * y(io16) * rate(ir1616)
+    a(3) = -y(isi28) * rate(irsiga)
+    a(4) =  y(img24) * y(ihe4) * rate(irmgag)
+    a(5) = -rate(irsi2ni) * y(ihe4)
+    a(6) =  rate(irni2si) * y(ini56)
+
+    state % ydot(isi28) = esum6(a)
+
+    ! ni56 reactions
+    a(1) =  rate(irsi2ni) * y(ihe4)
+    a(2) = -rate(irni2si) * y(ini56)
+
+    state % ydot(ini56) = sum(a(1:2))
 
     ! Instantaneous energy generation rate -- this needs molar fractions
 
