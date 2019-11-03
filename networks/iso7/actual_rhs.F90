@@ -182,8 +182,7 @@ contains
     double precision :: rho, temp, abar, zbar
     double precision :: y(nspec)
 
-    double precision :: rate(nrates), dratedt(nrates)
-    double precision :: dratedy1(irsi2ni:irni2si), dratedy2(irsi2ni:irni2si)
+    double precision :: rate(nrates)
 
     double precision :: dtab(nrates)
 
@@ -248,11 +247,6 @@ contains
                   + gama * rattab(j,iat+2) &
                   + delt * rattab(j,iat+3) )
 
-       dratedt(j) = (alfa * drattabdt(j,iat) &
-                     + beta * drattabdt(j,iat+1) &
-                     + gama * drattabdt(j,iat+2) &
-                     + delt * drattabdt(j,iat+3) )
-
     enddo
 
     ! Set the density dependence array
@@ -275,9 +269,6 @@ contains
     dtab(irni2si) = 0.0d0
 
     rate(:) = rate(:) * dtab(:)
-    dratedt(:) = dratedt(:) * dtab(:)
-    dratedy1(:) = ZERO
-    dratedy2(:) = ZERO
 
     ! Do the screening here because the corrections depend on the composition
 
@@ -296,63 +287,54 @@ contains
     sc3a   = sc1a * sc2a
     sc3adt = sc1adt*sc2a + sc1a*sc2adt
 
-    dratedt(ir3a) = dratedt(ir3a) * sc3a + rate(ir3a) * sc3adt
     rate(ir3a)    = rate(ir3a) * sc3a
 
     ! c12 to o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratedt(ircag) = dratedt(ircag) * sc1a + rate(ircag) * sc1adt
     rate(ircag)    = rate(ircag) * sc1a
 
     ! c12 + c12
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratedt(ir1212) = dratedt(ir1212) * sc1a + rate(ir1212) * sc1adt
     rate(ir1212)    = rate(ir1212) * sc1a
 
     ! c12 + o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratedt(ir1216) = dratedt(ir1216) * sc1a + rate(ir1216) * sc1adt
     rate(ir1216)    = rate(ir1216) * sc1a
 
     ! o16 + o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratedt(ir1616) = dratedt(ir1616) * sc1a + rate(ir1616) * sc1adt
     rate(ir1616)    = rate(ir1616) * sc1a
 
     ! o16 to ne20
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratedt(iroag) = dratedt(iroag) * sc1a + rate(iroag) * sc1adt
     rate(iroag)    = rate(iroag) * sc1a
 
     ! o16 to mg24
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratedt(irneag) = dratedt(irneag) * sc1a + rate(irneag) * sc1adt
     rate(irneag)    = rate(irneag) * sc1a
 
     ! mg24 to si28
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratedt(irmgag) = dratedt(irmgag) * sc1a + rate(irmgag) * sc1adt
     rate(irmgag)    = rate(irmgag) * sc1a
 
     ! ca40 to ti44
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratedt(ircaag) = dratedt(ircaag) * sc1a + rate(ircaag) * sc1adt
     rate(ircaag)    = rate(ircaag) * sc1a
 
     ! the publication, timmes, woosley & hoffman apjs, 129, 377
@@ -375,24 +357,10 @@ contains
        denom     = (rho * y(ihe4))**3
 
        rate(irsi2ni)     = yeff_ca40*denom*rate(ircaag)*y(isi28)
-       dratedy1(irsi2ni) = 3.0d0 * rate(irsi2ni)/y(ihe4)
-       dratedy2(irsi2ni) = yeff_ca40*denom*rate(ircaag)
-       dratedt(irsi2ni)  = (yeff_ca40dt*rate(ircaag) &
-            + yeff_ca40*dratedt(ircaag))*denom*y(isi28)*1.0d-9
 
        if (denom .ne. 0.0) then
-
           zz     = 1.0d0/denom
           rate(irni2si) = min(1.0d10,yeff_ti44*rate(irtiga)*zz)
-
-          if (rate(irni2si) .eq. 1.0d10) then
-             dratedy1(irni2si) = 0.0d0
-             dratedt(irni2si)  = 0.0d0
-          else
-             dratedy1(irni2si) = -3.0d0 * rate(irni2si)/y(ihe4)
-             dratedt(irni2si)  = (yeff_ti44dt*rate(irtiga) &
-                  + yeff_ti44*dratedt(irtiga))*zz*1.0d-9
-          end if
        endif
     end if
 
