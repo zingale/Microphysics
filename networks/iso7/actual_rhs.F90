@@ -57,8 +57,8 @@ contains
     double precision :: rho, temp
     double precision :: y(nspec)
 
-    double precision :: ratdum(nrates), dratdumdt(nrates)
-    double precision :: dratdumdy1(irsi2ni:irni2si), dratdumdy2(irsi2ni:irni2si)
+    double precision :: rate(nrates), dratedt(nrates)
+    double precision :: dratedy1(irsi2ni:irni2si), dratedy2(irsi2ni:irni2si)
 
     !$gpu
 
@@ -69,20 +69,19 @@ contains
     y    = state % xn * aion_inv
 
     ! Get the raw reaction rates
-    call iso7tab(temp, rho, ratdum, dratdumdt)
+    call iso7tab(temp, rho, rate, dratedt)
 
     ! Do the screening here because the corrections depend on the composition
-
-    call screen_iso7(temp, rho, y,      &
-                     ratdum, dratdumdt, &
-                     dratdumdy1, dratdumdy2)
+    call screen_iso7(temp, rho, y,  &
+                     rate, dratedt, &
+                     dratedy1, dratedy2)
 
     ! Save the rate data, for the Jacobian later if we need it.
 
-    rr % rates(1,:) = ratdum
-    rr % rates(2,:) = dratdumdt
-    rr % rates(3,irsi2ni:irni2si) = dratdumdy1
-    rr % rates(4,irsi2ni:irni2si) = dratdumdy2
+    rr % rates(1,:) = rate
+    rr % rates(2,:) = dratedt
+    rr % rates(3,irsi2ni:irni2si) = dratedy1
+    rr % rates(4,irsi2ni:irni2si) = dratedy2
 
     rr % T_eval = temp
 
@@ -334,7 +333,7 @@ contains
     enddo
 
     ! Evaluate the Jacobian elements with respect to temperature by
-    ! calling the RHS using d(ratdum) / dT
+    ! calling the RHS using d(rate) / dT
 
     deriva = .true.
     call rhs(y, rr, yderivs, deriva, for_jacobian_tderiv = .true.)
@@ -460,7 +459,7 @@ contains
 
 
 
-  subroutine iso7rat(btemp, bden, ratdum, dratdumdt)
+  subroutine iso7rat(btemp, bden, rate, dratedt)
 
     ! this routine generates unscreened
     ! nuclear reaction rates for the iso7 network.
@@ -471,7 +470,7 @@ contains
     use extern_probin_module, only: use_c12ag_deboer17
 
     double precision :: btemp, bden
-    double precision :: ratdum(nrates), dratdumdt(nrates)
+    double precision :: rate(nrates), dratedt(nrates)
 
     integer          :: i
     double precision :: rrate,drratedt,drratedd,drratedd2
@@ -481,8 +480,8 @@ contains
     !$gpu
     
     do i=1,nrates
-       ratdum(i)    = ZERO
-       dratdumdt(i) = ZERO
+       rate(i)    = ZERO
+       dratedt(i) = ZERO
     enddo
 
     if (btemp .lt. 1.0d6) return
@@ -495,62 +494,62 @@ contains
     if (use_c12ag_deboer17) then
     ! deboer + 2017 c12(a,g)o16 rate
        call rate_c12ag_deboer17(tf,bden, &
-                    ratdum(ircag),dratdumdt(ircag),drratedd, &
-                    ratdum(iroga),dratdumdt(iroga),drratedd2)
+                    rate(ircag),dratedt(ircag),drratedd, &
+                    rate(iroga),dratedt(iroga),drratedd2)
     else
     ! 1.7 times cf88 c12(a,g)o16 rate
        call rate_c12ag(tf,bden, &
-                    ratdum(ircag),dratdumdt(ircag),drratedd, &
-                    ratdum(iroga),dratdumdt(iroga),drratedd2)
+                    rate(ircag),dratedt(ircag),drratedd, &
+                    rate(iroga),dratedt(iroga),drratedd2)
     endif
 
     ! triple alpha to c12
     call rate_tripalf(tf,bden, &
-                      ratdum(ir3a),dratdumdt(ir3a),drratedd, &
-                      ratdum(irg3a),dratdumdt(irg3a),drratedd2)
+                      rate(ir3a),dratedt(ir3a),drratedd, &
+                      rate(irg3a),dratedt(irg3a),drratedd2)
 
     ! c12 + c12
     call rate_c12c12(tf,bden, &
-                     ratdum(ir1212),dratdumdt(ir1212),drratedd2, &
+                     rate(ir1212),dratedt(ir1212),drratedd2, &
                      rrate,drratedt,drratedd)
 
     ! c12 + o16
     call rate_c12o16(tf,bden, &
-                     ratdum(ir1216),dratdumdt(ir1216),drratedd2, &
+                     rate(ir1216),dratedt(ir1216),drratedd2, &
                      rrate,drratedt,drratedd)
 
     ! 16o + 16o
     call rate_o16o16(tf,bden, &
-                     ratdum(ir1616),dratdumdt(ir1616),drratedd2, &
+                     rate(ir1616),dratedt(ir1616),drratedd2, &
                      rrate,drratedt,drratedd)
 
     ! o16(a,g)ne20
     call rate_o16ag(tf,bden, &
-                    ratdum(iroag),dratdumdt(iroag),drratedd, &
-                    ratdum(irnega),dratdumdt(irnega),drratedd2)
+                    rate(iroag),dratedt(iroag),drratedd, &
+                    rate(irnega),dratedt(irnega),drratedd2)
 
     ! ne20(a,g)mg24
     call rate_ne20ag(tf,bden, &
-                     ratdum(irneag),dratdumdt(irneag),drratedd, &
-                     ratdum(irmgga),dratdumdt(irmgga),drratedd2)
+                     rate(irneag),dratedt(irneag),drratedd, &
+                     rate(irmgga),dratedt(irmgga),drratedd2)
 
     ! mg24(a,g)si28
     call rate_mg24ag(tf,bden, &
-                     ratdum(irmgag),dratdumdt(irmgag),drratedd, &
-                     ratdum(irsiga),dratdumdt(irsiga),drratedd2)
+                     rate(irmgag),dratedt(irmgag),drratedd, &
+                     rate(irsiga),dratedt(irsiga),drratedd2)
 
     ! ca40(a,g)ti44
     call rate_ca40ag(tf,bden, &
-                     ratdum(ircaag),dratdumdt(ircaag),drratedd, &
-                     ratdum(irtiga),dratdumdt(irtiga),drratedd2)
+                     rate(ircaag),dratedt(ircaag),drratedd, &
+                     rate(irtiga),dratedt(irtiga),drratedd2)
 
   end subroutine iso7rat
 
 
 
   subroutine screen_iso7(btemp, bden, y, &
-                         ratdum, dratdumdt, &
-                         dratdumdy1, dratdumdy2)
+                         rate, dratedt, &
+                         dratedy1, dratedy2)
 
     use amrex_constants_module, only: ZERO, ONE
     use screening_module, only: screen5, plasma_state, fill_plasma_state
@@ -563,8 +562,8 @@ contains
 
     double precision :: btemp, bden
     double precision :: y(nspec)
-    double precision :: ratdum(nrates), dratdumdt(nrates)
-    double precision :: dratdumdy1(irsi2ni:irni2si), dratdumdy2(irsi2ni:irni2si)
+    double precision :: rate(nrates), dratedt(nrates)
+    double precision :: dratedy1(irsi2ni:irni2si), dratedy2(irsi2ni:irni2si)
 
     integer          :: i, jscr
     double precision :: sc1a,sc1adt,sc1add,sc2a,sc2adt,sc2add, &
@@ -578,8 +577,8 @@ contains
     !$gpu
 
     ! initialize
-    dratdumdy1(:) = ZERO
-    dratdumdy2(:) = ZERO
+    dratedy1(:) = ZERO
+    dratedy2(:) = ZERO
 
     ! get the temperature factors
     call get_tfactors(btemp, tf)
@@ -598,64 +597,64 @@ contains
     sc3a   = sc1a * sc2a
     sc3adt = sc1adt*sc2a + sc1a*sc2adt
 
-    dratdumdt(ir3a) = dratdumdt(ir3a) * sc3a + ratdum(ir3a) * sc3adt
-    ratdum(ir3a)    = ratdum(ir3a) * sc3a
+    dratedt(ir3a) = dratedt(ir3a) * sc3a + rate(ir3a) * sc3adt
+    rate(ir3a)    = rate(ir3a) * sc3a
 
     ! c12 to o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratdumdt(ircag) = dratdumdt(ircag) * sc1a + ratdum(ircag) * sc1adt
-    ratdum(ircag)    = ratdum(ircag) * sc1a
+    dratedt(ircag) = dratedt(ircag) * sc1a + rate(ircag) * sc1adt
+    rate(ircag)    = rate(ircag) * sc1a
 
     ! c12 + c12
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratdumdt(ir1212) = dratdumdt(ir1212) * sc1a + ratdum(ir1212) * sc1adt
-    ratdum(ir1212)    = ratdum(ir1212) * sc1a
+    dratedt(ir1212) = dratedt(ir1212) * sc1a + rate(ir1212) * sc1adt
+    rate(ir1212)    = rate(ir1212) * sc1a
 
     ! c12 + o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratdumdt(ir1216) = dratdumdt(ir1216) * sc1a + ratdum(ir1216) * sc1adt
-    ratdum(ir1216)    = ratdum(ir1216) * sc1a
+    dratedt(ir1216) = dratedt(ir1216) * sc1a + rate(ir1216) * sc1adt
+    rate(ir1216)    = rate(ir1216) * sc1a
 
     ! o16 + o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratdumdt(ir1616) = dratdumdt(ir1616) * sc1a + ratdum(ir1616) * sc1adt
-    ratdum(ir1616)    = ratdum(ir1616) * sc1a
+    dratedt(ir1616) = dratedt(ir1616) * sc1a + rate(ir1616) * sc1adt
+    rate(ir1616)    = rate(ir1616) * sc1a
 
     ! o16 to ne20
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratdumdt(iroag) = dratdumdt(iroag) * sc1a + ratdum(iroag) * sc1adt
-    ratdum(iroag)    = ratdum(iroag) * sc1a
+    dratedt(iroag) = dratedt(iroag) * sc1a + rate(iroag) * sc1adt
+    rate(iroag)    = rate(iroag) * sc1a
 
     ! o16 to mg24
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratdumdt(irneag) = dratdumdt(irneag) * sc1a + ratdum(irneag) * sc1adt
-    ratdum(irneag)    = ratdum(irneag) * sc1a
+    dratedt(irneag) = dratedt(irneag) * sc1a + rate(irneag) * sc1adt
+    rate(irneag)    = rate(irneag) * sc1a
 
     ! mg24 to si28
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratdumdt(irmgag) = dratdumdt(irmgag) * sc1a + ratdum(irmgag) * sc1adt
-    ratdum(irmgag)    = ratdum(irmgag) * sc1a
+    dratedt(irmgag) = dratedt(irmgag) * sc1a + rate(irmgag) * sc1adt
+    rate(irmgag)    = rate(irmgag) * sc1a
 
     ! ca40 to ti44
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    dratdumdt(ircaag) = dratdumdt(ircaag) * sc1a + ratdum(ircaag) * sc1adt
-    ratdum(ircaag)    = ratdum(ircaag) * sc1a
+    dratedt(ircaag) = dratedt(ircaag) * sc1a + rate(ircaag) * sc1adt
+    rate(ircaag)    = rate(ircaag) * sc1a
 
     ! the publication, timmes, woosley & hoffman apjs, 129, 377
     ! has a typo on page 393, where it says "y(ic12)+y(io16) .gt. 0.004"
@@ -676,24 +675,24 @@ contains
 
        denom     = (bden * y(ihe4))**3
 
-       ratdum(irsi2ni)     = yeff_ca40*denom*ratdum(ircaag)*y(isi28)
-       dratdumdy1(irsi2ni) = 3.0d0 * ratdum(irsi2ni)/y(ihe4)
-       dratdumdy2(irsi2ni) = yeff_ca40*denom*ratdum(ircaag)
-       dratdumdt(irsi2ni)  = (yeff_ca40dt*ratdum(ircaag) &
-            + yeff_ca40*dratdumdt(ircaag))*denom*y(isi28)*1.0d-9
+       rate(irsi2ni)     = yeff_ca40*denom*rate(ircaag)*y(isi28)
+       dratedy1(irsi2ni) = 3.0d0 * rate(irsi2ni)/y(ihe4)
+       dratedy2(irsi2ni) = yeff_ca40*denom*rate(ircaag)
+       dratedt(irsi2ni)  = (yeff_ca40dt*rate(ircaag) &
+            + yeff_ca40*dratedt(ircaag))*denom*y(isi28)*1.0d-9
 
        if (denom .ne. 0.0) then
 
           zz     = 1.0d0/denom
-          ratdum(irni2si) = min(1.0d10,yeff_ti44*ratdum(irtiga)*zz)
+          rate(irni2si) = min(1.0d10,yeff_ti44*rate(irtiga)*zz)
 
-          if (ratdum(irni2si) .eq. 1.0d10) then
-             dratdumdy1(irni2si) = 0.0d0
-             dratdumdt(irni2si)  = 0.0d0
+          if (rate(irni2si) .eq. 1.0d10) then
+             dratedy1(irni2si) = 0.0d0
+             dratedt(irni2si)  = 0.0d0
           else
-             dratdumdy1(irni2si) = -3.0d0 * ratdum(irni2si)/y(ihe4)
-             dratdumdt(irni2si)  = (yeff_ti44dt*ratdum(irtiga) &
-                  + yeff_ti44*dratdumdt(irtiga))*zz*1.0d-9
+             dratedy1(irni2si) = -3.0d0 * rate(irni2si)/y(ihe4)
+             dratedt(irni2si)  = (yeff_ti44dt*rate(irtiga) &
+                  + yeff_ti44*dratedt(irtiga))*zz*1.0d-9
           end if
        endif
     end if
