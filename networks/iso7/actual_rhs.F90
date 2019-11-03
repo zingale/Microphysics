@@ -60,6 +60,8 @@ contains
     double precision :: rate(nrates), dratedt(nrates)
     double precision :: dratedy1(irsi2ni:irni2si), dratedy2(irsi2ni:irni2si)
 
+    double precision :: dtab(nrates)
+
     !$gpu
 
     ! Get the data from the state
@@ -69,7 +71,29 @@ contains
     y    = state % xn * aion_inv
 
     ! Get the raw reaction rates
-    call iso7tab(temp, rho, rate, dratedt)
+    call iso7tab(temp, rate, dratedt)
+
+    ! Set the density dependence array
+    dtab(ircag)  = rho
+    dtab(iroga)  = 1.0d0
+    dtab(ir3a)   = rho*rho
+    dtab(irg3a)  = 1.0d0
+    dtab(ir1212) = rho
+    dtab(ir1216) = rho
+    dtab(ir1616) = rho
+    dtab(iroag)  = rho
+    dtab(irnega) = 1.0d0
+    dtab(irneag) = rho
+    dtab(irmgga) = 1.0d0
+    dtab(irmgag) = rho
+    dtab(irsiga) = 1.0d0
+    dtab(ircaag) = rho
+    dtab(irtiga) = 1.0d0
+    dtab(irsi2ni) = 0.0d0
+    dtab(irni2si) = 0.0d0
+
+    rate(:) = rate(:) * dtab(:)
+    dratedt(:) = dratedt(:) * dtab(:)
 
     ! Do the screening here because the corrections depend on the composition
     call screen_iso7(temp, rho, y,  &
@@ -89,11 +113,11 @@ contains
 
 
 
-  subroutine iso7tab(btemp, bden, ratraw, dratrawdt)
+  subroutine iso7tab(btemp, ratraw, dratrawdt)
 
     implicit none
 
-    double precision :: btemp, bden, ratraw(nrates), dratrawdt(nrates)
+    double precision :: btemp, ratraw(nrates), dratrawdt(nrates)
 
     integer, parameter :: mp = 4
 
@@ -102,28 +126,7 @@ contains
     double precision :: a, b, c, d, e, f, g, h, p, q
     double precision :: alfa, beta, gama, delt
 
-    double precision :: dtab(nrates)
-
     !$gpu
-
-    ! Set the density dependence array
-    dtab(ircag)  = bden
-    dtab(iroga)  = 1.0d0
-    dtab(ir3a)   = bden*bden
-    dtab(irg3a)  = 1.0d0
-    dtab(ir1212) = bden
-    dtab(ir1216) = bden
-    dtab(ir1616) = bden
-    dtab(iroag)  = bden
-    dtab(irnega) = 1.0d0
-    dtab(irneag) = bden
-    dtab(irmgga) = 1.0d0
-    dtab(irmgag) = bden
-    dtab(irsiga) = 1.0d0
-    dtab(ircaag) = bden
-    dtab(irtiga) = 1.0d0
-    dtab(irsi2ni) = 0.0d0
-    dtab(irni2si) = 0.0d0
 
     ! hash locate
     iat = int((log10(btemp) - tab_tlo)/tab_tstp) + 1
@@ -156,12 +159,12 @@ contains
        ratraw(j) = (alfa * rattab(j,iat) &
                     + beta * rattab(j,iat+1) &
                     + gama * rattab(j,iat+2) &
-                    + delt * rattab(j,iat+3) ) * dtab(j)
+                    + delt * rattab(j,iat+3) )
 
        dratrawdt(j) = (alfa * drattabdt(j,iat) &
                        + beta * drattabdt(j,iat+1) &
                        + gama * drattabdt(j,iat+2) &
-                       + delt * drattabdt(j,iat+3) ) * dtab(j)
+                       + delt * drattabdt(j,iat+3) )
 
     enddo
 
