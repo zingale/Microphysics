@@ -238,7 +238,10 @@ contains
 
   subroutine actual_rhs(state)
 
+    use amrex_constants_module, only: ZERO
     use sneut_module, only: sneut5
+    use screening_module, only: fill_plasma_state
+    use tfactors_module, only: get_tfactors
     use temperature_integration_module, only: temperature_rhs
 
     implicit none
@@ -260,6 +263,14 @@ contains
     double precision :: rho, temp, abar, zbar
     double precision :: y(nspec), ydot(nspec)
 
+    double precision :: rate(nrates), dratedt(nrates)
+    double precision :: dratedy1(irsi2ni:irni2si), dratedy2(irsi2ni:irni2si)
+
+    double precision :: dtab(nrates)
+
+    type (plasma_state) :: pstate
+    type (tf_t)         :: tf
+
     !$gpu
 
     ! Get the data from the state
@@ -270,7 +281,53 @@ contains
     zbar = state % zbar
     y(:) = state % xn(:) * aion_inv(:)
 
-    call get_rates(state, rr)
+    ! Get the raw reaction rates
+    call iso7tab(temp, rate, dratedt)
+
+    ! Set the density dependence array
+    dtab(ircag)  = rho
+    dtab(iroga)  = 1.0d0
+    dtab(ir3a)   = rho*rho
+    dtab(irg3a)  = 1.0d0
+    dtab(ir1212) = rho
+    dtab(ir1216) = rho
+    dtab(ir1616) = rho
+    dtab(iroag)  = rho
+    dtab(irnega) = 1.0d0
+    dtab(irneag) = rho
+    dtab(irmgga) = 1.0d0
+    dtab(irmgag) = rho
+    dtab(irsiga) = 1.0d0
+    dtab(ircaag) = rho
+    dtab(irtiga) = 1.0d0
+    dtab(irsi2ni) = 0.0d0
+    dtab(irni2si) = 0.0d0
+
+    rate(:) = rate(:) * dtab(:)
+    dratedt(:) = dratedt(:) * dtab(:)
+    dratedy1(:) = ZERO
+    dratedy2(:) = ZERO
+
+    ! Do the screening here because the corrections depend on the composition
+
+    ! Get the temperature factors
+    call get_tfactors(temp, tf)
+
+    ! Set up the state data, which is the same for all screening factors.
+    call fill_plasma_state(pstate, temp, rho, y(1:nspec))
+
+    call screen_iso7(pstate, tf, rho, y,  &
+                     rate, dratedt, &
+                     dratedy1, dratedy2)
+
+    ! Save the rate data, for the Jacobian later if we need it.
+
+    rr % rates(1,:) = rate
+    rr % rates(2,:) = dratedt
+    rr % rates(3,irsi2ni:irni2si) = dratedy1
+    rr % rates(4,irsi2ni:irni2si) = dratedy2
+
+    rr % T_eval = temp
 
     ! Call the RHS to actually get dydt.
 
