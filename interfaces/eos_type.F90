@@ -87,7 +87,6 @@ module eos_type_module
 
   ! rho      -- mass density (g/cm**3)
   ! T        -- temperature (K)
-  ! xn       -- the mass fractions of the individual isotopes
   ! p        -- the pressure (dyn/cm**2)
   ! h        -- the enthalpy (erg/g)
   ! e        -- the internal energy (erg/g)
@@ -181,8 +180,6 @@ contains
     to_eos % e = from_eos % e
     to_eos % h = from_eos % h
     to_eos % s = from_eos % s
-    to_eos % xn(:) = from_eos % xn(:)
-    to_eos % aux(:) = from_eos % aux(:)
 
     to_eos % dpdT = from_eos % dpdT
     to_eos % dpdr = from_eos % dpdr
@@ -221,20 +218,19 @@ contains
   ! Normalize the mass fractions: they must be individually positive
   ! and less than one, and they must all sum to unity.
 
-  subroutine normalize_abundances(state)
+  subroutine normalize_abundances(xn)
 
     use amrex_constants_module, only: ONE
     use extern_probin_module, only: small_x
 
     implicit none
 
-    type (eos_t), intent(inout) :: state
+    real(rt), intent(inout) :: xn(nspec)
 
     !$gpu
 
-    state % xn = max(small_x, min(ONE, state % xn))
-
-    state % xn = state % xn / sum(state % xn)
+    xn = max(small_x, min(ONE, xn))
+    xn = xn / sum(xn)
 
   end subroutine normalize_abundances
 
@@ -266,8 +262,6 @@ contains
 
     print *, 'DENS = ', state % rho
     print *, 'TEMP = ', state % T
-    print *, 'X    = ', state % xn
-    print *, 'Y_E  = ', state % y_e
 
   end subroutine print_state
 
