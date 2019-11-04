@@ -123,7 +123,6 @@ contains
 
     use eos_type_module, only: eos_t
     use eos_composition_module, only : eos_comp_t
-    use eos_composition_module, only : composition
     use actual_eos_module, only: actual_eos
     use eos_override_module, only: eos_override
 #ifndef AMREX_USE_GPU
