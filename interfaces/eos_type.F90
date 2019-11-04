@@ -110,8 +110,6 @@ module eos_type_module
   ! dsdr     -- d entropy/ d density
   ! dhdT     -- d enthalpy/ d temperature
   ! dhdr     -- d enthalpy/ d density
-  ! dPdX     -- d pressure / d xmass
-  ! dhdX     -- d enthalpy / d xmass at constant pressure
   ! gam1     -- first adiabatic index (d log P/ d log rho) |_s
   ! cs       -- sound speed
   ! abar     -- average atomic number ( sum_k {X_k} ) / ( sum_k {X_k/A_k} )
