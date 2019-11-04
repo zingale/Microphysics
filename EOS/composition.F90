@@ -6,6 +6,13 @@ module eos_composition_module
 
   implicit none
 
+  type :: eos_comp_t
+     real(rt) :: mu_e
+     real(rt) :: abar
+     real(rt) :: zbar
+     real(rt) :: y_e
+  end type eos_comp_t
+
   type :: eos_xderivs_t
     real(rt) :: dedX(nspec)
     real(rt) :: dpdX(nspec)
@@ -17,14 +24,15 @@ contains
   ! Given a set of mass fractions, calculate quantities that depend
   ! on the composition like abar and zbar.
 
-  subroutine composition(state)
+  subroutine composition(xn, state_comp)
 
     use amrex_constants_module, only: ONE
     use network, only: aion_inv, zion
 
     implicit none
 
-    type (eos_t), intent(inout) :: state
+    real(rt), intent(in) :: xn(nspec)
+    type (eos_comp_t), intent(out) :: state_comp
 
     !$gpu
 
@@ -34,18 +42,18 @@ contains
     ! mu_e, the mean number of nucleons per electron, and
     ! y_e, the electron fraction.
 
-    state % mu_e = ONE / (sum(state % xn(:) * zion(:) * aion_inv(:)))
-    state % y_e = ONE / state % mu_e
+    state_comp % mu_e = ONE / (sum(xn(:) * zion(:) * aion_inv(:)))
+    state_comp % y_e = ONE / state_comp % mu_e
 
-    state % abar = ONE / (sum(state % xn(:) * aion_inv(:)))
-    state % zbar = state % abar / state % mu_e
+    state_comp % abar = ONE / (sum(xn(:) * aion_inv(:)))
+    state_comp % zbar = state_comp % abar / state_comp % mu_e
 
   end subroutine composition
 
 
   ! Compute thermodynamic derivatives with respect to xn(:)
 
-  subroutine composition_derivatives(state, state_xderivs)
+  subroutine composition_derivatives(state, state_comp, state_xderivs)
 
     use amrex_constants_module, only: ZERO
     use network, only: aion, aion_inv, zion
@@ -53,20 +61,21 @@ contains
     implicit none
 
     type (eos_t), intent(in) :: state
+    type (eos_comp_t), intent(in) :: state_comp
     type (eos_xderivs_t), intent(out) :: state_xderivs
 
     !$gpu
 
 #ifdef EXTRA_THERMO
-    state_xderivs % dpdX(:) = state % dpdA * (state % abar * aion_inv(:))   &
-                                        * (aion(:) - state % abar) &
-                            + state % dpdZ * (state % abar * aion_inv(:))   &
-                                        * (zion(:) - state % zbar)
+    state_xderivs % dpdX(:) = state % dpdA * (state_comp % abar * aion_inv(:))   &
+                                        * (aion(:) - state_comp % abar) &
+                            + state % dpdZ * (state_comp % abar * aion_inv(:))   &
+                                        * (zion(:) - state_comp % zbar)
 
-    state_xderivs % dEdX(:) = state % dedA * (state % abar * aion_inv(:))   &
-                                        * (aion(:) - state % abar) &
-                            + state % dedZ * (state % abar * aion_inv(:))   &
-                                        * (zion(:) - state % zbar)
+    state_xderivs % dEdX(:) = state % dedA * (state_comp % abar * aion_inv(:))   &
+                                        * (aion(:) - state_comp % abar) &
+                            + state % dedZ * (state_comp % abar * aion_inv(:))   &
+                                        * (zion(:) - state_comp % zbar)
 
     if (state % dPdr .ne. ZERO) then
 
