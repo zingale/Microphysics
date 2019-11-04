@@ -132,8 +132,6 @@ module eos_type_module
     real(rt) :: e
     real(rt) :: h
     real(rt) :: s
-    real(rt) :: xn(nspec)
-    real(rt) :: aux(naux)
 
     real(rt) :: dpdT
     real(rt) :: dpdr
@@ -153,19 +151,8 @@ module eos_type_module
     real(rt) :: eta
     real(rt) :: pele
     real(rt) :: ppos
-    real(rt) :: mu
-    real(rt) :: mu_e
-    real(rt) :: y_e
-#ifdef EXTRA_THERMO
-    real(rt) :: dedX(nspec)
-    real(rt) :: dpdX(nspec)
-    real(rt) :: dhdX(nspec)
-#endif
     real(rt) :: gam1
     real(rt) :: cs
-
-    real(rt) :: abar
-    real(rt) :: zbar
 
 #ifdef EXTRA_THERMO
     real(rt) :: dpdA
@@ -217,21 +204,11 @@ contains
     to_eos % eta = from_eos % eta
     to_eos % pele = from_eos % pele
     to_eos % ppos = from_eos % ppos
-    to_eos % mu = from_eos % mu
-    to_eos % mu_e = from_eos % mu_e
-    to_eos % y_e = from_eos % y_e
 
     to_eos % gam1 = from_eos % gam1
     to_eos % cs = from_eos % cs
 
-    to_eos % abar = from_eos % abar
-    to_eos % zbar = from_eos % zbar
-
 #ifdef EXTRA_THERMO
-    to_eos % dedX(:) = from_eos % dedX(:)
-    to_eos % dpdX(:) = from_eos % dpdX(:)
-    to_eos % dhdX(:) = from_eos % dhdX(:)
-    
     to_eos % dpdA = from_eos % dpdA
     to_eos % dpdZ = from_eos % dpdZ
     to_eos % dedA = from_eos % dedA
@@ -241,72 +218,6 @@ contains
     to_eos % conductivity = from_eos % conductivity
 
   end subroutine copy_eos_t
-
-
-  ! Given a set of mass fractions, calculate quantities that depend
-  ! on the composition like abar and zbar.
-
-  subroutine composition(state)
-
-    !$acc routine seq
-
-    use amrex_constants_module, only: ONE
-    use network, only: aion, aion_inv, zion
-
-    implicit none
-
-    type (eos_t), intent(inout) :: state
-
-    !$gpu
-
-    ! Calculate abar, the mean nucleon number,
-    ! zbar, the mean proton number,
-    ! mu, the mean molecular weight,
-    ! mu_e, the mean number of nucleons per electron, and
-    ! y_e, the electron fraction.
-
-    state % mu_e = ONE / (sum(state % xn(:) * zion(:) * aion_inv(:)))
-    state % y_e = ONE / state % mu_e
-
-    state % abar = ONE / (sum(state % xn(:) * aion_inv(:)))
-    state % zbar = state % abar / state % mu_e
-
-  end subroutine composition
-
-#ifdef EXTRA_THERMO
-  ! Compute thermodynamic derivatives with respect to xn(:)
-
-  subroutine composition_derivatives(state)
-
-    use amrex_constants_module, only: ZERO
-    use network, only: aion, aion_inv, zion
-
-    implicit none
-
-    type (eos_t), intent(inout) :: state
-
-    !$gpu
-
-    state % dpdX(:) = state % dpdA * (state % abar * aion_inv(:))   &
-                                   * (aion(:) - state % abar) &
-                    + state % dpdZ * (state % abar * aion_inv(:))   &
-                                   * (zion(:) - state % zbar)
-
-    state % dEdX(:) = state % dedA * (state % abar * aion_inv(:))   &
-                                   * (aion(:) - state % abar) &
-                    + state % dedZ * (state % abar * aion_inv(:))   &
-                                   * (zion(:) - state % zbar)
-
-    if (state % dPdr .ne. ZERO) then
-
-       state % dhdX(:) = state % dedX(:) &
-                       + (state % p / state % rho**2 - state % dedr) &
-                       *  state % dPdX(:) / state % dPdr
-
-    endif
-
-  end subroutine composition_derivatives
-#endif
 
 
   ! Normalize the mass fractions: they must be individually positive
