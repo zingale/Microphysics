@@ -7,7 +7,7 @@ subroutine do_eos(lo, hi, &
                              eos_input_ph, eos_input_ps, eos_input_rh, eos_input_th, &
                              copy_eos_t
   use eos_module, only : eos
-  use eos_composition_module, only : eos_xderivs_t, composition, composition_derivatives
+  use eos_composition_module, only : eos_comp_t, eos_xderivs_t, composition, composition_derivatives
   use amrex_fort_module, only : rt => amrex_real
   use amrex_constants_module
   use extern_probin_module
@@ -26,6 +26,7 @@ subroutine do_eos(lo, hi, &
 
   type(eos_t) :: eos_state
   type(eos_t) :: eos_state_reference
+  type(eos_comp_t) :: eos_comp
   type(eos_xderivs_t) :: eos_xderivs
 
   integer :: ii, jj, kk, n
@@ -52,7 +53,8 @@ subroutine do_eos(lo, hi, &
 
            eos_state % rho = dens_zone
            eos_state % T = temp_zone
-           eos_state % xn(:) = xn_zone(:)
+
+           call composition(xn_zone, eos_comp)
 
            ! store default state
            sp(ii, jj, kk, p % irho) = dens_zone
@@ -60,8 +62,8 @@ subroutine do_eos(lo, hi, &
            sp(ii, jj, kk, p % ispec: p % ispec-1+nspec) = xn_zone(:)
 
            ! call EOS using rho, T
-           call eos(eos_input_rt, eos_state)
-           call composition_derivatives(eos_state, eos_xderivs)
+           call eos(eos_input_rt, eos_state, eos_comp)
+           call composition_derivatives(eos_state, eos_comp, eos_xderivs)
 
            call copy_eos_t(eos_state_reference, eos_state)
 
@@ -77,8 +79,8 @@ subroutine do_eos(lo, hi, &
            sp(ii, jj, kk, p % ieta) = eos_state % eta
            sp(ii, jj, kk, p % ipele) = eos_state % pele
            sp(ii, jj, kk, p % ippos) = eos_state % ppos
-           sp(ii, jj, kk, p % imu) = eos_state % mu
-           sp(ii, jj, kk, p % imue) = eos_state % mu_e
+           sp(ii, jj, kk, p % imu) = eos_comp % mu
+           sp(ii, jj, kk, p % imue) = eos_comp % mu_e
            sp(ii, jj, kk, p % idpdt) = eos_state % dpdt
            sp(ii, jj, kk, p % idpdr) = eos_state % dpdr
            sp(ii, jj, kk, p % idedt) = eos_state % dedt
@@ -94,8 +96,8 @@ subroutine do_eos(lo, hi, &
            end do
            sp(ii, jj, kk, p % igam1) = eos_state % gam1
            sp(ii, jj, kk, p % ics) = eos_state % cs
-           sp(ii, jj, kk, p % iabar) = eos_state % abar
-           sp(ii, jj, kk, p % izbar) = eos_state % zbar
+           sp(ii, jj, kk, p % iabar) = eos_comp % abar
+           sp(ii, jj, kk, p % izbar) = eos_comp % zbar
            sp(ii, jj, kk, p % idpda) = eos_state % dpda
            sp(ii, jj, kk, p % idpdz) = eos_state % dpdz
            sp(ii, jj, kk, p % ideda) = eos_state % deda
@@ -109,7 +111,7 @@ subroutine do_eos(lo, hi, &
            ! reset T to give it some work to do
            eos_state % T = 100.d0
 
-           call eos(eos_input_rh, eos_state)
+           call eos(eos_input_rh, eos_state, eos_comp)
 
            sp(ii, jj, kk, p % ierr_T_eos_rh) = &
                 abs(eos_state % T - temp_zone)/temp_zone
@@ -122,7 +124,7 @@ subroutine do_eos(lo, hi, &
            ! reset rho to give it some work to do
            eos_state % rho = 1.d0
 
-           call eos(eos_input_tp, eos_state)
+           call eos(eos_input_tp, eos_state, eos_comp)
 
            sp(ii, jj, kk, p % ierr_rho_eos_tp) = &
                 abs(eos_state % rho - dens_zone)/dens_zone
@@ -135,7 +137,7 @@ subroutine do_eos(lo, hi, &
            ! reset T to give it some work to do
            eos_state % T = 100.d0
 
-           call eos(eos_input_rp, eos_state)
+           call eos(eos_input_rp, eos_state, eos_comp)
 
            sp(ii, jj, kk, p % ierr_T_eos_rp) = &
                 abs(eos_state % T - temp_zone)/temp_zone
@@ -148,7 +150,7 @@ subroutine do_eos(lo, hi, &
            ! reset T to give it some work to do
            eos_state % T = 100.d0
 
-           call eos(eos_input_re, eos_state)
+           call eos(eos_input_re, eos_state, eos_comp)
 
            sp(ii, jj, kk, p % ierr_T_eos_re) = &
                 abs(eos_state % T - temp_zone)/temp_zone
@@ -167,7 +169,7 @@ subroutine do_eos(lo, hi, &
            ! of entropy throughout the entire rho-T plane
            if (eos_state%s > ZERO) then
 
-              call eos(eos_input_ps, eos_state)
+              call eos(eos_input_ps, eos_state, eos_comp)
 
               ! store the thermodynamic state
               sp(ii, jj, kk, p % ierr_T_eos_ps) = &
@@ -190,7 +192,7 @@ subroutine do_eos(lo, hi, &
            eos_state % T = 100.d0
            eos_state % rho = 1.d0
 
-           call eos(eos_input_ph, eos_state)
+           call eos(eos_input_ph, eos_state, eos_comp)
 
            sp(ii, jj, kk, p % ierr_T_eos_ph) = &
                 abs(eos_state % T - temp_zone)/temp_zone
@@ -207,7 +209,7 @@ subroutine do_eos(lo, hi, &
            ! monotonic, so we only perturb rho slightly here
            eos_state % rho = 0.9 * eos_state % rho
 
-           call eos(eos_input_th, eos_state)
+           call eos(eos_input_th, eos_state, eos_comp)
 
            sp(ii, jj, kk, p % ierr_rho_eos_th) = &
                 abs(eos_state % rho - dens_zone)/dens_zone
