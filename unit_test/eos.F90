@@ -117,11 +117,12 @@ contains
   end subroutine eos_finalize
 
 
-  subroutine eos(input, state, use_raw_inputs)
+  subroutine eos(input, state, state_comp)
 
     !$acc routine seq
 
     use eos_type_module, only: eos_t
+    use eos_composition_module, only : eos_comp_t
     use eos_composition_module, only : composition
     use actual_eos_module, only: actual_eos
     use eos_override_module, only: eos_override
@@ -135,7 +136,7 @@ contains
 
     integer,      intent(in   ) :: input
     type (eos_t), intent(inout) :: state
-    logical, optional, intent(in) :: use_raw_inputs
+    type (eos_comp_t), intent(inout) :: state_comp
 
     logical :: has_been_reset, use_composition_routine
 
@@ -147,22 +148,11 @@ contains
     if (.not. initialized) call amrex_error('EOS: not initialized')
 #endif
 
-    if (present(use_raw_inputs)) then
-       use_composition_routine = .not. use_raw_inputs
-    else
-       use_composition_routine = .true.
-    end if
-
-    if (use_composition_routine) then
-       ! Get abar, zbar, etc.
-
-       call composition(state)
-    end if
 
     ! Force the inputs to be valid.
 
     has_been_reset = .false.
-    call reset_inputs(input, state, has_been_reset)
+    call reset_inputs(input, state, state_comp, has_been_reset)
 
     ! Allow the user to override any details of the
     ! EOS state. This should generally occur right
@@ -173,25 +163,27 @@ contains
     ! Call the EOS.
 
     if (.not. has_been_reset) then
-       call actual_eos(input, state)
+       call actual_eos(input, state, state_comp)
     endif
 
   end subroutine eos
 
 
 
-  subroutine reset_inputs(input, state, has_been_reset)
+  subroutine reset_inputs(input, state, state_comp, has_been_reset)
 
     !$acc routine seq
 
     use eos_type_module, only: eos_t, &
                                eos_input_rt, eos_input_re, eos_input_rh, eos_input_tp, &
                                eos_input_rp, eos_input_th, eos_input_ph, eos_input_ps
+    use eos_composition_module, only : eos_comp_t
 
     implicit none
 
     integer,      intent(in   ) :: input
     type (eos_t), intent(inout) :: state
+    type (eos_comp_t), intent(in) :: state_comp
     logical,      intent(inout) :: has_been_reset
 
     !$gpu
@@ -207,37 +199,37 @@ contains
     elseif (input .eq. eos_input_rh) then
 
        call reset_rho(state, has_been_reset)
-       call reset_h(state, has_been_reset)
+       call reset_h(state, state_comp, has_been_reset)
 
     elseif (input .eq. eos_input_tp) then
 
        call reset_T(state, has_been_reset)
-       call reset_p(state, has_been_reset)
+       call reset_p(state, state_comp, has_been_reset)
 
     elseif (input .eq. eos_input_rp) then
 
        call reset_rho(state, has_been_reset)
-       call reset_p(state, has_been_reset)
+       call reset_p(state, state_comp, has_been_reset)
 
     elseif (input .eq. eos_input_re) then
 
        call reset_rho(state, has_been_reset)
-       call reset_e(state, has_been_reset)
+       call reset_e(state, state_comp, has_been_reset)
 
     elseif (input .eq. eos_input_ps) then
 
-       call reset_p(state, has_been_reset)
-       call reset_s(state, has_been_reset)
+       call reset_p(state, state_comp, has_been_reset)
+       call reset_s(state, state_comp, has_been_reset)
 
     elseif (input .eq. eos_input_ph) then
 
-       call reset_p(state, has_been_reset)
-       call reset_h(state, has_been_reset)
+       call reset_p(state, state_comp, has_been_reset)
+       call reset_h(state, state_comp, has_been_reset)
 
     elseif (input .eq. eos_input_th) then
 
        call reset_t(state, has_been_reset)
-       call reset_h(state, has_been_reset)
+       call reset_h(state, state_comp, has_been_reset)
 
     endif
 
@@ -287,84 +279,92 @@ contains
 
 
 
-  subroutine reset_e(state, has_been_reset)
+  subroutine reset_e(state, state_comp, has_been_reset)
 
     !$acc routine seq
 
     use eos_type_module, only: eos_t, mine, maxe
+    use eos_composition_module, only : eos_comp_t
 
     implicit none
 
     type (eos_t), intent(inout) :: state
+    type (eos_comp_t), intent(in) :: state_comp
     logical,      intent(inout) :: has_been_reset
 
     !$gpu
 
     if (state % e .lt. mine .or. state % e .gt. maxe) then
-       call eos_reset(state, has_been_reset)
+       call eos_reset(state, state_comp, has_been_reset)
     endif
 
   end subroutine reset_e
 
 
 
-  subroutine reset_h(state, has_been_reset)
+  subroutine reset_h(state, state_comp, has_been_reset)
 
     !$acc routine seq
 
     use eos_type_module, only: eos_t, minh, maxh
+    use eos_composition_module, only : eos_comp_t
 
     implicit none
 
     type (eos_t), intent(inout) :: state
+    type (eos_comp_t), intent(in) :: state_comp
     logical,      intent(inout) :: has_been_reset
 
     !$gpu
 
     if (state % h .lt. minh .or. state % h .gt. maxh) then
-       call eos_reset(state, has_been_reset)
+       call eos_reset(state, state_comp, has_been_reset)
     endif
 
   end subroutine reset_h
 
 
 
-  subroutine reset_s(state, has_been_reset)
+  subroutine reset_s(state, state_comp, has_been_reset)
 
     !$acc routine seq
 
     use eos_type_module, only: eos_t, mins, maxs
+    use eos_composition_module, only : eos_comp_t
 
     implicit none
 
     type (eos_t), intent(inout) :: state
+    type (eos_comp_t), intent(in) :: state_comp
     logical,      intent(inout) :: has_been_reset
 
     !$gpu
 
     if (state % s .lt. mins .or. state % s .gt. maxs) then
-       call eos_reset(state, has_been_reset)
+       call eos_reset(state, state_comp, has_been_reset)
     endif
 
   end subroutine reset_s
 
 
 
-  subroutine reset_p(state, has_been_reset)
+  subroutine reset_p(state, state_comp, has_been_reset)
 
     !$acc routine seq
 
     use eos_type_module, only: eos_t, minp, maxp
+    use eos_composition_module, only : eos_comp_t
 
     implicit none
 
     type (eos_t), intent(inout) :: state
+    type (eos_comp_t), intent(in) :: state_comp
     logical,      intent(inout) :: has_been_reset
 
     !$gpu
 
     if (state % p .lt. minp .or. state % p .gt. maxp) then
-       call eos_reset(state, has_been_reset)
+       call eos_reset(state, state_comp, has_been_reset)
     endif
 
   end subroutine reset_p
@@ -374,16 +374,18 @@ contains
   ! Given an EOS state, ensure that rho and T are
   ! valid, then call with eos_input_rt.
 
-  subroutine eos_reset(state, has_been_reset)
+  subroutine eos_reset(state, state_comp, has_been_reset)
 
     !$acc routine seq
 
     use eos_type_module, only: eos_t, eos_input_rt, mintemp, maxtemp, mindens, maxdens
+    use eos_composition_module, only : eos_comp_t
     use actual_eos_module, only: actual_eos
 
     implicit none
 
     type (eos_t), intent(inout) :: state
+    type (eos_comp_t), intent(in) :: state_comp
     logical,      intent(inout) :: has_been_reset
 
     !$gpu
@@ -391,7 +393,7 @@ contains
     state % T = min(maxtemp, max(mintemp, state % T))
     state % rho = min(maxdens, max(mindens, state % rho))
 
-    call actual_eos(eos_input_rt, state)
+    call actual_eos(eos_input_rt, state, state_comp)
 
     has_been_reset = .true.
 
@@ -400,86 +402,6 @@ contains
 
 
 #ifndef AMREX_USE_GPU
-  subroutine check_inputs(input, state)
-
-    use amrex_error_module
-    use network, only: nspec
-    use eos_type_module, only: eos_t, print_state, minx, maxx, minye, maxye, &
-                               eos_input_rt, eos_input_re, eos_input_rp, eos_input_rh, &
-                               eos_input_th, eos_input_tp, eos_input_ph, eos_input_ps
-
-    implicit none
-
-    integer,      intent(in   ) :: input
-    type (eos_t), intent(inout) :: state
-
-    integer :: n
-
-    ! Check the inputs for validity.
-
-    do n = 1, nspec
-       if (state % xn(n) .lt. minx) then
-          call print_state(state)
-          call amrex_error('EOS: mass fraction less than minimum possible mass fraction.')
-       else if (state % xn(n) .gt. maxx) then
-          call print_state(state)
-          call amrex_error('EOS: mass fraction more than maximum possible mass fraction.')
-       endif
-    enddo
-
-    if (state % y_e .lt. minye) then
-       call print_state(state)
-       call amrex_error('EOS: y_e less than minimum possible electron fraction.')
-    else if (state % y_e .gt. maxye) then
-       call print_state(state)
-       call amrex_error('EOS: y_e greater than maximum possible electron fraction.')
-    endif
-
-    if (input .eq. eos_input_rt) then
-
-       call check_rho(state)
-       call check_T(state)
-
-    elseif (input .eq. eos_input_rh) then
-
-       call check_rho(state)
-       call check_h(state)
-
-    elseif (input .eq. eos_input_tp) then
-
-       call check_T(state)
-       call check_p(state)
-
-    elseif (input .eq. eos_input_rp) then
-
-       call check_rho(state)
-       call check_p(state)
-
-    elseif (input .eq. eos_input_re) then
-
-       call check_rho(state)
-       call check_e(state)
-
-    elseif (input .eq. eos_input_ps) then
-
-       call check_p(state)
-       call check_s(state)
-
-    elseif (input .eq. eos_input_ph) then
-
-       call check_p(state)
-       call check_h(state)
-
-    elseif (input .eq. eos_input_th) then
-
-       call check_t(state)
-       call check_h(state)
-
-    endif
-
-  end subroutine check_inputs
-
-
 
   subroutine check_rho(state)
 
