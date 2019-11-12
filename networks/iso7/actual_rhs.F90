@@ -197,7 +197,7 @@ contains
     integer          :: j, iat
     double precision :: x, x1, x2, x3, x4
     double precision :: a, b, c, d, e, f, g, h, p, q
-    double precision :: alfa, beta, gama, delt
+    double precision :: fact(4)
 
     !$gpu
 
@@ -229,19 +229,14 @@ contains
     h  = x2 - x3
     p  = x2 - x4
     q  = x3 - x4
-    alfa =  b*c*d/(e*f*g)
-    beta = -a*c*d/(e*h*p)
-    gama =  a*b*d/(f*h*q)
-    delt = -a*b*c/(g*p*q)
+    fact(1) =  b*c*d/(e*f*g)
+    fact(2) = -a*c*d/(e*h*p)
+    fact(3) =  a*b*d/(f*h*q)
+    fact(4) = -a*b*c/(g*p*q)
 
     ! crank off the raw reaction rates
     do j = 1, nrates
-
-       rate(j) = (alfa * rattab(j,iat) &
-                  + beta * rattab(j,iat+1) &
-                  + gama * rattab(j,iat+2) &
-                  + delt * rattab(j,iat+3) )
-
+       rate(j) = sum(fact(:) * rattab(j,iat:iat+3))
     enddo
 
     ! Do the screening here because the corrections depend on the composition
