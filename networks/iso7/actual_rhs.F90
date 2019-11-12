@@ -15,7 +15,7 @@ module actual_rhs_module
   ! Table interpolation data
 
   double precision, parameter :: tab_tlo = 6.0d0, tab_thi = 10.0d0
-  integer, parameter :: tab_per_decade = 1000
+  integer, parameter :: tab_per_decade = 2000
   integer, parameter :: nrattab = int(tab_thi - tab_tlo) * tab_per_decade + 1
   integer, parameter :: tab_imax = int(tab_thi - tab_tlo) * tab_per_decade + 1
   double precision, parameter :: tab_tstp = (tab_thi - tab_tlo) / dble(tab_imax - 1)
@@ -49,12 +49,11 @@ contains
   end subroutine actual_rhs_init
 
 
-
-  subroutine iso7tab(btemp, ratraw, dratrawdt)
+  subroutine iso7tab(btemp, rate, dratedt)
 
     implicit none
 
-    double precision :: btemp, ratraw(nrates), dratrawdt(nrates)
+    double precision :: btemp, rate(nrates), dratedt(nrates)
 
     integer, parameter :: mp = 4
 
@@ -93,15 +92,15 @@ contains
     ! crank off the raw reaction rates
     do j = 1, nrates
 
-       ratraw(j) = (alfa * rattab(j,iat) &
-                    + beta * rattab(j,iat+1) &
-                    + gama * rattab(j,iat+2) &
-                    + delt * rattab(j,iat+3) )
+       rate(j) = (alfa * rattab(j,iat) &
+                  + beta * rattab(j,iat+1) &
+                  + gama * rattab(j,iat+2) &
+                  + delt * rattab(j,iat+3) )
 
-       dratrawdt(j) = (alfa * drattabdt(j,iat) &
-                       + beta * drattabdt(j,iat+1) &
-                       + gama * drattabdt(j,iat+2) &
-                       + delt * drattabdt(j,iat+3) )
+       dratedt(j) = (alfa * drattabdt(j,iat) &
+                     + beta * drattabdt(j,iat+1) &
+                     + gama * drattabdt(j,iat+2) &
+                     + delt * drattabdt(j,iat+3) )
 
     enddo
 
@@ -128,7 +127,7 @@ contains
 
     implicit none
 
-    double precision :: btemp, bden, ratraw(nrates), dratrawdt(nrates)
+    double precision :: btemp, bden, rate(nrates), dratedt(nrates)
     integer :: i, j
 
     bden = 1.0d0
@@ -138,14 +137,14 @@ contains
        btemp = tab_tlo + dble(i-1) * tab_tstp
        btemp = 10.0d0**(btemp)
 
-       call iso7rat(btemp, bden, ratraw, dratrawdt)
+       call iso7rat(btemp, bden, rate, dratedt)
 
        ttab(i) = btemp
 
        do j = 1, nrates
 
-          rattab(j,i)    = ratraw(j)
-          drattabdt(j,i) = dratrawdt(j)
+          rattab(j,i)    = rate(j)
+          drattabdt(j,i) = dratedt(j)
 
        enddo
 
@@ -555,7 +554,7 @@ contains
     call sneut5(temp, rho, abar, zbar, sneut, dsneutdt, dsneutdd, snuda, snudz)
 
     do j = 1, nspec
-       b1 = ((aion(j) - abar) * abar * snuda + (zion(j) - zbar) * abar * snudz)
+       b1 = (-abar * abar * snuda + (zion(j) - zbar) * abar * snudz)
        state % jac(net_ienuc,j) = state % jac(net_ienuc,j) - b1
     enddo
 
