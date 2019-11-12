@@ -183,8 +183,6 @@ contains
 
     double precision :: rate(nrates)
 
-    double precision :: dtab(nrates)
-
     type (plasma_state) :: pstate
     type (tf_t)         :: tf
 
@@ -246,27 +244,6 @@ contains
 
     enddo
 
-    ! Set the density dependence array
-    dtab(ircag)  = rho
-    dtab(iroga)  = 1.0d0
-    dtab(ir3a)   = rho*rho
-    dtab(irg3a)  = 1.0d0
-    dtab(ir1212) = rho
-    dtab(ir1216) = rho
-    dtab(ir1616) = rho
-    dtab(iroag)  = rho
-    dtab(irnega) = 1.0d0
-    dtab(irneag) = rho
-    dtab(irmgga) = 1.0d0
-    dtab(irmgag) = rho
-    dtab(irsiga) = 1.0d0
-    dtab(ircaag) = rho
-    dtab(irtiga) = 1.0d0
-    dtab(irsi2ni) = 0.0d0
-    dtab(irni2si) = 0.0d0
-
-    rate(:) = rate(:) * dtab(:)
-
     ! Do the screening here because the corrections depend on the composition
 
     ! Get the temperature factors
@@ -286,7 +263,7 @@ contains
     sc3a   = sc1a * sc2a
     sc3adt = sc1adt * sc2a + sc1a * sc2adt
 
-    rate(ir3a) = rate(ir3a) * sc3a
+    rate(ir3a) = rate(ir3a) * rho * rho * sc3a
 
     state % ydot(ihe4) = state % ydot(ihe4) - 0.5d0 * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
     state % ydot(ic12) = state % ydot(ic12) + SIXTH * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
@@ -295,7 +272,7 @@ contains
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(ircag)    = rate(ircag) * sc1a
+    rate(ircag) = rate(ircag) * rho * sc1a
 
     state % ydot(ihe4) = state % ydot(ihe4) - y(ic12) * y(ihe4) * rate(ircag)
     state % ydot(ic12) = state % ydot(ic12) - y(ic12) * y(ihe4) * rate(ircag)
@@ -305,7 +282,7 @@ contains
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(ir1212)    = rate(ir1212) * sc1a
+    rate(ir1212) = rate(ir1212) * rho * sc1a
 
     state % ydot(ihe4) = state % ydot(ihe4) + 0.5d0 * y(ic12) * y(ic12) * rate(ir1212)
     state % ydot(ic12) = state % ydot(ic12) - y(ic12) * y(ic12) * rate(ir1212)
@@ -315,7 +292,7 @@ contains
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(ir1216)    = rate(ir1216) * sc1a
+    rate(ir1216) = rate(ir1216) * rho * sc1a
 
     state % ydot(ihe4) = state % ydot(ihe4) + 0.5d0 * y(ic12) * y(io16) * rate(ir1216)
     state % ydot(ic12) = state % ydot(ic12) - y(ic12) * y(io16) * rate(ir1216)
@@ -327,7 +304,7 @@ contains
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(ir1616)    = rate(ir1616) * sc1a
+    rate(ir1616) = rate(ir1616) * rho * sc1a
 
     state % ydot(ihe4) = state % ydot(ihe4) + 0.5d0 * y(io16) * y(io16) * rate(ir1616)
     state % ydot(io16) = state % ydot(io16) - y(io16) * y(io16) * rate(ir1616)
@@ -337,7 +314,7 @@ contains
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(iroag)    = rate(iroag) * sc1a
+    rate(iroag) = rate(iroag) * rho * sc1a
 
     state % ydot(ihe4) = state % ydot(ihe4) - y(io16) * y(ihe4) * rate(iroag)
     state % ydot(io16) = state % ydot(io16) - y(io16) * y(ihe4) * rate(iroag)
@@ -347,8 +324,8 @@ contains
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(irneag)    = rate(irneag) * sc1a
-    
+    rate(irneag) = rate(irneag) * rho * sc1a
+
     state % ydot(ihe4) = state % ydot(ihe4) - y(ine20) * y(ihe4) * rate(irneag)
     state % ydot(ine20) = state % ydot(ine20) - y(ine20) * y(ihe4) * rate(irneag)
     state % ydot(img24) = state % ydot(img24) + y(ine20) * y(ihe4) * rate(irneag)
@@ -357,7 +334,7 @@ contains
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(irmgag)    = rate(irmgag) * sc1a
+    rate(irmgag) = rate(irmgag) * rho * sc1a
 
     state % ydot(ihe4) = state % ydot(ihe4) - y(img24) * y(ihe4) * rate(irmgag)
     state % ydot(img24) = state % ydot(img24) - y(img24) * y(ihe4) * rate(irmgag)
@@ -385,13 +362,16 @@ contains
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(ircaag)    = rate(ircaag) * sc1a
+    rate(ircaag) = rate(ircaag) * rho * sc1a
 
     ! the publication, timmes, woosley & hoffman apjs, 129, 377
     ! has a typo on page 393, where it says "y(ic12)+y(io16) .gt. 0.004"
     ! it should be less than or equal to, since the idea is this piece
     ! gets activated during silicon burning, after all the c + o from
     ! oxygen burning is gone.
+
+    rate(irsi2ni) = 0.0d0
+    rate(irni2si) = 0.0d0
 
     if (tf%t9 .gt. 2.5 .and. y(ic12)+y(io16) .le. 4.0d-3) then
 
@@ -404,9 +384,9 @@ contains
        yeff_ti44   = t992  * exp(-274.12*tf%t9i + 74.914)
        yeff_ti44dt = yeff_ti44*(274.12*tf%t9i2 + 4.5d0*tf%t9i)
 
-       denom     = (rho * y(ihe4))**3
+       denom = (rho * y(ihe4))**3
 
-       rate(irsi2ni)     = yeff_ca40*denom*rate(ircaag)*y(isi28)
+       rate(irsi2ni) = yeff_ca40*denom*rate(ircaag)*y(isi28)
 
        if (denom .ne. 0.0) then
           zz     = 1.0d0/denom
