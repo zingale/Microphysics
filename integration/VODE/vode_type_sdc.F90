@@ -4,7 +4,8 @@ module vode_type_module
   use amrex_constants_module
 
   use burn_type_module, only : burn_t, net_ienuc, eos_to_burn
-  use eos_type_module, only : eos_t, eos_input_re, eos_input_rh, eos_input_rt, eos_get_small_temp, eos_get_max_temp
+  use eos_type_module, only : eos_t, eos_input_re, eos_input_rh, eos_input_rt, eos_input_rp, &
+       eos_get_small_temp, eos_get_max_temp
   use eos_module, only : eos
 
   use network, only : nspec, aion, aion_inv
@@ -333,7 +334,12 @@ contains
 
 #elif (SDC_METHOD == 2)
 
-    eos_state % h = y(SENTH) * rhoInv
+    if (use_tfromp) then
+       ! NOT SURE IF THIS IS VALID
+       eos_state % p = rpar(irp_p0)
+    else
+       eos_state % h = y(SENTH) * rhoInv
+    endif
 
 #endif
 
@@ -353,7 +359,9 @@ contains
 
     if (use_tfromp) then
 
-       call amrex_error("Error: SDC_METHOD = 2 requires use_tfromp = F")
+       ! NOT SURE IF THIS IS VALID
+       ! used to be an Abort statement
+       call eos(eos_input_rp, eos_state)
 
     else
 
