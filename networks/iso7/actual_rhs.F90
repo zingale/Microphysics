@@ -157,7 +157,7 @@ contains
   subroutine actual_rhs(state)
 
     use amrex_constants_module, only: ZERO, SIXTH
-    use sneut_module, only: sneut5
+    use sneut_module, only: sneut5_noderivs
     use screening_module, only: fill_plasma_state, screen5
     use tfactors_module, only: get_tfactors
     use temperature_integration_module, only: temperature_rhs
@@ -415,7 +415,7 @@ contains
 
     ! Get the neutrino losses
 
-    call sneut5(temp, rho, abar, zbar, sneut, dsneutdt, dsneutdd, snuda, snudz)
+    call sneut5_noderivs(temp, rho, abar, zbar, sneut)
 
     ! Append the energy equation (this is erg/g/s)
 
