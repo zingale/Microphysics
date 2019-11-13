@@ -178,7 +178,7 @@ contains
     double precision :: sneut, dsneutdt, dsneutdd, snuda, snudz
     double precision :: enuc
 
-    double precision :: rho, temp, abar, zbar
+    double precision :: rho, temp, abar, zbar, z2bar
     double precision :: y(nspec)
 
     double precision :: rate
@@ -187,7 +187,7 @@ contains
 
     integer :: jscr
     double precision :: sc1a,sc1adt,sc1add,sc2a,sc2adt,sc2add, &
-                        sc3a,sc3adt,sc3add,ye,z2bar, &
+                        sc3a,sc3adt,sc3add,ye, &
                         t992,t9i92,yeff_ca40,yeff_ca40dt,yeff_ti44,yeff_ti44dt, &
                         denom,denomdt,denomdd,xx,zz
 
@@ -208,6 +208,7 @@ contains
     temp = state % T
     abar = state % abar
     zbar = state % zbar
+    z2bar  = sum(zion**2 * state % xn * aion_inv) * abar
     y(:) = state % xn(:) * aion_inv(:)
 
     t9 = temp * 1.0d-9
@@ -241,7 +242,8 @@ contains
     ! Do the screening here because the corrections depend on the composition
 
     ! Set up the state data, which is the same for all screening factors.
-    call fill_plasma_state(pstate, temp, rho, y(1:nspec))
+    
+    call fill_plasma_state(pstate, temp, rho, abar, zbar, z2bar)
 
     state % ydot(:) = 0.0d0
 
@@ -447,7 +449,7 @@ contains
 
     integer          :: j
 
-    double precision :: rho, temp, abar, zbar
+    double precision :: rho, temp, abar, zbar, z2bar
     double precision :: y(nspec), yderivs(nspec)
 
     double precision :: rate(nrates), dratedt(nrates)
@@ -468,6 +470,7 @@ contains
     temp = state % T
     abar = state % abar
     zbar = state % zbar
+    z2bar  = sum(zion**2 * state % xn * aion_inv) * abar
     y    = state % xn * aion_inv
 
     ! Get the raw reaction rates
@@ -503,7 +506,7 @@ contains
     call get_tfactors(temp, tf)
 
     ! Set up the state data, which is the same for all screening factors.
-    call fill_plasma_state(pstate, temp, rho, y(1:nspec))
+    call fill_plasma_state(pstate, temp, rho, abar, zbar, z2bar)
 
     call screen_iso7(pstate, tf, rho, y,  &
                      rate, dratedt, &

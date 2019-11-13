@@ -217,29 +217,21 @@ contains
   end subroutine add_screening_factor
 
 
-  subroutine fill_plasma_state(state, temp, dens, y)
+  subroutine fill_plasma_state(state, temp, dens, abar, zbar, z2bar)
 
     !$acc routine seq
-
-    use network, only: nspec, zion
 
     ! Input variables
 
     type (plasma_state) :: state
-    double precision :: temp, dens, y(nspec)
+    double precision :: temp, dens, abar, zbar, z2bar
 
     ! Local variables
 
-    double precision :: abar, zbar, z2bar
     double precision :: ytot, rr, tempi, dtempi, deni
     double precision :: pp, qq, dppdt, xni
-!    double precision :: dppdd
 
     !$gpu
-
-    abar   = ONE / sum(y)
-    zbar   = sum(zion * y) * abar
-    z2bar  = sum(zion**2 * y) * abar
 
     ytot             = ONE / abar
     rr               = dens * ytot
@@ -250,22 +242,18 @@ contains
     pp               = sqrt(rr*tempi*(z2bar + zbar))
     qq               = HALF/pp *(z2bar + zbar)
     dppdt            = qq*rr*dtempi
-    !dppdd            = qq * ytot * tempi
 
     state % qlam0z   = 1.88d8 * tempi * pp
     state % qlam0zdt = 1.88d8 * (dtempi*pp + tempi*dppdt)
-    !state % qlam0zdd = 1.88d8 * tempi * dppdd
 
     state % taufac   = co2 * tempi**THIRD
     state % taufacdt = -THIRD * state % taufac * tempi
 
     qq               = rr * zbar
     xni              = qq**THIRD
-    !dxnidd           = THIRD * xni * deni
 
     state % aa       = 2.27493d5 * tempi * xni
     state % daadt    = 2.27493d5 * dtempi * xni
-    !state % daadd    = 2.27493d5 * tempi * dxnidd
 
   end subroutine fill_plasma_state
 
