@@ -181,7 +181,7 @@ contains
     double precision :: rho, temp, abar, zbar
     double precision :: y(nspec)
 
-    double precision :: rate(nrates)
+    double precision :: rate
 
     type (plasma_state) :: pstate
     type (tf_t)         :: tf
@@ -253,124 +253,117 @@ contains
     sc3a   = sc1a * sc2a
     sc3adt = sc1adt * sc2a + sc1a * sc2adt
 
-    rate(ir3a) = sum(fact(:) * rattab(ir3a,iat:iat+3)) * rho * rho * sc3a
+    rate = sum(fact(:) * rattab(ir3a,iat:iat+3)) * rho * rho * sc3a
 
-    state % ydot(ihe4) = state % ydot(ihe4) - 0.5d0 * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
-    state % ydot(ic12) = state % ydot(ic12) + SIXTH * y(ihe4) * y(ihe4) * y(ihe4) * rate(ir3a)
+    state % ydot(ihe4) = state % ydot(ihe4) - 0.5d0 * y(ihe4) * y(ihe4) * y(ihe4) * rate
+    state % ydot(ic12) = state % ydot(ic12) + SIXTH * y(ihe4) * y(ihe4) * y(ihe4) * rate
 
     ! c12 to o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(ircag) = sum(fact(:) * rattab(ircag,iat:iat+3)) * rho * sc1a
+    rate = sum(fact(:) * rattab(ircag,iat:iat+3)) * rho * sc1a
 
-    state % ydot(ihe4) = state % ydot(ihe4) - y(ic12) * y(ihe4) * rate(ircag)
-    state % ydot(ic12) = state % ydot(ic12) - y(ic12) * y(ihe4) * rate(ircag)
-    state % ydot(io16) = state % ydot(io16) + y(ic12) * y(ihe4) * rate(ircag)
+    state % ydot(ihe4) = state % ydot(ihe4) - y(ic12) * y(ihe4) * rate
+    state % ydot(ic12) = state % ydot(ic12) - y(ic12) * y(ihe4) * rate
+    state % ydot(io16) = state % ydot(io16) + y(ic12) * y(ihe4) * rate
 
     ! c12 + c12
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(ir1212) = sum(fact(:) * rattab(ir1212,iat:iat+3)) * rho * sc1a
+    rate = sum(fact(:) * rattab(ir1212,iat:iat+3)) * rho * sc1a
 
-    state % ydot(ihe4) = state % ydot(ihe4) + 0.5d0 * y(ic12) * y(ic12) * rate(ir1212)
-    state % ydot(ic12) = state % ydot(ic12) - y(ic12) * y(ic12) * rate(ir1212)
-    state % ydot(ine20) = state % ydot(ine20) + 0.5d0 * y(ic12) * y(ic12) * rate(ir1212)
+    state % ydot(ihe4) = state % ydot(ihe4) + 0.5d0 * y(ic12) * y(ic12) * rate
+    state % ydot(ic12) = state % ydot(ic12) - y(ic12) * y(ic12) * rate
+    state % ydot(ine20) = state % ydot(ine20) + 0.5d0 * y(ic12) * y(ic12) * rate
 
     ! c12 + o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(ir1216) = sum(fact(:) * rattab(ir1216,iat:iat+3)) * rho * sc1a
+    rate = sum(fact(:) * rattab(ir1216,iat:iat+3)) * rho * sc1a
 
-    state % ydot(ihe4) = state % ydot(ihe4) + 0.5d0 * y(ic12) * y(io16) * rate(ir1216)
-    state % ydot(ic12) = state % ydot(ic12) - y(ic12) * y(io16) * rate(ir1216)
-    state % ydot(io16) = state % ydot(io16) - y(ic12) * y(io16) * rate(ir1216)
-    state % ydot(img24) = state % ydot(img24) + 0.5d0 * y(ic12) * y(io16) * rate(ir1216)
-    state % ydot(isi28) = state % ydot(isi28) + 0.5d0 * y(ic12) * y(io16) * rate(ir1216)
+    state % ydot(ihe4) = state % ydot(ihe4) + 0.5d0 * y(ic12) * y(io16) * rate
+    state % ydot(ic12) = state % ydot(ic12) - y(ic12) * y(io16) * rate
+    state % ydot(io16) = state % ydot(io16) - y(ic12) * y(io16) * rate
+    state % ydot(img24) = state % ydot(img24) + 0.5d0 * y(ic12) * y(io16) * rate
+    state % ydot(isi28) = state % ydot(isi28) + 0.5d0 * y(ic12) * y(io16) * rate
 
     ! o16 + o16
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(ir1616) = sum(fact(:) * rattab(ir1616,iat:iat+3)) * rho * sc1a
+    rate = sum(fact(:) * rattab(ir1616,iat:iat+3)) * rho * sc1a
 
-    state % ydot(ihe4) = state % ydot(ihe4) + 0.5d0 * y(io16) * y(io16) * rate(ir1616)
-    state % ydot(io16) = state % ydot(io16) - y(io16) * y(io16) * rate(ir1616)
-    state % ydot(isi28) = state % ydot(isi28) + 0.5d0 * y(io16) * y(io16) * rate(ir1616)
+    state % ydot(ihe4) = state % ydot(ihe4) + 0.5d0 * y(io16) * y(io16) * rate
+    state % ydot(io16) = state % ydot(io16) - y(io16) * y(io16) * rate
+    state % ydot(isi28) = state % ydot(isi28) + 0.5d0 * y(io16) * y(io16) * rate
 
     ! o16 to ne20
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(iroag) = sum(fact(:) * rattab(iroag,iat:iat+3)) * rho * sc1a
+    rate = sum(fact(:) * rattab(iroag,iat:iat+3)) * rho * sc1a
 
-    state % ydot(ihe4) = state % ydot(ihe4) - y(io16) * y(ihe4) * rate(iroag)
-    state % ydot(io16) = state % ydot(io16) - y(io16) * y(ihe4) * rate(iroag)
-    state % ydot(ine20) = state % ydot(ine20) + y(io16) * y(ihe4) * rate(iroag)
+    state % ydot(ihe4) = state % ydot(ihe4) - y(io16) * y(ihe4) * rate
+    state % ydot(io16) = state % ydot(io16) - y(io16) * y(ihe4) * rate
+    state % ydot(ine20) = state % ydot(ine20) + y(io16) * y(ihe4) * rate
 
     ! o16 to mg24
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(irneag) = sum(fact(:) * rattab(irneag,iat:iat+3)) * rho * sc1a
+    rate = sum(fact(:) * rattab(irneag,iat:iat+3)) * rho * sc1a
 
-    state % ydot(ihe4) = state % ydot(ihe4) - y(ine20) * y(ihe4) * rate(irneag)
-    state % ydot(ine20) = state % ydot(ine20) - y(ine20) * y(ihe4) * rate(irneag)
-    state % ydot(img24) = state % ydot(img24) + y(ine20) * y(ihe4) * rate(irneag)
+    state % ydot(ihe4) = state % ydot(ihe4) - y(ine20) * y(ihe4) * rate
+    state % ydot(ine20) = state % ydot(ine20) - y(ine20) * y(ihe4) * rate
+    state % ydot(img24) = state % ydot(img24) + y(ine20) * y(ihe4) * rate
 
     ! mg24 to si28
     jscr = jscr + 1
     call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
 
-    rate(irmgag) = sum(fact(:) * rattab(irmgag,iat:iat+3)) * rho * sc1a
+    rate = sum(fact(:) * rattab(irmgag,iat:iat+3)) * rho * sc1a
 
-    state % ydot(ihe4) = state % ydot(ihe4) - y(img24) * y(ihe4) * rate(irmgag)
-    state % ydot(img24) = state % ydot(img24) - y(img24) * y(ihe4) * rate(irmgag)
-    state % ydot(isi28) = state % ydot(isi28) + y(img24) * y(ihe4) * rate(irmgag)
+    state % ydot(ihe4) = state % ydot(ihe4) - y(img24) * y(ihe4) * rate
+    state % ydot(img24) = state % ydot(img24) - y(img24) * y(ihe4) * rate
+    state % ydot(isi28) = state % ydot(isi28) + y(img24) * y(ihe4) * rate
 
-    rate(irg3a) = sum(fact(:) * rattab(irg3a,iat:iat+3))
+    rate = sum(fact(:) * rattab(irg3a,iat:iat+3))
 
-    state % ydot(ihe4) = state % ydot(ihe4) + 3.0d0 * y(ic12) * rate(irg3a)
-    state % ydot(ic12) = state % ydot(ic12) - y(ic12) * rate(irg3a)
+    state % ydot(ihe4) = state % ydot(ihe4) + 3.0d0 * y(ic12) * rate
+    state % ydot(ic12) = state % ydot(ic12) - y(ic12) * rate
 
-    rate(iroga) = sum(fact(:) * rattab(iroga,iat:iat+3))
+    rate = sum(fact(:) * rattab(iroga,iat:iat+3))
 
-    state % ydot(ihe4) = state % ydot(ihe4) + y(io16) * rate(iroga)
-    state % ydot(ic12) = state % ydot(ic12) + y(io16) * rate(iroga)
-    state % ydot(io16) = state % ydot(io16) - y(io16) * rate(iroga)
+    state % ydot(ihe4) = state % ydot(ihe4) + y(io16) * rate
+    state % ydot(ic12) = state % ydot(ic12) + y(io16) * rate
+    state % ydot(io16) = state % ydot(io16) - y(io16) * rate
 
-    rate(irnega) = sum(fact(:) * rattab(irnega,iat:iat+3))
+    rate = sum(fact(:) * rattab(irnega,iat:iat+3))
 
-    state % ydot(ihe4) = state % ydot(ihe4) + y(ine20) * rate(irnega)
-    state % ydot(io16) = state % ydot(io16) + y(ine20) * rate(irnega)
-    state % ydot(ine20) = state % ydot(ine20) - y(ine20) * rate(irnega)
+    state % ydot(ihe4) = state % ydot(ihe4) + y(ine20) * rate
+    state % ydot(io16) = state % ydot(io16) + y(ine20) * rate
+    state % ydot(ine20) = state % ydot(ine20) - y(ine20) * rate
 
-    rate(irmgga) = sum(fact(:) * rattab(irmgga,iat:iat+3))
+    rate = sum(fact(:) * rattab(irmgga,iat:iat+3))
 
-    state % ydot(ihe4) = state % ydot(ihe4) + y(img24) * rate(irmgga)
-    state % ydot(ine20) = state % ydot(ine20) + y(img24) * rate(irmgga)
-    state % ydot(img24) = state % ydot(img24) - y(img24) * rate(irmgga)
+    state % ydot(ihe4) = state % ydot(ihe4) + y(img24) * rate
+    state % ydot(ine20) = state % ydot(ine20) + y(img24) * rate
+    state % ydot(img24) = state % ydot(img24) - y(img24) * rate
 
-    rate(irsiga) = sum(fact(:) * rattab(irsiga,iat:iat+3))
+    rate = sum(fact(:) * rattab(irsiga,iat:iat+3))
 
-    state % ydot(ihe4) = state % ydot(ihe4) + y(isi28) * rate(irsiga)
-    state % ydot(img24) = state % ydot(img24) + y(isi28) * rate(irsiga)
-    state % ydot(isi28) = state % ydot(isi28) - y(isi28) * rate(irsiga)
-
-    jscr = jscr + 1
-    call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
-
-    rate(ircaag) = sum(fact(:) * rattab(ircaag,iat:iat+3)) * rho * sc1a
+    state % ydot(ihe4) = state % ydot(ihe4) + y(isi28) * rate
+    state % ydot(img24) = state % ydot(img24) + y(isi28) * rate
+    state % ydot(isi28) = state % ydot(isi28) - y(isi28) * rate
 
     ! the publication, timmes, woosley & hoffman apjs, 129, 377
     ! has a typo on page 393, where it says "y(ic12)+y(io16) .gt. 0.004"
     ! it should be less than or equal to, since the idea is this piece
     ! gets activated during silicon burning, after all the c + o from
     ! oxygen burning is gone.
-
-    rate(irtiga) = sum(fact(:) * rattab(irtiga,iat:iat+3))
 
     denom = 0.0d0
 
@@ -387,28 +380,31 @@ contains
 
        denom = (rho * y(ihe4))**3
 
-       rate(irsi2ni) = yeff_ca40*denom*rate(ircaag)*y(isi28)
+       jscr = jscr + 1
+       call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+
+       rate = yeff_ca40 * denom * sum(fact(:) * rattab(ircaag,iat:iat+3)) * rho * sc1a * y(isi28)
 
     else
 
-       rate(irsi2ni) = 0.0d0
+       rate = 0.0d0
 
     end if
 
-    state % ydot(ihe4) = state % ydot(ihe4) - 7.0d0 * rate(irsi2ni) * y(ihe4)
-    state % ydot(isi28) = state % ydot(isi28) - rate(irsi2ni) * y(ihe4)
-    state % ydot(ini56) = state % ydot(ini56) + rate(irsi2ni) * y(ihe4)
+    state % ydot(ihe4) = state % ydot(ihe4) - 7.0d0 * rate * y(ihe4)
+    state % ydot(isi28) = state % ydot(isi28) - rate * y(ihe4)
+    state % ydot(ini56) = state % ydot(ini56) + rate * y(ihe4)
 
     if (denom .ne. 0.0d0) then
-       zz     = 1.0d0 / denom
-       rate(irni2si) = min(1.0d10,yeff_ti44*rate(irtiga)*zz)
+       zz   = 1.0d0 / denom
+       rate = min(1.0d10, yeff_ti44 * sum(fact(:) * rattab(irtiga,iat:iat+3)) * zz)
     else
-       rate(irni2si) = 0.0d0
+       rate = 0.0d0
     endif
 
-    state % ydot(ihe4) = state % ydot(ihe4) + 7.0d0 * rate(irni2si) * y(ini56)
-    state % ydot(isi28) = state % ydot(isi28) + rate(irni2si) * y(ini56)
-    state % ydot(ini56) = state % ydot(ini56) - rate(irni2si) * y(ini56)
+    state % ydot(ihe4) = state % ydot(ihe4) + 7.0d0 * rate * y(ini56)
+    state % ydot(isi28) = state % ydot(isi28) + rate * y(ini56)
+    state % ydot(ini56) = state % ydot(ini56) - rate * y(ini56)
 
     ! Instantaneous energy generation rate -- this needs molar fractions
 
