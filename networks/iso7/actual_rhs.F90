@@ -184,7 +184,6 @@ contains
     double precision :: rate
 
     type (plasma_state) :: pstate
-    type (tf_t)         :: tf
 
     integer :: jscr
     double precision :: sc1a,sc1adt,sc1add,sc2a,sc2adt,sc2add, &
@@ -199,6 +198,8 @@ contains
     double precision :: a, b, c, d, e, f, g, h, p, q
     double precision :: fact(4)
 
+    double precision :: t9, t9i
+
     !$gpu
 
     ! Get the data from the state
@@ -208,6 +209,9 @@ contains
     abar = state % abar
     zbar = state % zbar
     y(:) = state % xn(:) * aion_inv(:)
+
+    t9 = temp * 1.0d-9
+    t9i = 1.0d0 / t9
 
     ! hash locate
     iat = int((log10(temp) - tab_tlo)/tab_tstp) + 1
@@ -235,9 +239,6 @@ contains
     fact(4) = -a*b*c/(g*p*q)
 
     ! Do the screening here because the corrections depend on the composition
-
-    ! Get the temperature factors
-    call get_tfactors(temp, tf)
 
     ! Set up the state data, which is the same for all screening factors.
     call fill_plasma_state(pstate, temp, rho, y(1:nspec))
@@ -367,21 +368,21 @@ contains
 
     denom = 0.0d0
 
-    if (tf%t9 .gt. 2.5 .and. y(ic12)+y(io16) .le. 4.0d-3) then
+    if (t9 .gt. 2.5 .and. y(ic12)+y(io16) .le. 4.0d-3) then
 
-       t992  = tf%t972 * tf%t9
-       t9i92 = 1.0d0/t992
+       t992  = (t9**4 * sqrt(t9))
+       t9i92 = 1.0d0 / t992
 
-       yeff_ca40   = t9i92 * exp(239.42*tf%t9i - 74.741)
-       yeff_ca40dt = -yeff_ca40*(239.42*tf%t9i2 + 4.5d0*tf%t9i)
+       yeff_ca40   = t9i92 * exp(239.42 * t9i - 74.741)
+       yeff_ca40dt = -yeff_ca40*(239.42 * t9i**2 + 4.5d0 * t9i)
 
-       yeff_ti44   = t992  * exp(-274.12*tf%t9i + 74.914)
-       yeff_ti44dt = yeff_ti44*(274.12*tf%t9i2 + 4.5d0*tf%t9i)
+       yeff_ti44   = t992  * exp(-274.12 * t9i + 74.914)
+       yeff_ti44dt = yeff_ti44*(274.12 * t9i**2 + 4.5d0 * t9i)
 
        denom = (rho * y(ihe4))**3
 
        jscr = jscr + 1
-       call screen5(pstate,jscr,sc1a,sc1adt,sc1add)
+       call screen5(pstate, jscr, sc1a, sc1adt, sc1add)
 
        rate = yeff_ca40 * denom * sum(fact(:) * rattab(ircaag,iat:iat+3)) * rho * sc1a * y(isi28)
 
