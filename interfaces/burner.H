@@ -49,15 +49,30 @@ void burner (burn_t& state, Real dt)
         // aux data, T, and e represent the result from the incomplete
         // burn.
 
-        if (in_nse(state) && state.success == false) {
-            // ideally, we want to replace dt with just the dt
-            // remaining from the failed VODE burn.  This will append
-            // to state.e the amount additional energy released from
-            // adjusting to the new NSE state
+        // we use a relaxed NSE criteria now to catch states that are
+        // right on the edge of being in NSE
+
+        if (in_nse(state, true) && state.success == false) {
 #ifdef SIMPLIFIED_SDC
-            sdc_nse_burn(state, dt);
+#ifndef AMREX_USE_GPU
+            std::cout << "recovering burn failure in NSE, zone = (" << state.i << ", " << state.j << ", " << state.k << ")" << std::endl;
+#endif
+#endif
+            // replace dt with just the remaining integration time
+            // left after the failure
+            Real dt_remaining = amrex::max(dt - state.time, 0.0_rt);
+            // This will append to state.e the amount additional
+            // energy released from adjusting to the new NSE state
+#ifdef SIMPLIFIED_SDC
+            sdc_nse_burn(state, dt_remaining);
 #else
-            nse_burn(state, dt);
+            nse_burn(state, dt_remaining);
+#endif
+        } else if (state.success == false && abort_on_failure) {
+#ifndef AMREX_USE_GPU
+            std::cout << "failure \n";
+            std::cout << state << std::endl;
+            amrex::Error("integration failed in burner");
 #endif
         }
     }

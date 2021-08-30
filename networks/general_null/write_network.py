@@ -229,6 +229,9 @@ def write_network(network_template, header_template,
 
     for tmp, out_file, lang in templates:
 
+        if tmp == "":
+            continue
+
         print("writing {}".format(out_file))
 
         # read the template
@@ -286,6 +289,16 @@ def write_network(network_template, header_template,
                         for n, spec in enumerate(species):
                             fout.write("{}{},   // {} \n".format(indent, spec.A, n))
 
+                elif keyword == "AION_CONSTEXPR":
+                    if lang == "C++":
+                        fout.write("\n")
+                        for n, spec in enumerate(species):
+                            fout.write("{}case {}:   // {}\n".format(indent, spec.short_name.capitalize(), n))
+                            fout.write("{}{{\n".format(indent))
+                            fout.write("{}    a = {};\n".format(indent, spec.A))
+                            fout.write("{}    break;\n".format(indent))
+                            fout.write("{}}}\n\n".format(indent))
+
                 elif keyword == "AION_INV":
                     if lang == "Fortran":
                         for n, spec in enumerate(species):
@@ -303,6 +316,16 @@ def write_network(network_template, header_template,
                     elif lang == "C++":
                         for n, spec in enumerate(species):
                             fout.write("{}{},   // {}\n".format(indent, spec.Z, n))
+
+                elif keyword == "ZION_CONSTEXPR":
+                    if lang == "C++":
+                        fout.write("\n")
+                        for n, spec in enumerate(species):
+                            fout.write("{}case {}:   // {}\n".format(indent, spec.short_name.capitalize(), n))
+                            fout.write("{}{{\n".format(indent))
+                            fout.write("{}    z = {};\n".format(indent, spec.Z))
+                            fout.write("{}    break;\n".format(indent))
+                            fout.write("{}}}\n\n".format(indent))
 
                 elif keyword == "AUX_NAMES":
                     if lang == "Fortran":
@@ -373,9 +396,6 @@ def main():
                         help="and preprocessor defines that are used in building the code")
 
     args = parser.parse_args()
-
-    if args.t == "" or args.o == "":
-        sys.exit("write_probin.py: ERROR: invalid calling sequence")
 
     write_network(args.t, args.header_template,
                   args.s, args.other_properties,

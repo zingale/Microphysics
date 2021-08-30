@@ -34,8 +34,8 @@ namespace RateTable
     constexpr int tab_imax = static_cast<int>(tab_thi - tab_tlo) * tab_per_decade + 1;
     constexpr Real tab_tstp = (tab_thi - tab_tlo) / static_cast<Real>(tab_imax - 1);
 
-    extern AMREX_GPU_MANAGED Array2D<Real, 1, Rates::NumRates, 1, nrattab> rattab;
-    extern AMREX_GPU_MANAGED Array2D<Real, 1, Rates::NumRates, 1, nrattab> drattabdt;
+    extern AMREX_GPU_MANAGED Array3D<Real, 1, Rates::NumRatesFR, 1, 2, 1, nrattab> rattab;
+    extern AMREX_GPU_MANAGED Array3D<Real, 1, Rates::NumRatesFR, 1, 2, 1, nrattab> drattabdt;
     extern AMREX_GPU_MANAGED Array1D<Real, 1, nrattab> ttab;
 }
 
@@ -81,113 +81,98 @@ void iso7tab(const Real btemp, const Real bden,
     delt = -a*b*c/(g*p*q);
 
     // crank off the raw reaction rates
-    for (int rateindex = 1; rateindex <= Rates::NumRates; ++rateindex) {
+    for (int rateindex = 1; rateindex <= Rates::NumRatesFR; ++rateindex) {
 
-        Real dtab = 0.0_rt;
+        Real forward_dtab = 0.0_rt;
+        Real reverse_dtab = 0.0_rt;
 
         // Set the density dependence
 
         switch (rateindex) {
 
-        case (C12_He4_to_O16_forward):
-            dtab = bden;
+        case (C12_He4_to_O16):
+            forward_dtab = bden;
+            reverse_dtab = 1.0e0_rt;
             break;
 
-        case (C12_He4_to_O16_reverse):
-            dtab = 1.0e0_rt;
+        case (He4_He4_He4_to_C12):
+            forward_dtab = bden * bden;
+            reverse_dtab = 1.0e0_rt;
             break;
 
-        case (He4_He4_He4_to_C12_forward):
-            dtab = bden * bden;
+        case (C12_C12_to_Ne20_He4):
+            forward_dtab = bden;
+            reverse_dtab = bden; // rate is zero in this net
             break;
 
-        case (He4_He4_He4_to_C12_reverse):
-            dtab = 1.0e0_rt;
+        case (C12_O16_to_Mg24_He4):
+            forward_dtab = bden;
+            reverse_dtab = bden; // rate is zero in this net
             break;
 
-        case (C12_C12_to_Ne20_He4_forward):
-            dtab = bden;
+        case (C12_O16_to_Si28):
+            forward_dtab = bden;
+            reverse_dtab = 1.0_rt; // rate is zero in this net
             break;
 
-        case (C12_C12_to_Ne20_He4_reverse):
-            dtab = bden; // rate is zero in this net
+        case (O16_O16_to_Si28_He4):
+            forward_dtab = bden;
+            reverse_dtab = bden; // rate is zero in this net
             break;
 
-        case (C12_O16_to_Mg24_He4_forward):
-            dtab = bden;
+        case (O16_He4_to_Ne20):
+            forward_dtab = bden;
+            reverse_dtab = 1.0e0_rt;
             break;
 
-        case (C12_O16_to_Mg24_He4_reverse):
-            dtab = bden; // rate is zero in this net
+        case (Ne20_He4_to_Mg24):
+            forward_dtab = bden;
+            reverse_dtab = 1.0e0_rt;
             break;
 
-        case (C12_O16_to_Si28_forward):
-            dtab = bden;
+        case (Mg24_He4_to_Si28):
+            forward_dtab = bden;
+            reverse_dtab = 1.0e0_rt;
             break;
 
-        case (C12_O16_to_Si28_reverse):
-            dtab = 1.0_rt; // rate is zero in this net
+        case (Ca40_He4_to_Ti44):
+            forward_dtab = bden;
+            reverse_dtab = 1.0e0_rt;
             break;
 
-        case (O16_O16_to_Si28_He4_forward):
-            dtab = bden;
-            break;
-
-        case (O16_O16_to_Si28_He4_reverse):
-            dtab = bden; // rate is zero in this net
-            break;
-
-        case (O16_He4_to_Ne20_forward):
-            dtab = bden;
-            break;
-
-        case (O16_He4_to_Ne20_reverse):
-            dtab = 1.0e0_rt;
-            break;
-
-        case (Ne20_He4_to_Mg24_forward):
-            dtab = bden;
-            break;
-
-        case (Ne20_He4_to_Mg24_reverse):
-            dtab = 1.0e0_rt;
-            break;
-
-        case (Mg24_He4_to_Si28_forward):
-            dtab = bden;
-            break;
-
-        case (Mg24_He4_to_Si28_reverse):
-            dtab = 1.0e0_rt;
-            break;
-
-        case (Ca40_He4_to_Ti44_forward):
-            dtab = bden;
-            break;
-
-        case (Ca40_He4_to_Ti44_reverse):
-            dtab = 1.0e0_rt;
-            break;
-
-        case (Si28_7He4_to_Ni56_forward):
-            dtab = 0.0e0_rt;
-            break;
-
-        case (Si28_7He4_to_Ni56_reverse):
-            dtab = 0.0e0_rt;
+        case (Si28_7He4_to_Ni56):
+            // This reaction is evaluated in the screening routine
+            forward_dtab = 0.0e0_rt;
+            reverse_dtab = 0.0e0_rt;
             break;
 
         }
 
-        rate(rateindex) = (alfa * rattab(rateindex, iat  ) +
-                           beta * rattab(rateindex, iat+1) +
-                           gama * rattab(rateindex, iat+2) +
-                           delt * rattab(rateindex, iat+3)) * dtab;
+        // The rate array is flattened and for each reaction should contain the
+        // forward rate and then the backward rate. So for any given rate index
+        // we need to fill in 2 * index - 1 and 2 * index in the legacy flattened
+        // scheme used by the rate array (whereas at every index the table has both
+        // the forward and reverse terms).
 
-        dratedt(rateindex) = (alfa * drattabdt(rateindex, iat  ) +
-                              beta * drattabdt(rateindex, iat+1) +
-                              gama * drattabdt(rateindex, iat+2) +
-                              delt * drattabdt(rateindex, iat+3)) * dtab;
+        rate(2 * rateindex - 1) = (alfa * rattab(rateindex, 1, iat  ) +
+                                   beta * rattab(rateindex, 1, iat+1) +
+                                   gama * rattab(rateindex, 1, iat+2) +
+                                   delt * rattab(rateindex, 1, iat+3)) * forward_dtab;
+
+        rate(2 * rateindex    ) = (alfa * rattab(rateindex, 2, iat  ) +
+                                   beta * rattab(rateindex, 2, iat+1) +
+                                   gama * rattab(rateindex, 2, iat+2) +
+                                   delt * rattab(rateindex, 2, iat+3)) * reverse_dtab;
+
+        dratedt(2 * rateindex - 1) = (alfa * drattabdt(rateindex, 1, iat  ) +
+                                      beta * drattabdt(rateindex, 1, iat+1) +
+                                      gama * drattabdt(rateindex, 1, iat+2) +
+                                      delt * drattabdt(rateindex, 1, iat+3)) * forward_dtab;
+
+        dratedt(2 * rateindex    ) = (alfa * drattabdt(rateindex, 2, iat  ) +
+                                      beta * drattabdt(rateindex, 2, iat+1) +
+                                      gama * drattabdt(rateindex, 2, iat+2) +
+                                      delt * drattabdt(rateindex, 2, iat+3)) * reverse_dtab;
 
     }
 }
@@ -216,18 +201,10 @@ void iso7rat(const Real btemp, const Real bden,
     // get the temperature factors
     tf_t tf = get_tfactors(btemp);
 
-    // Determine which c12(a,g)o16 rate to use
-    if (use_c12ag_deboer17) {
-        // deboer + 2017 c12(a,g)o16 rate
-        rate_c12ag_deboer17(tf,bden,
-                            rate(C12_He4_to_O16_forward),dratedt(C12_He4_to_O16_forward),
-                            rate(C12_He4_to_O16_reverse),dratedt(C12_He4_to_O16_reverse));
-    } else {
-        // 1.7 times cf88 c12(a,g)o16 rate
-        rate_c12ag(tf,bden,
-                   rate(C12_He4_to_O16_forward),dratedt(C12_He4_to_O16_forward),
-                   rate(C12_He4_to_O16_reverse),dratedt(C12_He4_to_O16_reverse));
-    }
+    // c12(a,g)o16
+    rate_c12ag(tf,bden,
+               rate(C12_He4_to_O16_forward),dratedt(C12_He4_to_O16_forward),
+               rate(C12_He4_to_O16_reverse),dratedt(C12_He4_to_O16_reverse));
 
     // triple alpha to c12
     rate_triplealf(tf,bden,
@@ -237,17 +214,17 @@ void iso7rat(const Real btemp, const Real bden,
     // c12 + c12
     rate_c12c12(tf,bden,
                 rate(C12_C12_to_Ne20_He4_forward),dratedt(C12_C12_to_Ne20_He4_forward),
-                rrate,drratedt);
+                rate(C12_C12_to_Ne20_He4_reverse),dratedt(C12_C12_to_Ne20_He4_reverse));
 
     // c12 + o16
     rate_c12o16(tf,bden,
                 rate(C12_O16_to_Mg24_He4_forward),dratedt(C12_O16_to_Mg24_He4_forward),
-                rrate,drratedt);
+                rate(C12_O16_to_Mg24_He4_reverse),dratedt(C12_O16_to_Mg24_He4_reverse));
 
     // 16o + 16o
     rate_o16o16(tf,bden,
                 rate(O16_O16_to_Si28_He4_forward),dratedt(O16_O16_to_Si28_He4_forward),
-                rrate,drratedt);
+                rate(O16_O16_to_Si28_He4_reverse),dratedt(O16_O16_to_Si28_He4_reverse));
 
     // o16(a,g)ne20
     rate_o16ag(tf,bden,
@@ -291,10 +268,12 @@ void set_iso7rat()
 
        ttab(i) = btemp;
 
-       for (int j = 1; j <= Rates::NumRates; ++j) {
+       for (int j = 1; j <= Rates::NumRatesFR; ++j) {
 
-          rattab(j,i)    = rate(j);
-          drattabdt(j,i) = dratedt(j);
+           rattab(j, 1, i)    = rate(2 * j - 1);
+           rattab(j, 2, i)    = rate(2 * j    );
+           drattabdt(j, 1, i) = dratedt(2 * j - 1);
+           drattabdt(j, 2, i) = dratedt(2 * j    );
 
        }
     }
@@ -357,11 +336,6 @@ void screen_iso7(const Real btemp, const Real bden,
     dratedt(He4_He4_He4_to_C12_forward) = dratedt(He4_He4_He4_to_C12_forward) * sc3a + rate(He4_He4_He4_to_C12_forward) * sc3adt;
     rate(He4_He4_He4_to_C12_forward)    = rate(He4_He4_He4_to_C12_forward) * sc3a;
 
-    // Identical particle factor (He4 + He4 + He4)
-
-    rate(He4_He4_He4_to_C12_forward)    *= 1.0_rt / 6.0_rt;
-    dratedt(He4_He4_He4_to_C12_forward) *= 1.0_rt / 6.0_rt;
-
     // c12 to o16
     jscr++;
     screen5(pstate,jscr,
@@ -379,11 +353,6 @@ void screen_iso7(const Real btemp, const Real bden,
 
     dratedt(C12_C12_to_Ne20_He4_forward) = dratedt(C12_C12_to_Ne20_He4_forward) * sc1a + rate(C12_C12_to_Ne20_He4_forward) * sc1adt;
     rate(C12_C12_to_Ne20_He4_forward)    = rate(C12_C12_to_Ne20_He4_forward) * sc1a;
-
-    // Identical particle factor (C12 + C12)
-
-    rate(C12_C12_to_Ne20_He4_forward)    *= 0.5_rt;
-    dratedt(C12_C12_to_Ne20_He4_forward) *= 0.5_rt;
 
     // c12 + o16
     jscr++;
@@ -410,11 +379,6 @@ void screen_iso7(const Real btemp, const Real bden,
 
     dratedt(O16_O16_to_Si28_He4_forward) = dratedt(O16_O16_to_Si28_He4_forward) * sc1a + rate(O16_O16_to_Si28_He4_forward) * sc1adt;
     rate(O16_O16_to_Si28_He4_forward)    = rate(O16_O16_to_Si28_He4_forward) * sc1a;
-
-    // Identical particle factor (O16 + O16)
-
-    rate(O16_O16_to_Si28_He4_forward)    *= 0.5_rt;
-    dratedt(O16_O16_to_Si28_He4_forward) *= 0.5_rt;
 
     // o16 to ne20
     jscr++;
@@ -474,7 +438,6 @@ void screen_iso7(const Real btemp, const Real bden,
        denom     = std::pow(bden * y(He4), 3.0e0_rt);
 
        rate(Si28_7He4_to_Ni56_forward)     = yeff_ca40*denom*rate(Ca40_He4_to_Ti44_forward);
-       dratedY(He4, Si28_7He4_to_Ni56_forward) = 3.0e0_rt * rate(Si28_7He4_to_Ni56_forward)/y(He4);
        dratedt(Si28_7He4_to_Ni56_forward)  = (yeff_ca40dt*rate(Ca40_He4_to_Ti44_forward)
                                               + yeff_ca40*dratedt(Ca40_He4_to_Ti44_forward))*denom*1.0e-9_rt;
 
@@ -484,10 +447,8 @@ void screen_iso7(const Real btemp, const Real bden,
           rate(Si28_7He4_to_Ni56_reverse) = amrex::min(1.0e10_rt,yeff_ti44*rate(Ca40_He4_to_Ti44_reverse)*zz);
 
           if (rate(Si28_7He4_to_Ni56_reverse) == 1.0e10_rt) {
-             dratedY(He4, Si28_7He4_to_Ni56_reverse) = 0.0e0_rt;
              dratedt(Si28_7He4_to_Ni56_reverse)  = 0.0e0_rt;
           } else {
-             dratedY(He4, Si28_7He4_to_Ni56_reverse) = -3.0e0_rt * rate(Si28_7He4_to_Ni56_reverse)/y(He4);
              dratedt(Si28_7He4_to_Ni56_reverse)  = (yeff_ti44dt*rate(Ca40_He4_to_Ti44_reverse)
                                                     + yeff_ti44*dratedt(Ca40_He4_to_Ti44_reverse))*zz*1.0e-9_rt;
           }
@@ -588,40 +549,6 @@ void dfdy_isotopes_iso7(Array1D<Real, 1, NumSpec> const& y,
         for (int spec2 = 1; spec2 <= NumSpec; ++spec2) {
             jac(spec1, spec2) = spec_jac(spec1, spec2);
         }
-    }
-
-    for (int spec1 = 1; spec1 <= NumSpec; ++spec1) {
-
-        for (int spec2 = 1; spec2 <= NumSpec; ++spec2) {
-
-            // Now handle the terms that include a d(rate)/dY contribution.
-
-            for (int rate = 1; rate <= NumRates; ++rate) {
-                jac_t jac_data = RHS::jac_data(spec1, spec2, rate);
-
-                if (std::abs(jac_data.rate_prefactor) > 0.0_rt) {
-                    Real term = jac_data.rate_prefactor;
-
-                    if (jac_data.rate_specindex1 >= 0) {
-                        term *= y(jac_data.rate_specindex1);
-                    }
-
-                    if (jac_data.rate_specindex2 >= 0) {
-                        term *= y(jac_data.rate_specindex2);
-                    }
-
-                    if (jac_data.rate_specindex3 >= 0) {
-                        term *= y(jac_data.rate_specindex3);
-                    }
-
-                    term *= rr(2 + spec2).rates(rate);
-
-                    jac(spec1, spec2) += term;
-                }
-            }
-
-        }
-
     }
 
 }
