@@ -22,7 +22,7 @@ def doit():
 
     subch_library.validate(reaclib_library)
 
-    net = StarKillerCxxNetwork(libraries=[subch_library])
+    net = StarKillerCxxNetwork(libraries=[subch_library], symmetric_screening=True)
     net.write_network()
 
 if __name__ == "__main__":
