@@ -272,6 +272,7 @@ int dvstep (burn_t& state, dvode_t& vstate)
             // update
 
             Real X_current = (vstate.y(SFS+i) - vstate.H * state.ydot_a[SFS-1+i]) / rho_current;
+            //Real X_current = vstate.y(SFS+i) / rho_current;
 
             if (std::abs(y_save(SFS+i)) > X_reject_buffer * atol_spec &&
                 std::abs(X_current) > X_reject_buffer * atol_spec &&

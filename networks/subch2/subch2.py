@@ -62,9 +62,9 @@ def doit():
     #    remove_rates.append(r)
 
 
-    for r in remove_rates:
-        print("removing: ", r)
-        subch_library.remove_rate(r)
+    #for r in remove_rates:
+    #    print("removing: ", r)
+    #    subch_library.remove_rate(r)
 
     net = StarKillerCxxNetwork(libraries=[subch_library], symmetric_screening=True)
     net.write_network()
