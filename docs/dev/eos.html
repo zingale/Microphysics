@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Equations of State &mdash; StarKiller Microphysics  documentation</title>
+  <title>Equations of State &mdash; Microphysics  documentation</title>
       <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,14 +15,15 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "macros": {"rhozero": "{\\rho_0}", "pizero": "{\\pi_0}", "pizeroone": "{\\pi_0^{(1)}}", "pizerotwo": "{\\pi_0^{(2)}}", "gammabar": "{\\overline{\\Gamma}_1}", "ptl": "{{\\partial}}", "eb": "{{\\bf e}}", "fb": "{{\\bf f}}", "ib": "{{\\bf i}}", "Ub": "{{\\bf U}}", "Vb": "{{\\bf V}}", "xb": "{{\\bf x}}", "ut": "{\\tilde{u}}", "vt": "{\\tilde{v}}", "wt": "{\\tilde{w}}", "Ubt": "{\\widetilde{\\Ub}}", "edge": "{\\rm EDGE}", "mac": "{\\rm MAC}", "trans": "{\\rm TRANS}", "nablab": "{\\mathbf{\\nabla}}", "cdotb": "{\\mathbf{\\cdot}}", "half": "{\\frac{1}{2}}", "myhalf": "{\\frac{1}{2}}", "nph": "{{n + \\myhalf}}", "nmh": "{{n - \\myhalf}}", "Hext": "{{H_{\\rm ext}}}", "Hnuc": "{{H_{\\rm nuc}}}", "kth": "{k_{\\rm th}}", "pred": "{{\\rm pred}}", "Sbar": "{\\overline{S}}", "inp": "{\\mathrm{in}}", "initp": "{\\mathrm{init}}", "outp": "{\\mathrm{out}}", "uadv": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvone": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV},\\star}}", "uadvonedag": "{\\Ubt^{\\mathrm{ADV},\\dagger,\\star}}", "uadvtwo": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvtwodag": "{\\Ubt^{\\mathrm{ADV},\\dagger}}", "uadvsdcstar": "{\\mathbf{U}^{\\mathrm{ADV},\\star}}", "uadvsdcpred": "{\\mathbf{U}^{\\mathrm{ADV},\\mathrm{pred}}}", "uadvsdc": "{\\mathbf{U}^{\\mathrm{ADV}}}", "dt": "{\\Delta t}", "dr": "{\\Delta r}", "etarho": "{\\eta_{\\rho}}", "etarhoec": "{\\etarho^{\\rm ec}}", "etarhocc": "{\\etarho^{\\rm cc}}", "etarhoflux": "{\\etarho^{\\rm flux}}", "divetarho": "{\\nabla\\cdot(\\etarho\\eb_r)}", "ow": "{\\overline{w}_0}", "dw": "{\\delta w_0}", "thalf": "{\\sfrac{3}{2}}", "rhop": "{{\\rho^{\\prime}}}", "omegadot": "{\\dot{\\omega}}", "er": "{\\mathbf{e}_r}", "ex": "{\\mathbf{e}_x}", "ey": "{\\mathbf{e}_y}", "ez": "{\\mathbf{e}_z}", "Omegab": "{{\\bf \\Omega}}", "rb": "{{\\bf r}}", "isotm": ["{{}^{#2}\\mathrm{#1}}", 2], "edot": "{{{\\dot{e}_\\mathrm{nuc}}}}", "enuc": "{{{{e}_\\mathrm{nuc}}}}", "edotnu": "{{{\\dot{e}_\\nu}}}", "rt": "{\\tilde{r}_0}", "rhob": "{\\ensuremath{\\rho_\\mathrm{base}}}", "Tb": "{\\ensuremath{T_\\mathrm{base}}}", "gcc": "{\\mathrm{g~cm^{-3} }}", "pb": "{p_\\mathrm{base}}", "qburn": "{q_\\mathrm{burn}}", "Uc": "{{\\boldsymbol{\\mathcal{U}}}}", "Fb": "{\\mathbf{F}}", "Sc": "{\\mathbf{S}}", "Shydro": "{{{\\bf S}^{\\mathrm{hydro}}}}", "Rb": "{{\\bf R}}", "Rq": "{{\\bf R}}", "Adv": ["{{\\left [\\boldsymbol{\\mathcal{A}} \\left(#1\\right)\\right]}}", 1], "Advs": ["{{\\boldsymbol{\\mathcal{A}} \\left(#1\\right)}}", 1], "Sdot": "{\\dot{S}}"}}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Reaction Networks" href="networks.html" />
+    <link rel="next" title="Overview of Reaction Networks" href="networks-overview.html" />
     <link rel="prev" title="ForwardEuler" href="runtime_parameters.html" /> 
 </head>
 
@@ -32,7 +33,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
 
-            <a href="index.html" class="icon icon-home"> StarKiller Microphysics
+            <a href="index.html" class="icon icon-home"> Microphysics
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -46,7 +47,7 @@
     </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">StarKiller basics</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Microphysics basics</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics.html">StarKiller Basics</a></li>
@@ -68,12 +69,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#eos-structure">EOS Structure</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="networks.html">Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networks-overview.html">Overview of Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networks.html">Available Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templated_networks.html">Templated Network Righthand Sides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="screening.html">Screening of Reaction Rates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="integrators.html">Integrating a Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nse.html">NSE</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Coefficients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cxx.html">C++ interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPUs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdc.html">Spectral Deferred Corrections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zreferences.html">References</a></li>
@@ -85,7 +87,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">StarKiller Microphysics</a>
+          <a href="index.html">Microphysics</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -128,18 +130,18 @@
 }
 </style>
 <section id="equations-of-state">
-<h1>Equations of State<a class="headerlink" href="#equations-of-state" title="Permalink to this headline">¶</a></h1>
+<h1>Equations of State<a class="headerlink" href="#equations-of-state" title="Permalink to this heading">¶</a></h1>
 <p>In this chapter on equations of state, we list the EOS routines
 available for your use, and then we describe the correct structure of
 an EOS module in case you want to build your own.</p>
 <section id="available-equations-of-state">
-<h2>Available Equations of State<a class="headerlink" href="#available-equations-of-state" title="Permalink to this headline">¶</a></h2>
+<h2>Available Equations of State<a class="headerlink" href="#available-equations-of-state" title="Permalink to this heading">¶</a></h2>
 <p>The following equations of state are available in Microphysics.
 Except where noted, each of these EOSs will provide the full
 thermodynamic data (including all derivatives) in the <code class="docutils literal notranslate"><span class="pre">eos_t</span></code>
 type.</p>
 <section id="gamma-law">
-<h3>gamma_law<a class="headerlink" href="#gamma-law" title="Permalink to this headline">¶</a></h3>
+<h3>gamma_law<a class="headerlink" href="#gamma-law" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">gamma_law</span></code> represents a gamma law gas, with
 equation of state:</p>
 <div class="math notranslate nohighlight">
@@ -168,7 +170,7 @@ fills the thermodynamic information in <code class="docutils literal notranslate
 by the hydrodynamics module in CASTRO.</p>
 </section>
 <section id="polytrope">
-<h3>polytrope<a class="headerlink" href="#polytrope" title="Permalink to this headline">¶</a></h3>
+<h3>polytrope<a class="headerlink" href="#polytrope" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">polytrope</span></code> represents a polytropic fluid, with equation of
 state:</p>
 <div class="math notranslate nohighlight">
@@ -199,7 +201,7 @@ electron gas.</p>
 </ul>
 </section>
 <section id="ztwd">
-<h3>ztwd<a class="headerlink" href="#ztwd" title="Permalink to this headline">¶</a></h3>
+<h3>ztwd<a class="headerlink" href="#ztwd" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">ztwd</span></code> is the zero-temperature degenerate electron equation
 of state of Chandrasekhar (1935), which is designed to describe
 white dward material. The pressure satisfies the equation:</p>
@@ -223,7 +225,7 @@ with pressure as a primary input then we do Newton-Raphson iteration
 to find the density that matches this pressure.</p>
 </section>
 <section id="multigamma">
-<h3>multigamma<a class="headerlink" href="#multigamma" title="Permalink to this headline">¶</a></h3>
+<h3>multigamma<a class="headerlink" href="#multigamma" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">multigamma</span></code> is an ideal gas equation of state where each
 species can have a different value of <span class="math notranslate nohighlight">\(\gamma\)</span>. This mainly affects
 how the internal energy is constructed as each species, represented
@@ -269,7 +271,7 @@ different species.</p></li>
 </ul>
 </section>
 <section id="helmholtz">
-<h3>helmholtz<a class="headerlink" href="#helmholtz" title="Permalink to this headline">¶</a></h3>
+<h3>helmholtz<a class="headerlink" href="#helmholtz" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">helmholtz</span></code> contains a general, publicly available stellar
 equation of state based on the Helmholtz free energy, with
 contributions from ions, radiation, and electron degeneracy, as
@@ -286,13 +288,12 @@ module in the code calling this. However, there is a choice of whether
 to update the energy to match this temperature, respecting
 thermodynamic consistency, or to leave the energy alone, respecting
 energy conservation. This is controlled through the
-<code class="docutils literal notranslate"><span class="pre">eos_input_is_constant</span></code> parameter in your <code class="docutils literal notranslate"><span class="pre">extern</span></code>
-namelist in your probin file.</p>
+<code class="docutils literal notranslate"><span class="pre">eos.eos_input_is_constant</span></code> parameter in your inputs file.</p>
 <p>We thank Frank Timmes for permitting us to modify his code and
 publicly release it in this repository.</p>
 </section>
 <section id="stellarcollapse">
-<h3>stellarcollapse<a class="headerlink" href="#stellarcollapse" title="Permalink to this headline">¶</a></h3>
+<h3>stellarcollapse<a class="headerlink" href="#stellarcollapse" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">stellarcollapse</span></code> is the equation of state module provided
 on <a class="reference external" href="http://stellarcollapse.org">http://stellarcollapse.org</a>. It is designed
 to be used for core-collapse supernovae and is compatible with a
@@ -302,13 +303,40 @@ appropriate interpolation table from that site to use this.</p>
 </section>
 </section>
 <section id="interface-and-modes">
-<h2>Interface and Modes<a class="headerlink" href="#interface-and-modes" title="Permalink to this headline">¶</a></h2>
+<h2>Interface and Modes<a class="headerlink" href="#interface-and-modes" title="Permalink to this heading">¶</a></h2>
+<p>The EOS is called as:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">eos</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">eos_type</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <em>mode</em> determines which thermodynamic quantities are inputs,
+and is one of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_input_rt</span></code> : density and temperature are inputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_input_rh</span></code> : density and specific enthalpy are inputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_input_tp</span></code> : temperature and pressure are inputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_input_rp</span></code> : density and pressure are inputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_input_re</span></code> : density and specific internal energy are inputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_input_ps</span></code> : pressure and entropy are inputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_input_ph</span></code> : pressure and specific enthalpy are inputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_input_th</span></code> : temperature and specific enthalpy are inputs</p></li>
+</ul>
+<p>The <em>eos_type</em> passed in is one of</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_t</span></code> : provides access to all available thermodynamic information,
+including derivatives.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_re_t</span></code> : only provides the energy-based thermodynamic information, including
+energy derivatives.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_rep_t</span></code> : expands on <code class="docutils literal notranslate"><span class="pre">eos_re_t</span></code> to include pressure information</p></li>
+</ul>
+<p>In general, you should use the type that has the smallest set of
+information needed, since we optimize out needless quantities at
+compile type (via C++ templating) for <code class="docutils literal notranslate"><span class="pre">eos_re_t</span></code> and <code class="docutils literal notranslate"><span class="pre">eos_rep_t</span></code>.</p>
 </section>
 <section id="initialization-and-cutoff-values">
-<h2>Initialization and Cutoff Values<a class="headerlink" href="#initialization-and-cutoff-values" title="Permalink to this headline">¶</a></h2>
+<h2>Initialization and Cutoff Values<a class="headerlink" href="#initialization-and-cutoff-values" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="input-validation">
-<h2>Input Validation<a class="headerlink" href="#input-validation" title="Permalink to this headline">¶</a></h2>
+<h2>Input Validation<a class="headerlink" href="#input-validation" title="Permalink to this heading">¶</a></h2>
 <p>The EOS will make sure that the inputs are within an acceptable range,
 (e.g., <code class="docutils literal notranslate"><span class="pre">small_temp</span></code> <span class="math notranslate nohighlight">\(&lt; T &lt;\)</span> <code class="docutils literal notranslate"><span class="pre">maxT</span></code>). If they are not, then it
 resets them silently—no error is thrown.</p>
@@ -319,7 +347,7 @@ max ( <code class="docutils literal notranslate"><span class="pre">small_temp</s
 the EOS.</p>
 </section>
 <section id="eos-structure">
-<h2>EOS Structure<a class="headerlink" href="#eos-structure" title="Permalink to this headline">¶</a></h2>
+<h2>EOS Structure<a class="headerlink" href="#eos-structure" title="Permalink to this heading">¶</a></h2>
 <p>Each EOS should have two main routines by which it interfaces to the
 rest of CASTRO. At the beginning of the simulation,
 <code class="docutils literal notranslate"><span class="pre">actual_eos_init</span></code> will perform any initialization steps and save
@@ -337,13 +365,13 @@ accept an eos_input and an eos_t state; see Section <a class="reference internal
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="runtime_parameters.html" class="btn btn-neutral float-left" title="ForwardEuler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="networks.html" class="btn btn-neutral float-right" title="Reaction Networks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="networks-overview.html" class="btn btn-neutral float-right" title="Overview of Reaction Networks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2018, StarKiller Development Team.</p>
+    <p>&#169; Copyright 2012, Microphysics Development Team.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
