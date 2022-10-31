@@ -17,6 +17,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "macros": {"rhozero": "{\\rho_0}", "pizero": "{\\pi_0}", "pizeroone": "{\\pi_0^{(1)}}", "pizerotwo": "{\\pi_0^{(2)}}", "gammabar": "{\\overline{\\Gamma}_1}", "ptl": "{{\\partial}}", "eb": "{{\\bf e}}", "fb": "{{\\bf f}}", "ib": "{{\\bf i}}", "Ub": "{{\\bf U}}", "Vb": "{{\\bf V}}", "xb": "{{\\bf x}}", "ut": "{\\tilde{u}}", "vt": "{\\tilde{v}}", "wt": "{\\tilde{w}}", "Ubt": "{\\widetilde{\\Ub}}", "edge": "{\\rm EDGE}", "mac": "{\\rm MAC}", "trans": "{\\rm TRANS}", "nablab": "{\\mathbf{\\nabla}}", "cdotb": "{\\mathbf{\\cdot}}", "half": "{\\frac{1}{2}}", "myhalf": "{\\frac{1}{2}}", "nph": "{{n + \\myhalf}}", "nmh": "{{n - \\myhalf}}", "Hext": "{{H_{\\rm ext}}}", "Hnuc": "{{H_{\\rm nuc}}}", "kth": "{k_{\\rm th}}", "pred": "{{\\rm pred}}", "Sbar": "{\\overline{S}}", "inp": "{\\mathrm{in}}", "initp": "{\\mathrm{init}}", "outp": "{\\mathrm{out}}", "uadv": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvone": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV},\\star}}", "uadvonedag": "{\\Ubt^{\\mathrm{ADV},\\dagger,\\star}}", "uadvtwo": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvtwodag": "{\\Ubt^{\\mathrm{ADV},\\dagger}}", "uadvsdcstar": "{\\mathbf{U}^{\\mathrm{ADV},\\star}}", "uadvsdcpred": "{\\mathbf{U}^{\\mathrm{ADV},\\mathrm{pred}}}", "uadvsdc": "{\\mathbf{U}^{\\mathrm{ADV}}}", "dt": "{\\Delta t}", "dr": "{\\Delta r}", "etarho": "{\\eta_{\\rho}}", "etarhoec": "{\\etarho^{\\rm ec}}", "etarhocc": "{\\etarho^{\\rm cc}}", "etarhoflux": "{\\etarho^{\\rm flux}}", "divetarho": "{\\nabla\\cdot(\\etarho\\eb_r)}", "ow": "{\\overline{w}_0}", "dw": "{\\delta w_0}", "thalf": "{\\sfrac{3}{2}}", "rhop": "{{\\rho^{\\prime}}}", "omegadot": "{\\dot{\\omega}}", "er": "{\\mathbf{e}_r}", "ex": "{\\mathbf{e}_x}", "ey": "{\\mathbf{e}_y}", "ez": "{\\mathbf{e}_z}", "Omegab": "{{\\bf \\Omega}}", "rb": "{{\\bf r}}", "isotm": ["{{}^{#2}\\mathrm{#1}}", 2], "edot": "{{{\\dot{e}_\\mathrm{nuc}}}}", "enuc": "{{{{e}_\\mathrm{nuc}}}}", "edotnu": "{{{\\dot{e}_\\nu}}}", "rt": "{\\tilde{r}_0}", "rhob": "{\\ensuremath{\\rho_\\mathrm{base}}}", "Tb": "{\\ensuremath{T_\\mathrm{base}}}", "gcc": "{\\mathrm{g~cm^{-3} }}", "pb": "{p_\\mathrm{base}}", "qburn": "{q_\\mathrm{burn}}", "Uc": "{{\\boldsymbol{\\mathcal{U}}}}", "Fb": "{\\mathbf{F}}", "Sc": "{\\mathbf{S}}", "Shydro": "{{{\\bf S}^{\\mathrm{hydro}}}}", "Rb": "{{\\bf R}}", "Rq": "{{\\bf R}}", "Adv": ["{{\\left [\\boldsymbol{\\mathcal{A}} \\left(#1\\right)\\right]}}", 1], "Advs": ["{{\\boldsymbol{\\mathcal{A}} \\left(#1\\right)}}", 1], "Sdot": "{\\dot{S}}"}}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -63,7 +64,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#stellarcollapse">stellarcollapse</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#interface-and-modes">Interface and Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interface-and-modes">Interface and Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#auxillary-composition">Auxillary Composition</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#initialization-and-cutoff-values">Initialization and Cutoff Values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#input-validation">Input Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#eos-structure">EOS Structure</a></li>
@@ -331,6 +335,38 @@ energy derivatives.</p></li>
 <p>In general, you should use the type that has the smallest set of
 information needed, since we optimize out needless quantities at
 compile type (via C++ templating) for <code class="docutils literal notranslate"><span class="pre">eos_re_t</span></code> and <code class="docutils literal notranslate"><span class="pre">eos_rep_t</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All of these modes require composition as an input.  Usually this is
+via the set of mass fractions, <code class="docutils literal notranslate"><span class="pre">eos_t.xn[]</span></code>, but if <code class="docutils literal notranslate"><span class="pre">USE_AUX_THERMO</span></code>
+is set to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, then we instead use the auxillary quantities
+stored in <code class="docutils literal notranslate"><span class="pre">eos_t.aux[]</span></code>.</p>
+</div>
+<section id="auxillary-composition">
+<h3>Auxillary Composition<a class="headerlink" href="#auxillary-composition" title="Permalink to this heading">¶</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">USE_AUX_THERMO=TRUE</span></code>, we interpret the composition from the auxiliary variables.
+The auxiliary variables are</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_state.aux[iye]</span></code> : electron fraction, defined as</p>
+<div class="math notranslate nohighlight">
+\[Y_e = \sum_k \frac{X_k Z_k}{A_k}\]</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_state.aux[iabar]</span></code> : the average mass of the nuclei, defined as:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{\bar{A}} = \sum_k \frac{X_k}{A_k}\]</div>
+<p>In many stellar evolutions texts, this would be written as <span class="math notranslate nohighlight">\(\mu_I\)</span>.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eos_state.aux[ibea]</span></code> : the binding energy per nucleon (units of
+MeV), defined as</p>
+<div class="math notranslate nohighlight">
+\[\left \langle \frac{B}{A} \right \rangle  = \sum_k \frac{X_k B_k}{A_k}\]</div>
+<p>where <span class="math notranslate nohighlight">\(B_k\)</span> is the binding energy of nucleus <span class="math notranslate nohighlight">\(k\)</span></p>
+</li>
+</ul>
+<p>Given a composition of mass fractions, the function
+<code class="docutils literal notranslate"><span class="pre">set_aux_comp_from_X(state_t&amp;</span> <span class="pre">state)</span></code> will initialize these
+auxiliary quantities.</p>
+</section>
 </section>
 <section id="initialization-and-cutoff-values">
 <h2>Initialization and Cutoff Values<a class="headerlink" href="#initialization-and-cutoff-values" title="Permalink to this heading">¶</a></h2>
