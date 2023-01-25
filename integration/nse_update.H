@@ -75,6 +75,8 @@ void sdc_nse_burn(burn_t& state, const Real dt) {
     state.y[SMY] += dt * state.ydot_a[SMY];
     state.y[SMZ] += dt * state.ydot_a[SMZ];
 
+    Real rho_half = 0.5_rt * (rho_old + state.y[SRHO]);
+
     // predict the U^{n+1,*} state with only estimates of the aux
     // reaction terms and advection to dt
 
@@ -85,13 +87,13 @@ void sdc_nse_burn(burn_t& state, const Real dt) {
     Real aux_source[NumAux] = {0.0_rt};
 
     aux_source[iye] = rho_old * dyedt;
+    aux_source[iabar] = rho_half * state.Iq_aux[iabar];
 
     Real rhoe_new;
     Real rho_aux_new[NumAux];
     Real dq;
-    Real enucdot = 0.0_rt;
+    Real enucdot = rho_half * Iq_e;
 
-    Real rho_half = 0.5_rt * (rho_old + state.y[SRHO]);
 
     for (int iter = 0; iter < 3; iter++) {
 

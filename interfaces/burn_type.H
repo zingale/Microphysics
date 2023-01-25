@@ -136,6 +136,9 @@ struct burn_t
   // to hydrodynamics over the timestep.
   Real ydot_a[SVAR];
 
+  Real Iq_e;
+  Real Iq_aux[NumAux];
+
 #if defined(SDC_EVOLVE_ENTHALPY)
   // Pressure in case we wish to use it for EOS calls
   Real p0;
