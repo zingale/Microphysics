@@ -64,104 +64,100 @@ void sdc_nse_burn(burn_t& state, const Real dt) {
 
 #endif
 
-    Real dyedt_old = dyedt;
-
     // density and momentum have no reactive sources
     Real rho_old = state.y[SRHO];
+    Real rhoe_old = state.y[SEINT];
+
     Real rho_bea_old = state.y[SFX+ibea];
     Real rho_abar_old = state.y[SFX+iabar];
+    Real rho_ye_old = state.y[SFX+iye];
 
+    // update the non-reactive state
     state.y[SRHO] += dt * state.ydot_a[SRHO];
     state.y[SMX] += dt * state.ydot_a[SMX];
     state.y[SMY] += dt * state.ydot_a[SMY];
     state.y[SMZ] += dt * state.ydot_a[SMZ];
 
-    // predict the U^{n+1,*} state with only estimates of the aux
-    // reaction terms and advection to dt
+    Real rho_new = state.y[SRHO];
+
+    // predict the state at the midpoint in time
+    Real rho_half = rho_old + 0.5_rt * dt * state.ydot_a[SRHO];
+
+    // we are assuming that since we start out at NSE, that the energy
+    // generation is ~ 0
+    Real rhoe_half = rhoe_old + 0.5_rt * dt * state.ydot_a[SEINT];
+
+    Real rho_ye_half = rho_ye_old + 0.5_rt * dt * state.ydot_a[SFX+iye] + 0.5 * dt * rho_old * dyedt;
+    Real rho_abar_half = rho_abar_old + 0.5_rt * dt * state.ydot_a[SFX+iabar];
+
+    // get the updated temperature here
 
     eos_re_t eos_state;
-    eos_state.T = 1.e6_rt; // initial guess
+    eos_state.rho = rho_half;
+    eos_state.e = rhoe_half / rho_half;
+    eos_state.aux[iye] = rho_ye_half / rho_half;
+    eos_state.aux[iabar] = rho_abar_half / rho_half;
+    eos_state.T = 1.e6_rt;
 
-    // initial aux_sources
-    Real aux_source[NumAux] = {0.0_rt};
+    eos(eos_input_re, eos_state);
 
-    aux_source[iye] = rho_old * dyedt;
+    // find the NSE state at the midpoint in time
 
-    Real rhoe_new;
-    Real rho_aux_new[NumAux];
-    Real dq;
-    Real rho_enucdot = 0.0_rt;
+    nse_interp(eos_state.T, eos_state.rho, eos_state.aux[iye],
+               abar_out, dq_out, dyedt, X);
 
-    Real rho_half = 0.5_rt * (rho_old + state.y[SRHO]);
+    // compute the sources at the midpoint in time
 
-    // predict the new aux for the first iteration -- this is really
-    // just including the advection bits
+    Real dyedt_half = dyedt;
 
-    for (int n = 0; n < NumAux; n++) {
-        rho_aux_new[n] = state.y[SFX+n] + dt * state.ydot_a[SFX+n] + dt * aux_source[n];
-    }
 
-    for (int iter = 0; iter < 3; iter++) {
+    // compute the energy release -- we need to remove the advective part
 
-        // update (rho e)^{n+1} based on the new energy generation rate
-        rhoe_new = state.y[SEINT] + dt * state.ydot_a[SEINT] + dt * rho_enucdot;
+    Real rho_bea_star = rho_bea_old + 0.5_rt * dt * state.ydot_a[SFX+ibea];
+    Real bea_star = rho_bea_star / rho_half;
 
-        // call the EOS to get the updated T*
+    Real dbea = dq_out - bea_star;
 
-        Real T_new;
-        eos_state.rho = state.y[SRHO];
-        eos_state.e = rhoe_new / state.y[SRHO];
-        for (int n = 0; n < NumAux; n++) {
-            eos_state.aux[n] = rho_aux_new[n] / state.y[SRHO];
-        }
+    // convert the energy to erg / cm**3
+    Real rho_enucdot_half  = 0.5_rt * (rho_old + rho_half) * dbea * C::MeV2eV * C::ev2erg * C::n_A / dt;
 
-        if (state.T_fixed > 0) {
-            T_new = state.T_fixed;
-        } else {
-            eos(eos_input_re, eos_state);
-            T_new = state.T;
-        }
+    Real rho_abar_star = rho_abar_old + 0.5_rt * dt * state.ydot_a[SFX+iabar];
+    Real abar_star = rho_abar_star / rho_half;
 
-#if defined(NSE_TABLE)
-        // call the NSE table using the * state to get the t^{n+1}
-        // source estimates
+    Real dabardt_half = (abar_out - abar_star) / dt;
 
-        nse_interp(T_new, eos_state.rho, eos_state.aux[iye],
-                   abar_out, dq_out, dyedt, X);
+    // finally update everything to the final time
 
-        // note that the abar, dq (B/A), and X here have all already
-        // seen advection implicitly
+    Real rhoe_new = rhoe_old + dt * state.ydot_a[SEINT] + dt * rho_enucdot_half;
 
-#elif defined(NSE_NET)
-        // solve for the NSE state for this network we need to call
-        // get_nse_state with a burn_t, so we need to ensure that the
-        // xn are in sync
+    Real rho_ye_new = rho_ye_old + dt * state.ydot_a[SFX+iye] + dt * rho_half * dyedt_half;
+    Real rho_abar_new = rho_abar_old + dt * state.ydot_a[SFX+iabar] + rho_half * dabardt_half;
 
-        // compute abar, dq_out, and dyedt
+    // get the final temperature
 
-#endif
+    eos_state.rho = rho_new;
+    eos_state.e = rhoe_new / rho_new;
+    eos_state.aux[iye] = rho_ye_new / rho_new;
+    eos_state.aux[iabar] = rho_abar_new / rho_new;
 
-        // compute the energy release -- we need to remove the advective part
+    eos(eos_input_re, eos_state);
 
-        Real rho_bea_star = rho_bea_old + dt * state.ydot_a[SFX+ibea];
-        Real bea_star = rho_bea_star / state.y[SRHO];
+    // find the NSE state at the final time
 
-        Real dbea = dq_out - bea_star;
+    nse_interp(eos_state.T, eos_state.rho, eos_state.aux[iye],
+               abar_out, dq_out, dyedt, X);
 
-        // convert the energy to erg / cm**3
-        rho_enucdot  = rho_half * dbea * C::MeV2eV * C::ev2erg * C::n_A / dt;
 
-        // update the new state for the next pass
+    // find the final energy release
 
-        aux_source[iye] = 0.5_rt * rho_half * (dyedt_old + dyedt);
-        rho_aux_new[iye] = state.y[SFX+iye] + dt * state.ydot_a[SFX+iye] + dt * aux_source[iye];
+    rho_bea_star = rho_bea_old + dt * state.ydot_a[SFX+ibea];
+    bea_star = rho_bea_star / rho_new;
 
-        rho_aux_new[iabar] = state.y[SRHO] * abar_out;
-        rho_aux_new[ibea] = state.y[SRHO] * dq_out;
+    dbea = dq_out - bea_star;
 
-    }
+    // convert the energy to erg / cm**3
+    Real rho_enucdot  = rho_half * dbea * C::MeV2eV * C::ev2erg * C::n_A / dt;
 
-    // now update the aux quantities
 
     // the new mass fractions are just those that come from the table
     // make sure they are normalized
@@ -176,18 +172,15 @@ void sdc_nse_burn(burn_t& state, const Real dt) {
     }
 
     for (int n = 0; n < NumSpec; ++n) {
-        state.y[SFS+n] = state.y[SRHO] * X[n];
+        state.y[SFS+n] = eos_state.rho * X[n];
     }
 
     // aux data comes from the table (except Ye, which we predicted)
 
-    //state.y[SFX+iye] = eos_state.rho * eos_state.aux[iye];
-    //state.y[SFX+iabar] = eos_state.rho * abar_out;
-    //state.y[SFX+ibea] = eos_state.rho * dq_out;
+    state.y[SFX+iye] = eos_state.rho * eos_state.aux[iye];
+    state.y[SFX+iabar] = eos_state.rho * abar_out;
+    state.y[SFX+ibea] = eos_state.rho * dq_out;
 
-    for (int n = 0; n < NumAux; ++n) {
-        state.y[SFX+n] = rho_aux_new[n];
-    }
 
     // density and momenta have already been updated
 
