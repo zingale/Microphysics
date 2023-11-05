@@ -66,6 +66,7 @@ void sdc_nse_burn(BurnT& state, const Real dt) {
     // density and momentum have no reactive sources
     Real rho_old = state.y[SRHO];
     Real rho_bea_old = state.y[SFX+ibea];
+    Real rho_dbeadt_old = rho_old * dbeadt;
 
     state.y[SRHO] += dt * state.ydot_a[SRHO];
     state.y[SMX] += dt * state.ydot_a[SMX];
@@ -85,7 +86,7 @@ void sdc_nse_burn(BurnT& state, const Real dt) {
     Real rho_aux_new[NumAux];
 
     Real rhoe_new;
-    Real rho_enucdot = 0.0_rt;
+    Real rho_enucdot = rho_dbeadt_old;
 
     Real rho_half = 0.5_rt * (rho_old + state.y[SRHO]);
 
@@ -129,11 +130,12 @@ void sdc_nse_burn(BurnT& state, const Real dt) {
 
         // compute the energy release -- we need to remove the advective part
 
-        Real rho_bea_tilde = state.y[SRHO] * dq_out - dt * state.ydot_a[SFX+ibea];
-        Real rho_dBEA = rho_bea_tilde - rho_bea_old;  // this is MeV / nucleon * g / cm**3
+        //Real rho_bea_tilde = state.y[SRHO] * dq_out - dt * state.ydot_a[SFX+ibea];
+        //Real rho_dBEA = rho_bea_tilde - rho_bea_old;  // this is MeV / nucleon * g / cm**3
 
         // convert the energy to erg / cm**3
-        rho_enucdot  = rho_dBEA * C::MeV2eV * C::ev2erg * C::n_A / dt;
+        //rho_enucdot  = rho_dBEA * C::MeV2eV * C::ev2erg * C::n_A / dt;
+        rho_enucdot  = 0.5_rt * (state.y[SRHO] * dbeadt + rho_dbeadt_old) * C::MeV2eV * C::ev2erg * C::n_A;
 
         // update the new state for the next pass
 
@@ -173,6 +175,14 @@ void sdc_nse_burn(BurnT& state, const Real dt) {
     // density and momenta have already been updated
 
     // update the total and internal energy now
+
+    // we need to compute the total energy release since we cam into this
+    // funtion.  That includes the release from the original change
+    // in B/A from the first call to nse_interp()
+
+    Real rho_bea_tilde = state.y[SRHO] * dq_out - dt * state.ydot_a[SFX+ibea];
+    Real rho_dBEA = rho_bea_tilde - rho_bea_old;  // this is MeV / nucleon * g / cm**3
+    rho_enucdot  = rho_dBEA * C::MeV2eV * C::ev2erg * C::n_A / dt;
 
     state.y[SEINT] += dt * state.ydot_a[SEINT] + dt * rho_enucdot;
     state.y[SEDEN] += dt * state.ydot_a[SEDEN] + dt * rho_enucdot;
