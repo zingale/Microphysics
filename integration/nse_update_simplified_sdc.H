@@ -110,6 +110,9 @@ void evolve(const Real rho0, const Real T0, const Real rhoe0, const Real *rhoaux
     Real rho_bea_tilde = rho_new * bea_out - dt * ydot_a[SFX+ibea];
     Real rho_dBEA = rho_bea_tilde - rhoaux0[ibea]; // this is MeV / nucleon * g / cm**3
 
+    Real rho_abar_tilde = rho_new * abar_out - dt * ydot_a[SFX+iabar];
+    Real rho_abar = rho_abar_tilde - rhoaux0[iabar];
+
     rhoe_source = rho_dBEA * C::MeV2eV * C::ev2erg * C::n_A / dt;
     rhoe_source -= rho_new * (enu + snu);
 
@@ -122,6 +125,7 @@ void evolve(const Real rho0, const Real T0, const Real rhoe0, const Real *rhoaux
     // so there is no instantaneous change in the binding energy
 
     rhoaux_new[ibea] = rho_new * bea_out;
+    rhoaux_new[iabar] = rho_new * abar_out;
 
 }
 
@@ -247,6 +251,20 @@ void sdc_nse_burn(BurnT& state, const Real dt) {
     Real rhoe_new;
     Real rhoaux_new[NumAux];
     Real rhoX_new[NumSpec];
+
+    // get a better estimate for the source at time t = 0 by
+    // evolving for a very small timestep.  We will then use the
+    // sources here as the starting sources at t = 0
+
+    {
+        constexpr bool skip_X_fill{true};
+
+        evolve<skip_X_fill>(rho_old, T_old, rhoe_old, rhoaux_old,
+                            0.01_rt*dt, state.ydot_a,
+                            rhoe_new, rhoaux_new, rhoX_new,
+                            rhoe_source, rhoaux_source, state.T_fixed);
+    }
+
 
     // evolve for dt/2 -- the sources will be overwritten with the
     // sources at the end point of this integration
