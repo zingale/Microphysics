@@ -183,39 +183,80 @@ void sdc_nse_burn(BurnT& state, const Real dt) {
 
     // do an RK2 integration
 
+    // k1
     // get the derivatives at t = t^n
 
-    Real drhoedt;
-    Real drhoauxdt[NumSpec];
+    Real drhoedt1;
+    Real drhoauxdt1[NumSpec];
 
     nse_derivs(rho_old, rhoe_old, rhoaux_old,
                dt, state.ydot_a,
-               drhoedt, drhoauxdt, state.T_fixed);
+               drhoedt1, drhoauxdt1, state.T_fixed);
 
+    // k2
     // evolve to the midpoint in time
 
     Real rho_tmp = rho_old + 0.5_rt * dt * state.ydot_a[SRHO];
-    Real rhoe_tmp = rhoe_old + 0.5_rt * dt * (state.ydot_a[SEINT] + drhoedt);
+    Real rhoe_tmp = rhoe_old + 0.5_rt * dt * (state.ydot_a[SEINT] + drhoedt1);
     Real rhoaux_tmp[NumAux];
     for (int n = 0; n < NumAux; ++n) {
         rhoaux_tmp[n] = rhoaux_old[n] +
-            0.5_rt * dt * (state.ydot_a[SFX+n] + drhoauxdt[n]);
+            0.5_rt * dt * (state.ydot_a[SFX+n] + drhoauxdt1[n]);
     }
 
     // compute the derivatives at the midpoint in time
 
+    Real drhoedt2;
+    Real drhoauxdt2[NumSpec];
+
     nse_derivs(rho_tmp, rhoe_tmp, rhoaux_tmp,
                dt, state.ydot_a,
-               drhoedt, drhoauxdt, state.T_fixed);
+               drhoedt2, drhoauxdt2, state.T_fixed);
 
-    // evolve to the new time
+    // k3
+    // evolve again to the midpoint in time
+
+    rho_tmp = rho_old + 0.5_rt * dt * state.ydot_a[SRHO];
+    rhoe_tmp = rhoe_old + 0.5_rt * dt * (state.ydot_a[SEINT] + drhoedt2);
+    for (int n = 0; n < NumAux; ++n) {
+        rhoaux_tmp[n] = rhoaux_old[n] +
+            0.5_rt * dt * (state.ydot_a[SFX+n] + drhoauxdt2[n]);
+    }
+
+    Real drhoedt3;
+    Real drhoauxdt3[NumSpec];
+
+    nse_derivs(rho_tmp, rhoe_tmp, rhoaux_tmp,
+               dt, state.ydot_a,
+               drhoedt3, drhoauxdt3, state.T_fixed);
+
+    // k4
+    // evolve to the endpoint in time
+
+    rho_tmp = rho_old + dt * state.ydot_a[SRHO];
+    rhoe_tmp = rhoe_old + dt * (state.ydot_a[SEINT] + drhoedt3);
+    for (int n = 0; n < NumAux; ++n) {
+        rhoaux_tmp[n] = rhoaux_old[n] +
+            dt * (state.ydot_a[SFX+n] + drhoauxdt3[n]);
+    }
+
+    Real drhoedt4;
+    Real drhoauxdt4[NumSpec];
+
+    nse_derivs(rho_tmp, rhoe_tmp, rhoaux_tmp,
+               dt, state.ydot_a,
+               drhoedt4, drhoauxdt4, state.T_fixed);
+
+
+    // final RK4 update
 
     Real rho_new = rho_old + dt * state.ydot_a[SRHO];
-    Real rhoe_new = rhoe_old + dt * (state.ydot_a[SEINT] + drhoedt);
+    Real rhoe_new = rhoe_old + dt * state.ydot_a[SEINT] +
+        dt / 6.0_rt * (drhoedt1 + 2.0_rt * drhoedt2 + 2.0_rt * drhoedt3 + drhoedt4);
     Real rhoaux_new[NumAux];
     for (int n = 0; n < NumAux; ++n) {
-        rhoaux_new[n] = rhoaux_old[n] +
-            dt * (state.ydot_a[SFX+n] + drhoauxdt[n]);
+        rhoaux_new[n] = rhoaux_old[n] + dt * state.ydot_a[SFX+n] +
+            dt / 6.0_rt * (drhoauxdt1[n] + 2.0_rt * drhoauxdt2[n] + 2.0_rt * drhoauxdt3[n] + drhoauxdt4[n]);
     }
 
     // get the new temperature
