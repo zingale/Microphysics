@@ -1,7 +1,7 @@
 import pynucastro as pyna
 from pynucastro.rates import ReacLibRate, TabularRate
 
-DO_DERIVED_RATES = True
+DO_DERIVED_RATES = False
 
 reaclib_lib = pyna.ReacLibLibrary()
 weak_lib = pyna.TabularLibrary()
@@ -72,6 +72,7 @@ iron_weak_lib = weak_lib.linking_nuclei(iron_peak)
 all_lib = core_lib + iron_reaclib + iron_weak_lib
 
 if DO_DERIVED_RATES:
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     rates_to_derive = []
     for r in all_lib.get_rates():
         if r.reverse:
@@ -119,3 +120,5 @@ net.remove_nuclei(["fe53", "fe55", "ni57"])
 
 fig = net.plot(rotated=True, curved_edges=True, size=(1500, 800), hide_xalpha=True, node_size=400, node_font_size=9)
 fig.savefig("newnet.png")
+
+net.write_network()
