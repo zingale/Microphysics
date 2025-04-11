@@ -46,6 +46,7 @@ def doit():
              Z_range=(1,29))
 
     net.write_network()
+    print("endpoint nuclei: ", net.find_endpoints())
 
 
 if __name__ == "__main__":

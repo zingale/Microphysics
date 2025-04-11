@@ -47,6 +47,7 @@ def doit():
 
     net.write_network()
 
+    print("endpoints: ", net.find_endpoints())
 
 if __name__ == "__main__":
     doit()

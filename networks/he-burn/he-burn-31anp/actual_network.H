@@ -173,7 +173,8 @@ namespace network
 namespace Rates
 {
 
-    enum NetworkRates
+    enum NetworkRates :
+    std::uint8_t
     {
         k_p_C12_to_N13 = 1,
         k_He4_C12_to_O16 = 2,
