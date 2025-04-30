@@ -7,6 +7,7 @@ from pynucastro.rates import ReacLibRate
 
 def get_core_library(*,
                      include_n14_sequence=False,
+                     include_n14_ne20_approx=False,
                      include_zn=False,
                      include_iron_peak=False,
                      include_low_ye=False,
@@ -36,6 +37,12 @@ def get_core_library(*,
 
     core_lib = reaclib_lib.linking_nuclei(nuclei)
 
+    if include_n14_ne20_approx:
+        n14ag = reaclib_lib.get_rate_by_name("n14(a,g)f18")
+        new_rate = pyna.ModifiedRate(n14ag, new_products=["ne20"],
+                                     stoichiometry={pyna.Nucleus("he4"): 1.5})
+        core_lib.add_rate(new_rate)
+
     # in this list, we have the reactants, the actual reactants,
     # and modified products that we will use instead
     other_rates = [("c12(c12,n)mg23", "mg24"),
@@ -44,8 +51,8 @@ def get_core_library(*,
 
     for r, mp in other_rates:
         _r = reaclib_lib.get_rate_by_name(r)
-        _r.modify_products(mp)
-        core_lib += pyna.Library(rates=[_r])
+        new_rate = pyna.ModifiedRate(_r, new_products=[mp])
+        core_lib.add_rate(new_rate)
 
     # finally, the aprox nets don't include the reverse rates for
     # C12+C12, C12+O16, and O16+O16, so remove those
