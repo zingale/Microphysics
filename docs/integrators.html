@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reaction ODE System &mdash; Microphysics  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=2e394b92" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=eaa7b67c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "processEscapes": true, "displayMath": [["\\[", "\\]"]], "macros": {"rhozero": "{\\rho_0}", "pizero": "{\\pi_0}", "pizeroone": "{\\pi_0^{(1)}}", "pizerotwo": "{\\pi_0^{(2)}}", "gammabar": "{\\overline{\\Gamma}_1}", "ptl": "{{\\partial}}", "eb": "{{\\bf e}}", "fb": "{{\\bf f}}", "ib": "{{\\bf i}}", "Ub": "{{\\bf U}}", "Vb": "{{\\bf V}}", "xb": "{{\\bf x}}", "ut": "{\\tilde{u}}", "vt": "{\\tilde{v}}", "wt": "{\\tilde{w}}", "Ubt": "{\\widetilde{\\Ub}}", "edge": "{\\rm EDGE}", "mac": "{\\rm MAC}", "trans": "{\\rm TRANS}", "nablab": "{\\mathbf{\\nabla}}", "cdotb": "{\\mathbf{\\cdot}}", "half": "{\\frac{1}{2}}", "myhalf": "{\\frac{1}{2}}", "nph": "{{n + \\myhalf}}", "nmh": "{{n - \\myhalf}}", "Hext": "{{H_{\\rm ext}}}", "Hnuc": "{{H_{\\rm nuc}}}", "kth": "{k_{\\rm th}}", "pred": "{{\\rm pred}}", "Sbar": "{\\overline{S}}", "inp": "{\\mathrm{in}}", "initp": "{\\mathrm{init}}", "outp": "{\\mathrm{out}}", "uadv": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvone": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV},\\star}}", "uadvonedag": "{\\Ubt^{\\mathrm{ADV},\\dagger,\\star}}", "uadvtwo": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvtwodag": "{\\Ubt^{\\mathrm{ADV},\\dagger}}", "uadvsdcstar": "{\\mathbf{U}^{\\mathrm{ADV},\\star}}", "uadvsdcpred": "{\\mathbf{U}^{\\mathrm{ADV},\\mathrm{pred}}}", "uadvsdc": "{\\mathbf{U}^{\\mathrm{ADV}}}", "dt": "{\\Delta t}", "dr": "{\\Delta r}", "etarho": "{\\eta_{\\rho}}", "etarhoec": "{\\etarho^{\\rm ec}}", "etarhocc": "{\\etarho^{\\rm cc}}", "etarhoflux": "{\\etarho^{\\rm flux}}", "divetarho": "{\\nabla\\cdot(\\etarho\\eb_r)}", "ow": "{\\overline{w}_0}", "dw": "{\\delta w_0}", "thalf": "{\\sfrac{3}{2}}", "rhop": "{{\\rho^{\\prime}}}", "omegadot": "{\\dot{\\omega}}", "er": "{\\mathbf{e}_r}", "ex": "{\\mathbf{e}_x}", "ey": "{\\mathbf{e}_y}", "ez": "{\\mathbf{e}_z}", "Omegab": "{{\\bf \\Omega}}", "rb": "{{\\bf r}}", "isotm": ["{{}^{#2}\\mathrm{#1}}", 2], "edot": "{{{\\dot{e}_\\mathrm{nuc}}}}", "enuc": "{{{{e}_\\mathrm{nuc}}}}", "edotnu": "{{{\\dot{e}_\\nu}}}", "rt": "{\\tilde{r}_0}", "rhob": "{\\ensuremath{\\rho_\\mathrm{base}}}", "Tb": "{\\ensuremath{T_\\mathrm{base}}}", "gcc": "{\\mathrm{g~cm^{-3} }}", "pb": "{p_\\mathrm{base}}", "qburn": "{q_\\mathrm{burn}}", "Uc": "{{\\boldsymbol{\\mathcal{U}}}}", "Fb": "{\\mathbf{F}}", "Sc": "{\\mathbf{S}}", "Shydro": "{{{\\bf S}^{\\mathrm{hydro}}}}", "Rb": "{{\\bf R}}", "Rbs": ["{{\\bf R} \\left ( #1 \\right )}", 1], "Rq": "{{\\bf R}}", "Adv": ["{{\\left [\\boldsymbol{\\mathcal{A}} \\left(#1\\right)\\right]}}", 1], "Advs": ["{{\\boldsymbol{\\mathcal{A}} \\left(#1\\right)}}", 1], "Sdot": "{\\dot{S}}"}}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ODE Integrators" href="ode_integrators.html" />
+    <link rel="prev" title="Neutrino Losses" href="neutrinos.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Microphysics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+    <div class="branch">
+        Branch: <a href="./integrators.html">main</a> | <a href="./dev/integrators.html">development</a>
+    </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Microphysics overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures.html">Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_system.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_intro.html">Runtime Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fundamental_constants.html">Fundamental Constants</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EOS and transport</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_implementations.html">Available Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Coefficients</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reaction networks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="networks-overview.html">Overview of Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networks.html">Available Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templated_networks.html">Templated Network Righthand Sides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="screening.html">Screening of Reaction Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neutrinos.html">Neutrino Losses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ODE integrators</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reaction ODE System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#interfaces">Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#burner"><code class="docutils literal notranslate"><span class="pre">burner</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#network-routines">Network Routines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#righthand-size-implementation">Righthand size implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#righthand-side-wrapper">Righthand side wrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jacobian-implementation">Jacobian implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jacobian-wrapper">Jacobian wrapper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#thermodynamics-and-e-evolution">Thermodynamics and <span class="math notranslate nohighlight">\(e\)</span> Evolution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ode_integrators.html">ODE Integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nse.html">NSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdc.html">Spectral Deferred Corrections</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Util / external libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Helper Functions and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autodiff.html">Automatic Differentiation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Unit tests</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Overview of Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit_test_runtime_parameters.html">Unit Test Common Runtime Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comprehensive_tests.html">Comprehensive Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_zone_tests.html">One Zone Tests</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Microphysics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Microphysics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Reaction ODE System</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/integrators.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="reaction-ode-system">
+<h1>Reaction ODE System<a class="headerlink" href="#reaction-ode-system" title="Link to this heading"></a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This describes the integration done when doing Strang
+operator-splitting, which is the default mode of coupling burning
+to application codes.  For SDC coupling see the <a class="reference internal" href="sdc.html#sdc-evolution"><span class="std std-ref">Spectral Deferred Corrections</span></a>
+section.</p>
+</div>
+<p>The equations we integrate to do a nuclear burn are:</p>
+<div class="math notranslate nohighlight" id="equation-eq-spec-integrate">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-spec-integrate" title="Link to this equation"></a></span>\[\frac{dX_k}{dt} = \dot{\omega}_k(\rho,X_k,T)\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-enuc-integrate">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-enuc-integrate" title="Link to this equation"></a></span>\[\frac{de}{dt} = \epsilon(\rho,X_k,T)\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(X_k\)</span> is the mass fraction of species <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(e\)</span>
+is the specific nuclear energy created through reactions. Also needed
+are density <span class="math notranslate nohighlight">\(\rho\)</span>, temperature <span class="math notranslate nohighlight">\(T\)</span>, and the specific
+heat. The function <span class="math notranslate nohighlight">\(\epsilon\)</span> provides the energy release from
+reactions and can often be expressed in terms of the instantaneous
+reaction terms, <span class="math notranslate nohighlight">\(\dot{X}_k\)</span>. As noted in the previous section,
+this is implemented in a network-specific manner.</p>
+<p>In this system, <span class="math notranslate nohighlight">\(e\)</span> is equal to the total specific internal
+energy. This allows us to easily call the EOS during the burn to obtain the temperature.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The energy generation rate includes a term for neutrino losses (see
+<a class="reference internal" href="neutrinos.html#neutrino-loss"><span class="std std-ref">Neutrino Losses</span></a>) in addition to the energy release from the
+changing binding energy of the fusion products.</p>
+</div>
+<div class="admonition note" id="index-0">
+<p class="admonition-title">Note</p>
+<p>By setting <code class="docutils literal notranslate"><span class="pre">integrator.use_number_densities=1</span></code>, number densities will be
+integrated instead of mass fractions.  This makes the system:</p>
+<div class="math notranslate nohighlight" id="equation-eq-spec-n-integrate">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-spec-n-integrate" title="Link to this equation"></a></span>\[\frac{dn_k}{dt} = \dot{\omega}_k(\rho,n_k,T)\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-enuc-n-integrate">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-enuc-n-integrate" title="Link to this equation"></a></span>\[\frac{de}{dt} = \epsilon(\rho,n_k,T)\]</div>
+<p>The effect of this flag in the integrators is that we don’t worry
+about converting between mass and molar fractions when calling the
+righthand side function and Jacobian, and we don’t do any normalization
+requiring <span class="math notranslate nohighlight">\(\sum_k X_k = 1\)</span>.</p>
+</div>
+<p>While the system above is the most common way to construct the set of
+burn equations, and is used in most of our production networks,
+all of them are ultimately implemented by the network itself, which
+can choose to disable the evolution of any of these equations by
+setting the RHS to zero. The integration software provides some
+helper routines that construct common RHS evaluations, like the routine
+that converts a temperature update to <span class="math notranslate nohighlight">\(\dot{e}\)</span>, but these calls
+are always explicitly done by the individual networks rather than
+being handled by the integration backend. This allows you to write a
+new network that defines the RHS in whatever way you like.</p>
+<p id="index-1">The standard reaction rates can all be boosted by a constant factor by
+setting the <code class="docutils literal notranslate"><span class="pre">integrator.react_boost</span></code> runtime parameter.  This will simply
+multiply the righthand sides of each species evolution equation (and
+appropriate Jacobian terms) by the specified constant amount.</p>
+<section id="interfaces">
+<h2>Interfaces<a class="headerlink" href="#interfaces" title="Link to this heading"></a></h2>
+<p>The interfaces to all of the networks and integrators are written in C++.</p>
+<section id="burner">
+<h3><code class="docutils literal notranslate"><span class="pre">burner</span></code><a class="headerlink" href="#burner" title="Link to this heading"></a></h3>
+<p>The main entry point for C++ is <code class="docutils literal notranslate"><span class="pre">burner()</span></code> in
+<code class="docutils literal notranslate"><span class="pre">interfaces/burner.H</span></code>.  This simply calls the <code class="docutils literal notranslate"><span class="pre">integrator()</span></code>
+routine (at the moment this can be <code class="docutils literal notranslate"><span class="pre">VODE</span></code>, <code class="docutils literal notranslate"><span class="pre">BackwardEuler</span></code>, <code class="docutils literal notranslate"><span class="pre">ForwardEuler</span></code>, <code class="docutils literal notranslate"><span class="pre">QSS</span></code>, or <code class="docutils literal notranslate"><span class="pre">RKC</span></code>).</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">AMREX_GPU_HOST_DEVICE</span><span class="w"> </span><span class="n">AMREX_FORCE_INLINE</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">burner</span><span class="w"> </span><span class="p">(</span><span class="n">burn_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">amrex</span><span class="o">::</span><span class="n">Real</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The input is a <code class="docutils literal notranslate"><span class="pre">burn_t</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the thermodynamic state, only the density, temperature, and
+mass fractions are used directly—we compute the internal energy
+corresponding to this input state through the equation of state
+before integrating.</p>
+</div>
+<p>When integrating the system, we often need auxiliary information to
+close the system.  This is kept in the original <code class="docutils literal notranslate"><span class="pre">burn_t</span></code> that was
+passed into the integration routines.  For this reason, we often need
+to pass both the specific integrator’s type (e.g. <code class="docutils literal notranslate"><span class="pre">dvode_t</span></code>) and
+<code class="docutils literal notranslate"><span class="pre">burn_t</span></code> objects into the lower-level network routines.</p>
+<p>Below we outline the overall flow of the integrator (using VODE as the
+example).  Most of the setup and cleanup after calling the particular
+integration routine is the same for all integrators, and is handled by
+the functions <code class="docutils literal notranslate"><span class="pre">integrator_setup()</span></code> and <code class="docutils literal notranslate"><span class="pre">integrator_cleanup()</span></code>.</p>
+<span id="index-2"></span><ol class="arabic simple" id="index-3">
+<li><p>Call the EOS directly on the input <code class="docutils literal notranslate"><span class="pre">burn_t</span></code> state using
+<span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(T\)</span> as inputs.</p></li>
+<li><p>Scale the absolute energy tolerance if we are using
+<code class="docutils literal notranslate"><span class="pre">integrator.scale_system</span></code></p></li>
+<li><p>Fill the integrator type by calling <code class="docutils literal notranslate"><span class="pre">burn_to_integrator()</span></code> to create a
+<code class="docutils literal notranslate"><span class="pre">dvode_t</span></code>.</p></li>
+<li><p>Save the initial thermodynamic state for diagnostics and optionally
+subtracting off the initial energy later.</p></li>
+<li><p>Call the ODE integrator, <code class="docutils literal notranslate"><span class="pre">dvode()</span></code>, passing in the <code class="docutils literal notranslate"><span class="pre">dvode_t</span></code> <em>and</em> the
+<code class="docutils literal notranslate"><span class="pre">burn_t</span></code> — as noted above, the auxiliary information that is
+not part of the integration state will be obtained from the
+<code class="docutils literal notranslate"><span class="pre">burn_t</span></code>.</p></li>
+<li><p>Convert back to a <code class="docutils literal notranslate"><span class="pre">burn_t</span></code> by calling <code class="docutils literal notranslate"><span class="pre">integrator_to_burn</span></code></p></li>
+<li><p>Recompute the temperature if we are using <code class="docutils literal notranslate"><span class="pre">integrator.call_eos_in_rhs</span></code>.</p></li>
+<li><p>If we set <code class="docutils literal notranslate"><span class="pre">integrator.subtract_internal_energy</span></code>, then subtract
+off the energy offset, the energy stored is now just that generated
+by reactions.</p></li>
+<li><p>Normalize the abundances so they sum to 1 (except if <code class="docutils literal notranslate"><span class="pre">integrator.use_number_density</span></code> is set).</p></li>
+<li><p>Output statistics on the integration if we set <code class="docutils literal notranslate"><span class="pre">integrator.burner_verbose</span></code>.
+This is not recommended for big simulations, as it will output information
+for every zone’s burn.</p></li>
+</ol>
+<div class="admonition important" id="index-4">
+<p class="admonition-title">Important</p>
+<p>By default, upon exit, <code class="docutils literal notranslate"><span class="pre">burn_t</span> <span class="pre">burn_state.e</span></code> is the energy <em>released</em> during
+the burn, and not the actual internal energy of the state.</p>
+<p>Optionally, by setting <code class="docutils literal notranslate"><span class="pre">integrator.subtract_internal_energy=0</span></code>
+the output will be the total internal energy, including that released
+burning the burn.</p>
+</div>
+</section>
+<section id="network-routines">
+<h3>Network Routines<a class="headerlink" href="#network-routines" title="Link to this heading"></a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Microphysics integrates the reaction system in terms of mass
+fractions, <span class="math notranslate nohighlight">\(X_k\)</span>, but most astrophysical networks use molar
+fractions, <span class="math notranslate nohighlight">\(Y_k\)</span>.  As a result, we expect the networks to
+return the righthand side and Jacobians in terms of molar
+fractions.  The integration wrappers will internally
+convert to mass fractions as needed for the integrators.</p>
+</div>
+<section id="righthand-size-implementation">
+<h4>Righthand size implementation<a class="headerlink" href="#righthand-size-implementation" title="Link to this heading"></a></h4>
+<p>The righthand side of the network is implemented by
+<code class="docutils literal notranslate"><span class="pre">actual_rhs()</span></code> in <code class="docutils literal notranslate"><span class="pre">actual_rhs.H</span></code>, and appears as</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">AMREX_GPU_HOST_DEVICE</span><span class="w"> </span><span class="n">AMREX_INLINE</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">actual_rhs</span><span class="p">(</span><span class="n">burn_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">amrex</span><span class="o">::</span><span class="n">Array1D</span><span class="o">&lt;</span><span class="n">amrex</span><span class="o">::</span><span class="n">Real</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">neqs</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">ydot</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All of the necessary integration data comes in through state, as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">state.xn[NumSpec]</span></code> : the mass fractions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state.aux[NumAux]</span></code> : the auxiliary data (only available if <code class="docutils literal notranslate"><span class="pre">NAUX_NET</span></code> &gt; 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state.e</span></code> : the current internal energy. It is very rare (never?) that a RHS
+implementation would need to use this variable directly – even though this is
+the main thermodynamic integration variable, we obtain the temperature from the
+energy through an EOS evaluation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state.T</span></code> : the current temperature</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state.rho</span></code> : the current density</p></li>
+</ul>
+<p>Note that we come in with the mass fractions, but the molar fractions can
+be computed as:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">amrex</span><span class="o">::</span><span class="n">Array1D</span><span class="o">&lt;</span><span class="n">amrex</span><span class="o">::</span><span class="n">Real</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">NumSpec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">NumSpec</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">y</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">xn</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">aion_inv</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We use 1-based indexing for <code class="docutils literal notranslate"><span class="pre">ydot</span></code> for legacy reasons, so watch out when filling in
+this array based on 0-indexed C arrays.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">actual_rhs()</span></code> routine’s job is to fill the righthand side vector
+for the ODE system, <code class="docutils literal notranslate"><span class="pre">ydot(neqs)</span></code>. Here, the important
+fields to fill are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">state.ydot(1:NumSpec)</span></code> : the change in <em>molar
+fractions</em> for the <code class="docutils literal notranslate"><span class="pre">NumSpec</span></code> species that we are evolving,
+<span class="math notranslate nohighlight">\(d({Y}_k)/dt\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state.ydot(net_ienuc)</span></code> : the change in the internal energy
+from the net, <span class="math notranslate nohighlight">\(de/dt\)</span></p></li>
+</ul>
+<p>The righthand side routine is assumed to return the change in <em>molar fractions</em>,
+<span class="math notranslate nohighlight">\(dY_k/dt\)</span>. These will be converted to the change in mass fractions, <span class="math notranslate nohighlight">\(dX_k/dt\)</span>
+by the wrappers that call the righthand side routine for the integrator.
+If the network builds the RHS in terms of mass fractions directly, <span class="math notranslate nohighlight">\(dX_k/dt\)</span>, then
+these will need to be converted to molar fraction rates for storage, e.g.,
+<span class="math notranslate nohighlight">\(dY_k/dt = A_k^{-1} dX_k/dt\)</span>.</p>
+</section>
+<section id="righthand-side-wrapper">
+<h4>Righthand side wrapper<a class="headerlink" href="#righthand-side-wrapper" title="Link to this heading"></a></h4>
+<p>The integrator provides a wrapper that sits between the integration
+routines and the network’s implementation of the righthand side.  Its
+flow is (for VODE):</p>
+<ol class="arabic simple">
+<li><p>call <code class="docutils literal notranslate"><span class="pre">clean_state</span></code> on the <code class="docutils literal notranslate"><span class="pre">dvode_t</span></code></p></li>
+<li><p>update the thermodynamics by calling <code class="docutils literal notranslate"><span class="pre">update_thermodynamics</span></code>.  This takes both
+the <code class="docutils literal notranslate"><span class="pre">dvode_t</span></code> and the <code class="docutils literal notranslate"><span class="pre">burn_t</span></code> and computes the temperature that matches the
+current state.</p></li>
+<li><p>call <code class="docutils literal notranslate"><span class="pre">actual_rhs</span></code></p></li>
+<li><p>convert the derivatives to mass-fraction-based (since we integrate <span class="math notranslate nohighlight">\(X\)</span>)
+and zero out the temperature and energy derivatives if we are not integrating
+those quantities.</p></li>
+<li><p>apply any boosting if <code class="docutils literal notranslate"><span class="pre">integrator.react_boost</span></code> &gt; 0</p></li>
+</ol>
+</section>
+<section id="jacobian-implementation">
+<h4>Jacobian implementation<a class="headerlink" href="#jacobian-implementation" title="Link to this heading"></a></h4>
+<p id="index-5">Either an analytic or numerical Jacobian is used for the implicit
+integrators, selected via the <code class="docutils literal notranslate"><span class="pre">integrator.jacobian</span></code> runtime
+parameter (<code class="docutils literal notranslate"><span class="pre">1</span></code> = analytic; <code class="docutils literal notranslate"><span class="pre">2</span></code> = numerical).  For VODE, the
+numerical Jacobian is computed internally.  For the other integrators,
+a difference method is implemented in
+<code class="docutils literal notranslate"><span class="pre">integration/utils/numerical_jacobian.H</span></code>.</p>
+<p>The analytic Jacobian is specific to each network and is provided by
+<code class="docutils literal notranslate"><span class="pre">actual_jac(state,</span> <span class="pre">jac)</span></code>.  It takes the form:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">MatrixType</span><span class="o">&gt;</span>
+<span class="n">AMREX_GPU_HOST_DEVICE</span><span class="w"> </span><span class="n">AMREX_INLINE</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">actual_jac</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">burn_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="n">MatrixType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">jac</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where the <code class="docutils literal notranslate"><span class="pre">MatrixType</span></code> is most commonly <code class="docutils literal notranslate"><span class="pre">MathArray2D&lt;1,</span> <span class="pre">neqs,</span> <span class="pre">1,</span> <span class="pre">neqs&gt;</span></code></p>
+<p>The Jacobian matrix elements are stored in <code class="docutils literal notranslate"><span class="pre">jac</span></code> as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jac(m,</span> <span class="pre">n)</span></code> for <span class="math notranslate nohighlight">\(\mathrm{m}, \mathrm{n} \in [1, \mathrm{NumSpec}]\)</span> :
+<span class="math notranslate nohighlight">\(d(\dot{Y}_m)/dY_n\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jac(net_ienuc,</span> <span class="pre">n)</span></code> for <span class="math notranslate nohighlight">\(\mathrm{n} \in [1, \mathrm{NumSpec}]\)</span> :
+<span class="math notranslate nohighlight">\(d(\dot{e})/dY_n\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jac(m,</span> <span class="pre">net_ienuc)</span></code> for <span class="math notranslate nohighlight">\(\mathrm{m} \in [1, \mathrm{NumSpec}]\)</span> :
+<span class="math notranslate nohighlight">\(d(\dot{Y}_m)/de\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jac(net_ienuc,</span> <span class="pre">net_ienuc)</span></code> :
+<span class="math notranslate nohighlight">\(d(\dot{e})/de\)</span></p></li>
+</ul>
+<p>The form looks like:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left (
+\begin{matrix}
+   \ddots  &amp; \vdots                          &amp;          &amp; \vdots \\
+   \cdots  &amp; \partial \dot{Y}_m/\partial Y_n &amp; \cdots   &amp; \partial \dot{Y}_m/\partial e    \\
+           &amp; \vdots                          &amp; \ddots   &amp; \vdots  \\
+   \cdots  &amp; \partial \dot{e}/\partial Y_n   &amp; \cdots   &amp; \partial \dot{e}/\partial e   \\
+\end{matrix}
+\right )\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A network is not required to provide a Jacobian if a numerical
+Jacobian is used.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The integrator does not zero the Jacobian elements.  It is the responsibility
+of the Jacobian implementation to zero the Jacobian array if necessary.</p>
+</div>
+</section>
+<section id="jacobian-wrapper">
+<h4>Jacobian wrapper<a class="headerlink" href="#jacobian-wrapper" title="Link to this heading"></a></h4>
+<p>The integrator provides a wrapper that sits between the integration
+routines and the network’s implementation of the Jacobian.  Its
+flow is (for VODE):</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is assumed that the thermodynamics are already correct when
+calling the Jacobian wrapper, likely because we just called the RHS
+wrapper above which did the <code class="docutils literal notranslate"><span class="pre">clean_state</span></code> and
+<code class="docutils literal notranslate"><span class="pre">update_thermodynamics</span></code> calls.</p>
+</div>
+<ol class="arabic simple" id="index-6">
+<li><p>call <code class="docutils literal notranslate"><span class="pre">integrator_to_burn()</span></code> to update the <code class="docutils literal notranslate"><span class="pre">burn_t</span></code></p></li>
+<li><p>call <code class="docutils literal notranslate"><span class="pre">actual_jac()</span></code> to have the network fill the Jacobian array</p></li>
+<li><p>convert the derivative to be mass-fraction-based</p></li>
+<li><p>apply any boosting to the rates if <code class="docutils literal notranslate"><span class="pre">integrator.react_boost</span></code> &gt; 0</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="thermodynamics-and-e-evolution">
+<h2>Thermodynamics and <span class="math notranslate nohighlight">\(e\)</span> Evolution<a class="headerlink" href="#thermodynamics-and-e-evolution" title="Link to this heading"></a></h2>
+<p>The thermodynamic equation in our system is the evolution of the internal energy,
+<span class="math notranslate nohighlight">\(e\)</span>.  During the course of the integration, we ensure that the temperature stay
+below the value <code class="docutils literal notranslate"><span class="pre">integrator.MAX_TEMP</span></code> (defaulting to <code class="docutils literal notranslate"><span class="pre">1.e11</span></code>) by clamping the
+temperature if necessary.</p>
+<p>At initialization, <span class="math notranslate nohighlight">\(e\)</span> is set to the value from the EOS consistent
+with the initial temperature, density, and composition:</p>
+<div class="math notranslate nohighlight">
+\[e_0 = e(\rho_0, T_0, {X_k}_0)\]</div>
+<p>As the system is integrated, <span class="math notranslate nohighlight">\(e\)</span> is updated to account for the
+nuclear energy release (and thermal neutrino losses),</p>
+<div class="math notranslate nohighlight">
+\[e(t) = e_0 + \int_{t_0}^t \epsilon(\dot{Y}_k) dt\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When the system is integrated in an operator-split approach, the
+energy equation accounts for only the nuclear energy release and
+not pdV work.</p>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">integrator.subtract_internal_energy</span></code> is set, then, on exit, we
+subtract off this initial <span class="math notranslate nohighlight">\(e_0\)</span>, so <code class="docutils literal notranslate"><span class="pre">state.e</span></code> in the returned
+<code class="docutils literal notranslate"><span class="pre">burn_t</span></code> type from the <code class="docutils literal notranslate"><span class="pre">actual_integrator</span></code> call represents the
+energy <em>release</em> during the burn.</p>
+<p>Integration of Equation <a class="reference internal" href="#equation-eq-enuc-integrate">(2)</a> requires an evaluation
+of the temperature at each integration step (since the RHS for the
+species is given in terms of <span class="math notranslate nohighlight">\(T\)</span>, not <span class="math notranslate nohighlight">\(e\)</span>).  This involves
+an EOS call and is the default behavior of the integration.</p>
+<p>Note also that for the Jacobian, we need the specific heat,
+<span class="math notranslate nohighlight">\(c_v\)</span>, since we usually calculate derivatives with respect to
+temperature (as this is the form the rates are commonly provided in).</p>
+<div class="admonition note" id="index-7">
+<p class="admonition-title">Note</p>
+<p>If desired, the EOS call can be skipped and the temperature and
+<span class="math notranslate nohighlight">\(c_v\)</span> kept frozen over the entire time interval of the integration
+by setting <code class="docutils literal notranslate"><span class="pre">integrator.call_eos_in_rhs=0</span></code>.</p>
+</div>
+<p id="index-8">We also provide the option to completely remove the energy equation from
+the system by setting <code class="docutils literal notranslate"><span class="pre">integrator.integrate_energy=0</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="neutrinos.html" class="btn btn-neutral float-left" title="Neutrino Losses" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ode_integrators.html" class="btn btn-neutral float-right" title="ODE Integrators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Microphysics Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+
+</body>
+</html>

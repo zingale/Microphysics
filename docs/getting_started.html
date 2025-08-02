@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started &mdash; Microphysics  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=2e394b92" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=eaa7b67c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Design" href="design.html" />
+    <link rel="prev" title="AMReX-Astro Microphysics" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Microphysics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+    <div class="branch">
+        Branch: <a href="./getting_started.html">main</a> | <a href="./dev/getting_started.html">development</a>
+    </div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Microphysics overview</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-modes">Usage Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standalone">Standalone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-with-amrex-application-code">Running with AMReX Application Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures.html">Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_system.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_intro.html">Runtime Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fundamental_constants.html">Fundamental Constants</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EOS and transport</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_implementations.html">Available Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Coefficients</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reaction networks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="networks-overview.html">Overview of Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networks.html">Available Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templated_networks.html">Templated Network Righthand Sides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="screening.html">Screening of Reaction Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neutrinos.html">Neutrino Losses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ODE integrators</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="integrators.html">Reaction ODE System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ode_integrators.html">ODE Integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nse.html">NSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdc.html">Spectral Deferred Corrections</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Util / external libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Helper Functions and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autodiff.html">Automatic Differentiation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Unit tests</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Overview of Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit_test_runtime_parameters.html">Unit Test Common Runtime Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comprehensive_tests.html">Comprehensive Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_zone_tests.html">One Zone Tests</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Microphysics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Microphysics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting Started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>Microphysics requires</p>
+<ul class="simple">
+<li><p>A C++17 or later compiler</p></li>
+<li><p>AMReX (<a class="reference external" href="https://github.com/amrex-codes/amrex">https://github.com/amrex-codes/amrex</a>)</p></li>
+<li><p>python (≥ 3.10)</p></li>
+<li><p>GNU make</p></li>
+</ul>
+<p>optional dependencies are:</p>
+<ul class="simple">
+<li><p>CUDA (≥ 11)</p></li>
+<li><p>ROCm (≥ 6.3.1 — earlier versions have register allocation bugs)</p></li>
+</ul>
+</section>
+<section id="usage-modes">
+<h2>Usage Modes<a class="headerlink" href="#usage-modes" title="Link to this heading"></a></h2>
+<p>There are two ways to use Microphysics:</p>
+<ul class="simple">
+<li><p>As part of an application code, where Microphysics provides
+the network, EOS, etoc.</p></li>
+<li><p>In a standalone fashion, where simple unit tests can be run to
+explore integration or thermodynamics.</p></li>
+</ul>
+<p>In each case, the physics choices (network, EOS, etc) need to be
+made at compile time.  As such, there is not a single library that
+can be built and linked against.</p>
+<p>Below we describe how to use Microphysics in both of these modes.</p>
+</section>
+<section id="standalone">
+<h2>Standalone<a class="headerlink" href="#standalone" title="Link to this heading"></a></h2>
+<p id="index-0">Microphysics can be used in a “standalone” fashion to run the unit
+tests and explore the behavior of the reaction networks.  The main
+requirement is a copy of AMReX:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><style type="text/css">
+span.prompt1:before {
+  content: "$ ";
+}
+</style><span class="prompt1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AMReX-Codes/amrex.git</span>
+</pre></div></div><p>We use this for some data structures and the build system.  You need
+to set the <code class="docutils literal notranslate"><span class="pre">AMREX_HOME</span></code> environment variable to point to the
+<code class="docutils literal notranslate"><span class="pre">amrex/</span></code> directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1"><span class="nb">export</span><span class="w"> </span><span class="nv">AMREX_HOME</span><span class="o">=</span>/path/to/amrex</span>
+</pre></div></div><p>(where you change <code class="docutils literal notranslate"><span class="pre">/path/to/amrex</span></code> to your actual path).</p>
+<p id="index-1">A good unit test to start with is <code class="docutils literal notranslate"><span class="pre">burn_cell</span></code>—this is simply a
+one-zone burn.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">Microphysics/</span></code> directory, do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1"><span class="nb">cd</span><span class="w"> </span>unit_test/burn_cell</span>
+<span class="prompt1">make</span>
+</pre></div></div><p>This will create an executable called <code class="docutils literal notranslate"><span class="pre">main3d.gnu.ex</span></code>.
+By default, the test is built with the 13-isotope <code class="docutils literal notranslate"><span class="pre">aprox13</span></code> network,
+<code class="docutils literal notranslate"><span class="pre">helmholtz</span></code> EOS, and VODE integrator.</p>
+<p>Then you can run it as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">./main3d.gnu.ex<span class="w"> </span>inputs_aprox13</span>
+</pre></div></div><p>Here <code class="docutils literal notranslate"><span class="pre">inputs_aprox13</span></code> is the inputs file that sets options.</p>
+<p>This will output information about the starting and final state to the
+terminal and produce a file <code class="docutils literal notranslate"><span class="pre">state_over_time.txt</span></code> that contains the
+thermodynamic history at different points in time.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Because the choice of physics is set at compile time, if you
+want to change a network or EOS, you must rebuild.  In the
+Microphysics / AMReX build system, this is done via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">make<span class="w"> </span>clean</span>
+</pre></div></div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the <a class="reference internal" href="burn_cell.html#sec-burn-cell"><span class="std std-ref">burn_cell</span></a> documentation for more details on this
+unit test and how to visualize the output.</p>
+</div>
+</section>
+<section id="running-with-amrex-application-code">
+<h2>Running with AMReX Application Code<a class="headerlink" href="#running-with-amrex-application-code" title="Link to this heading"></a></h2>
+<p id="index-2">Getting started with Microphysics using either <a class="reference external" href="https://amrex-astro.github.io/Castro/docs/index.html">CASTRO</a> or <a class="reference external" href="https://amrex-astro.github.io/MAESTROeX/docs/index.html">MAESTROeX</a> is
+straightforward. Because the modules here are already in a format that
+the AMReX codes understand, you only need to provide to the code
+calling these routines their location on your system. The code will do
+the rest.</p>
+<p>First we need to define the <code class="docutils literal notranslate"><span class="pre">MICROPHYSICS_HOME</span></code> environment
+variable, either on the command line or (if you use the bash shell)
+through your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>, e.g.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MICROPHYSICS_HOME</span><span class="o">=</span>/path/to/Microphysics
+</pre></div>
+</div>
+<p>For CASTRO and MAESTROeX the name of the EOS and network are set via
+the make variables <code class="docutils literal notranslate"><span class="pre">EOS_DIR</span></code> and <code class="docutils literal notranslate"><span class="pre">NETWORK_DIR</span></code>. These codes then
+rely on the Microphysics <code class="docutils literal notranslate"><span class="pre">Make.Microphysics_extern</span></code> makefile stub
+(found via the <code class="docutils literal notranslate"><span class="pre">MICROPHYSICS_HOME</span></code> variable) to add the necessary
+source to the build.  All of the interfaces that these codes use
+are found in <code class="docutils literal notranslate"><span class="pre">Microphysics/interfaces/</span></code>.</p>
+<p>Other AMReX-based codes can use Microphysics in the same fashion.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="AMReX-Astro Microphysics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="design.html" class="btn btn-neutral float-right" title="Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Microphysics Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+
+</body>
+</html>

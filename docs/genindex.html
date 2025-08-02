@@ -1,224 +1,505 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Index &mdash; StarKiller Microphysics 20.07
- documentation</title>
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index &mdash; Microphysics  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=2e394b92" />
 
   
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"rhozero": "{\\rho_0}", "pizero": "{\\pi_0}", "pizeroone": "{\\pi_0^{(1)}}", "pizerotwo": "{\\pi_0^{(2)}}", "gammabar": "{\\overline{\\Gamma}_1}", "ptl": "{{\\partial}}", "eb": "{{\\bf e}}", "fb": "{{\\bf f}}", "ib": "{{\\bf i}}", "Ub": "{{\\bf U}}", "Vb": "{{\\bf V}}", "xb": "{{\\bf x}}", "ut": "{\\tilde{u}}", "vt": "{\\tilde{v}}", "wt": "{\\tilde{w}}", "Ubt": "{\\widetilde{\\Ub}}", "edge": "{\\rm EDGE}", "mac": "{\\rm MAC}", "trans": "{\\rm TRANS}", "nablab": "{\\mathbf{\\nabla}}", "cdotb": "{\\mathbf{\\cdot}}", "half": "{\\frac{1}{2}}", "myhalf": "{\\frac{1}{2}}", "nph": "{{n + \\myhalf}}", "nmh": "{{n - \\myhalf}}", "Hext": "{{H_{\\rm ext}}}", "Hnuc": "{{H_{\\rm nuc}}}", "kth": "{k_{\\rm th}}", "pred": "{{\\rm pred}}", "Sbar": "{\\overline{S}}", "inp": "{\\mathrm{in}}", "initp": "{\\mathrm{init}}", "outp": "{\\mathrm{out}}", "uadv": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvone": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV},\\star}}", "uadvonedag": "{\\Ubt^{\\mathrm{ADV},\\dagger,\\star}}", "uadvtwo": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvtwodag": "{\\Ubt^{\\mathrm{ADV},\\dagger}}", "uadvsdcstar": "{\\mathbf{U}^{\\mathrm{ADV},\\star}}", "uadvsdcpred": "{\\mathbf{U}^{\\mathrm{ADV},\\mathrm{pred}}}", "uadvsdc": "{\\mathbf{U}^{\\mathrm{ADV}}}", "dt": "{\\Delta t}", "dr": "{\\Delta r}", "etarho": "{\\eta_{\\rho}}", "etarhoec": "{\\etarho^{\\rm ec}}", "etarhocc": "{\\etarho^{\\rm cc}}", "etarhoflux": "{\\etarho^{\\rm flux}}", "divetarho": "{\\nabla\\cdot(\\etarho\\eb_r)}", "ow": "{\\overline{w}_0}", "dw": "{\\delta w_0}", "thalf": "{\\sfrac{3}{2}}", "rhop": "{{\\rho^{\\prime}}}", "omegadot": "{\\dot{\\omega}}", "er": "{\\mathbf{e}_r}", "ex": "{\\mathbf{e}_x}", "ey": "{\\mathbf{e}_y}", "ez": "{\\mathbf{e}_z}", "Omegab": "{{\\bf \\Omega}}", "rb": "{{\\bf r}}", "isotm": ["{{}^{#2}\\mathrm{#1}}", 2], "edot": "{{{\\dot{e}_\\mathrm{nuc}}}}", "enuc": "{{{{e}_\\mathrm{nuc}}}}", "edotnu": "{{{\\dot{e}_\\nu}}}", "rt": "{\\tilde{r}_0}", "rhob": "{\\ensuremath{\\rho_\\mathrm{base}}}", "Tb": "{\\ensuremath{T_\\mathrm{base}}}", "gcc": "{\\mathrm{g~cm^{-3} }}", "pb": "{p_\\mathrm{base}}", "qburn": "{q_\\mathrm{burn}}", "Uc": "{{\\boldsymbol{\\mathcal{U}}}}", "Fb": "{\\mathbf{F}}", "Sc": "{\\mathbf{S}}", "Shydro": "{{{\\bf S}^{\\mathrm{hydro}}}}", "Rb": "{{\\bf R}}", "Rq": "{{\\bf R}}", "Adv": ["{{\\left [\\boldsymbol{\\mathcal{A}} \\left(#1\\right)\\right]}}", 1], "Advs": ["{{\\boldsymbol{\\mathcal{A}} \\left(#1\\right)}}", 1], "Sdot": "{\\dot{S}}"}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=eaa7b67c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
+
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> StarKiller Microphysics
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            Microphysics
           </a>
-
-          
-            
-            
-              <div class="version">
-                20.07
-
-              </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+    <div class="branch">
+        Branch: <a href="./genindex.html">main</a> | <a href="./dev/genindex.html">development</a>
+    </div>
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">StarKiller basics</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Microphysics overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basics.html">StarKiller Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_structures.html">Data Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rp_intro.html">Runtime parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_system.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_intro.html">Runtime Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fundamental_constants.html">Fundamental Constants</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EOS and transport</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
-<li class="toctree-l1"><a class="reference internal" href="networks.html">Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_implementations.html">Available Equations of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Coefficients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cxx.html">C++ interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPUs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Unit Tests</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reaction networks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="networks-overview.html">Overview of Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networks.html">Available Reaction Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templated_networks.html">Templated Network Righthand Sides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="screening.html">Screening of Reaction Rates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neutrinos.html">Neutrino Losses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ODE integrators</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="integrators.html">Reaction ODE System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ode_integrators.html">ODE Integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nse.html">NSE</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdc.html">Spectral Deferred Corrections</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Util / external libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Helper Functions and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autodiff.html">Automatic Differentiation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Unit tests</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Overview of Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit_test_runtime_parameters.html">Unit Test Common Runtime Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comprehensive_tests.html">Comprehensive Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_zone_tests.html">One Zone Tests</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Microphysics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zreferences.html">References</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Index</a></li>
+</ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">StarKiller Microphysics</a>
-        
+          <a href="index.html">Microphysics</a>
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>Index</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Index</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
 
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  
 </div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_system.html#index-2">AMReX_buildInfo.cpp</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_system.html#index-1">AMREX_HOME</a>, <a href="getting_started.html#index-0">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="burn_cell.html#index-0">burn_cell</a>, <a href="getting_started.html#index-1">[1]</a>, <a href="unit_tests.html#index-1">[2]</a>
+</li>
+      <li><a href="unit_tests.html#index-1">burn_cell_primordial_chem</a>
+</li>
+      <li><a href="burn_cell_sdc.html#index-0">burn_cell_sdc</a>, <a href="unit_tests.html#index-1">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="data_structures.html#index-1">burn_t</a>
+</li>
+      <li><a href="integrators.html#index-2">burn_to_integrator</a>
+</li>
+      <li><a href="data_structures.html#index-2">burn_type.H</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="eos.html#index-0">chem_eos_t</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="transport.html#index-0">CONDUCTIVITY_DIR</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="eos_implementations.html#index-1">eos.assume_neutral</a>
+</li>
+      <li><a href="eos_implementations.html#index-2">eos.eos_dtol</a>
+</li>
+      <li><a href="eos_implementations.html#index-1">eos.eos_gamma</a>
+</li>
+      <li><a href="eos_implementations.html#index-3">eos.eos_gamma_default</a>
+</li>
+      <li><a href="eos_implementations.html#index-2">eos.eos_input_is_constant</a>
+</li>
+      <li><a href="eos_implementations.html#index-2">eos.eos_ttol</a>
+</li>
+      <li><a href="eos_implementations.html#index-4">eos.polytrope_gamma</a>
+</li>
+      <li><a href="eos_implementations.html#index-4">eos.polytrope_K</a>
+</li>
+      <li><a href="eos_implementations.html#index-4">eos.polytrope_mu_e</a>
+</li>
+      <li><a href="eos_implementations.html#index-4">eos.polytrope_type</a>
+</li>
+      <li><a href="eos_implementations.html#index-2">eos.prad_limiter_delta_rho</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="eos_implementations.html#index-2">eos.prad_limiter_rho_c</a>
+</li>
+      <li><a href="eos_implementations.html#index-2">eos.use_eos_coulomb</a>
+</li>
+      <li><a href="eos_cell.html#index-0">eos_cell</a>, <a href="unit_tests.html#index-1">[1]</a>
+</li>
+      <li><a href="eos_implementations.html#index-0">EOS_DIR</a>
+</li>
+      <li><a href="eos.html#index-2">eos_extra_t</a>
+</li>
+      <li><a href="eos.html#index-2">eos_re_extra_t</a>
+</li>
+      <li><a href="eos.html#index-0">eos_re_t</a>
+</li>
+      <li><a href="eos.html#index-2">eos_rep_extra_t</a>
+</li>
+      <li><a href="eos.html#index-0">eos_rep_t</a>
+</li>
+      <li><a href="eos.html#index-0">eos_rh_t</a>
+</li>
+      <li><a href="data_structures.html#index-0">eos_t</a>, <a href="eos.html#index-0">[1]</a>, <a href="eos_implementations.html#index-0">[2]</a>
+</li>
+      <li><a href="build_system.html#index-2">extern_parameters.H</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="networks.html#index-2">GENERAL_NET_INPUTS</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="networks.html#index-1">general_null</a>
+</li>
+      <li><a href="design.html#index-0">GPUs</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="ode_integrators.html#index-5">integrator.atol_enuc</a>
+</li>
+      <li><a href="ode_integrators.html#index-5">integrator.atol_spec</a>
+</li>
+      <li><a href="integrators.html#index-3">integrator.burner_verbose</a>
+</li>
+      <li><a href="integrators.html#index-3">integrator.call_eos_in_rhs</a>, <a href="integrators.html#index-7">[1]</a>
+</li>
+      <li><a href="ode_integrators.html#index-7">integrator.do_species_clip</a>
+</li>
+      <li><a href="integrators.html#index-8">integrator.integrate_energy</a>
+</li>
+      <li><a href="integrators.html#index-5">integrator.jacobian</a>
+</li>
+      <li><a href="ode_integrators.html#index-4">integrator.linalg_do_pivoting</a>
+</li>
+      <li><a href="nse_tabular.html#index-1">integrator.nse_deriv_dt_factor</a>
+</li>
+      <li><a href="nse_tabular.html#index-1">integrator.nse_include_enu_weak</a>
+</li>
+      <li><a href="ode_integrators.html#index-8">integrator.ode_max_steps</a>
+</li>
+      <li><a href="integrators.html#index-1">integrator.react_boost</a>, <a href="integrators.html#index-6">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="ode_integrators.html#index-7">integrator.renormalize_abundances</a>
+</li>
+      <li><a href="ode_integrators.html#index-5">integrator.rtol_enuc</a>
+</li>
+      <li><a href="ode_integrators.html#index-5">integrator.rtol_spec</a>
+</li>
+      <li><a href="integrators.html#index-2">integrator.scale_system</a>, <a href="ode_integrators.html#index-3">[1]</a>
+</li>
+      <li><a href="ode_integrators.html#index-7">integrator.SMALL_X_SAFE</a>
+</li>
+      <li><a href="integrators.html#index-3">integrator.subtract_internal_energy</a>, <a href="integrators.html#index-4">[1]</a>
+</li>
+      <li><a href="ode_integrators.html#index-1">integrator.use_circle_theorem</a>
+</li>
+      <li><a href="ode_integrators.html#index-2">integrator.use_jacobian_caching</a>
+</li>
+      <li><a href="integrators.html#index-0">integrator.use_number_densities</a>
+</li>
+      <li><a href="ode_integrators.html#index-6">integrator.X_reject_buffer</a>
+</li>
+      <li><a href="ode_integrators.html#index-0">INTEGRATOR_DIR</a>
+</li>
+      <li><a href="integrators.html#index-2">integrator_to_burn</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="jac_cell.html#index-0">jac_cell</a>, <a href="unit_tests.html#index-1">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_system.html#index-0">Make.Microphysics</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_system.html#index-0">Make.Microphysics_extern</a>
+</li>
+      <li><a href="build_system.html#index-1">MICROPHYSICS_HOME</a>, <a href="getting_started.html#index-2">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nse_tabular.html#index-3">network.C_nse</a>
+</li>
+      <li><a href="nse_tabular.html#index-3">network.He_Fe_nse</a>
+</li>
+      <li><a href="nse_tabular.html#index-3">network.O_nse</a>
+</li>
+      <li><a href="nse_tabular.html#index-2">network.rho_nse</a>
+</li>
+      <li><a href="nse_tabular.html#index-3">network.Si_nse</a>
+</li>
+      <li><a href="nse_tabular.html#index-2">network.T_always_nse</a>
+</li>
+      <li><a href="nse_tabular.html#index-2">network.T_nse</a>
+</li>
+      <li><a href="networks.html#index-0">NETWORK_DIR</a>
+</li>
+      <li><a href="networks.html#index-2">NETWORK_INPUTS</a>
+</li>
+      <li><a href="build_system.html#index-2">network_properties.H</a>, <a href="networks.html#index-3">[1]</a>
+</li>
+      <li><a href="neutrinos.html#index-0">neutrino_cooling.include_recomb</a>
+</li>
+      <li><a href="nse_net.html#index-0">nse.ase_tol</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nse_net.html#index-0">nse.nse_abs_tol</a>
+</li>
+      <li><a href="nse_net.html#index-0">nse.nse_dx_independent</a>
+</li>
+      <li><a href="nse_net.html#index-0">nse.nse_molar_independent</a>
+</li>
+      <li><a href="nse_net.html#index-0">nse.nse_rel_tol</a>
+</li>
+      <li><a href="nse_net.html#index-0">nse.nse_skip_molar</a>
+</li>
+      <li><a href="nse_net.html#index-0">nse.T_min_nse</a>
+</li>
+      <li><a href="nse_net.html#index-0">nse.T_nse_net</a>
+</li>
+      <li><a href="nse_tabular.html#index-0">nse_interp</a>
+</li>
+      <li><a href="unit_tests.html#index-1">nse_net_cell</a>
+</li>
+      <li><a href="unit_tests.html#index-1">nse_table_cell</a>
+</li>
+      <li><a href="nse_tabular.html#index-0">nse_table_t</a>
+</li>
+      <li><a href="jac_cell.html#index-0">numerical_jacobian.H</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="burn_cell_sdc.html#index-1">parse_integration_failure.py</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="unit_tests.html#index-1">part_func_cell</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="screening.html#index-0">SCREEN_METHOD</a>
+</li>
+      <li><a href="screening.html#index-1">screening.debye_huckel_skip_threshold</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="screening.html#index-2">screening.enable_chabrier1998_quantum_corr</a>
+</li>
+      <li><a href="screening.html#index-1">screening.enable_debye_huckel_skip</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="unit_tests.html#index-0">test_aprox_rates</a>
+</li>
+      <li><a href="unit_tests.html#index-0">test_conductivity</a>
+</li>
+      <li><a href="unit_tests.html#index-0">test_eos</a>
+</li>
+      <li><a href="unit_tests.html#index-0">test_jac</a>
+</li>
+      <li><a href="unit_tests.html#index-2">test_linear_algebra</a>
+</li>
+      <li><a href="unit_tests.html#index-0">test_neutrino_cooling</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="unit_tests.html#index-2">test_nse_interp</a>
+</li>
+      <li><a href="unit_tests.html#index-2">test_parameters</a>
+</li>
+      <li><a href="unit_tests.html#index-0">test_react</a>
+</li>
+      <li><a href="unit_tests.html#index-0">test_rhs</a>
+</li>
+      <li><a href="unit_tests.html#index-0">test_screening_templated</a>
+</li>
+      <li><a href="unit_tests.html#index-0">test_sdc</a>
+</li>
+      <li><a href="unit_tests.html#index-2">test_sdc_vode_rhs</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="eos.html#index-1">USE_AUX_THERMO</a>
+</li>
+      <li><a href="burn_cell_sdc.html#index-1">USE_GPU_PRINTF</a>
+</li>
+      <li><a href="nse.html#index-0">USE_NSE_NET</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nse.html#index-0">USE_NSE_TABLE</a>
+</li>
+      <li><a href="sdc.html#index-0">USE_SIMPLIFIED_SDC</a>
+</li>
+      <li><a href="sdc.html#index-0">USE_TRUE_SDC</a>
+</li>
+  </ul></td>
+</tr></table>
+
 
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2018, StarKiller Development Team
-
-    </p>
+    <p>&#169; Copyright 2025, Microphysics Development Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
+  </script>  
 
-  
-  
-    
-   
 
 </body>
 </html>
