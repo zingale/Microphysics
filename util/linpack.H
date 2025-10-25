@@ -32,7 +32,7 @@ void dgesl (const RArray2D& a, const IArray1D& pivot, RArray1D& b)
 
             AMREX_UNROLL_LOOP(4)
             for (int j = k+1; j <= num_eqs; ++j) {
-                b(j) += t * a(j,k);
+                b(j) = std::fma(t, a(j,k), b(j));  // b(j) = b(j) + t * a(j, k)
             }
         }
     }
@@ -45,7 +45,7 @@ void dgesl (const RArray2D& a, const IArray1D& pivot, RArray1D& b)
         amrex::Real t = -b(k);
         AMREX_UNROLL_LOOP(4)
         for (int j = 1; j <= k-1; ++j) {
-            b(j) += t * a(j,k);
+            b(j) = std::fma(t, a(j,k), b(j));  // b(j) = b(j) + t * a(j, k)
         }
     }
 
@@ -123,7 +123,7 @@ void dgefa (RArray2D& a, IArray1D& pivot, int& info)
 
                     AMREX_UNROLL_LOOP(4)
                     for (int i = k+1; i <= num_eqs; ++i) {
-                        a(i,j) += t * a(i,k);
+                        a(i, j) = std::fma(t, a(i, k), a(i, j));  // a(i,j) = a(i, j) + t * a(i, k)
                     }
                 }
 
