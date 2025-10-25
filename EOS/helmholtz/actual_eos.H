@@ -150,7 +150,7 @@ void apply_electrons (T& state)
     [[maybe_unused]] amrex::Real ytot1 = 1.0e0_rt / state.abar;
 
     // define mu -- the total mean molecular weight including both electrons and ions
-    state.mu = 1.0e0_rt / (1.0e0_rt / state.abar + 1.0e0_rt / state.mu_e);
+    state.mu = 1.0e0_rt / (ytot1 + 1.0e0_rt / state.mu_e);
 
     // enter the table with ye*den
     amrex::Real din = state.y_e * state.rho;
@@ -171,9 +171,18 @@ void apply_electrons (T& state)
         fi[i + 27] = f[jat+1][iat+1][i];
     }
 
+    // real into local memory
+    amrex::Real dti{dti_save[jat]};
+    amrex::Real ddi{ddi_save[iat]};
+    amrex::Real dt{dt_save[jat]};
+    amrex::Real dd{dd_save[iat]};
+    amrex::Real dt2{dt2_sav[jat]};
+    amrex::Real dd2{dd2_sav[iat]};
+    amrex::Real dt2i{dt2i_sav[jat]};
+
     // various differences
-    amrex::Real xt  = amrex::max((state.T - t[jat]) * dti_sav[jat], 0.0e0_rt);
-    amrex::Real xd  = amrex::max((din - d[iat]) * ddi_sav[iat], 0.0e0_rt);
+    amrex::Real xt  = amrex::max((state.T - t[jat]) * dti, 0.0e0_rt);
+    amrex::Real xd  = amrex::max((din - d[iat]) * ddi, 0.0e0_rt);
     amrex::Real mxt = 1.0e0_rt - xt;
     amrex::Real mxd = 1.0e0_rt - xd;
 
@@ -181,53 +190,53 @@ void apply_electrons (T& state)
     amrex::Real sit[6];
 
     sit[0] = psi0(xt);
-    sit[1] = psi1(xt) * dt_sav[jat];
-    sit[2] = psi2(xt) * dt2_sav[jat];
+    sit[1] = psi1(xt) * dt;
+    sit[2] = psi2(xt) * dt2;
 
     sit[3] =  psi0(mxt);
-    sit[4] = -psi1(mxt) * dt_sav[jat];
-    sit[5] =  psi2(mxt) * dt2_sav[jat];
+    sit[4] = -psi1(mxt) * dt;
+    sit[5] =  psi2(mxt) * dt2;
 
     amrex::Real sid[6];
 
     sid[0] =  psi0(xd);
-    sid[1] =  psi1(xd) * dd_sav[iat];
-    sid[2] =  psi2(xd) * dd2_sav[iat];
+    sid[1] =  psi1(xd) * dd;
+    sid[2] =  psi2(xd) * dd2;
 
     sid[3] =  psi0(mxd);
-    sid[4] = -psi1(mxd) * dd_sav[iat];
-    sid[5] =  psi2(mxd) * dd2_sav[iat];
+    sid[4] = -psi1(mxd) * dd;
+    sid[5] =  psi2(mxd) * dd2;
 
     // derivatives of the weight functions
     amrex::Real dsit[6];
 
-    dsit[0] =  dpsi0(xt) * dti_sav[jat];
+    dsit[0] =  dpsi0(xt) * dti;
     dsit[1] =  dpsi1(xt);
-    dsit[2] =  dpsi2(xt) * dt_sav[jat];
+    dsit[2] =  dpsi2(xt) * dt;
 
-    dsit[3] = -dpsi0(mxt) * dti_sav[jat];
+    dsit[3] = -dpsi0(mxt) * dti;
     dsit[4] =  dpsi1(mxt);
-    dsit[5] = -dpsi2(mxt) * dt_sav[jat];
+    dsit[5] = -dpsi2(mxt) * dt;
 
     amrex::Real dsid[6];
 
-    dsid[0] =  dpsi0(xd) * ddi_sav[iat];
+    dsid[0] =  dpsi0(xd) * ddi;
     dsid[1] =  dpsi1(xd);
-    dsid[2] =  dpsi2(xd) * dd_sav[iat];
+    dsid[2] =  dpsi2(xd) * dd;
 
-    dsid[3] = -dpsi0(mxd) * ddi_sav[iat];
+    dsid[3] = -dpsi0(mxd) * ddi;
     dsid[4] =  dpsi1(mxd);
-    dsid[5] = -dpsi2(mxd) * dd_sav[iat];
+    dsid[5] = -dpsi2(mxd) * dd;
 
     // second derivatives of the weight functions
     amrex::Real ddsit[6];
 
-    ddsit[0] =  ddpsi0(xt) * dt2i_sav[jat];
-    ddsit[1] =  ddpsi1(xt) * dti_sav[jat];
+    ddsit[0] =  ddpsi0(xt) * dt2i;
+    ddsit[1] =  ddpsi1(xt) * dti;
     ddsit[2] =  ddpsi2(xt);
 
-    ddsit[3] =  ddpsi0(mxt) * dt2i_sav[jat];
-    ddsit[4] = -ddpsi1(mxt) * dti_sav[jat];
+    ddsit[3] =  ddpsi0(mxt) * dt2i;
+    ddsit[4] = -ddpsi1(mxt) * dti;
     ddsit[5] =  ddpsi2(mxt);
 
     // This array saves some subexpressions that go into
@@ -276,28 +285,28 @@ void apply_electrons (T& state)
     // electron positron number densities
     // get the interpolation weight functions
     sit[0] = xpsi0(xt);
-    sit[1] = xpsi1(xt) * dt_sav[jat];
+    sit[1] = xpsi1(xt) * dt;
 
     sit[2] = xpsi0(mxt);
-    sit[3] = -xpsi1(mxt) * dt_sav[jat];
+    sit[3] = -xpsi1(mxt) * dt;
 
     sid[0] = xpsi0(xd);
-    sid[1] = xpsi1(xd) * dd_sav[iat];
+    sid[1] = xpsi1(xd) * dd;
 
     sid[2] = xpsi0(mxd);
-    sid[3] = -xpsi1(mxd) * dd_sav[iat];
+    sid[3] = -xpsi1(mxd) * dd;
 
     // derivatives of weight functions
-    dsit[0] = xdpsi0(xt) * dti_sav[jat];
+    dsit[0] = xdpsi0(xt) * dti;
     dsit[1] = xdpsi1(xt);
 
-    dsit[2] = -xdpsi0(mxt) * dti_sav[jat];
+    dsit[2] = -xdpsi0(mxt) * dti;
     dsit[3] = xdpsi1(mxt);
 
-    dsid[0] = xdpsi0(xd) * ddi_sav[iat];
+    dsid[0] = xdpsi0(xd) * ddi;
     dsid[1] = xdpsi1(xd);
 
-    dsid[2] = -xdpsi0(mxd) * ddi_sav[iat];
+    dsid[2] = -xdpsi0(mxd) * ddi;
     dsid[3] = xdpsi1(mxd);
 
     // Reuse subexpressions that would go into computing the
