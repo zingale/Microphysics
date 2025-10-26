@@ -163,12 +163,17 @@ void apply_electrons (T& state)
 
     amrex::Real fi[36];
 
+    auto const* AMREX_RESTRICT f00 = &f[jat  ][iat  ][0];
+    auto const* AMREX_RESTRICT f01 = &f[jat  ][iat+1][0];
+    auto const* AMREX_RESTRICT f10 = &f[jat+1][iat  ][0];
+    auto const* AMREX_RESTRICT f11 = &f[jat+1][iat+1][0];
+
     // access the table locations only once
     for (int i = 0; i < 9; ++i) {
-        fi[i     ] = f[jat  ][iat  ][i]; // f, ft, ftt, fd, fdd, fdt, fddt, fdtt, fddtt
-        fi[i +  9] = f[jat  ][iat+1][i];
-        fi[i + 18] = f[jat+1][iat  ][i];
-        fi[i + 27] = f[jat+1][iat+1][i];
+        fi[i     ] = f00[i]; // f, ft, ftt, fd, fdd, fdt, fddt, fdtt, fddtt
+        fi[i +  9] = f01[i];
+        fi[i + 18] = f10[i];
+        fi[i + 27] = f11[i];
     }
 
     // real into local memory
