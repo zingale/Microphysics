@@ -172,10 +172,10 @@ void apply_electrons (T& state)
     }
 
     // real into local memory
-    amrex::Real dti{dti_save[jat]};
-    amrex::Real ddi{ddi_save[iat]};
-    amrex::Real dt{dt_save[jat]};
-    amrex::Real dd{dd_save[iat]};
+    amrex::Real dti{dti_sav[jat]};
+    amrex::Real ddi{ddi_sav[iat]};
+    amrex::Real dt{dt_sav[jat]};
+    amrex::Real dd{dd_sav[iat]};
     amrex::Real dt2{dt2_sav[jat]};
     amrex::Real dd2{dd2_sav[iat]};
     amrex::Real dt2i{dt2i_sav[jat]};
