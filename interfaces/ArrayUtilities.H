@@ -78,9 +78,9 @@ namespace ArrayUtil
 
         AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
         void add_identity () noexcept {
-            for (int i = XLO; i <= XHI; ++i) {
+            amrex::constexpr_for<XLO, XHI+1>([&] (auto i) {
                 arr[i+i*(XHI-XLO+1)-(YLO*(XHI-XLO+1)+XLO)] += 1.0_rt;
-            }
+            });
         }
 
         AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
