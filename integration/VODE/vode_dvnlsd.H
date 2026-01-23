@@ -1,11 +1,14 @@
 #ifndef VODE_DVNLSD_H
 #define VODE_DVNLSD_H
 
+#include <format>
+
 #include <vode_type.H>
 #ifndef NEW_NETWORK_IMPLEMENTATION
 #include <linpack.H>
 #endif
 #include <vode_dvjac.H>
+#include <jacobian_utilities.H>
 
 template <typename BurnT, typename DvodeT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
@@ -168,6 +171,15 @@ amrex::Real dvnlsd (int& NFLAG, BurnT& state, DvodeT& vstate)
                 // IPUP = 1 forces a Jacobian reevaluation.  The return value,
                 // ACNRM is ignored in this case (since NFLAG != 0)
                 if (fail) {
+                    std::cout << "failed!, step = " << vstate.n_step << std::endl;
+                    std::cout << "Jacobian: " << std::endl;
+                    std::cout << "new state: " << std::endl;
+                    print_jacobian<burn_t>(vstate.jac);
+                    for (int i = 1; i <= int_neqs; ++i) {
+                        std::cout << std::format("{:9.3g} ", vstate.y(i));
+                    }
+                    std::cout << std::endl;
+
                     NFLAG = -1;
                     vstate.ICF = 2;
                     vstate.IPUP = 1;

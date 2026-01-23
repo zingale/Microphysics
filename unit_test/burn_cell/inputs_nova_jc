@@ -1,0 +1,31 @@
+unit_test.small_temp = 1.e5
+unit_test.small_dens = 1.0
+
+unit_test.density = 3.98107170553497326e+03
+unit_test.temperature = 18478497.974222906
+
+unit_test.tmax = 1.e-4
+
+unit_test.X1 = 1.00000000000000033e-01
+unit_test.X2 = 3.52380952380952558e-02
+unit_test.X3 = 3.52380952380952558e-02
+unit_test.X4 = 3.71428571428571608e-01
+unit_test.X5 = 3.52380952380952558e-02
+unit_test.X6 = 3.52380952380952558e-02
+unit_test.X7 = 3.52380952380952558e-02
+unit_test.X8 = 3.52380952380952558e-02
+unit_test.X9 = 3.52380952380952558e-02
+unit_test.X10 = 3.52380952380952558e-02
+unit_test.X11 = 3.52380952380952558e-02
+unit_test.X12 = 3.52380952380952558e-02
+unit_test.X13 = 3.52380952380952558e-02
+unit_test.X14 = 3.52380952380952558e-02
+unit_test.X15 = 3.52380952380952558e-02
+unit_test.X16 = 3.52380952380952558e-02
+unit_test.X17 = 3.52380952380952558e-02
+
+integrator.atol_spec = 1.e-8
+integrator.rtol_spec = 1.e-5
+
+unit_test.skip_initial_normalization = 1
+unit_test.nsteps = 1

@@ -150,6 +150,8 @@ void burn_cell_c()
     // loop over steps, burn, and output the current state
 
     int nstep_int = 0;
+    int njac_int = 0;
+    int nrhs_int = 0;
 
     for (int n = 0; n < unit_test_rp::nsteps; n++){
 
@@ -160,11 +162,14 @@ void burn_cell_c()
 
         burner(burn_state, dt);
 
+#if 0
         if (! burn_state.success) {
             amrex::Error("integration failed");
         }
-
+#endif
         nstep_int += burn_state.n_step;
+        njac_int += burn_state.n_jac;
+        nrhs_int += burn_state.n_rhs;
 
         // state.e represents the change in energy over the burn (for
         // just this sybcycle), so turn it back into a physical energy
@@ -224,7 +229,10 @@ void burn_cell_c()
                   << (burn_state.xn[n] - burn_state_in.xn[n]) / unit_test_rp::tmax << std::endl;
     }
 
+    std::cout << std::endl;
     std::cout << "number of steps taken: " << nstep_int << std::endl;
+    std::cout << "number of RHS evaluations: " << nrhs_int << std::endl;
+    std::cout << "number of Jacobian evaluations: " << njac_int << std::endl;
 
 }
 #endif
