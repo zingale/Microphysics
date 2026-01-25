@@ -47,66 +47,76 @@ constexpr std::string_view eos_name = "helmholtz";
 
 // quintic hermite polynomial functions
 // psi0 and its derivatives
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real psi0 (amrex::Real z) noexcept
+RealT psi0 (RealT z) noexcept
 {
     return z * z * z * (z * (-6.0e0_rt * z + 15.0e0_rt) -10.0e0_rt) + 1.0e0_rt;
 }
 
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real dpsi0 (amrex::Real z) noexcept
+RealT dpsi0 (RealT z) noexcept
 {
     return z * z * (z * (-30.0e0_rt*z + 60.0e0_rt) - 30.0e0_rt);
 }
 
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real ddpsi0 (amrex::Real z) noexcept
+RealT ddpsi0 (RealT z) noexcept
 {
     return z * (z * (-120.0e0_rt * z + 180.0e0_rt) - 60.0e0_rt);
 }
 
 // psi1 and its derivatives
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real psi1 (amrex::Real z) noexcept
+RealT psi1 (RealT z) noexcept
 {
     return z * ( z * z * (z * (-3.0e0_rt * z + 8.0e0_rt) - 6.0e0_rt) + 1.0e0_rt);
 }
 
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real dpsi1 (amrex::Real z) noexcept
+RealT dpsi1 (RealT z) noexcept
 {
     return z * z * ( z * (-15.0e0_rt * z + 32.0e0_rt) - 18.0e0_rt) + 1.0e0_rt;
 }
 
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real ddpsi1 (amrex::Real z) noexcept
+RealT ddpsi1 (RealT z) noexcept
 {
     return z * (z * (-60.0e0_rt * z + 96.0e0_rt) - 36.0e0_rt);
 }
 
 // psi2 and its derivatives
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real psi2 (amrex::Real z) noexcept
+RealT psi2 (RealT z) noexcept
 {
     return 0.5e0_rt * z * z * ( z * ( z * (-z + 3.0e0_rt) - 3.0e0_rt) + 1.0e0_rt);
 }
 
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real dpsi2 (amrex::Real z) noexcept
+RealT dpsi2 (RealT z) noexcept
 {
     return 0.5e0_rt * z * (z * (z * (-5.0e0_rt * z + 12.0e0_rt) - 9.0e0_rt) + 2.0e0_rt);
 }
 
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real ddpsi2 (amrex::Real z) noexcept
+RealT ddpsi2 (RealT z) noexcept
 {
     return 0.5e0_rt * (z * ( z * (-20.0e0_rt * z + 36.0e0_rt) - 18.0e0_rt) + 2.0e0_rt);
 }
 
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-void fwt (const amrex::Real* AMREX_RESTRICT fi,
-          const amrex::Real* AMREX_RESTRICT wt,
-          amrex::Real* AMREX_RESTRICT fwtr) noexcept
+void fwt (const RealT* AMREX_RESTRICT fi,
+          const RealT* AMREX_RESTRICT wt,
+          RealT* AMREX_RESTRICT fwtr) noexcept
 {
 
     fwtr[0] = fi[ 0]*wt[0] + fi[ 1]*wt[1] + fi[ 2]*wt[2] + fi[18]*wt[3] + fi[19]*wt[4] + fi[20]*wt[5];
@@ -119,15 +129,17 @@ void fwt (const amrex::Real* AMREX_RESTRICT fi,
 
 // cubic hermite polynomial functions
 // psi0 & derivatives
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real xpsi0(amrex::Real z) noexcept
+RealT xpsi0(RealT z) noexcept
 {
     return z * z * (2.0e0_rt * z - 3.0e0_rt) + 1.0_rt;
 }
 
 // psi1 & derivatives
+template <typename RealT>
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
-amrex::Real xpsi1(amrex::Real z) noexcept
+RealT xpsi1(RealT z) noexcept
 {
     return z * (z * (z - 2.0e0_rt) + 1.0e0_rt);
 }
@@ -150,25 +162,25 @@ namespace electron_table_indexing {
 }
 
 
-template <typename T>
+template <typename RealT, typename T>
 AMREX_GPU_HOST_DEVICE AMREX_INLINE
 void apply_electrons (T& state)
 {
     using namespace helmholtz;
 
     // assume complete ionization
-    [[maybe_unused]] amrex::Real ytot1 = 1.0e0_rt / state.abar;
+    [[maybe_unused]] RealT ytot1 = 1.0e0_rt / static_cast<RealT>(state.abar);
 
     // enter the table with ye*den
-    amrex::Real din = state.y_e * state.rho;
+    RealT din = static_cast<RealT>(state.y_e) * static_cast<RealT>(state.rho);
 
     // hash locate this temperature and density
-    int jat = int((std::log10(state.T) - tlo) * tstpi) + 1;
+    int jat = int((std::log10(static_cast<RealT>(state.T)) - tlo) * tstpi) + 1;
     jat = amrex::Clamp(jat, 1, jmax-1) - 1;
     int iat = int((std::log10(din) - dlo) * dstpi) + 1;
     iat = amrex::Clamp(iat, 1, imax-1) - 1;
 
-    amrex::Real fi[36];
+    RealT fi[36];
 
     // access the table locations only once
     for (int i = 0; i < 9; ++i) {
@@ -179,13 +191,13 @@ void apply_electrons (T& state)
     }
 
     // various differences
-    amrex::Real xt  = amrex::max((state.T - t[jat]) * dti_sav[jat], 0.0e0_rt);
-    amrex::Real xd  = amrex::max((din - d[iat]) * ddi_sav[iat], 0.0e0_rt);
-    amrex::Real mxt = 1.0e0_rt - xt;
-    amrex::Real mxd = 1.0e0_rt - xd;
+    RealT xt  = amrex::max((static_cast<RealT>(state.T) - t[jat]) * dti_sav[jat], 0.0e0_rt);
+    RealT xd  = amrex::max((din - d[iat]) * ddi_sav[iat], 0.0e0_rt);
+    RealT mxt = 1.0e0_rt - xt;
+    RealT mxd = 1.0e0_rt - xd;
 
     // the six density basis functions
-    amrex::Real sid[6];
+    RealT sid[6];
 
     sid[0] =  psi0(xd);
     sid[1] =  psi1(xd) * dd_sav[iat];
@@ -196,7 +208,7 @@ void apply_electrons (T& state)
     sid[5] =  psi2(mxd) * dd2_sav[iat];
 
     // derivatives of the weight functions
-    amrex::Real dsid[6];
+    RealT dsid[6];
 
     dsid[0] =  dpsi0(xd) * ddi_sav[iat];
     dsid[1] =  dpsi1(xd);
@@ -212,8 +224,8 @@ void apply_electrons (T& state)
     // and then compute the result as
     // (table data * temperature terms) * density terms.
 
-    amrex::Real fwtr[6];
-    amrex::Real sit[6];
+    RealT fwtr[6];
+    RealT sit[6];
 
     {
         // temperature basis functions
@@ -229,8 +241,8 @@ void apply_electrons (T& state)
         fwt(fi, sit, fwtr);
     }
 
-    amrex::Real free = 0.e0_rt;
-    amrex::Real df_d = 0.e0_rt;
+    RealT free = 0.e0_rt;
+    RealT df_d = 0.e0_rt;
 
     for (int i = 0; i <= 5; ++i) {
         // the free energy
@@ -254,8 +266,8 @@ void apply_electrons (T& state)
         fwt(fi, sit, fwtr);
     }
 
-    amrex::Real df_t = 0.e0_rt;
-    amrex::Real df_dt = 0.e0_rt;
+    RealT df_t = 0.e0_rt;
+    RealT df_dt = 0.e0_rt;
 
     for (int i = 0; i <= 5; ++i) {
         // derivative with respect to temperature
@@ -280,7 +292,7 @@ void apply_electrons (T& state)
         fwt(fi, sit, fwtr);
     }
 
-    amrex::Real df_tt = 0.e0_rt;
+    RealT df_tt = 0.e0_rt;
     for (int i = 0; i <= 5; ++i) {
         // derivative with respect to temperature**2
         df_tt = df_tt + fwtr[i] * sid[i];
@@ -304,7 +316,7 @@ void apply_electrons (T& state)
 
     // Reuse subexpressions that would go into computing the
     // cubic interpolation.
-    amrex::Real wdt[16];
+    RealT wdt[16];
 
     for (int i = 0; i <= 3; ++i) {
         wdt[i     ] = sid[0] * sit[i];
@@ -323,7 +335,7 @@ void apply_electrons (T& state)
     // giving the j offset, i offset, and component
 
     // pressure derivative with density
-    [[maybe_unused]] amrex::Real dpepdd = 0.0e0_rt;
+    [[maybe_unused]] RealT dpepdd = 0.0e0_rt;
     if constexpr (has_pressure<T>) {
         amrex::constexpr_for<0, 16>([&] (auto K) {
             constexpr int k = K;
@@ -331,11 +343,11 @@ void apply_electrons (T& state)
 
             dpepdd += dpdf[jat+m.dj][iat+m.di][m.n] * wdt[k];
         });
-        dpepdd = amrex::max(state.y_e * dpepdd, 0.0e0_rt);
+        dpepdd = amrex::max(static_cast<RealT>(state.y_e) * dpepdd, static_cast<RealT>(0.0e0_rt));
     }
 
     // electron chemical potential etaele
-    [[maybe_unused]] amrex::Real etaele{};
+    [[maybe_unused]] RealT etaele{};
     if constexpr (has_eta<T>) {
         amrex::constexpr_for<0, 16>([&] (auto K) {
             constexpr int k = K;
@@ -346,7 +358,7 @@ void apply_electrons (T& state)
     }
 
     // electron + positron number densities
-    [[maybe_unused]] amrex::Real xnefer{};
+    [[maybe_unused]] RealT xnefer{};
     if constexpr (has_xne_xnp<T>) {
         amrex::constexpr_for<0, 16>([&] (auto K) {
             constexpr int k = K;
@@ -362,41 +374,41 @@ void apply_electrons (T& state)
     // floating point limit of the subtraction of two large terms.
     // since state.dpdr doesn't enter the maxwell relations at all, use the
     // bicubic interpolation done above instead of this one
-    amrex::Real x       = din * din;
-    amrex::Real pele    = x * df_d;
-    amrex::Real dpepdt  = x * df_dt;
-    [[maybe_unused]] amrex::Real dpepda{};
-    [[maybe_unused]] amrex::Real dpepdz{};
+    RealT x       = din * din;
+    RealT pele    = x * df_d;
+    RealT dpepdt  = x * df_dt;
+    [[maybe_unused]] RealT dpepda{};
+    [[maybe_unused]] RealT dpepdz{};
     if constexpr (has_pressure<T>) {
         if constexpr (has_dpdA<T> || has_dpdZ<T>) {
-            amrex::Real s       = dpepdd/state.y_e - 2.0e0_rt * din * df_d;
+            RealT s       = dpepdd/static_cast<RealT>(state.y_e) - 2.0e0_rt * din * df_d;
             if constexpr (has_dpdA<T>) {
                 dpepda  = -ytot1 * (2.0e0_rt * pele + s * din);
             }
             if constexpr (has_dpdZ<T>) {
-                dpepdz  = state.rho*ytot1*(2.0e0_rt * din * df_d  +  s);
+                dpepdz  = static_cast<RealT>(state.rho) * ytot1 * (2.0e0_rt * din * df_d  +  s);
             }
         }
     }
 
-    x            = state.y_e * state.y_e;
-    amrex::Real sele    = -df_t * state.y_e;
-    amrex::Real dsepdt  = -df_tt * state.y_e;
-    amrex::Real dsepdd  = -df_dt * x;
+    x            = static_cast<RealT>(state.y_e) * static_cast<RealT>(state.y_e);
+    RealT sele    = -df_t * static_cast<RealT>(state.y_e);
+    RealT dsepdt  = -df_tt * static_cast<RealT>(state.y_e);
+    RealT dsepdd  = -df_dt * x;
 
-    amrex::Real eele    = state.y_e*free + state.T * sele;
-    amrex::Real deepdt  = state.T * dsepdt;
-    amrex::Real deepdd  = x * df_d + state.T * dsepdd;
+    RealT eele    = static_cast<RealT>(state.y_e) * free + static_cast<RealT>(state.T) * sele;
+    RealT deepdt  = static_cast<RealT>(state.T) * dsepdt;
+    RealT deepdd  = x * df_d + static_cast<RealT>(state.T) * dsepdd;
 
-    [[maybe_unused]] amrex::Real deepda{};
+    [[maybe_unused]] RealT deepda{};
     if constexpr (has_dedA<T>) {
-        amrex::Real dsepda = ytot1 * (state.y_e * df_dt * din - sele);
+        RealT dsepda = ytot1 * (state.y_e * df_dt * din - sele);
         deepda = -state.y_e * ytot1 * (free +  df_d * din) + state.T * dsepda;
     }
 
-    [[maybe_unused]] amrex::Real deepdz{};
+    [[maybe_unused]] RealT deepdz{};
     if constexpr (has_dedZ<T>) {
-        amrex::Real dsepdz = -ytot1 * (state.y_e * df_dt * state.rho  + df_t);
+        RealT dsepdz = -ytot1 * (state.y_e * df_dt * state.rho  + df_t);
         deepdz = ytot1* (free + state.y_e * df_d * state.rho) + state.T * dsepdz;
     }
 
@@ -1261,7 +1273,11 @@ void actual_eos (I input, T& state)
 
         apply_ions(state);
 
-        apply_electrons(state);
+        if (iter == 1 && !converged) {
+            apply_electrons<float>(state);
+        } else {
+            apply_electrons<amrex::Real>(state);
+        }
 
         if (do_coulomb) {
             apply_coulomb_corrections(state);
