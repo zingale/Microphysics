@@ -917,7 +917,7 @@ void prepare_for_iterations (I input, const T& state,
 
 
 template <typename T>
-AMREX_GPU_HOST_DEVICE AMREX_INLINE
+AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
 void single_iter_update (T& state, int var, int dvar,
                          amrex::Real v_want, bool& converged)
 {
@@ -933,25 +933,22 @@ void single_iter_update (T& state, int var, int dvar,
         smallx = EOSData::mintemp;
         xtol = ttol;
 
-        if (var == ipres) {
-            if constexpr (has_pressure<T>) {
-                v    = state.p;
-                dvdx = state.dpdT;
-            }
-        }
-        else if (var == iener) {
+        if (var == iener) {
             if constexpr (has_energy<T>) {
                 v    = state.e;
                 dvdx = state.dedT;
             }
-        }
-        else if (var == ientr) {
+        } else if (var == ipres) {
+            if constexpr (has_pressure<T>) {
+                v    = state.p;
+                dvdx = state.dpdT;
+            }
+        } else if (var == ientr) {
             if constexpr (has_entropy<T>) {
                 v    = state.s;
                 dvdx = state.dsdT;
             }
-        }
-        else if (var == ienth) {
+        } else if (var == ienth) {
             if constexpr (has_enthalpy<T>) {
                 v    = state.h;
                 dvdx = state.dhdT;
@@ -1022,7 +1019,7 @@ void single_iter_update (T& state, int var, int dvar,
 
 
 template <typename T>
-AMREX_GPU_HOST_DEVICE AMREX_INLINE
+AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
 void double_iter_update (T& state, int var1, int var2,
                          amrex::Real v1_want, amrex::Real v2_want, bool& converged)
 {
