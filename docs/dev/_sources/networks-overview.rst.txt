@@ -42,7 +42,7 @@ for the ability to swap integrators as desired. We discuss the
 integrators in a later section.
 
 A network is defined by a ``.net`` file which provides a list of species
-and some data about each species (its name and some isotopic data). 
+and some data about each species (its name and some isotopic data).
 
 An example is ``Microphysics/networks/iso7/iso7.net``:
 
@@ -114,9 +114,11 @@ There are two primary files within each network directory.
    state and (respectively) the time-derivatives and Jacobian
    elements to fill in.
 
-   Note: some networks do not provide an analytic Jacobian and instead
-   rely on the numerical difference-approximation to the Jacobian. In
-   this case, the interface ``actual_jac`` is still needed to compile.
+   .. important::
+
+      Some networks do not provide an analytic Jacobian and instead
+      rely on the numerical difference-approximation to the Jacobian. In
+      this case, the interface ``actual_jac`` is still needed to compile.
 
 Notice that these modules have initialization routines:
 
@@ -128,5 +130,7 @@ These must be called upon initialization. These should be not called
 within OpenMP parallel regions, because in general they will modify
 global data.
 
-Note, depending on the network, some of these may do nothing, but
-these interfaces are all required for maximum flexibility.
+.. note::
+
+   Depending on the network, some of these may do nothing, but these
+   interfaces are all required for maximum flexibility.

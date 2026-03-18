@@ -1,3 +1,5 @@
+.. _sec:templated_rhs:
+
 *********************************
 Templated Network Righthand Sides
 *********************************
@@ -117,9 +119,9 @@ For example, consider the reaction :math:`\isotm{He}{4} + \isotm{C}{12} \rightar
    data.species_B = He4;
    data.species_D = O16;
 
-   data.number_A = 1;
-   data.number_B = 1;
-   data.number_D = 1;
+   data.number_A = 1.0_rt;
+   data.number_B = 1.0_rt;
+   data.number_D = 1.0_rt;
 
    data.exponent_A = 1;
    data.exponent_B = 1;
@@ -149,10 +151,10 @@ special cases (e.g., for approximate nets):
           data.species_D = Mg24;
           data.species_E = He4;
 
-          data.number_A = 1;
-          data.number_B = 1;
-          data.number_D = 1;
-          data.number_E = 1;
+          data.number_A = 1.0_rt;
+          data.number_B = 1.0_rt;
+          data.number_D = 1.0_rt;
+          data.number_E = 1.0_rt;
 
           data.exponent_A = 1;
           data.exponent_B = 1;
@@ -167,9 +169,9 @@ special cases (e.g., for approximate nets):
           data.species_B = O16;
           data.species_D = Si28;
 
-          data.number_A = 1;
-          data.number_B = 1;
-          data.number_D = 1;
+          data.number_A = 1.0_rt;
+          data.number_B = 1.0_rt;
+          data.number_D = 1.0_rt;
 
           data.exponent_A = 1;
           data.exponent_B = 1;
@@ -181,7 +183,7 @@ special cases (e.g., for approximate nets):
   This indicates that each branch happens 50% of the time.
 
 
-* ``apply_identical_particle_factor`` : 
+* ``apply_identical_particle_factor`` :
 
    Normally for rates involving identical nuclei, we divide
    the rate by a factor (:math:`n!`, where `n` is the number of the same nuclei participating).  This
@@ -216,7 +218,7 @@ special cases (e.g., for approximate nets):
 
   To save on computation, we can create a table of reaction rates
   by evaluating over a grid of temperature and then interpolating
-  in temperature as needed.  This operates only on the 
+  in temperature as needed.  This operates only on the
   :math:`N_A \langle \sigma v \rangle` portion of the rate.
 
   Some rates are more complex than fits into the rate tabulation
@@ -278,9 +280,9 @@ special cases (e.g., for approximate nets):
          data.species_B = He4;
          data.species_D = Si28;
 
-         data.number_A = 1;
-         data.number_B = 1;
-         data.number_D = 1;
+         data.number_A = 1.0_rt;
+         data.number_B = 1.0_rt;
+         data.number_D = 1.0_rt;
 
          data.exponent_A = 1;
          data.exponent_B = 1;
@@ -310,7 +312,7 @@ The main logic for constructing RHS is contained in ``Microphysics/networks/rhs.
 .. code:: c++
 
    AMREX_GPU_HOST_DEVICE AMREX_INLINE
-   void rhs (burn_t& state, Array1D<Real, 1, neqs>& ydot)
+   void rhs (burn_t& state, amrex::Array1D<amrex::Real, 1, neqs>& ydot)
 
 The basic flow is:
 
@@ -322,7 +324,7 @@ The basic flow is:
 #. Compute all of the intermediate rates.
 
    Since these rates are used multiple times, we compute them once and cache them.
-   This is done soley for performance reasons, since computing the rates is expensive.
+   This is done solely for performance reasons, since computing the rates is expensive.
 
 #. Loop over rates
 
@@ -384,16 +386,11 @@ Linear Algebra
 
 The VODE integrator needs routines to do LU factorization and back
 substitution.  We build off of the linpack ``dgefa`` and ``dgesl``
-routines, but because we know at compile time which Jacobian terms are
-non-zero, we are able to use ``constexpr`` for-loops to only do the
-calculations on non-zero elements.  This greatly reduces the amount of work
-in the linear algebra.
+routines, using ``constexpr`` for-loops that know the network size
+at compile time.
 
-Note:
+.. note::
 
-* Currently we are still storing a dense Jacobian -- we just skip computation
-  on the elements that are 0.
-
-* These routines do not perform pivoting.  This does not seem to be an
-  issue for the types of matrices we solve with reactions (since they are
-  all of the form :math:`I - \tau J`, where :math:`tau` is the timestep).
+   These routines do not perform pivoting.  This does not seem to be an
+   issue for the types of matrices we solve with reactions (since they are
+   all of the form :math:`I - \tau J`, where :math:`tau` is the timestep).

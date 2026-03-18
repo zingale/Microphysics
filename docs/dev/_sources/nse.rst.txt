@@ -1,14 +1,80 @@
+.. _ch:nse:
+
 ***
 NSE
 ***
+
+.. important::
+
+   NSE is only supported with the simplified-SDC method for
+   coupling hydrodynamics and reactions.  We do not support
+   operator-splitting (Strang) coupling with NSE.
+
+Nuclear statistical equilibrium (NSE) describes a state in which all strong
+nuclear reactions are in chemical equilibrium, with each forward reaction
+balanced by its reverse. The NSE condition is a state where the
+chemical potential of any isotope can be expressed as
+the sum of the chemical potentials of the its constituent neutrons and protons.
+which happens when :math:`T \gtrsim 6 \times 10^9 \ \mathrm{K}`.
+Mathematically it means:
+
+.. math:: \mu_i = Z_i \mu_p + N_i \mu_n
+
+Applying this assumption to the Maxwell-Boltzmann gas, the mass abundance
+of the system in NSE is uniquely defined as:
+
+.. math::
+
+   X_i^{\mathrm{NSE}} = \dfrac{(m_i)^{5/2}}{\rho} g_i \left( \dfrac{k_B T}{2\pi \hbar^2} \right)^{3/2} \exp{\left( \dfrac{Z_i (\mu_p^\mathrm{kin} + \mu_p^c) + N_i \mu_n^{\mathrm{kin}} + B_i - \mu^c_i}{k_B T} \right)}
+
+A more detailed derivation can be found in many literature,
+e.g., :cite:`pynucastro2`.
+
+There are three possible constraint equations that may be required to solve
+the NSE equation. Depending on the specified input mode, either two or all three
+constraints are needed.
+
+1. *Conservation of mass*, or equivalently a constraint on the input density,
+   :math:`\rho`.
+
+   .. math:: f_\rho = \sum_i X_i^{\mathrm{NSE}} - 1 = 0
+
+2. *Conservation of charge* for strong reactions, or equivalently a constraint
+   on the input electron fraction, :math:`Y_e`
+
+   .. math:: f_{Y_e}\sum_i \frac{Z_i}{A_i} X_i^{\mathrm{NSE}} - Y_e = 0
+
+3. *Conservation of energy*, or equivalently a constraint on the
+   input internal energy, :math:`e`
+
+   .. math:: f_e = \frac{e\left(\rho, T_\mathrm{NSE}, X_i^\mathrm{NSE}\right)}{e_0} - 1 = 0
+
+Two input modes are currently supported:
+
+1. Given the input :math:`(\rho, T, Y_e)`, the system has two unknowns,
+   the chemical potential of proton and neutron, i.e.
+   :math:`(\mu_p^\mathrm{kin}, \mu_n^\mathrm{kin})`.
+   In this mode, the first two constraint equations are sufficient to solve
+   the system.
+
+2. Given the input :math:`(\rho, e_0, Y_e)`, the above equation has three unknowns,
+   the chemical potential of proton and neutron and temperature, i.e.
+   :math:`(\mu_p^\mathrm{kin}, \mu_n^\mathrm{kin}, T_9)`.
+   In this mode, all three constraint equations are needed to solve the system.
+
+
+NSE Evolution Modes
+===================
 
 The reaction networks in Microphysics have the ability to use NSE
 instead of integrating the entire network when the conditions are
 appropriate.  There are 2 different implementations of NSE in
 Microphysics, that have slightly different use cases.
 
+.. index:: USE_NSE_TABLE, USE_NSE_NET
+
 * :ref:`tabulated_nse` : this uses a table of NSE abundances given
-  :math:`(\rho, T, Y_e)` generate from a large network (125 isotopes).
+  :math:`(\rho, T, Y_e)` generate from a large network (96 isotopes).
   The table also returns :math:`dY_e/dt` resulting from
   electron-captures, to allow for the NSE state to evolve.  This is
   meant to be used in the cores of massive stars and works only with the
@@ -21,14 +87,18 @@ Microphysics, that have slightly different use cases.
   :math:`\langle B/A\rangle`.  All of the EOS calls will work with
   these quantities.
 
+  This algorithm was described in :cite:`sdc-nse`.
+
   This is enabled via ``USE_NSE_TABLE``
+
 
 * :ref:`self_consistent_nse` : this adds an NSE solver to the network that
   can be called to find the equilibrium abundances of each of the
-  species defined in the network.  It works with any of the
-  pynucastro-generated networks.  Unlike the tabulated NSE, there is
-  no need to advect the auxiliary composition, since this only deals
-  with the isotopes defined in the main reaction network.
+  species defined in the network.  It only works pynucastro-generated networks.
+  Note that there are requirements in order for networks to be intrinsically
+  compatible with NSE, see more detail in :ref:`self_consistent_nse`.
+  Unlike the tabulated NSE, there is no need to advect an auxiliary composition,
+  since this only deals with the isotopes defined in the main reaction network.
 
   This is enabled via ``USE_NSE_NET``
 
@@ -46,169 +116,11 @@ make option               preprocessor variables set
 The directive ``NSE`` should be used whether the specific
 implementation of NSE does not matter.
 
-These two NSE solvers are described below.
+These two NSE solvers are in the next sections.
 
+.. toctree::
+   :maxdepth: 1
+   :hidden:
 
-.. _tabulated_nse:
-
-Tabulated NSE and ``aprox19``
-=============================
-
-The ``aprox19`` network can be run in a manner where we blends the
-standard ``aprox19`` network with a table for nuclear statistic
-equilibrium resulting from a much larger network at high density and
-temperatures.    This option is enabled by building with:
-
-.. prompt:: bash
-
-   NETWORK_DIR=aprox19 USE_NSE=TRUE
-
-Composition and EOS
--------------------
-
-The NSE table was generated using a 125 nuclei reaction network
-(described in :cite:`ma:2013`), and includes electron-capture rates,
-so the compositional quantities it carries, :math:`\bar{A}` and
-:math:`Y_e` and not representable from the 19 isotopes we carry in the
-network.  In particular, it can attain a lower :math:`Y_e` than
-``aprox19`` can represent.
-
-For this reason, when we are using the NSE network, we always take the
-composition quantities in the EOS directly from ``eos_state.aux[]``
-instead of from ``eos_state.xn[]``.  The ``AUX_THERMO`` preprocessor
-variable is enabled in this case, and the equations of state interpret
-this to use the auxillary data for the composition.  This is described in :ref:`aux_eos_comp`.
-
-
-NSE Table Outputs
------------------
-
-The NSE table provides values for the auxiliary composition,
-:math:`Y_e`, :math:`\bar{A}`, and :math:`\langle B/A \rangle`
-resulting from the full 125 nuclei network.   It also provides a set of 19
-:math:`X_k` that map into the isotopes carried by ``aprox19``.
-
-
-These three quantities are stored as ``aux`` data in the network and
-are indexed as ``iye``, ``iabar``, and ``ibea``.  Additionally, when
-coupling to hydrodynamics, we need to advect these auxillary
-quantities.
-
-For Strang split coupling of hydro and reactions, :math:`DX_k/Dt = 0`,
-and our evolution equations are:
-
-.. math::
-
-   \begin{align*}
-   \frac{DY_e}{Dt} &= \sum_k \frac{Z_k}{A_k} \frac{DX_k}{Dt} = 0 \\
-   \frac{D}{Dt} \frac{1}{\bar{A}} &= - \frac{1}{\bar{A}^2} \frac{D\bar{A}}{Dt} = \sum_k \frac{1}{A_k} \frac{DX_k}{Dt} = 0 \rightarrow \frac{D\bar{A}}{Dt} = 0 \\
-   \frac{D}{Dt} \left (\frac{B}{A} \right ) &= \sum_k \frac{B_k}{A_k} \frac{DX_k}{Dt} = 0
-   \end{align*}
-
-Therefore each of these auxillar equations obeys an advection equation
-in the hydro part of the advancement.
-
-
-NSE Flow
---------
-
-The basic flow of a simulation using ``aprox19`` + the NSE table is as follows:
-
-* initialize the problem, including :math:`X_k`
-
-* fill the initial aux data with :math:`Y_e`, :math:`\bar{A}`, and :math:`(B/A)`
-
-* in hydro, we will update these quantities simply via advection (for
-  Strang-split evolution)
-
-* for the reactive update:
-
-  * check if NSE applies (see below)
-
-  * if we are in an NSE region:
-
-    * use :math:`\rho`, :math:`T`, and :math:`Y_e` to call the table.
-      This returns: :math:`dY_e/dt`, :math:`(B/A)_{\rm out}`, and :math:`\bar{A}_{\rm out}`.
-
-    * update :math:`Y_e` [#fY]_ :
-
-      .. math::
-
-         (Y_e)_{\rm out} = (Y_e)_{\rm in} + \Delta t \frac{dY_e}{dt}
-
-    * :math:`\bar{A}_{\rm out}` is simply the value returned from the table
-
-    * the energy generation rate, :math:`e_{\rm nuc}` is:
-
-      .. math::
-
-         e_{\rm nuc} = \eta \left [ \left ( \frac{B}{A} \right )_{\rm out} -
-                                    \left ( \frac{B}{A} \right )_{\rm in} \right ] * \frac{1.602 \times 10^{-6}  {\rm erg}}{{\rm MeV}} N_A \frac{1}{\Delta t}
-
-
-      where :math:`\eta` is an inertia term < 1 to prevent the energy changing too much in one set.
-
-    * the new binding energy for the zone is then:
-
-      .. math::
-
-         \left ( \frac{B}{A} \right )_{\rm out}  = \left ( \frac{B}{A} \right )_{\rm in} + \eta \left [ \left ( \frac{B}{A} \right )_{\rm out} - \left ( \frac{B}{A} \right )_{\rm in} \right ]
-
-    * update the mass fractions, :math:`X_k`, using the values from the table
-
-  * if we are not in NSE:
-
-    * integrate the ``aprox19`` network as usual
-
-    * update the aux quantities at the end of the burn
-
-
-NSE check
----------
-
-We determine is a zone is in NSE according to:
-
-* :math:`\rho` > ``rho_nse``
-
-* :math:`T` > ``T_nse``
-
-* :math:`X(\isotm{C}{12})` < ``C_nse``
-
-* :math:`X(\isotm{He}{4}) + X(\isotm{Cr}{48}) + X(\isotm{Fe}{52}) + X(\isotm{Fe}{54}) + X(\isotm{Ni}{56})` > ``He_Fe_nse``
-
-.. _self_consistent_nse:
-
-Self-consistent NSE
-===================
-
-The self-consistent NSE approach uses only the nuclei in the main
-reaction network.  It solves for the chemical potentials of the proton
-and neutron and from there gets the abundances of each of the nuclei
-under the assumption of NSE, following the procedure outlined in :cite:`Calder_2007`.
-
-The solve is done using a port of the hybrid Powell method from
-MINPACK (we ported the solver to templated C++).
-
-The advantage of this approach is that it can be used with any
-reaction network, once the integration has reached NSE.
-
-This solver is enabled by compiling with
-
-.. prompt:: bash
-
-   USE_NSE_NET=TRUE
-
-The functions to find the NSE state are then found in ``nse_solver.H``.
-
-
-
-.. rubric:: Footnotes
-
-.. [#fY] The table actually provides the weak rate, which is the sum
-   of all electron capture and positron decay rates times the
-   appropriate abundances minus a similar rate for the beta decay and
-   positron capture, [wrate] = [rectot] + [rpdtot] - [redtot] - [rpctot]
-
-   So if electron capture dominates, then [wrate] is positive and this should
-   be subtracted from :math:`Y_e`.
-
+   nse_tabular.rst
+   nse_net.rst

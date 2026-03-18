@@ -1,31 +1,33 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NSE &mdash; Microphysics  documentation</title>
-      <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/theme_overrides.css?v=2e394b92" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "macros": {"rhozero": "{\\rho_0}", "pizero": "{\\pi_0}", "pizeroone": "{\\pi_0^{(1)}}", "pizerotwo": "{\\pi_0^{(2)}}", "gammabar": "{\\overline{\\Gamma}_1}", "ptl": "{{\\partial}}", "eb": "{{\\bf e}}", "fb": "{{\\bf f}}", "ib": "{{\\bf i}}", "Ub": "{{\\bf U}}", "Vb": "{{\\bf V}}", "xb": "{{\\bf x}}", "ut": "{\\tilde{u}}", "vt": "{\\tilde{v}}", "wt": "{\\tilde{w}}", "Ubt": "{\\widetilde{\\Ub}}", "edge": "{\\rm EDGE}", "mac": "{\\rm MAC}", "trans": "{\\rm TRANS}", "nablab": "{\\mathbf{\\nabla}}", "cdotb": "{\\mathbf{\\cdot}}", "half": "{\\frac{1}{2}}", "myhalf": "{\\frac{1}{2}}", "nph": "{{n + \\myhalf}}", "nmh": "{{n - \\myhalf}}", "Hext": "{{H_{\\rm ext}}}", "Hnuc": "{{H_{\\rm nuc}}}", "kth": "{k_{\\rm th}}", "pred": "{{\\rm pred}}", "Sbar": "{\\overline{S}}", "inp": "{\\mathrm{in}}", "initp": "{\\mathrm{init}}", "outp": "{\\mathrm{out}}", "uadv": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvone": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV},\\star}}", "uadvonedag": "{\\Ubt^{\\mathrm{ADV},\\dagger,\\star}}", "uadvtwo": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvtwodag": "{\\Ubt^{\\mathrm{ADV},\\dagger}}", "uadvsdcstar": "{\\mathbf{U}^{\\mathrm{ADV},\\star}}", "uadvsdcpred": "{\\mathbf{U}^{\\mathrm{ADV},\\mathrm{pred}}}", "uadvsdc": "{\\mathbf{U}^{\\mathrm{ADV}}}", "dt": "{\\Delta t}", "dr": "{\\Delta r}", "etarho": "{\\eta_{\\rho}}", "etarhoec": "{\\etarho^{\\rm ec}}", "etarhocc": "{\\etarho^{\\rm cc}}", "etarhoflux": "{\\etarho^{\\rm flux}}", "divetarho": "{\\nabla\\cdot(\\etarho\\eb_r)}", "ow": "{\\overline{w}_0}", "dw": "{\\delta w_0}", "thalf": "{\\sfrac{3}{2}}", "rhop": "{{\\rho^{\\prime}}}", "omegadot": "{\\dot{\\omega}}", "er": "{\\mathbf{e}_r}", "ex": "{\\mathbf{e}_x}", "ey": "{\\mathbf{e}_y}", "ez": "{\\mathbf{e}_z}", "Omegab": "{{\\bf \\Omega}}", "rb": "{{\\bf r}}", "isotm": ["{{}^{#2}\\mathrm{#1}}", 2], "edot": "{{{\\dot{e}_\\mathrm{nuc}}}}", "enuc": "{{{{e}_\\mathrm{nuc}}}}", "edotnu": "{{{\\dot{e}_\\nu}}}", "rt": "{\\tilde{r}_0}", "rhob": "{\\ensuremath{\\rho_\\mathrm{base}}}", "Tb": "{\\ensuremath{T_\\mathrm{base}}}", "gcc": "{\\mathrm{g~cm^{-3} }}", "pb": "{p_\\mathrm{base}}", "qburn": "{q_\\mathrm{burn}}", "Uc": "{{\\boldsymbol{\\mathcal{U}}}}", "Fb": "{\\mathbf{F}}", "Sc": "{\\mathbf{S}}", "Shydro": "{{{\\bf S}^{\\mathrm{hydro}}}}", "Rb": "{{\\bf R}}", "Rq": "{{\\bf R}}", "Adv": ["{{\\left [\\boldsymbol{\\mathcal{A}} \\left(#1\\right)\\right]}}", 1], "Advs": ["{{\\boldsymbol{\\mathcal{A}} \\left(#1\\right)}}", 1], "Sdot": "{\\dot{S}}"}}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=eaa7b67c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "processEscapes": true, "displayMath": [["\\[", "\\]"]], "macros": {"rhozero": "{\\rho_0}", "pizero": "{\\pi_0}", "pizeroone": "{\\pi_0^{(1)}}", "pizerotwo": "{\\pi_0^{(2)}}", "gammabar": "{\\overline{\\Gamma}_1}", "ptl": "{{\\partial}}", "eb": "{{\\bf e}}", "fb": "{{\\bf f}}", "ib": "{{\\bf i}}", "Ub": "{{\\bf U}}", "Vb": "{{\\bf V}}", "xb": "{{\\bf x}}", "ut": "{\\tilde{u}}", "vt": "{\\tilde{v}}", "wt": "{\\tilde{w}}", "Ubt": "{\\widetilde{\\Ub}}", "edge": "{\\rm EDGE}", "mac": "{\\rm MAC}", "trans": "{\\rm TRANS}", "nablab": "{\\mathbf{\\nabla}}", "cdotb": "{\\mathbf{\\cdot}}", "half": "{\\frac{1}{2}}", "myhalf": "{\\frac{1}{2}}", "nph": "{{n + \\myhalf}}", "nmh": "{{n - \\myhalf}}", "Hext": "{{H_{\\rm ext}}}", "Hnuc": "{{H_{\\rm nuc}}}", "kth": "{k_{\\rm th}}", "pred": "{{\\rm pred}}", "Sbar": "{\\overline{S}}", "inp": "{\\mathrm{in}}", "initp": "{\\mathrm{init}}", "outp": "{\\mathrm{out}}", "uadv": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvone": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV},\\star}}", "uadvonedag": "{\\Ubt^{\\mathrm{ADV},\\dagger,\\star}}", "uadvtwo": "{\\widetilde{\\mathbf{U}}^{\\mathrm{ADV}}}", "uadvtwodag": "{\\Ubt^{\\mathrm{ADV},\\dagger}}", "uadvsdcstar": "{\\mathbf{U}^{\\mathrm{ADV},\\star}}", "uadvsdcpred": "{\\mathbf{U}^{\\mathrm{ADV},\\mathrm{pred}}}", "uadvsdc": "{\\mathbf{U}^{\\mathrm{ADV}}}", "dt": "{\\Delta t}", "dr": "{\\Delta r}", "etarho": "{\\eta_{\\rho}}", "etarhoec": "{\\etarho^{\\rm ec}}", "etarhocc": "{\\etarho^{\\rm cc}}", "etarhoflux": "{\\etarho^{\\rm flux}}", "divetarho": "{\\nabla\\cdot(\\etarho\\eb_r)}", "ow": "{\\overline{w}_0}", "dw": "{\\delta w_0}", "thalf": "{\\sfrac{3}{2}}", "rhop": "{{\\rho^{\\prime}}}", "omegadot": "{\\dot{\\omega}}", "er": "{\\mathbf{e}_r}", "ex": "{\\mathbf{e}_x}", "ey": "{\\mathbf{e}_y}", "ez": "{\\mathbf{e}_z}", "Omegab": "{{\\bf \\Omega}}", "rb": "{{\\bf r}}", "isotm": ["{{}^{#2}\\mathrm{#1}}", 2], "edot": "{{{\\dot{e}_\\mathrm{nuc}}}}", "enuc": "{{{{e}_\\mathrm{nuc}}}}", "edotnu": "{{{\\dot{e}_\\nu}}}", "rt": "{\\tilde{r}_0}", "rhob": "{\\ensuremath{\\rho_\\mathrm{base}}}", "Tb": "{\\ensuremath{T_\\mathrm{base}}}", "gcc": "{\\mathrm{g~cm^{-3} }}", "pb": "{p_\\mathrm{base}}", "qburn": "{q_\\mathrm{burn}}", "Uc": "{{\\boldsymbol{\\mathcal{U}}}}", "Fb": "{\\mathbf{F}}", "Sc": "{\\mathbf{S}}", "Shydro": "{{{\\bf S}^{\\mathrm{hydro}}}}", "Rb": "{{\\bf R}}", "Rbs": ["{{\\bf R} \\left ( #1 \\right )}", 1], "Rq": "{{\\bf R}}", "Adv": ["{{\\left [\\boldsymbol{\\mathcal{A}} \\left(#1\\right)\\right]}}", 1], "Advs": ["{{\\boldsymbol{\\mathcal{A}} \\left(#1\\right)}}", 1], "Sdot": "{\\dot{S}}"}}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Transport Coefficients" href="transport.html" />
-    <link rel="prev" title="Integrating a Network" href="integrators.html" /> 
+    <link rel="next" title="Tabulated NSE and aprox19" href="nse_tabular.html" />
+    <link rel="prev" title="ODE Integrators" href="ode_integrators.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,11 +36,15 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
 
-            <a href="index.html" class="icon icon-home"> Microphysics
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Microphysics
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -48,33 +54,64 @@
     </div>
 
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Microphysics basics</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basics.html">StarKiller Basics</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Microphysics overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_structures.html">Data Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rp_intro.html">Runtime parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_system.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rp_intro.html">Runtime Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fundamental_constants.html">Fundamental Constants</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EOS and transport</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="eos.html">Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos_implementations.html">Available Equations of State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Coefficients</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reaction networks</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="networks-overview.html">Overview of Reaction Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="networks.html">Available Reaction Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="templated_networks.html">Templated Network Righthand Sides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="screening.html">Screening of Reaction Rates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrators.html">Integrating a Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neutrinos.html">Neutrino Losses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ODE integrators</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="integrators.html">Reaction ODE System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ode_integrators.html">ODE Integrators</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">NSE</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#tabulated-nse-and-aprox19">Tabulated NSE and <code class="docutils literal notranslate"><span class="pre">aprox19</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#composition-and-eos">Composition and EOS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#nse-table-outputs">NSE Table Outputs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#nse-flow">NSE Flow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#nse-check">NSE check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nse-evolution-modes">NSE Evolution Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nse_tabular.html">Tabulated NSE and <code class="docutils literal notranslate"><span class="pre">aprox19</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nse_net.html">Self-consistent NSE</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#self-consistent-nse">Self-consistent NSE</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="transport.html">Transport Coefficients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Unit Tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdc.html">Spectral Deferred Corrections</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Util / external libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Helper Functions and Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autodiff.html">Automatic Differentiation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Unit tests</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unit_tests.html">Overview of Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit_test_runtime_parameters.html">Unit Test Common Runtime Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comprehensive_tests.html">Comprehensive Unit Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_zone_tests.html">One Zone Tests</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing Microphysics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zreferences.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 </ul>
 
         </div>
@@ -90,7 +127,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">NSE</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/nse.rst.txt" rel="nofollow"> View page source</a>
@@ -101,39 +138,70 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="nse">
-<h1>NSE<a class="headerlink" href="#nse" title="Permalink to this heading">¶</a></h1>
+  <section id="nse">
+<span id="ch-nse"></span><h1>NSE<a class="headerlink" href="#nse" title="Link to this heading"></a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>NSE is only supported with the simplified-SDC method for
+coupling hydrodynamics and reactions.  We do not support
+operator-splitting (Strang) coupling with NSE.</p>
+</div>
+<p>Nuclear statistical equilibrium (NSE) describes a state in which all strong
+nuclear reactions are in chemical equilibrium, with each forward reaction
+balanced by its reverse. The NSE condition is a state where the
+chemical potential of any isotope can be expressed as
+the sum of the chemical potentials of the its constituent neutrons and protons.
+which happens when <span class="math notranslate nohighlight">\(T \gtrsim 6 \times 10^9 \ \mathrm{K}\)</span>.
+Mathematically it means:</p>
+<div class="math notranslate nohighlight">
+\[\mu_i = Z_i \mu_p + N_i \mu_n\]</div>
+<p>Applying this assumption to the Maxwell-Boltzmann gas, the mass abundance
+of the system in NSE is uniquely defined as:</p>
+<div class="math notranslate nohighlight">
+\[X_i^{\mathrm{NSE}} = \dfrac{(m_i)^{5/2}}{\rho} g_i \left( \dfrac{k_B T}{2\pi \hbar^2} \right)^{3/2} \exp{\left( \dfrac{Z_i (\mu_p^\mathrm{kin} + \mu_p^c) + N_i \mu_n^{\mathrm{kin}} + B_i - \mu^c_i}{k_B T} \right)}\]</div>
+<p>A more detailed derivation can be found in many literature,
+e.g., <span id="id1">[<a class="reference internal" href="zreferences.html#id57" title="Alexander I. Smith, Eric T. Johnson, Zhi Chen, Kiran Eiden, Donald E. Willcox, Brendan Boyd, Lyra Cao, Christopher J. DeGrendele, and Michael Zingale. Pynucastro: a python library for nuclear astrophysics. The Astrophysical Journal, 947(2):65, apr 2023. URL: https://dx.doi.org/10.3847/1538-4357/acbaff, doi:10.3847/1538-4357/acbaff.">20</a>]</span>.</p>
+<p>There are three possible constraint equations that may be required to solve
+the NSE equation. Depending on the specified input mode, either two or all three
+constraints are needed.</p>
+<ol class="arabic">
+<li><p><em>Conservation of mass</em>, or equivalently a constraint on the input density,
+<span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[f_\rho = \sum_i X_i^{\mathrm{NSE}} - 1 = 0\]</div>
+</li>
+<li><p><em>Conservation of charge</em> for strong reactions, or equivalently a constraint
+on the input electron fraction, <span class="math notranslate nohighlight">\(Y_e\)</span></p>
+<div class="math notranslate nohighlight">
+\[f_{Y_e}\sum_i \frac{Z_i}{A_i} X_i^{\mathrm{NSE}} - Y_e = 0\]</div>
+</li>
+<li><p><em>Conservation of energy</em>, or equivalently a constraint on the
+input internal energy, <span class="math notranslate nohighlight">\(e\)</span></p>
+<div class="math notranslate nohighlight">
+\[f_e = \frac{e\left(\rho, T_\mathrm{NSE}, X_i^\mathrm{NSE}\right)}{e_0} - 1 = 0\]</div>
+</li>
+</ol>
+<p>Two input modes are currently supported:</p>
+<ol class="arabic simple">
+<li><p>Given the input <span class="math notranslate nohighlight">\((\rho, T, Y_e)\)</span>, the system has two unknowns,
+the chemical potential of proton and neutron, i.e.
+<span class="math notranslate nohighlight">\((\mu_p^\mathrm{kin}, \mu_n^\mathrm{kin})\)</span>.
+In this mode, the first two constraint equations are sufficient to solve
+the system.</p></li>
+<li><p>Given the input <span class="math notranslate nohighlight">\((\rho, e_0, Y_e)\)</span>, the above equation has three unknowns,
+the chemical potential of proton and neutron and temperature, i.e.
+<span class="math notranslate nohighlight">\((\mu_p^\mathrm{kin}, \mu_n^\mathrm{kin}, T_9)\)</span>.
+In this mode, all three constraint equations are needed to solve the system.</p></li>
+</ol>
+<section id="nse-evolution-modes">
+<h2>NSE Evolution Modes<a class="headerlink" href="#nse-evolution-modes" title="Link to this heading"></a></h2>
 <p>The reaction networks in Microphysics have the ability to use NSE
 instead of integrating the entire network when the conditions are
 appropriate.  There are 2 different implementations of NSE in
 Microphysics, that have slightly different use cases.</p>
-<ul>
-<li><p><a class="reference internal" href="#tabulated-nse"><span class="std std-ref">Tabulated NSE and aprox19</span></a> : this uses a table of NSE abundances given
-<span class="math notranslate nohighlight">\((\rho, T, Y_e)\)</span> generate from a large network (125 isotopes).
+<ul id="index-0">
+<li><p><a class="reference internal" href="nse_tabular.html#tabulated-nse"><span class="std std-ref">Tabulated NSE and aprox19</span></a> : this uses a table of NSE abundances given
+<span class="math notranslate nohighlight">\((\rho, T, Y_e)\)</span> generate from a large network (96 isotopes).
 The table also returns <span class="math notranslate nohighlight">\(dY_e/dt\)</span> resulting from
 electron-captures, to allow for the NSE state to evolve.  This is
 meant to be used in the cores of massive stars and works only with the
@@ -144,14 +212,16 @@ meant to be used in the cores of massive stars and works only with the
 composition and advect <span class="math notranslate nohighlight">\(Y_e\)</span>, <span class="math notranslate nohighlight">\(\bar{A}\)</span>, and
 <span class="math notranslate nohighlight">\(\langle B/A\rangle\)</span>.  All of the EOS calls will work with
 these quantities.</p>
+<p>This algorithm was described in <span id="id2">[<a class="reference internal" href="zreferences.html#id47" title="Michael Zingale, Zhi Chen, Eric T. Johnson, Max P. Katz, and Alexander Smith Clark. Strong coupling of hydrodynamics and reactions in nuclear statistical equilibrium for modeling convection in massive stars. The Astrophysical Journal, 977(1):30, nov 2024. URL: https://dx.doi.org/10.3847/1538-4357/ad8a66, doi:10.3847/1538-4357/ad8a66.">46</a>]</span>.</p>
 <p>This is enabled via <code class="docutils literal notranslate"><span class="pre">USE_NSE_TABLE</span></code></p>
 </li>
-<li><p><a class="reference internal" href="#self-consistent-nse"><span class="std std-ref">Self-consistent NSE</span></a> : this adds an NSE solver to the network that
+<li><p><a class="reference internal" href="nse_net.html#self-consistent-nse"><span class="std std-ref">Self-consistent NSE</span></a> : this adds an NSE solver to the network that
 can be called to find the equilibrium abundances of each of the
-species defined in the network.  It works with any of the
-pynucastro-generated networks.  Unlike the tabulated NSE, there is
-no need to advect the auxiliary composition, since this only deals
-with the isotopes defined in the main reaction network.</p>
+species defined in the network.  It only works pynucastro-generated networks.
+Note that there are requirements in order for networks to be intrinsically
+compatible with NSE, see more detail in <a class="reference internal" href="nse_net.html#self-consistent-nse"><span class="std std-ref">Self-consistent NSE</span></a>.
+Unlike the tabulated NSE, there is no need to advect an auxiliary composition,
+since this only deals with the isotopes defined in the main reaction network.</p>
 <p>This is enabled via <code class="docutils literal notranslate"><span class="pre">USE_NSE_NET</span></code></p>
 </li>
 </ul>
@@ -159,10 +229,6 @@ with the isotopes defined in the main reaction network.</p>
 provide a function <code class="docutils literal notranslate"><span class="pre">in_nse()</span></code> that can be used to determine if a
 state is currently in NSE.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 31%" />
-<col style="width: 69%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>make option</p></td>
 <td><p>preprocessor variables set</p></td>
@@ -177,131 +243,9 @@ state is currently in NSE.</p>
 </table>
 <p>The directive <code class="docutils literal notranslate"><span class="pre">NSE</span></code> should be used whether the specific
 implementation of NSE does not matter.</p>
-<p>These two NSE solvers are described below.</p>
-<section id="tabulated-nse-and-aprox19">
-<span id="tabulated-nse"></span><h2>Tabulated NSE and <code class="docutils literal notranslate"><span class="pre">aprox19</span></code><a class="headerlink" href="#tabulated-nse-and-aprox19" title="Permalink to this heading">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">aprox19</span></code> network can be run in a manner where we blends the
-standard <code class="docutils literal notranslate"><span class="pre">aprox19</span></code> network with a table for nuclear statistic
-equilibrium resulting from a much larger network at high density and
-temperatures.    This option is enabled by building with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><style type="text/css">
-span.prompt1:before {
-  content: "$ ";
-}
-</style><span class="prompt1"><span class="nv">NETWORK_DIR</span><span class="o">=</span>aprox19 <span class="nv">USE_NSE</span><span class="o">=</span>TRUE</span>
-</pre></div></div><section id="composition-and-eos">
-<h3>Composition and EOS<a class="headerlink" href="#composition-and-eos" title="Permalink to this heading">¶</a></h3>
-<p>The NSE table was generated using a 125 nuclei reaction network
-(described in <span id="id1">[<a class="reference internal" href="zreferences.html#id29" title="H. Ma, S. E. Woosley, C. M. Malone, A. Almgren, and J. Bell. Carbon Deflagration in Type Ia Supernova. I. Centrally Ignited Models. \apj , 771(1):58, jul 2013. arXiv:1305.2433, doi:10.1088/0004-637X/771/1/58.">MaWoosleyMalone+13</a>]</span>), and includes electron-capture rates,
-so the compositional quantities it carries, <span class="math notranslate nohighlight">\(\bar{A}\)</span> and
-<span class="math notranslate nohighlight">\(Y_e\)</span> and not representable from the 19 isotopes we carry in the
-network.  In particular, it can attain a lower <span class="math notranslate nohighlight">\(Y_e\)</span> than
-<code class="docutils literal notranslate"><span class="pre">aprox19</span></code> can represent.</p>
-<p>For this reason, when we are using the NSE network, we always take the
-composition quantities in the EOS directly from <code class="docutils literal notranslate"><span class="pre">eos_state.aux[]</span></code>
-instead of from <code class="docutils literal notranslate"><span class="pre">eos_state.xn[]</span></code>.  The <code class="docutils literal notranslate"><span class="pre">AUX_THERMO</span></code> preprocessor
-variable is enabled in this case, and the equations of state interpret
-this to use the auxillary data for the composition.  This is described in <a class="reference internal" href="eos.html#aux-eos-comp"><span class="std std-ref">Auxillary Composition</span></a>.</p>
-</section>
-<section id="nse-table-outputs">
-<h3>NSE Table Outputs<a class="headerlink" href="#nse-table-outputs" title="Permalink to this heading">¶</a></h3>
-<p>The NSE table provides values for the auxiliary composition,
-<span class="math notranslate nohighlight">\(Y_e\)</span>, <span class="math notranslate nohighlight">\(\bar{A}\)</span>, and <span class="math notranslate nohighlight">\(\langle B/A \rangle\)</span>
-resulting from the full 125 nuclei network.   It also provides a set of 19
-<span class="math notranslate nohighlight">\(X_k\)</span> that map into the isotopes carried by <code class="docutils literal notranslate"><span class="pre">aprox19</span></code>.</p>
-<p>These three quantities are stored as <code class="docutils literal notranslate"><span class="pre">aux</span></code> data in the network and
-are indexed as <code class="docutils literal notranslate"><span class="pre">iye</span></code>, <code class="docutils literal notranslate"><span class="pre">iabar</span></code>, and <code class="docutils literal notranslate"><span class="pre">ibea</span></code>.  Additionally, when
-coupling to hydrodynamics, we need to advect these auxillary
-quantities.</p>
-<p>For Strang split coupling of hydro and reactions, <span class="math notranslate nohighlight">\(DX_k/Dt = 0\)</span>,
-and our evolution equations are:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-\frac{DY_e}{Dt} &amp;= \sum_k \frac{Z_k}{A_k} \frac{DX_k}{Dt} = 0 \\
-\frac{D}{Dt} \frac{1}{\bar{A}} &amp;= - \frac{1}{\bar{A}^2} \frac{D\bar{A}}{Dt} = \sum_k \frac{1}{A_k} \frac{DX_k}{Dt} = 0 \rightarrow \frac{D\bar{A}}{Dt} = 0 \\
-\frac{D}{Dt} \left (\frac{B}{A} \right ) &amp;= \sum_k \frac{B_k}{A_k} \frac{DX_k}{Dt} = 0
-\end{align*}\end{split}\]</div>
-<p>Therefore each of these auxillar equations obeys an advection equation
-in the hydro part of the advancement.</p>
-</section>
-<section id="nse-flow">
-<h3>NSE Flow<a class="headerlink" href="#nse-flow" title="Permalink to this heading">¶</a></h3>
-<p>The basic flow of a simulation using <code class="docutils literal notranslate"><span class="pre">aprox19</span></code> + the NSE table is as follows:</p>
-<ul>
-<li><p>initialize the problem, including <span class="math notranslate nohighlight">\(X_k\)</span></p></li>
-<li><p>fill the initial aux data with <span class="math notranslate nohighlight">\(Y_e\)</span>, <span class="math notranslate nohighlight">\(\bar{A}\)</span>, and <span class="math notranslate nohighlight">\((B/A)\)</span></p></li>
-<li><p>in hydro, we will update these quantities simply via advection (for
-Strang-split evolution)</p></li>
-<li><p>for the reactive update:</p>
-<ul>
-<li><p>check if NSE applies (see below)</p></li>
-<li><p>if we are in an NSE region:</p>
-<ul>
-<li><p>use <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(T\)</span>, and <span class="math notranslate nohighlight">\(Y_e\)</span> to call the table.
-This returns: <span class="math notranslate nohighlight">\(dY_e/dt\)</span>, <span class="math notranslate nohighlight">\((B/A)_{\rm out}\)</span>, and <span class="math notranslate nohighlight">\(\bar{A}_{\rm out}\)</span>.</p></li>
-<li><p>update <span class="math notranslate nohighlight">\(Y_e\)</span> <a class="footnote-reference brackets" href="#fy" id="id2">1</a> :</p>
-<div class="math notranslate nohighlight">
-\[(Y_e)_{\rm out} = (Y_e)_{\rm in} + \Delta t \frac{dY_e}{dt}\]</div>
-</li>
-<li><p><span class="math notranslate nohighlight">\(\bar{A}_{\rm out}\)</span> is simply the value returned from the table</p></li>
-<li><p>the energy generation rate, <span class="math notranslate nohighlight">\(e_{\rm nuc}\)</span> is:</p>
-<div class="math notranslate nohighlight">
-\[e_{\rm nuc} = \eta \left [ \left ( \frac{B}{A} \right )_{\rm out} -
-                           \left ( \frac{B}{A} \right )_{\rm in} \right ] * \frac{1.602 \times 10^{-6}  {\rm erg}}{{\rm MeV}} N_A \frac{1}{\Delta t}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\eta\)</span> is an inertia term &lt; 1 to prevent the energy changing too much in one set.</p>
-</li>
-<li><p>the new binding energy for the zone is then:</p>
-<div class="math notranslate nohighlight">
-\[\left ( \frac{B}{A} \right )_{\rm out}  = \left ( \frac{B}{A} \right )_{\rm in} + \eta \left [ \left ( \frac{B}{A} \right )_{\rm out} - \left ( \frac{B}{A} \right )_{\rm in} \right ]\]</div>
-</li>
-<li><p>update the mass fractions, <span class="math notranslate nohighlight">\(X_k\)</span>, using the values from the table</p></li>
-</ul>
-</li>
-<li><p>if we are not in NSE:</p>
-<ul class="simple">
-<li><p>integrate the <code class="docutils literal notranslate"><span class="pre">aprox19</span></code> network as usual</p></li>
-<li><p>update the aux quantities at the end of the burn</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="nse-check">
-<h3>NSE check<a class="headerlink" href="#nse-check" title="Permalink to this heading">¶</a></h3>
-<p>We determine is a zone is in NSE according to:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\rho\)</span> &gt; <code class="docutils literal notranslate"><span class="pre">rho_nse</span></code></p></li>
-<li><p><span class="math notranslate nohighlight">\(T\)</span> &gt; <code class="docutils literal notranslate"><span class="pre">T_nse</span></code></p></li>
-<li><p><span class="math notranslate nohighlight">\(X(\isotm{C}{12})\)</span> &lt; <code class="docutils literal notranslate"><span class="pre">C_nse</span></code></p></li>
-<li><p><span class="math notranslate nohighlight">\(X(\isotm{He}{4}) + X(\isotm{Cr}{48}) + X(\isotm{Fe}{52}) + X(\isotm{Fe}{54}) + X(\isotm{Ni}{56})\)</span> &gt; <code class="docutils literal notranslate"><span class="pre">He_Fe_nse</span></code></p></li>
-</ul>
-</section>
-</section>
-<section id="self-consistent-nse">
-<span id="id3"></span><h2>Self-consistent NSE<a class="headerlink" href="#self-consistent-nse" title="Permalink to this heading">¶</a></h2>
-<p>The self-consistent NSE approach uses only the nuclei in the main
-reaction network.  It solves for the chemical potentials of the proton
-and neutron and from there gets the abundances of each of the nuclei
-under the assumption of NSE, following the procedure outlined in <span id="id4">[<a class="reference internal" href="zreferences.html#id36" title="A. C. Calder, D. M. Townsley, I. R. Seitenzahl, F. Peng, O. E. B. Messer, N. Vladimirova, E. F. Brown, J. W. Truran, and D. Q. Lamb. Capturing the fire: flame energetics and neutronization for type ia supernova simulations. The Astrophysical Journal, 656(1):313–332, feb 2007. URL: https://doi.org/10.1086/510709, doi:10.1086/510709.">CTS+07</a>]</span>.</p>
-<p>The solve is done using a port of the hybrid Powell method from
-MINPACK (we ported the solver to templated C++).</p>
-<p>The advantage of this approach is that it can be used with any
-reaction network, once the integration has reached NSE.</p>
-<p>This solver is enabled by compiling with</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1"><span class="nv">USE_NSE_NET</span><span class="o">=</span>TRUE</span>
-</pre></div></div><p>The functions to find the NSE state are then found in <code class="docutils literal notranslate"><span class="pre">nse_solver.H</span></code>.</p>
-<p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="fy"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
-<dd><p>The table actually provides the weak rate, which is the sum
-of all electron capture and positron decay rates times the
-appropriate abundances minus a similar rate for the beta decay and
-positron capture, [wrate] = [rectot] + [rpdtot] - [redtot] - [rpctot]</p>
-<p>So if electron capture dominates, then [wrate] is positive and this should
-be subtracted from <span class="math notranslate nohighlight">\(Y_e\)</span>.</p>
-</dd>
-</dl>
+<p>These two NSE solvers are in the next sections.</p>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 </section>
 
@@ -309,14 +253,14 @@ be subtracted from <span class="math notranslate nohighlight">\(Y_e\)</span>.</p
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="integrators.html" class="btn btn-neutral float-left" title="Integrating a Network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="transport.html" class="btn btn-neutral float-right" title="Transport Coefficients" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ode_integrators.html" class="btn btn-neutral float-left" title="ODE Integrators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nse_tabular.html" class="btn btn-neutral float-right" title="Tabulated NSE and aprox19" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2012, Microphysics Development Team.</p>
+    <p>&#169; Copyright 2025, Microphysics Development Team.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
