@@ -19,7 +19,7 @@ def create_network():
                                           remove_al27_alpha_links=False,
                                           include_zn=False,
                                           extra_nuclei=extra_reactants,
-                                          do_detailed_balance=True)
+                                          do_detailed_balance=False)
 
     # create a modified rate to link Na22 to even Z nuclei
     rl = pyna.ReacLibLibrary()
