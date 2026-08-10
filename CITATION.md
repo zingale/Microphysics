@@ -16,7 +16,7 @@ bibtex:
  volume = {11},
  number = {124},
  pages = {10422},
- author = {AMReX-Astro Microphysics Team and
+ author = {{AMReX-Astro Microphysics Team} and
            Bhargava, Khanak and
            Bishop, Abigail and
            Chen, Zhi and
