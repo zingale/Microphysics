@@ -129,7 +129,7 @@ namespace C12_C12_to_He4_Ne20_starlib_data {
 
 // temperature / rate tabulation for O16 + C12 --> p + Al27
 
-namespace C12_O16_to_p_Al27_starlib_data {
+namespace O16_C12_to_p_Al27_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 39> log_t9 = {
      -2.995732273553991  , -2.8134107167600364 , -2.659260036932778  ,
@@ -184,7 +184,7 @@ namespace C12_O16_to_p_Al27_starlib_data {
 
 // temperature / rate tabulation for O16 + C12 --> He4 + Mg24
 
-namespace C12_O16_to_He4_Mg24_starlib_data {
+namespace O16_C12_to_He4_Mg24_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 39> log_t9 = {
      -2.995732273553991  , -2.8134107167600364 , -2.659260036932778  ,
@@ -410,7 +410,7 @@ namespace He4_He4_He4_to_C12_starlib_data {
 
 // temperature / rate tabulation for C12 + p --> N13
 
-namespace p_C12_to_N13_starlib_data {
+namespace C12_p_to_N13_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 55> log_t9 = {
      -5.115995809754082  , -4.961845129926823  , -4.8283137373023015 ,
@@ -483,7 +483,7 @@ namespace p_C12_to_N13_starlib_data {
 
 // temperature / rate tabulation for C12 + He4 --> O16
 
-namespace He4_C12_to_O16_starlib_data {
+namespace C12_He4_to_O16_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 40> log_t9 = {
      -3.2188758248682006 , -2.995732273553991  , -2.8134107167600364 ,
@@ -541,7 +541,7 @@ namespace He4_C12_to_O16_starlib_data {
 
 // temperature / rate tabulation for N13 + He4 --> p + O16
 
-namespace He4_N13_to_p_O16_starlib_data {
+namespace N13_He4_to_p_O16_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -617,7 +617,7 @@ namespace He4_N13_to_p_O16_starlib_data {
 
 // temperature / rate tabulation for O16 + He4 --> Ne20
 
-namespace He4_O16_to_Ne20_starlib_data {
+namespace O16_He4_to_Ne20_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -693,7 +693,7 @@ namespace He4_O16_to_Ne20_starlib_data {
 
 // temperature / rate tabulation for Ne20 + He4 --> Mg24
 
-namespace He4_Ne20_to_Mg24_starlib_data {
+namespace Ne20_He4_to_Mg24_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -760,7 +760,7 @@ namespace He4_Ne20_to_Mg24_starlib_data {
 
 // temperature / rate tabulation for Na23 + p --> He4 + Ne20
 
-namespace p_Na23_to_He4_Ne20_starlib_data {
+namespace Na23_p_to_He4_Ne20_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -827,7 +827,7 @@ namespace p_Na23_to_He4_Ne20_starlib_data {
 
 // temperature / rate tabulation for Na23 + p --> Mg24
 
-namespace p_Na23_to_Mg24_starlib_data {
+namespace Na23_p_to_Mg24_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -894,7 +894,7 @@ namespace p_Na23_to_Mg24_starlib_data {
 
 // temperature / rate tabulation for Mg24 + He4 --> Si28
 
-namespace He4_Mg24_to_Si28_starlib_data {
+namespace Mg24_He4_to_Si28_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -970,7 +970,7 @@ namespace He4_Mg24_to_Si28_starlib_data {
 
 // temperature / rate tabulation for Al27 + p --> He4 + Mg24
 
-namespace p_Al27_to_He4_Mg24_starlib_data {
+namespace Al27_p_to_He4_Mg24_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -1037,7 +1037,7 @@ namespace p_Al27_to_He4_Mg24_starlib_data {
 
 // temperature / rate tabulation for Al27 + p --> Si28
 
-namespace p_Al27_to_Si28_starlib_data {
+namespace Al27_p_to_Si28_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -1089,7 +1089,7 @@ namespace p_Al27_to_Si28_starlib_data {
      0.15956456967133845, 0.131028262406404  , 0.11867152971749854,
      0.10885440491208208, 0.10074990310014315, 0.09349034308733897,
      0.08801087732271337, 0.08342160813907236, 0.07881118042428985,
-     0.071389996086673  , 0.06485097231961627, 0.04879016416943204,
+     0.071389996086673  , 0.06485097231961627, 0.04879016416943205,
      0.03729578474369693, 0.03149866705937102, 0.02955880224154443,
      0.02858745685191247, 0.02955880224154443, 0.03149866705937102,
      0.03246719013750141, 0.03343477608623742, 0.03440142671733232,
@@ -1104,7 +1104,7 @@ namespace p_Al27_to_Si28_starlib_data {
 
 // temperature / rate tabulation for Si28 + He4 --> S32
 
-namespace He4_Si28_to_S32_starlib_data {
+namespace Si28_He4_to_S32_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 38> log_t9 = {
      -2.8134107167600364 , -2.659260036932778  , -2.5257286443082556 ,
@@ -1159,7 +1159,7 @@ namespace He4_Si28_to_S32_starlib_data {
 
 // temperature / rate tabulation for P31 + p --> He4 + Si28
 
-namespace p_P31_to_He4_Si28_starlib_data {
+namespace P31_p_to_He4_Si28_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -1226,7 +1226,7 @@ namespace p_P31_to_He4_Si28_starlib_data {
 
 // temperature / rate tabulation for P31 + p --> S32
 
-namespace p_P31_to_S32_starlib_data {
+namespace P31_p_to_S32_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -1293,7 +1293,7 @@ namespace p_P31_to_S32_starlib_data {
 
 // temperature / rate tabulation for Cr48 + He4 --> p + Mn51
 
-namespace He4_Cr48_to_p_Mn51_starlib_data {
+namespace Cr48_He4_to_p_Mn51_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 33> log_t9 = {
      -2.2072749131897207 , -2.120263536200091  , -2.0402208285265546 ,
@@ -1342,7 +1342,7 @@ namespace He4_Cr48_to_p_Mn51_starlib_data {
 
 // temperature / rate tabulation for Cr48 + He4 --> Fe52
 
-namespace He4_Cr48_to_Fe52_starlib_data {
+namespace Cr48_He4_to_Fe52_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 33> log_t9 = {
      -2.2072749131897207 , -2.120263536200091  , -2.0402208285265546 ,
@@ -1391,7 +1391,7 @@ namespace He4_Cr48_to_Fe52_starlib_data {
 
 // temperature / rate tabulation for Mn51 + p --> Fe52
 
-namespace p_Mn51_to_Fe52_starlib_data {
+namespace Mn51_p_to_Fe52_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -1466,7 +1466,7 @@ namespace p_Mn51_to_Fe52_starlib_data {
 
 // temperature / rate tabulation for Mn51 + He4 --> Co55
 
-namespace He4_Mn51_to_Co55_starlib_data {
+namespace Mn51_He4_to_Co55_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 28> log_t9 = {
      -1.8325814637483102 , -1.7147984280919266 , -1.6094379124341003 ,
@@ -1512,7 +1512,7 @@ namespace He4_Mn51_to_Co55_starlib_data {
 
 // temperature / rate tabulation for Fe52 + He4 --> p + Co55
 
-namespace He4_Fe52_to_p_Co55_starlib_data {
+namespace Fe52_He4_to_p_Co55_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 28> log_t9 = {
      -1.8325814637483102 , -1.7147984280919266 , -1.6094379124341003 ,
@@ -1562,7 +1562,7 @@ namespace He4_Fe52_to_p_Co55_starlib_data {
 
 // temperature / rate tabulation for Fe52 + He4 --> Ni56
 
-namespace He4_Fe52_to_Ni56_starlib_data {
+namespace Fe52_He4_to_Ni56_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 28> log_t9 = {
      -1.8325814637483102 , -1.7147984280919266 , -1.6094379124341003 ,
@@ -1612,7 +1612,7 @@ namespace He4_Fe52_to_Ni56_starlib_data {
 
 // temperature / rate tabulation for Co55 + p --> Ni56
 
-namespace p_Co55_to_Ni56_starlib_data {
+namespace Co55_p_to_Ni56_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -1687,7 +1687,7 @@ namespace p_Co55_to_Ni56_starlib_data {
 
 // temperature / rate tabulation for Co55 + He4 --> Cu59
 
-namespace He4_Co55_to_Cu59_starlib_data {
+namespace Co55_He4_to_Cu59_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 28> log_t9 = {
      -1.8325814637483102 , -1.7147984280919266 , -1.6094379124341003 ,
@@ -1737,7 +1737,7 @@ namespace He4_Co55_to_Cu59_starlib_data {
 
 // temperature / rate tabulation for Ni56 + He4 --> Zn60
 
-namespace He4_Ni56_to_Zn60_starlib_data {
+namespace Ni56_He4_to_Zn60_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 28> log_t9 = {
      -1.8325814637483102 , -1.7147984280919266 , -1.6094379124341003 ,
@@ -1787,7 +1787,7 @@ namespace He4_Ni56_to_Zn60_starlib_data {
 
 // temperature / rate tabulation for Cu59 + p --> He4 + Ni56
 
-namespace p_Cu59_to_He4_Ni56_starlib_data {
+namespace Cu59_p_to_He4_Ni56_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -1862,7 +1862,7 @@ namespace p_Cu59_to_He4_Ni56_starlib_data {
 
 // temperature / rate tabulation for Cu59 + p --> Zn60
 
-namespace p_Cu59_to_Zn60_starlib_data {
+namespace Cu59_p_to_Zn60_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -2027,7 +2027,7 @@ namespace O16_O16_to_n_S31_starlib_data {
 
 // temperature / rate tabulation for O16 + C12 --> n + Si27
 
-namespace C12_O16_to_n_Si27_starlib_data {
+namespace O16_C12_to_n_Si27_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 37> log_t9 = {
      -2.659260036932778  , -2.5257286443082556 , -2.4079456086518722 ,
@@ -2082,7 +2082,7 @@ namespace C12_O16_to_n_Si27_starlib_data {
 
 // temperature / rate tabulation for Mn51 + He4 --> p + Fe54
 
-namespace He4_Mn51_to_p_Fe54_starlib_data {
+namespace Mn51_He4_to_p_Fe54_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 28> log_t9 = {
      -1.8325814637483102 , -1.7147984280919266 , -1.6094379124341003 ,
@@ -2128,7 +2128,7 @@ namespace He4_Mn51_to_p_Fe54_starlib_data {
 
 // temperature / rate tabulation for Fe54 + p --> Co55
 
-namespace p_Fe54_to_Co55_starlib_data {
+namespace Fe54_p_to_Co55_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -2195,7 +2195,7 @@ namespace p_Fe54_to_Co55_starlib_data {
 
 // temperature / rate tabulation for Fe56 + p --> Co57
 
-namespace p_Fe56_to_Co57_starlib_data {
+namespace Fe56_p_to_Co57_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -2262,7 +2262,7 @@ namespace p_Fe56_to_Co57_starlib_data {
 
 // temperature / rate tabulation for Fe54 + He4 --> Ni58
 
-namespace He4_Fe54_to_Ni58_starlib_data {
+namespace Fe54_He4_to_Ni58_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 28> log_t9 = {
      -1.8325814637483102 , -1.7147984280919266 , -1.6094379124341003 ,
@@ -2308,7 +2308,7 @@ namespace He4_Fe54_to_Ni58_starlib_data {
 
 // temperature / rate tabulation for Co55 + n --> Co56
 
-namespace n_Co55_to_Co56_starlib_data {
+namespace Co55_n_to_Co56_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -2384,7 +2384,7 @@ namespace n_Co55_to_Co56_starlib_data {
 
 // temperature / rate tabulation for Co56 + n --> p + Fe56
 
-namespace n_Co56_to_p_Fe56_starlib_data {
+namespace Co56_n_to_p_Fe56_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -2460,7 +2460,7 @@ namespace n_Co56_to_p_Fe56_starlib_data {
 
 // temperature / rate tabulation for Co56 + n --> Co57
 
-namespace n_Co56_to_Co57_starlib_data {
+namespace Co56_n_to_Co57_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -2536,7 +2536,7 @@ namespace n_Co56_to_Co57_starlib_data {
 
 // temperature / rate tabulation for Co57 + p --> He4 + Fe54
 
-namespace p_Co57_to_He4_Fe54_starlib_data {
+namespace Co57_p_to_He4_Fe54_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -2603,7 +2603,7 @@ namespace p_Co57_to_He4_Fe54_starlib_data {
 
 // temperature / rate tabulation for Co57 + p --> Ni58
 
-namespace p_Co57_to_Ni58_starlib_data {
+namespace Co57_p_to_Ni58_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -2670,7 +2670,7 @@ namespace p_Co57_to_Ni58_starlib_data {
 
 // temperature / rate tabulation for Co55 + He4 --> p + Ni58
 
-namespace He4_Co55_to_p_Ni58_starlib_data {
+namespace Co55_He4_to_p_Ni58_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 28> log_t9 = {
      -1.8325814637483102 , -1.7147984280919266 , -1.6094379124341003 ,
@@ -2716,7 +2716,7 @@ namespace He4_Co55_to_p_Ni58_starlib_data {
 
 // temperature / rate tabulation for Ni56 + n --> p + Co56
 
-namespace n_Ni56_to_p_Co56_starlib_data {
+namespace Ni56_n_to_p_Co56_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -2792,7 +2792,7 @@ namespace n_Ni56_to_p_Co56_starlib_data {
 
 // temperature / rate tabulation for Ni58 + p --> Cu59
 
-namespace p_Ni58_to_Cu59_starlib_data {
+namespace Ni58_p_to_Cu59_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -2859,7 +2859,7 @@ namespace p_Ni58_to_Cu59_starlib_data {
 
 // temperature / rate tabulation for Cu59 + n --> He4 + Co56
 
-namespace n_Cu59_to_He4_Co56_starlib_data {
+namespace Cu59_n_to_He4_Co56_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -2935,7 +2935,7 @@ namespace n_Cu59_to_He4_Co56_starlib_data {
 
 // temperature / rate tabulation for S32 + He4 --> Ar36
 
-namespace He4_S32_to_Ar36_starlib_data {
+namespace S32_He4_to_Ar36_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 38> log_t9 = {
      -2.8134107167600364 , -2.659260036932778  , -2.5257286443082556 ,
@@ -2990,7 +2990,7 @@ namespace He4_S32_to_Ar36_starlib_data {
 
 // temperature / rate tabulation for Cl35 + p --> Ar36
 
-namespace p_Cl35_to_Ar36_starlib_data {
+namespace Cl35_p_to_Ar36_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -3047,7 +3047,7 @@ namespace p_Cl35_to_Ar36_starlib_data {
      0.16041672140590466, 0.15100287353652742, 0.1319050708799386 ,
      0.11511280710050467, 0.09984533496971612, 0.08709470685093373,
      0.0769610411361284 , 0.0620353909194527 , 0.05638033343610769,
-     0.05354076692802976, 0.05164323315183839, 0.04879016416943204,
+     0.05354076692802976, 0.05164323315183839, 0.04879016416943205,
      0.04592893188839973, 0.04401688541677426, 0.04210117601863533,
      0.04018178963283176, 0.04018178963283176, 0.04018178963283176,
      0.04018178963283176, 0.04018178963283176, 0.04018178963283176
@@ -3057,7 +3057,7 @@ namespace p_Cl35_to_Ar36_starlib_data {
 
 // temperature / rate tabulation for Cl35 + p --> He4 + S32
 
-namespace p_Cl35_to_He4_S32_starlib_data {
+namespace Cl35_p_to_He4_S32_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -3096,7 +3096,7 @@ namespace p_Cl35_to_He4_S32_starlib_data {
      -1.3758185491345005e+01, -1.0808343906784620e+01,
      -8.4794158270822066e+00, -6.5712830423609239e+00,
      -4.9917154092437448e+00, -3.6726124816500643e+00,
-     -1.5871873034992807e+00, -1.3008457330480694e-03,
+     -1.5871873034992807e+00, -1.3008457330480696e-03,
      1.2377943528014466e+00,  2.2406033006381643e+00,
      3.0661907372025525e+00,  4.6279096729575810e+00,
      5.7670702138921195e+00,  6.6780905106776620e+00,
@@ -3133,7 +3133,7 @@ namespace p_Cl35_to_He4_S32_starlib_data {
 
 // temperature / rate tabulation for Ar36 + He4 --> Ca40
 
-namespace He4_Ar36_to_Ca40_starlib_data {
+namespace Ar36_He4_to_Ca40_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 38> log_t9 = {
      -2.8134107167600364 , -2.659260036932778  , -2.5257286443082556 ,
@@ -3188,7 +3188,7 @@ namespace He4_Ar36_to_Ca40_starlib_data {
 
 // temperature / rate tabulation for K39 + p --> Ca40
 
-namespace p_K39_to_Ca40_starlib_data {
+namespace K39_p_to_Ca40_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 51> log_t9 = {
      -4.605170185988091  , -4.509860006183766  , -4.422848629194137  ,
@@ -3255,7 +3255,7 @@ namespace p_K39_to_Ca40_starlib_data {
 
 // temperature / rate tabulation for K39 + p --> He4 + Ar36
 
-namespace p_K39_to_He4_Ar36_starlib_data {
+namespace K39_p_to_He4_Ar36_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -3322,7 +3322,7 @@ namespace p_K39_to_He4_Ar36_starlib_data {
 
 // temperature / rate tabulation for Ca40 + He4 --> Ti44
 
-namespace He4_Ca40_to_Ti44_starlib_data {
+namespace Ca40_He4_to_Ti44_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 43> log_t9 = {
      -3.912023005428146  , -3.6888794541139363 , -3.506557897319982  ,
@@ -3383,7 +3383,7 @@ namespace He4_Ca40_to_Ti44_starlib_data {
 
 // temperature / rate tabulation for Sc43 + p --> Ti44
 
-namespace p_Sc43_to_Ti44_starlib_data {
+namespace Sc43_p_to_Ti44_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -3450,7 +3450,7 @@ namespace p_Sc43_to_Ti44_starlib_data {
 
 // temperature / rate tabulation for Sc43 + p --> He4 + Ca40
 
-namespace p_Sc43_to_He4_Ca40_starlib_data {
+namespace Sc43_p_to_He4_Ca40_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -3525,7 +3525,7 @@ namespace p_Sc43_to_He4_Ca40_starlib_data {
 
 // temperature / rate tabulation for Ti44 + He4 --> Cr48
 
-namespace He4_Ti44_to_Cr48_starlib_data {
+namespace Ti44_He4_to_Cr48_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 33> log_t9 = {
      -2.2072749131897207 , -2.120263536200091  , -2.0402208285265546 ,
@@ -3580,7 +3580,7 @@ namespace He4_Ti44_to_Cr48_starlib_data {
 
 // temperature / rate tabulation for V47 + p --> Cr48
 
-namespace p_V47_to_Cr48_starlib_data {
+namespace V47_p_to_Cr48_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -3655,7 +3655,7 @@ namespace p_V47_to_Cr48_starlib_data {
 
 // temperature / rate tabulation for V47 + p --> He4 + Ti44
 
-namespace p_V47_to_He4_Ti44_starlib_data {
+namespace V47_p_to_He4_Ti44_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 50> log_t9 = {
      -4.509860006183766  , -4.422848629194137  , -4.3428059215206005 ,
@@ -3722,7 +3722,7 @@ namespace p_V47_to_He4_Ti44_starlib_data {
 
 // temperature / rate tabulation for Fe52 + n --> Fe53
 
-namespace n_Fe52_to_Fe53_starlib_data {
+namespace Fe52_n_to_Fe53_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -3798,7 +3798,7 @@ namespace n_Fe52_to_Fe53_starlib_data {
 
 // temperature / rate tabulation for Fe53 + n --> Fe54
 
-namespace n_Fe53_to_Fe54_starlib_data {
+namespace Fe53_n_to_Fe54_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -3874,7 +3874,7 @@ namespace n_Fe53_to_Fe54_starlib_data {
 
 // temperature / rate tabulation for Fe54 + n --> Fe55
 
-namespace n_Fe54_to_Fe55_starlib_data {
+namespace Fe54_n_to_Fe55_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -3950,7 +3950,7 @@ namespace n_Fe54_to_Fe55_starlib_data {
 
 // temperature / rate tabulation for Fe55 + n --> Fe56
 
-namespace n_Fe55_to_Fe56_starlib_data {
+namespace Fe55_n_to_Fe56_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -4026,7 +4026,7 @@ namespace n_Fe55_to_Fe56_starlib_data {
 
 // temperature / rate tabulation for Ni56 + n --> Ni57
 
-namespace n_Ni56_to_Ni57_starlib_data {
+namespace Ni56_n_to_Ni57_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -4102,7 +4102,7 @@ namespace n_Ni56_to_Ni57_starlib_data {
 
 // temperature / rate tabulation for Ni57 + n --> Ni58
 
-namespace n_Ni57_to_Ni58_starlib_data {
+namespace Ni57_n_to_Ni58_starlib_data {
 
     inline AMREX_GPU_DEVICE amrex::Array1D<amrex::Real, 1, 60> log_t9 = {
      -6.907755278982137  , -6.214608098422191  , -5.809142990314028  ,
@@ -4235,7 +4235,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_C12_O16_to_p_Al27_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_O16_C12_to_p_Al27_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // O16 + C12 --> p + Al27
 
@@ -4244,13 +4244,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              C12_O16_to_p_Al27_starlib_data::log_t9,
-                                              C12_O16_to_p_Al27_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_C12_O16_to_p_Al27_starlib>();
+                                              O16_C12_to_p_Al27_starlib_data::log_t9,
+                                              O16_C12_to_p_Al27_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_O16_C12_to_p_Al27_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     C12_O16_to_p_Al27_starlib_data::log_t9,
-                                                     C12_O16_to_p_Al27_starlib_data::sigma_rate);
+                                                     O16_C12_to_p_Al27_starlib_data::log_t9,
+                                                     O16_C12_to_p_Al27_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4262,7 +4262,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_C12_O16_to_He4_Mg24_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_O16_C12_to_He4_Mg24_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // O16 + C12 --> He4 + Mg24
 
@@ -4271,13 +4271,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              C12_O16_to_He4_Mg24_starlib_data::log_t9,
-                                              C12_O16_to_He4_Mg24_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_C12_O16_to_He4_Mg24_starlib>();
+                                              O16_C12_to_He4_Mg24_starlib_data::log_t9,
+                                              O16_C12_to_He4_Mg24_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_O16_C12_to_He4_Mg24_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     C12_O16_to_He4_Mg24_starlib_data::log_t9,
-                                                     C12_O16_to_He4_Mg24_starlib_data::sigma_rate);
+                                                     O16_C12_to_He4_Mg24_starlib_data::log_t9,
+                                                     O16_C12_to_He4_Mg24_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4370,7 +4370,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_C12_to_N13_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_C12_p_to_N13_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // C12 + p --> N13
 
@@ -4379,13 +4379,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_C12_to_N13_starlib_data::log_t9,
-                                              p_C12_to_N13_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_C12_to_N13_starlib>();
+                                              C12_p_to_N13_starlib_data::log_t9,
+                                              C12_p_to_N13_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_C12_p_to_N13_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_C12_to_N13_starlib_data::log_t9,
-                                                     p_C12_to_N13_starlib_data::sigma_rate);
+                                                     C12_p_to_N13_starlib_data::log_t9,
+                                                     C12_p_to_N13_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4397,7 +4397,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_C12_to_O16_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_C12_He4_to_O16_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // C12 + He4 --> O16
 
@@ -4406,13 +4406,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_C12_to_O16_starlib_data::log_t9,
-                                              He4_C12_to_O16_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_C12_to_O16_starlib>();
+                                              C12_He4_to_O16_starlib_data::log_t9,
+                                              C12_He4_to_O16_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_C12_He4_to_O16_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_C12_to_O16_starlib_data::log_t9,
-                                                     He4_C12_to_O16_starlib_data::sigma_rate);
+                                                     C12_He4_to_O16_starlib_data::log_t9,
+                                                     C12_He4_to_O16_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4424,7 +4424,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_N13_to_p_O16_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_N13_He4_to_p_O16_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // N13 + He4 --> p + O16
 
@@ -4433,13 +4433,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_N13_to_p_O16_starlib_data::log_t9,
-                                              He4_N13_to_p_O16_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_N13_to_p_O16_starlib>();
+                                              N13_He4_to_p_O16_starlib_data::log_t9,
+                                              N13_He4_to_p_O16_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_N13_He4_to_p_O16_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_N13_to_p_O16_starlib_data::log_t9,
-                                                     He4_N13_to_p_O16_starlib_data::sigma_rate);
+                                                     N13_He4_to_p_O16_starlib_data::log_t9,
+                                                     N13_He4_to_p_O16_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4451,7 +4451,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_O16_to_Ne20_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_O16_He4_to_Ne20_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // O16 + He4 --> Ne20
 
@@ -4460,13 +4460,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_O16_to_Ne20_starlib_data::log_t9,
-                                              He4_O16_to_Ne20_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_O16_to_Ne20_starlib>();
+                                              O16_He4_to_Ne20_starlib_data::log_t9,
+                                              O16_He4_to_Ne20_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_O16_He4_to_Ne20_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_O16_to_Ne20_starlib_data::log_t9,
-                                                     He4_O16_to_Ne20_starlib_data::sigma_rate);
+                                                     O16_He4_to_Ne20_starlib_data::log_t9,
+                                                     O16_He4_to_Ne20_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4478,7 +4478,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Ne20_to_Mg24_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Ne20_He4_to_Mg24_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ne20 + He4 --> Mg24
 
@@ -4487,13 +4487,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Ne20_to_Mg24_starlib_data::log_t9,
-                                              He4_Ne20_to_Mg24_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Ne20_to_Mg24_starlib>();
+                                              Ne20_He4_to_Mg24_starlib_data::log_t9,
+                                              Ne20_He4_to_Mg24_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Ne20_He4_to_Mg24_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Ne20_to_Mg24_starlib_data::log_t9,
-                                                     He4_Ne20_to_Mg24_starlib_data::sigma_rate);
+                                                     Ne20_He4_to_Mg24_starlib_data::log_t9,
+                                                     Ne20_He4_to_Mg24_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4505,7 +4505,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Na23_to_He4_Ne20_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Na23_p_to_He4_Ne20_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Na23 + p --> He4 + Ne20
 
@@ -4514,13 +4514,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Na23_to_He4_Ne20_starlib_data::log_t9,
-                                              p_Na23_to_He4_Ne20_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Na23_to_He4_Ne20_starlib>();
+                                              Na23_p_to_He4_Ne20_starlib_data::log_t9,
+                                              Na23_p_to_He4_Ne20_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Na23_p_to_He4_Ne20_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Na23_to_He4_Ne20_starlib_data::log_t9,
-                                                     p_Na23_to_He4_Ne20_starlib_data::sigma_rate);
+                                                     Na23_p_to_He4_Ne20_starlib_data::log_t9,
+                                                     Na23_p_to_He4_Ne20_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4532,7 +4532,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Na23_to_Mg24_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Na23_p_to_Mg24_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Na23 + p --> Mg24
 
@@ -4541,13 +4541,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Na23_to_Mg24_starlib_data::log_t9,
-                                              p_Na23_to_Mg24_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Na23_to_Mg24_starlib>();
+                                              Na23_p_to_Mg24_starlib_data::log_t9,
+                                              Na23_p_to_Mg24_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Na23_p_to_Mg24_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Na23_to_Mg24_starlib_data::log_t9,
-                                                     p_Na23_to_Mg24_starlib_data::sigma_rate);
+                                                     Na23_p_to_Mg24_starlib_data::log_t9,
+                                                     Na23_p_to_Mg24_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4559,7 +4559,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Mg24_to_Si28_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Mg24_He4_to_Si28_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Mg24 + He4 --> Si28
 
@@ -4568,13 +4568,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Mg24_to_Si28_starlib_data::log_t9,
-                                              He4_Mg24_to_Si28_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Mg24_to_Si28_starlib>();
+                                              Mg24_He4_to_Si28_starlib_data::log_t9,
+                                              Mg24_He4_to_Si28_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Mg24_He4_to_Si28_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Mg24_to_Si28_starlib_data::log_t9,
-                                                     He4_Mg24_to_Si28_starlib_data::sigma_rate);
+                                                     Mg24_He4_to_Si28_starlib_data::log_t9,
+                                                     Mg24_He4_to_Si28_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4586,7 +4586,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Al27_to_He4_Mg24_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Al27_p_to_He4_Mg24_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Al27 + p --> He4 + Mg24
 
@@ -4595,13 +4595,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Al27_to_He4_Mg24_starlib_data::log_t9,
-                                              p_Al27_to_He4_Mg24_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Al27_to_He4_Mg24_starlib>();
+                                              Al27_p_to_He4_Mg24_starlib_data::log_t9,
+                                              Al27_p_to_He4_Mg24_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Al27_p_to_He4_Mg24_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Al27_to_He4_Mg24_starlib_data::log_t9,
-                                                     p_Al27_to_He4_Mg24_starlib_data::sigma_rate);
+                                                     Al27_p_to_He4_Mg24_starlib_data::log_t9,
+                                                     Al27_p_to_He4_Mg24_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4613,7 +4613,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Al27_to_Si28_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Al27_p_to_Si28_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Al27 + p --> Si28
 
@@ -4622,13 +4622,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Al27_to_Si28_starlib_data::log_t9,
-                                              p_Al27_to_Si28_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Al27_to_Si28_starlib>();
+                                              Al27_p_to_Si28_starlib_data::log_t9,
+                                              Al27_p_to_Si28_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Al27_p_to_Si28_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Al27_to_Si28_starlib_data::log_t9,
-                                                     p_Al27_to_Si28_starlib_data::sigma_rate);
+                                                     Al27_p_to_Si28_starlib_data::log_t9,
+                                                     Al27_p_to_Si28_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4640,7 +4640,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Si28_to_S32_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Si28_He4_to_S32_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Si28 + He4 --> S32
 
@@ -4649,13 +4649,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Si28_to_S32_starlib_data::log_t9,
-                                              He4_Si28_to_S32_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Si28_to_S32_starlib>();
+                                              Si28_He4_to_S32_starlib_data::log_t9,
+                                              Si28_He4_to_S32_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Si28_He4_to_S32_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Si28_to_S32_starlib_data::log_t9,
-                                                     He4_Si28_to_S32_starlib_data::sigma_rate);
+                                                     Si28_He4_to_S32_starlib_data::log_t9,
+                                                     Si28_He4_to_S32_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4667,7 +4667,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_P31_to_He4_Si28_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_P31_p_to_He4_Si28_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // P31 + p --> He4 + Si28
 
@@ -4676,13 +4676,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_P31_to_He4_Si28_starlib_data::log_t9,
-                                              p_P31_to_He4_Si28_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_P31_to_He4_Si28_starlib>();
+                                              P31_p_to_He4_Si28_starlib_data::log_t9,
+                                              P31_p_to_He4_Si28_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_P31_p_to_He4_Si28_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_P31_to_He4_Si28_starlib_data::log_t9,
-                                                     p_P31_to_He4_Si28_starlib_data::sigma_rate);
+                                                     P31_p_to_He4_Si28_starlib_data::log_t9,
+                                                     P31_p_to_He4_Si28_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4694,7 +4694,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_P31_to_S32_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_P31_p_to_S32_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // P31 + p --> S32
 
@@ -4703,13 +4703,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_P31_to_S32_starlib_data::log_t9,
-                                              p_P31_to_S32_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_P31_to_S32_starlib>();
+                                              P31_p_to_S32_starlib_data::log_t9,
+                                              P31_p_to_S32_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_P31_p_to_S32_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_P31_to_S32_starlib_data::log_t9,
-                                                     p_P31_to_S32_starlib_data::sigma_rate);
+                                                     P31_p_to_S32_starlib_data::log_t9,
+                                                     P31_p_to_S32_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4721,7 +4721,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Cr48_to_p_Mn51_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Cr48_He4_to_p_Mn51_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Cr48 + He4 --> p + Mn51
 
@@ -4730,13 +4730,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Cr48_to_p_Mn51_starlib_data::log_t9,
-                                              He4_Cr48_to_p_Mn51_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Cr48_to_p_Mn51_starlib>();
+                                              Cr48_He4_to_p_Mn51_starlib_data::log_t9,
+                                              Cr48_He4_to_p_Mn51_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Cr48_He4_to_p_Mn51_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Cr48_to_p_Mn51_starlib_data::log_t9,
-                                                     He4_Cr48_to_p_Mn51_starlib_data::sigma_rate);
+                                                     Cr48_He4_to_p_Mn51_starlib_data::log_t9,
+                                                     Cr48_He4_to_p_Mn51_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4748,7 +4748,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Cr48_to_Fe52_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Cr48_He4_to_Fe52_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Cr48 + He4 --> Fe52
 
@@ -4757,13 +4757,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Cr48_to_Fe52_starlib_data::log_t9,
-                                              He4_Cr48_to_Fe52_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Cr48_to_Fe52_starlib>();
+                                              Cr48_He4_to_Fe52_starlib_data::log_t9,
+                                              Cr48_He4_to_Fe52_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Cr48_He4_to_Fe52_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Cr48_to_Fe52_starlib_data::log_t9,
-                                                     He4_Cr48_to_Fe52_starlib_data::sigma_rate);
+                                                     Cr48_He4_to_Fe52_starlib_data::log_t9,
+                                                     Cr48_He4_to_Fe52_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4775,7 +4775,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Mn51_to_Fe52_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Mn51_p_to_Fe52_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Mn51 + p --> Fe52
 
@@ -4784,13 +4784,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Mn51_to_Fe52_starlib_data::log_t9,
-                                              p_Mn51_to_Fe52_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Mn51_to_Fe52_starlib>();
+                                              Mn51_p_to_Fe52_starlib_data::log_t9,
+                                              Mn51_p_to_Fe52_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Mn51_p_to_Fe52_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Mn51_to_Fe52_starlib_data::log_t9,
-                                                     p_Mn51_to_Fe52_starlib_data::sigma_rate);
+                                                     Mn51_p_to_Fe52_starlib_data::log_t9,
+                                                     Mn51_p_to_Fe52_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4802,7 +4802,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Mn51_to_Co55_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Mn51_He4_to_Co55_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Mn51 + He4 --> Co55
 
@@ -4811,13 +4811,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Mn51_to_Co55_starlib_data::log_t9,
-                                              He4_Mn51_to_Co55_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Mn51_to_Co55_starlib>();
+                                              Mn51_He4_to_Co55_starlib_data::log_t9,
+                                              Mn51_He4_to_Co55_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Mn51_He4_to_Co55_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Mn51_to_Co55_starlib_data::log_t9,
-                                                     He4_Mn51_to_Co55_starlib_data::sigma_rate);
+                                                     Mn51_He4_to_Co55_starlib_data::log_t9,
+                                                     Mn51_He4_to_Co55_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4829,7 +4829,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Fe52_to_p_Co55_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Fe52_He4_to_p_Co55_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Fe52 + He4 --> p + Co55
 
@@ -4838,13 +4838,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Fe52_to_p_Co55_starlib_data::log_t9,
-                                              He4_Fe52_to_p_Co55_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Fe52_to_p_Co55_starlib>();
+                                              Fe52_He4_to_p_Co55_starlib_data::log_t9,
+                                              Fe52_He4_to_p_Co55_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Fe52_He4_to_p_Co55_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Fe52_to_p_Co55_starlib_data::log_t9,
-                                                     He4_Fe52_to_p_Co55_starlib_data::sigma_rate);
+                                                     Fe52_He4_to_p_Co55_starlib_data::log_t9,
+                                                     Fe52_He4_to_p_Co55_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4856,7 +4856,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Fe52_to_Ni56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Fe52_He4_to_Ni56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Fe52 + He4 --> Ni56
 
@@ -4865,13 +4865,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Fe52_to_Ni56_starlib_data::log_t9,
-                                              He4_Fe52_to_Ni56_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Fe52_to_Ni56_starlib>();
+                                              Fe52_He4_to_Ni56_starlib_data::log_t9,
+                                              Fe52_He4_to_Ni56_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Fe52_He4_to_Ni56_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Fe52_to_Ni56_starlib_data::log_t9,
-                                                     He4_Fe52_to_Ni56_starlib_data::sigma_rate);
+                                                     Fe52_He4_to_Ni56_starlib_data::log_t9,
+                                                     Fe52_He4_to_Ni56_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4883,7 +4883,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Co55_to_Ni56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Co55_p_to_Ni56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Co55 + p --> Ni56
 
@@ -4892,13 +4892,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Co55_to_Ni56_starlib_data::log_t9,
-                                              p_Co55_to_Ni56_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Co55_to_Ni56_starlib>();
+                                              Co55_p_to_Ni56_starlib_data::log_t9,
+                                              Co55_p_to_Ni56_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Co55_p_to_Ni56_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Co55_to_Ni56_starlib_data::log_t9,
-                                                     p_Co55_to_Ni56_starlib_data::sigma_rate);
+                                                     Co55_p_to_Ni56_starlib_data::log_t9,
+                                                     Co55_p_to_Ni56_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4910,7 +4910,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Co55_to_Cu59_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Co55_He4_to_Cu59_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Co55 + He4 --> Cu59
 
@@ -4919,13 +4919,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Co55_to_Cu59_starlib_data::log_t9,
-                                              He4_Co55_to_Cu59_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Co55_to_Cu59_starlib>();
+                                              Co55_He4_to_Cu59_starlib_data::log_t9,
+                                              Co55_He4_to_Cu59_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Co55_He4_to_Cu59_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Co55_to_Cu59_starlib_data::log_t9,
-                                                     He4_Co55_to_Cu59_starlib_data::sigma_rate);
+                                                     Co55_He4_to_Cu59_starlib_data::log_t9,
+                                                     Co55_He4_to_Cu59_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4937,7 +4937,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Ni56_to_Zn60_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Ni56_He4_to_Zn60_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ni56 + He4 --> Zn60
 
@@ -4946,13 +4946,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Ni56_to_Zn60_starlib_data::log_t9,
-                                              He4_Ni56_to_Zn60_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Ni56_to_Zn60_starlib>();
+                                              Ni56_He4_to_Zn60_starlib_data::log_t9,
+                                              Ni56_He4_to_Zn60_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Ni56_He4_to_Zn60_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Ni56_to_Zn60_starlib_data::log_t9,
-                                                     He4_Ni56_to_Zn60_starlib_data::sigma_rate);
+                                                     Ni56_He4_to_Zn60_starlib_data::log_t9,
+                                                     Ni56_He4_to_Zn60_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4964,7 +4964,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Cu59_to_He4_Ni56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Cu59_p_to_He4_Ni56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Cu59 + p --> He4 + Ni56
 
@@ -4973,13 +4973,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Cu59_to_He4_Ni56_starlib_data::log_t9,
-                                              p_Cu59_to_He4_Ni56_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Cu59_to_He4_Ni56_starlib>();
+                                              Cu59_p_to_He4_Ni56_starlib_data::log_t9,
+                                              Cu59_p_to_He4_Ni56_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Cu59_p_to_He4_Ni56_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Cu59_to_He4_Ni56_starlib_data::log_t9,
-                                                     p_Cu59_to_He4_Ni56_starlib_data::sigma_rate);
+                                                     Cu59_p_to_He4_Ni56_starlib_data::log_t9,
+                                                     Cu59_p_to_He4_Ni56_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -4991,7 +4991,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Cu59_to_Zn60_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Cu59_p_to_Zn60_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Cu59 + p --> Zn60
 
@@ -5000,13 +5000,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Cu59_to_Zn60_starlib_data::log_t9,
-                                              p_Cu59_to_Zn60_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Cu59_to_Zn60_starlib>();
+                                              Cu59_p_to_Zn60_starlib_data::log_t9,
+                                              Cu59_p_to_Zn60_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Cu59_p_to_Zn60_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Cu59_to_Zn60_starlib_data::log_t9,
-                                                     p_Cu59_to_Zn60_starlib_data::sigma_rate);
+                                                     Cu59_p_to_Zn60_starlib_data::log_t9,
+                                                     Cu59_p_to_Zn60_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5072,7 +5072,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_C12_O16_to_n_Si27_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_O16_C12_to_n_Si27_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // O16 + C12 --> n + Si27
 
@@ -5081,13 +5081,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              C12_O16_to_n_Si27_starlib_data::log_t9,
-                                              C12_O16_to_n_Si27_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_C12_O16_to_n_Si27_starlib>();
+                                              O16_C12_to_n_Si27_starlib_data::log_t9,
+                                              O16_C12_to_n_Si27_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_O16_C12_to_n_Si27_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     C12_O16_to_n_Si27_starlib_data::log_t9,
-                                                     C12_O16_to_n_Si27_starlib_data::sigma_rate);
+                                                     O16_C12_to_n_Si27_starlib_data::log_t9,
+                                                     O16_C12_to_n_Si27_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5099,7 +5099,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Mn51_to_p_Fe54_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Mn51_He4_to_p_Fe54_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Mn51 + He4 --> p + Fe54
 
@@ -5108,13 +5108,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Mn51_to_p_Fe54_starlib_data::log_t9,
-                                              He4_Mn51_to_p_Fe54_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Mn51_to_p_Fe54_starlib>();
+                                              Mn51_He4_to_p_Fe54_starlib_data::log_t9,
+                                              Mn51_He4_to_p_Fe54_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Mn51_He4_to_p_Fe54_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Mn51_to_p_Fe54_starlib_data::log_t9,
-                                                     He4_Mn51_to_p_Fe54_starlib_data::sigma_rate);
+                                                     Mn51_He4_to_p_Fe54_starlib_data::log_t9,
+                                                     Mn51_He4_to_p_Fe54_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5126,7 +5126,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Fe54_to_Co55_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Fe54_p_to_Co55_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Fe54 + p --> Co55
 
@@ -5135,13 +5135,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Fe54_to_Co55_starlib_data::log_t9,
-                                              p_Fe54_to_Co55_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Fe54_to_Co55_starlib>();
+                                              Fe54_p_to_Co55_starlib_data::log_t9,
+                                              Fe54_p_to_Co55_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Fe54_p_to_Co55_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Fe54_to_Co55_starlib_data::log_t9,
-                                                     p_Fe54_to_Co55_starlib_data::sigma_rate);
+                                                     Fe54_p_to_Co55_starlib_data::log_t9,
+                                                     Fe54_p_to_Co55_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5153,7 +5153,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Fe56_to_Co57_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Fe56_p_to_Co57_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Fe56 + p --> Co57
 
@@ -5162,13 +5162,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Fe56_to_Co57_starlib_data::log_t9,
-                                              p_Fe56_to_Co57_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Fe56_to_Co57_starlib>();
+                                              Fe56_p_to_Co57_starlib_data::log_t9,
+                                              Fe56_p_to_Co57_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Fe56_p_to_Co57_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Fe56_to_Co57_starlib_data::log_t9,
-                                                     p_Fe56_to_Co57_starlib_data::sigma_rate);
+                                                     Fe56_p_to_Co57_starlib_data::log_t9,
+                                                     Fe56_p_to_Co57_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5180,7 +5180,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Fe54_to_Ni58_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Fe54_He4_to_Ni58_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Fe54 + He4 --> Ni58
 
@@ -5189,13 +5189,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Fe54_to_Ni58_starlib_data::log_t9,
-                                              He4_Fe54_to_Ni58_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Fe54_to_Ni58_starlib>();
+                                              Fe54_He4_to_Ni58_starlib_data::log_t9,
+                                              Fe54_He4_to_Ni58_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Fe54_He4_to_Ni58_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Fe54_to_Ni58_starlib_data::log_t9,
-                                                     He4_Fe54_to_Ni58_starlib_data::sigma_rate);
+                                                     Fe54_He4_to_Ni58_starlib_data::log_t9,
+                                                     Fe54_He4_to_Ni58_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5207,7 +5207,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Co55_to_Co56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Co55_n_to_Co56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Co55 + n --> Co56
 
@@ -5216,13 +5216,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Co55_to_Co56_starlib_data::log_t9,
-                                              n_Co55_to_Co56_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Co55_to_Co56_starlib>();
+                                              Co55_n_to_Co56_starlib_data::log_t9,
+                                              Co55_n_to_Co56_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Co55_n_to_Co56_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Co55_to_Co56_starlib_data::log_t9,
-                                                     n_Co55_to_Co56_starlib_data::sigma_rate);
+                                                     Co55_n_to_Co56_starlib_data::log_t9,
+                                                     Co55_n_to_Co56_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5234,7 +5234,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Co56_to_p_Fe56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Co56_n_to_p_Fe56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Co56 + n --> p + Fe56
 
@@ -5243,13 +5243,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Co56_to_p_Fe56_starlib_data::log_t9,
-                                              n_Co56_to_p_Fe56_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Co56_to_p_Fe56_starlib>();
+                                              Co56_n_to_p_Fe56_starlib_data::log_t9,
+                                              Co56_n_to_p_Fe56_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Co56_n_to_p_Fe56_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Co56_to_p_Fe56_starlib_data::log_t9,
-                                                     n_Co56_to_p_Fe56_starlib_data::sigma_rate);
+                                                     Co56_n_to_p_Fe56_starlib_data::log_t9,
+                                                     Co56_n_to_p_Fe56_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5261,7 +5261,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Co56_to_Co57_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Co56_n_to_Co57_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Co56 + n --> Co57
 
@@ -5270,13 +5270,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Co56_to_Co57_starlib_data::log_t9,
-                                              n_Co56_to_Co57_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Co56_to_Co57_starlib>();
+                                              Co56_n_to_Co57_starlib_data::log_t9,
+                                              Co56_n_to_Co57_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Co56_n_to_Co57_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Co56_to_Co57_starlib_data::log_t9,
-                                                     n_Co56_to_Co57_starlib_data::sigma_rate);
+                                                     Co56_n_to_Co57_starlib_data::log_t9,
+                                                     Co56_n_to_Co57_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5288,7 +5288,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Co57_to_He4_Fe54_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Co57_p_to_He4_Fe54_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Co57 + p --> He4 + Fe54
 
@@ -5297,13 +5297,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Co57_to_He4_Fe54_starlib_data::log_t9,
-                                              p_Co57_to_He4_Fe54_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Co57_to_He4_Fe54_starlib>();
+                                              Co57_p_to_He4_Fe54_starlib_data::log_t9,
+                                              Co57_p_to_He4_Fe54_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Co57_p_to_He4_Fe54_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Co57_to_He4_Fe54_starlib_data::log_t9,
-                                                     p_Co57_to_He4_Fe54_starlib_data::sigma_rate);
+                                                     Co57_p_to_He4_Fe54_starlib_data::log_t9,
+                                                     Co57_p_to_He4_Fe54_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5315,7 +5315,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Co57_to_Ni58_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Co57_p_to_Ni58_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Co57 + p --> Ni58
 
@@ -5324,13 +5324,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Co57_to_Ni58_starlib_data::log_t9,
-                                              p_Co57_to_Ni58_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Co57_to_Ni58_starlib>();
+                                              Co57_p_to_Ni58_starlib_data::log_t9,
+                                              Co57_p_to_Ni58_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Co57_p_to_Ni58_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Co57_to_Ni58_starlib_data::log_t9,
-                                                     p_Co57_to_Ni58_starlib_data::sigma_rate);
+                                                     Co57_p_to_Ni58_starlib_data::log_t9,
+                                                     Co57_p_to_Ni58_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5342,7 +5342,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Co55_to_p_Ni58_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Co55_He4_to_p_Ni58_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Co55 + He4 --> p + Ni58
 
@@ -5351,13 +5351,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Co55_to_p_Ni58_starlib_data::log_t9,
-                                              He4_Co55_to_p_Ni58_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Co55_to_p_Ni58_starlib>();
+                                              Co55_He4_to_p_Ni58_starlib_data::log_t9,
+                                              Co55_He4_to_p_Ni58_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Co55_He4_to_p_Ni58_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Co55_to_p_Ni58_starlib_data::log_t9,
-                                                     He4_Co55_to_p_Ni58_starlib_data::sigma_rate);
+                                                     Co55_He4_to_p_Ni58_starlib_data::log_t9,
+                                                     Co55_He4_to_p_Ni58_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5369,7 +5369,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Ni56_to_p_Co56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Ni56_n_to_p_Co56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ni56 + n --> p + Co56
 
@@ -5378,13 +5378,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Ni56_to_p_Co56_starlib_data::log_t9,
-                                              n_Ni56_to_p_Co56_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Ni56_to_p_Co56_starlib>();
+                                              Ni56_n_to_p_Co56_starlib_data::log_t9,
+                                              Ni56_n_to_p_Co56_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Ni56_n_to_p_Co56_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Ni56_to_p_Co56_starlib_data::log_t9,
-                                                     n_Ni56_to_p_Co56_starlib_data::sigma_rate);
+                                                     Ni56_n_to_p_Co56_starlib_data::log_t9,
+                                                     Ni56_n_to_p_Co56_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5396,7 +5396,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Ni58_to_Cu59_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Ni58_p_to_Cu59_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ni58 + p --> Cu59
 
@@ -5405,13 +5405,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Ni58_to_Cu59_starlib_data::log_t9,
-                                              p_Ni58_to_Cu59_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Ni58_to_Cu59_starlib>();
+                                              Ni58_p_to_Cu59_starlib_data::log_t9,
+                                              Ni58_p_to_Cu59_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Ni58_p_to_Cu59_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Ni58_to_Cu59_starlib_data::log_t9,
-                                                     p_Ni58_to_Cu59_starlib_data::sigma_rate);
+                                                     Ni58_p_to_Cu59_starlib_data::log_t9,
+                                                     Ni58_p_to_Cu59_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5423,7 +5423,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Cu59_to_He4_Co56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Cu59_n_to_He4_Co56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Cu59 + n --> He4 + Co56
 
@@ -5432,13 +5432,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Cu59_to_He4_Co56_starlib_data::log_t9,
-                                              n_Cu59_to_He4_Co56_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Cu59_to_He4_Co56_starlib>();
+                                              Cu59_n_to_He4_Co56_starlib_data::log_t9,
+                                              Cu59_n_to_He4_Co56_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Cu59_n_to_He4_Co56_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Cu59_to_He4_Co56_starlib_data::log_t9,
-                                                     n_Cu59_to_He4_Co56_starlib_data::sigma_rate);
+                                                     Cu59_n_to_He4_Co56_starlib_data::log_t9,
+                                                     Cu59_n_to_He4_Co56_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5450,7 +5450,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_S32_to_Ar36_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_S32_He4_to_Ar36_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // S32 + He4 --> Ar36
 
@@ -5459,13 +5459,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_S32_to_Ar36_starlib_data::log_t9,
-                                              He4_S32_to_Ar36_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_S32_to_Ar36_starlib>();
+                                              S32_He4_to_Ar36_starlib_data::log_t9,
+                                              S32_He4_to_Ar36_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_S32_He4_to_Ar36_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_S32_to_Ar36_starlib_data::log_t9,
-                                                     He4_S32_to_Ar36_starlib_data::sigma_rate);
+                                                     S32_He4_to_Ar36_starlib_data::log_t9,
+                                                     S32_He4_to_Ar36_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5477,7 +5477,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Cl35_to_Ar36_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Cl35_p_to_Ar36_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Cl35 + p --> Ar36
 
@@ -5486,13 +5486,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Cl35_to_Ar36_starlib_data::log_t9,
-                                              p_Cl35_to_Ar36_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Cl35_to_Ar36_starlib>();
+                                              Cl35_p_to_Ar36_starlib_data::log_t9,
+                                              Cl35_p_to_Ar36_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Cl35_p_to_Ar36_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Cl35_to_Ar36_starlib_data::log_t9,
-                                                     p_Cl35_to_Ar36_starlib_data::sigma_rate);
+                                                     Cl35_p_to_Ar36_starlib_data::log_t9,
+                                                     Cl35_p_to_Ar36_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5504,7 +5504,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Cl35_to_He4_S32_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Cl35_p_to_He4_S32_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Cl35 + p --> He4 + S32
 
@@ -5513,13 +5513,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Cl35_to_He4_S32_starlib_data::log_t9,
-                                              p_Cl35_to_He4_S32_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Cl35_to_He4_S32_starlib>();
+                                              Cl35_p_to_He4_S32_starlib_data::log_t9,
+                                              Cl35_p_to_He4_S32_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Cl35_p_to_He4_S32_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Cl35_to_He4_S32_starlib_data::log_t9,
-                                                     p_Cl35_to_He4_S32_starlib_data::sigma_rate);
+                                                     Cl35_p_to_He4_S32_starlib_data::log_t9,
+                                                     Cl35_p_to_He4_S32_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5531,7 +5531,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Ar36_to_Ca40_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Ar36_He4_to_Ca40_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ar36 + He4 --> Ca40
 
@@ -5540,13 +5540,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Ar36_to_Ca40_starlib_data::log_t9,
-                                              He4_Ar36_to_Ca40_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Ar36_to_Ca40_starlib>();
+                                              Ar36_He4_to_Ca40_starlib_data::log_t9,
+                                              Ar36_He4_to_Ca40_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Ar36_He4_to_Ca40_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Ar36_to_Ca40_starlib_data::log_t9,
-                                                     He4_Ar36_to_Ca40_starlib_data::sigma_rate);
+                                                     Ar36_He4_to_Ca40_starlib_data::log_t9,
+                                                     Ar36_He4_to_Ca40_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5558,7 +5558,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_K39_to_Ca40_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_K39_p_to_Ca40_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // K39 + p --> Ca40
 
@@ -5567,13 +5567,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_K39_to_Ca40_starlib_data::log_t9,
-                                              p_K39_to_Ca40_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_K39_to_Ca40_starlib>();
+                                              K39_p_to_Ca40_starlib_data::log_t9,
+                                              K39_p_to_Ca40_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_K39_p_to_Ca40_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_K39_to_Ca40_starlib_data::log_t9,
-                                                     p_K39_to_Ca40_starlib_data::sigma_rate);
+                                                     K39_p_to_Ca40_starlib_data::log_t9,
+                                                     K39_p_to_Ca40_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5585,7 +5585,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_K39_to_He4_Ar36_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_K39_p_to_He4_Ar36_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // K39 + p --> He4 + Ar36
 
@@ -5594,13 +5594,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_K39_to_He4_Ar36_starlib_data::log_t9,
-                                              p_K39_to_He4_Ar36_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_K39_to_He4_Ar36_starlib>();
+                                              K39_p_to_He4_Ar36_starlib_data::log_t9,
+                                              K39_p_to_He4_Ar36_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_K39_p_to_He4_Ar36_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_K39_to_He4_Ar36_starlib_data::log_t9,
-                                                     p_K39_to_He4_Ar36_starlib_data::sigma_rate);
+                                                     K39_p_to_He4_Ar36_starlib_data::log_t9,
+                                                     K39_p_to_He4_Ar36_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5612,7 +5612,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Ca40_to_Ti44_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Ca40_He4_to_Ti44_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ca40 + He4 --> Ti44
 
@@ -5621,13 +5621,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Ca40_to_Ti44_starlib_data::log_t9,
-                                              He4_Ca40_to_Ti44_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Ca40_to_Ti44_starlib>();
+                                              Ca40_He4_to_Ti44_starlib_data::log_t9,
+                                              Ca40_He4_to_Ti44_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Ca40_He4_to_Ti44_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Ca40_to_Ti44_starlib_data::log_t9,
-                                                     He4_Ca40_to_Ti44_starlib_data::sigma_rate);
+                                                     Ca40_He4_to_Ti44_starlib_data::log_t9,
+                                                     Ca40_He4_to_Ti44_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5639,7 +5639,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Sc43_to_Ti44_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Sc43_p_to_Ti44_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Sc43 + p --> Ti44
 
@@ -5648,13 +5648,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Sc43_to_Ti44_starlib_data::log_t9,
-                                              p_Sc43_to_Ti44_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Sc43_to_Ti44_starlib>();
+                                              Sc43_p_to_Ti44_starlib_data::log_t9,
+                                              Sc43_p_to_Ti44_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Sc43_p_to_Ti44_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Sc43_to_Ti44_starlib_data::log_t9,
-                                                     p_Sc43_to_Ti44_starlib_data::sigma_rate);
+                                                     Sc43_p_to_Ti44_starlib_data::log_t9,
+                                                     Sc43_p_to_Ti44_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5666,7 +5666,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_Sc43_to_He4_Ca40_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Sc43_p_to_He4_Ca40_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Sc43 + p --> He4 + Ca40
 
@@ -5675,13 +5675,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_Sc43_to_He4_Ca40_starlib_data::log_t9,
-                                              p_Sc43_to_He4_Ca40_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_Sc43_to_He4_Ca40_starlib>();
+                                              Sc43_p_to_He4_Ca40_starlib_data::log_t9,
+                                              Sc43_p_to_He4_Ca40_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Sc43_p_to_He4_Ca40_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_Sc43_to_He4_Ca40_starlib_data::log_t9,
-                                                     p_Sc43_to_He4_Ca40_starlib_data::sigma_rate);
+                                                     Sc43_p_to_He4_Ca40_starlib_data::log_t9,
+                                                     Sc43_p_to_He4_Ca40_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5693,7 +5693,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_He4_Ti44_to_Cr48_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Ti44_He4_to_Cr48_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ti44 + He4 --> Cr48
 
@@ -5702,13 +5702,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              He4_Ti44_to_Cr48_starlib_data::log_t9,
-                                              He4_Ti44_to_Cr48_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_He4_Ti44_to_Cr48_starlib>();
+                                              Ti44_He4_to_Cr48_starlib_data::log_t9,
+                                              Ti44_He4_to_Cr48_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Ti44_He4_to_Cr48_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     He4_Ti44_to_Cr48_starlib_data::log_t9,
-                                                     He4_Ti44_to_Cr48_starlib_data::sigma_rate);
+                                                     Ti44_He4_to_Cr48_starlib_data::log_t9,
+                                                     Ti44_He4_to_Cr48_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5720,7 +5720,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_V47_to_Cr48_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_V47_p_to_Cr48_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // V47 + p --> Cr48
 
@@ -5729,13 +5729,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_V47_to_Cr48_starlib_data::log_t9,
-                                              p_V47_to_Cr48_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_V47_to_Cr48_starlib>();
+                                              V47_p_to_Cr48_starlib_data::log_t9,
+                                              V47_p_to_Cr48_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_V47_p_to_Cr48_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_V47_to_Cr48_starlib_data::log_t9,
-                                                     p_V47_to_Cr48_starlib_data::sigma_rate);
+                                                     V47_p_to_Cr48_starlib_data::log_t9,
+                                                     V47_p_to_Cr48_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5747,7 +5747,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_p_V47_to_He4_Ti44_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_V47_p_to_He4_Ti44_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // V47 + p --> He4 + Ti44
 
@@ -5756,13 +5756,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              p_V47_to_He4_Ti44_starlib_data::log_t9,
-                                              p_V47_to_He4_Ti44_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_p_V47_to_He4_Ti44_starlib>();
+                                              V47_p_to_He4_Ti44_starlib_data::log_t9,
+                                              V47_p_to_He4_Ti44_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_V47_p_to_He4_Ti44_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     p_V47_to_He4_Ti44_starlib_data::log_t9,
-                                                     p_V47_to_He4_Ti44_starlib_data::sigma_rate);
+                                                     V47_p_to_He4_Ti44_starlib_data::log_t9,
+                                                     V47_p_to_He4_Ti44_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5774,7 +5774,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Fe52_to_Fe53_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Fe52_n_to_Fe53_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Fe52 + n --> Fe53
 
@@ -5783,13 +5783,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Fe52_to_Fe53_starlib_data::log_t9,
-                                              n_Fe52_to_Fe53_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Fe52_to_Fe53_starlib>();
+                                              Fe52_n_to_Fe53_starlib_data::log_t9,
+                                              Fe52_n_to_Fe53_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Fe52_n_to_Fe53_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Fe52_to_Fe53_starlib_data::log_t9,
-                                                     n_Fe52_to_Fe53_starlib_data::sigma_rate);
+                                                     Fe52_n_to_Fe53_starlib_data::log_t9,
+                                                     Fe52_n_to_Fe53_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5801,7 +5801,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Fe53_to_Fe54_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Fe53_n_to_Fe54_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Fe53 + n --> Fe54
 
@@ -5810,13 +5810,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Fe53_to_Fe54_starlib_data::log_t9,
-                                              n_Fe53_to_Fe54_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Fe53_to_Fe54_starlib>();
+                                              Fe53_n_to_Fe54_starlib_data::log_t9,
+                                              Fe53_n_to_Fe54_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Fe53_n_to_Fe54_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Fe53_to_Fe54_starlib_data::log_t9,
-                                                     n_Fe53_to_Fe54_starlib_data::sigma_rate);
+                                                     Fe53_n_to_Fe54_starlib_data::log_t9,
+                                                     Fe53_n_to_Fe54_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5828,7 +5828,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Fe54_to_Fe55_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Fe54_n_to_Fe55_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Fe54 + n --> Fe55
 
@@ -5837,13 +5837,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Fe54_to_Fe55_starlib_data::log_t9,
-                                              n_Fe54_to_Fe55_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Fe54_to_Fe55_starlib>();
+                                              Fe54_n_to_Fe55_starlib_data::log_t9,
+                                              Fe54_n_to_Fe55_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Fe54_n_to_Fe55_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Fe54_to_Fe55_starlib_data::log_t9,
-                                                     n_Fe54_to_Fe55_starlib_data::sigma_rate);
+                                                     Fe54_n_to_Fe55_starlib_data::log_t9,
+                                                     Fe54_n_to_Fe55_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5855,7 +5855,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Fe55_to_Fe56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Fe55_n_to_Fe56_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Fe55 + n --> Fe56
 
@@ -5864,13 +5864,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Fe55_to_Fe56_starlib_data::log_t9,
-                                              n_Fe55_to_Fe56_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Fe55_to_Fe56_starlib>();
+                                              Fe55_n_to_Fe56_starlib_data::log_t9,
+                                              Fe55_n_to_Fe56_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Fe55_n_to_Fe56_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Fe55_to_Fe56_starlib_data::log_t9,
-                                                     n_Fe55_to_Fe56_starlib_data::sigma_rate);
+                                                     Fe55_n_to_Fe56_starlib_data::log_t9,
+                                                     Fe55_n_to_Fe56_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5882,7 +5882,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Ni56_to_Ni57_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Ni56_n_to_Ni57_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ni56 + n --> Ni57
 
@@ -5891,13 +5891,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Ni56_to_Ni57_starlib_data::log_t9,
-                                              n_Ni56_to_Ni57_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Ni56_to_Ni57_starlib>();
+                                              Ni56_n_to_Ni57_starlib_data::log_t9,
+                                              Ni56_n_to_Ni57_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Ni56_n_to_Ni57_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Ni56_to_Ni57_starlib_data::log_t9,
-                                                     n_Ni56_to_Ni57_starlib_data::sigma_rate);
+                                                     Ni56_n_to_Ni57_starlib_data::log_t9,
+                                                     Ni56_n_to_Ni57_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5909,7 +5909,7 @@ namespace temp_tabular {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_n_Ni57_to_Ni58_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+    void rate_Ni57_n_to_Ni58_starlib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ni57 + n --> Ni58
 
@@ -5918,13 +5918,13 @@ namespace temp_tabular {
         //       σ = uncertainty, h = screening potential
         auto [_mu, _dmu_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                               tfactors.lnT9,
-                                              n_Ni57_to_Ni58_starlib_data::log_t9,
-                                              n_Ni57_to_Ni58_starlib_data::log_rate);
-        auto p = Rates::get_p_random<k_n_Ni57_to_Ni58_starlib>();
+                                              Ni57_n_to_Ni58_starlib_data::log_t9,
+                                              Ni57_n_to_Ni58_starlib_data::log_rate);
+        auto p = Rates::get_p_random<k_Ni57_n_to_Ni58_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     n_Ni57_to_Ni58_starlib_data::log_t9,
-                                                     n_Ni57_to_Ni58_starlib_data::sigma_rate);
+                                                     Ni57_n_to_Ni58_starlib_data::log_t9,
+                                                     Ni57_n_to_Ni58_starlib_data::sigma_rate);
         rate = std::exp(_mu + p * _sigma + log_scor);
         // we found dlog(rate)/dlog(T9)
         if constexpr (do_T_derivatives) {
@@ -5936,7 +5936,7 @@ namespace temp_tabular {
 
 
     template <int do_T_derivatives, typename T>
-    AMREX_GPU_HOST_DEVICE AMREX_INLINE
+    AMREX_GPU_DEVICE AMREX_INLINE
     void
     fill_rates(const tf_t& tfactors, T& rate_eval)
     {
@@ -5985,7 +5985,7 @@ namespace temp_tabular {
         }
 
         {
-            // C12_O16_to_p_Al27_starlib
+            // O16_C12_to_p_Al27_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -5995,15 +5995,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_C12_O16);
             }
 #endif
-            rate_C12_O16_to_p_Al27_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_C12_O16_to_p_Al27_starlib) = rate;
+            rate_O16_C12_to_p_Al27_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_O16_C12_to_p_Al27_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_C12_O16_to_p_Al27_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_O16_C12_to_p_Al27_starlib) = drate_dT;
             }
         }
 
         {
-            // C12_O16_to_He4_Mg24_starlib
+            // O16_C12_to_He4_Mg24_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6013,10 +6013,10 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_C12_O16);
             }
 #endif
-            rate_C12_O16_to_He4_Mg24_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_C12_O16_to_He4_Mg24_starlib) = rate;
+            rate_O16_C12_to_He4_Mg24_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_O16_C12_to_He4_Mg24_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_C12_O16_to_He4_Mg24_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_O16_C12_to_He4_Mg24_starlib) = drate_dT;
             }
         }
 
@@ -6075,7 +6075,7 @@ namespace temp_tabular {
         }
 
         {
-            // p_C12_to_N13_starlib
+            // C12_p_to_N13_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6085,15 +6085,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_C12);
             }
 #endif
-            rate_p_C12_to_N13_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_C12_to_N13_starlib) = rate;
+            rate_C12_p_to_N13_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_C12_p_to_N13_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_C12_to_N13_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_C12_p_to_N13_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_C12_to_O16_starlib
+            // C12_He4_to_O16_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6103,15 +6103,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_C12);
             }
 #endif
-            rate_He4_C12_to_O16_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_C12_to_O16_starlib) = rate;
+            rate_C12_He4_to_O16_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_C12_He4_to_O16_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_C12_to_O16_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_C12_He4_to_O16_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_N13_to_p_O16_starlib
+            // N13_He4_to_p_O16_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6121,15 +6121,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_N13);
             }
 #endif
-            rate_He4_N13_to_p_O16_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_N13_to_p_O16_starlib) = rate;
+            rate_N13_He4_to_p_O16_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_N13_He4_to_p_O16_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_N13_to_p_O16_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_N13_He4_to_p_O16_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_O16_to_Ne20_starlib
+            // O16_He4_to_Ne20_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6139,15 +6139,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_O16);
             }
 #endif
-            rate_He4_O16_to_Ne20_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_O16_to_Ne20_starlib) = rate;
+            rate_O16_He4_to_Ne20_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_O16_He4_to_Ne20_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_O16_to_Ne20_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_O16_He4_to_Ne20_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Ne20_to_Mg24_starlib
+            // Ne20_He4_to_Mg24_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6157,15 +6157,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Ne20);
             }
 #endif
-            rate_He4_Ne20_to_Mg24_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Ne20_to_Mg24_starlib) = rate;
+            rate_Ne20_He4_to_Mg24_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ne20_He4_to_Mg24_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Ne20_to_Mg24_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Ne20_He4_to_Mg24_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Na23_to_He4_Ne20_starlib
+            // Na23_p_to_He4_Ne20_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6175,15 +6175,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Na23);
             }
 #endif
-            rate_p_Na23_to_He4_Ne20_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Na23_to_He4_Ne20_starlib) = rate;
+            rate_Na23_p_to_He4_Ne20_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Na23_p_to_He4_Ne20_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Na23_to_He4_Ne20_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Na23_p_to_He4_Ne20_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Na23_to_Mg24_starlib
+            // Na23_p_to_Mg24_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6193,15 +6193,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Na23);
             }
 #endif
-            rate_p_Na23_to_Mg24_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Na23_to_Mg24_starlib) = rate;
+            rate_Na23_p_to_Mg24_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Na23_p_to_Mg24_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Na23_to_Mg24_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Na23_p_to_Mg24_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Mg24_to_Si28_starlib
+            // Mg24_He4_to_Si28_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6211,15 +6211,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Mg24);
             }
 #endif
-            rate_He4_Mg24_to_Si28_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Mg24_to_Si28_starlib) = rate;
+            rate_Mg24_He4_to_Si28_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Mg24_He4_to_Si28_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Mg24_to_Si28_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Mg24_He4_to_Si28_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Al27_to_He4_Mg24_starlib
+            // Al27_p_to_He4_Mg24_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6229,15 +6229,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Al27);
             }
 #endif
-            rate_p_Al27_to_He4_Mg24_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Al27_to_He4_Mg24_starlib) = rate;
+            rate_Al27_p_to_He4_Mg24_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Al27_p_to_He4_Mg24_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Al27_to_He4_Mg24_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Al27_p_to_He4_Mg24_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Al27_to_Si28_starlib
+            // Al27_p_to_Si28_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6247,15 +6247,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Al27);
             }
 #endif
-            rate_p_Al27_to_Si28_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Al27_to_Si28_starlib) = rate;
+            rate_Al27_p_to_Si28_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Al27_p_to_Si28_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Al27_to_Si28_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Al27_p_to_Si28_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Si28_to_S32_starlib
+            // Si28_He4_to_S32_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6265,15 +6265,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Si28);
             }
 #endif
-            rate_He4_Si28_to_S32_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Si28_to_S32_starlib) = rate;
+            rate_Si28_He4_to_S32_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Si28_He4_to_S32_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Si28_to_S32_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Si28_He4_to_S32_starlib) = drate_dT;
             }
         }
 
         {
-            // p_P31_to_He4_Si28_starlib
+            // P31_p_to_He4_Si28_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6283,15 +6283,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_P31);
             }
 #endif
-            rate_p_P31_to_He4_Si28_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_P31_to_He4_Si28_starlib) = rate;
+            rate_P31_p_to_He4_Si28_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_P31_p_to_He4_Si28_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_P31_to_He4_Si28_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_P31_p_to_He4_Si28_starlib) = drate_dT;
             }
         }
 
         {
-            // p_P31_to_S32_starlib
+            // P31_p_to_S32_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6301,15 +6301,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_P31);
             }
 #endif
-            rate_p_P31_to_S32_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_P31_to_S32_starlib) = rate;
+            rate_P31_p_to_S32_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_P31_p_to_S32_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_P31_to_S32_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_P31_p_to_S32_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Cr48_to_p_Mn51_starlib
+            // Cr48_He4_to_p_Mn51_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6319,15 +6319,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Cr48);
             }
 #endif
-            rate_He4_Cr48_to_p_Mn51_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Cr48_to_p_Mn51_starlib) = rate;
+            rate_Cr48_He4_to_p_Mn51_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Cr48_He4_to_p_Mn51_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Cr48_to_p_Mn51_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Cr48_He4_to_p_Mn51_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Cr48_to_Fe52_starlib
+            // Cr48_He4_to_Fe52_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6337,15 +6337,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Cr48);
             }
 #endif
-            rate_He4_Cr48_to_Fe52_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Cr48_to_Fe52_starlib) = rate;
+            rate_Cr48_He4_to_Fe52_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Cr48_He4_to_Fe52_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Cr48_to_Fe52_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Cr48_He4_to_Fe52_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Mn51_to_Fe52_starlib
+            // Mn51_p_to_Fe52_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6355,15 +6355,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Mn51);
             }
 #endif
-            rate_p_Mn51_to_Fe52_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Mn51_to_Fe52_starlib) = rate;
+            rate_Mn51_p_to_Fe52_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Mn51_p_to_Fe52_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Mn51_to_Fe52_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Mn51_p_to_Fe52_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Mn51_to_Co55_starlib
+            // Mn51_He4_to_Co55_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6373,15 +6373,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Mn51);
             }
 #endif
-            rate_He4_Mn51_to_Co55_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Mn51_to_Co55_starlib) = rate;
+            rate_Mn51_He4_to_Co55_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Mn51_He4_to_Co55_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Mn51_to_Co55_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Mn51_He4_to_Co55_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Fe52_to_p_Co55_starlib
+            // Fe52_He4_to_p_Co55_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6391,15 +6391,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Fe52);
             }
 #endif
-            rate_He4_Fe52_to_p_Co55_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Fe52_to_p_Co55_starlib) = rate;
+            rate_Fe52_He4_to_p_Co55_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Fe52_He4_to_p_Co55_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Fe52_to_p_Co55_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe52_He4_to_p_Co55_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Fe52_to_Ni56_starlib
+            // Fe52_He4_to_Ni56_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6409,15 +6409,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Fe52);
             }
 #endif
-            rate_He4_Fe52_to_Ni56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Fe52_to_Ni56_starlib) = rate;
+            rate_Fe52_He4_to_Ni56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Fe52_He4_to_Ni56_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Fe52_to_Ni56_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe52_He4_to_Ni56_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Co55_to_Ni56_starlib
+            // Co55_p_to_Ni56_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6427,15 +6427,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Co55);
             }
 #endif
-            rate_p_Co55_to_Ni56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Co55_to_Ni56_starlib) = rate;
+            rate_Co55_p_to_Ni56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Co55_p_to_Ni56_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Co55_to_Ni56_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Co55_p_to_Ni56_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Co55_to_Cu59_starlib
+            // Co55_He4_to_Cu59_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6445,15 +6445,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Co55);
             }
 #endif
-            rate_He4_Co55_to_Cu59_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Co55_to_Cu59_starlib) = rate;
+            rate_Co55_He4_to_Cu59_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Co55_He4_to_Cu59_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Co55_to_Cu59_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Co55_He4_to_Cu59_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Ni56_to_Zn60_starlib
+            // Ni56_He4_to_Zn60_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6463,15 +6463,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Ni56);
             }
 #endif
-            rate_He4_Ni56_to_Zn60_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Ni56_to_Zn60_starlib) = rate;
+            rate_Ni56_He4_to_Zn60_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ni56_He4_to_Zn60_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Ni56_to_Zn60_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Ni56_He4_to_Zn60_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Cu59_to_He4_Ni56_starlib
+            // Cu59_p_to_He4_Ni56_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6481,15 +6481,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Cu59);
             }
 #endif
-            rate_p_Cu59_to_He4_Ni56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Cu59_to_He4_Ni56_starlib) = rate;
+            rate_Cu59_p_to_He4_Ni56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Cu59_p_to_He4_Ni56_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Cu59_to_He4_Ni56_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Cu59_p_to_He4_Ni56_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Cu59_to_Zn60_starlib
+            // Cu59_p_to_Zn60_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6499,10 +6499,10 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Cu59);
             }
 #endif
-            rate_p_Cu59_to_Zn60_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Cu59_to_Zn60_starlib) = rate;
+            rate_Cu59_p_to_Zn60_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Cu59_p_to_Zn60_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Cu59_to_Zn60_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Cu59_p_to_Zn60_starlib) = drate_dT;
             }
         }
 
@@ -6543,7 +6543,7 @@ namespace temp_tabular {
         }
 
         {
-            // C12_O16_to_n_Si27_starlib
+            // O16_C12_to_n_Si27_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6553,15 +6553,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_C12_O16);
             }
 #endif
-            rate_C12_O16_to_n_Si27_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_C12_O16_to_n_Si27_starlib) = rate;
+            rate_O16_C12_to_n_Si27_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_O16_C12_to_n_Si27_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_C12_O16_to_n_Si27_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_O16_C12_to_n_Si27_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Mn51_to_p_Fe54_starlib
+            // Mn51_He4_to_p_Fe54_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6571,15 +6571,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Mn51);
             }
 #endif
-            rate_He4_Mn51_to_p_Fe54_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Mn51_to_p_Fe54_starlib) = rate;
+            rate_Mn51_He4_to_p_Fe54_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Mn51_He4_to_p_Fe54_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Mn51_to_p_Fe54_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Mn51_He4_to_p_Fe54_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Fe54_to_Co55_starlib
+            // Fe54_p_to_Co55_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6589,15 +6589,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Fe54);
             }
 #endif
-            rate_p_Fe54_to_Co55_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Fe54_to_Co55_starlib) = rate;
+            rate_Fe54_p_to_Co55_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Fe54_p_to_Co55_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Fe54_to_Co55_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe54_p_to_Co55_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Fe56_to_Co57_starlib
+            // Fe56_p_to_Co57_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6607,15 +6607,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Fe56);
             }
 #endif
-            rate_p_Fe56_to_Co57_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Fe56_to_Co57_starlib) = rate;
+            rate_Fe56_p_to_Co57_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Fe56_p_to_Co57_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Fe56_to_Co57_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe56_p_to_Co57_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Fe54_to_Ni58_starlib
+            // Fe54_He4_to_Ni58_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6625,69 +6625,51 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Fe54);
             }
 #endif
-            rate_He4_Fe54_to_Ni58_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Fe54_to_Ni58_starlib) = rate;
+            rate_Fe54_He4_to_Ni58_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Fe54_He4_to_Ni58_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Fe54_to_Ni58_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe54_He4_to_Ni58_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Co55_to_Co56_starlib
+            // Co55_n_to_Co56_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Co55_to_Co56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Co55_to_Co56_starlib) = rate;
+            rate_Co55_n_to_Co56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Co55_n_to_Co56_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Co55_to_Co56_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Co55_n_to_Co56_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Co56_to_p_Fe56_starlib
+            // Co56_n_to_p_Fe56_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Co56_to_p_Fe56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Co56_to_p_Fe56_starlib) = rate;
+            rate_Co56_n_to_p_Fe56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Co56_n_to_p_Fe56_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Co56_to_p_Fe56_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Co56_n_to_p_Fe56_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Co56_to_Co57_starlib
+            // Co56_n_to_Co57_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Co56_to_Co57_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Co56_to_Co57_starlib) = rate;
+            rate_Co56_n_to_Co57_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Co56_n_to_Co57_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Co56_to_Co57_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Co56_n_to_Co57_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Co57_to_He4_Fe54_starlib
-
-            amrex::Real log_scor {0.0_rt};
-            amrex::Real dlog_scor_dT {0.0_rt};
-#ifdef SCREENING
-            log_scor = rate_eval.log_screen(k_p_Co57);
-            if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Co57);
-            }
-#endif
-            rate_p_Co57_to_He4_Fe54_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Co57_to_He4_Fe54_starlib) = rate;
-            if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Co57_to_He4_Fe54_starlib) = drate_dT;
-            }
-        }
-
-        {
-            // p_Co57_to_Ni58_starlib
+            // Co57_p_to_He4_Fe54_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6697,15 +6679,33 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Co57);
             }
 #endif
-            rate_p_Co57_to_Ni58_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Co57_to_Ni58_starlib) = rate;
+            rate_Co57_p_to_He4_Fe54_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Co57_p_to_He4_Fe54_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Co57_to_Ni58_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Co57_p_to_He4_Fe54_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Co55_to_p_Ni58_starlib
+            // Co57_p_to_Ni58_starlib
+
+            amrex::Real log_scor {0.0_rt};
+            amrex::Real dlog_scor_dT {0.0_rt};
+#ifdef SCREENING
+            log_scor = rate_eval.log_screen(k_p_Co57);
+            if constexpr (std::is_same_v<T, rate_derivs_t>) {
+                dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Co57);
+            }
+#endif
+            rate_Co57_p_to_Ni58_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Co57_p_to_Ni58_starlib) = rate;
+            if constexpr (std::is_same_v<T, rate_derivs_t>) {
+                rate_eval.dscreened_rates_dT(k_Co57_p_to_Ni58_starlib) = drate_dT;
+            }
+        }
+
+        {
+            // Co55_He4_to_p_Ni58_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6715,27 +6715,27 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Co55);
             }
 #endif
-            rate_He4_Co55_to_p_Ni58_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Co55_to_p_Ni58_starlib) = rate;
+            rate_Co55_He4_to_p_Ni58_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Co55_He4_to_p_Ni58_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Co55_to_p_Ni58_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Co55_He4_to_p_Ni58_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Ni56_to_p_Co56_starlib
+            // Ni56_n_to_p_Co56_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Ni56_to_p_Co56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Ni56_to_p_Co56_starlib) = rate;
+            rate_Ni56_n_to_p_Co56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ni56_n_to_p_Co56_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Ni56_to_p_Co56_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Ni56_n_to_p_Co56_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Ni58_to_Cu59_starlib
+            // Ni58_p_to_Cu59_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6745,27 +6745,27 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Ni58);
             }
 #endif
-            rate_p_Ni58_to_Cu59_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Ni58_to_Cu59_starlib) = rate;
+            rate_Ni58_p_to_Cu59_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ni58_p_to_Cu59_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Ni58_to_Cu59_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Ni58_p_to_Cu59_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Cu59_to_He4_Co56_starlib
+            // Cu59_n_to_He4_Co56_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Cu59_to_He4_Co56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Cu59_to_He4_Co56_starlib) = rate;
+            rate_Cu59_n_to_He4_Co56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Cu59_n_to_He4_Co56_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Cu59_to_He4_Co56_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Cu59_n_to_He4_Co56_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_S32_to_Ar36_starlib
+            // S32_He4_to_Ar36_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6775,15 +6775,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_S32);
             }
 #endif
-            rate_He4_S32_to_Ar36_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_S32_to_Ar36_starlib) = rate;
+            rate_S32_He4_to_Ar36_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_S32_He4_to_Ar36_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_S32_to_Ar36_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_S32_He4_to_Ar36_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Cl35_to_Ar36_starlib
+            // Cl35_p_to_Ar36_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6793,15 +6793,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Cl35);
             }
 #endif
-            rate_p_Cl35_to_Ar36_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Cl35_to_Ar36_starlib) = rate;
+            rate_Cl35_p_to_Ar36_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Cl35_p_to_Ar36_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Cl35_to_Ar36_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Cl35_p_to_Ar36_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Cl35_to_He4_S32_starlib
+            // Cl35_p_to_He4_S32_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6811,15 +6811,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Cl35);
             }
 #endif
-            rate_p_Cl35_to_He4_S32_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Cl35_to_He4_S32_starlib) = rate;
+            rate_Cl35_p_to_He4_S32_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Cl35_p_to_He4_S32_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Cl35_to_He4_S32_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Cl35_p_to_He4_S32_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Ar36_to_Ca40_starlib
+            // Ar36_He4_to_Ca40_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6829,15 +6829,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Ar36);
             }
 #endif
-            rate_He4_Ar36_to_Ca40_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Ar36_to_Ca40_starlib) = rate;
+            rate_Ar36_He4_to_Ca40_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ar36_He4_to_Ca40_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Ar36_to_Ca40_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Ar36_He4_to_Ca40_starlib) = drate_dT;
             }
         }
 
         {
-            // p_K39_to_Ca40_starlib
+            // K39_p_to_Ca40_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6847,15 +6847,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_K39);
             }
 #endif
-            rate_p_K39_to_Ca40_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_K39_to_Ca40_starlib) = rate;
+            rate_K39_p_to_Ca40_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_K39_p_to_Ca40_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_K39_to_Ca40_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_K39_p_to_Ca40_starlib) = drate_dT;
             }
         }
 
         {
-            // p_K39_to_He4_Ar36_starlib
+            // K39_p_to_He4_Ar36_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6865,15 +6865,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_K39);
             }
 #endif
-            rate_p_K39_to_He4_Ar36_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_K39_to_He4_Ar36_starlib) = rate;
+            rate_K39_p_to_He4_Ar36_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_K39_p_to_He4_Ar36_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_K39_to_He4_Ar36_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_K39_p_to_He4_Ar36_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Ca40_to_Ti44_starlib
+            // Ca40_He4_to_Ti44_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6883,15 +6883,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Ca40);
             }
 #endif
-            rate_He4_Ca40_to_Ti44_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Ca40_to_Ti44_starlib) = rate;
+            rate_Ca40_He4_to_Ti44_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ca40_He4_to_Ti44_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Ca40_to_Ti44_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Ca40_He4_to_Ti44_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Sc43_to_Ti44_starlib
+            // Sc43_p_to_Ti44_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6901,15 +6901,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Sc43);
             }
 #endif
-            rate_p_Sc43_to_Ti44_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Sc43_to_Ti44_starlib) = rate;
+            rate_Sc43_p_to_Ti44_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Sc43_p_to_Ti44_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Sc43_to_Ti44_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Sc43_p_to_Ti44_starlib) = drate_dT;
             }
         }
 
         {
-            // p_Sc43_to_He4_Ca40_starlib
+            // Sc43_p_to_He4_Ca40_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6919,15 +6919,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_Sc43);
             }
 #endif
-            rate_p_Sc43_to_He4_Ca40_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_Sc43_to_He4_Ca40_starlib) = rate;
+            rate_Sc43_p_to_He4_Ca40_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Sc43_p_to_He4_Ca40_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_Sc43_to_He4_Ca40_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Sc43_p_to_He4_Ca40_starlib) = drate_dT;
             }
         }
 
         {
-            // He4_Ti44_to_Cr48_starlib
+            // Ti44_He4_to_Cr48_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6937,15 +6937,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Ti44);
             }
 #endif
-            rate_He4_Ti44_to_Cr48_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_He4_Ti44_to_Cr48_starlib) = rate;
+            rate_Ti44_He4_to_Cr48_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ti44_He4_to_Cr48_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_He4_Ti44_to_Cr48_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Ti44_He4_to_Cr48_starlib) = drate_dT;
             }
         }
 
         {
-            // p_V47_to_Cr48_starlib
+            // V47_p_to_Cr48_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6955,15 +6955,15 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_V47);
             }
 #endif
-            rate_p_V47_to_Cr48_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_V47_to_Cr48_starlib) = rate;
+            rate_V47_p_to_Cr48_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_V47_p_to_Cr48_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_V47_to_Cr48_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_V47_p_to_Cr48_starlib) = drate_dT;
             }
         }
 
         {
-            // p_V47_to_He4_Ti44_starlib
+            // V47_p_to_He4_Ti44_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
@@ -6973,82 +6973,82 @@ namespace temp_tabular {
                 dlog_scor_dT = rate_eval.dlog_screen_dT(k_p_V47);
             }
 #endif
-            rate_p_V47_to_He4_Ti44_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_p_V47_to_He4_Ti44_starlib) = rate;
+            rate_V47_p_to_He4_Ti44_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_V47_p_to_He4_Ti44_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_p_V47_to_He4_Ti44_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_V47_p_to_He4_Ti44_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Fe52_to_Fe53_starlib
+            // Fe52_n_to_Fe53_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Fe52_to_Fe53_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Fe52_to_Fe53_starlib) = rate;
+            rate_Fe52_n_to_Fe53_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Fe52_n_to_Fe53_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Fe52_to_Fe53_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe52_n_to_Fe53_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Fe53_to_Fe54_starlib
+            // Fe53_n_to_Fe54_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Fe53_to_Fe54_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Fe53_to_Fe54_starlib) = rate;
+            rate_Fe53_n_to_Fe54_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Fe53_n_to_Fe54_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Fe53_to_Fe54_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe53_n_to_Fe54_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Fe54_to_Fe55_starlib
+            // Fe54_n_to_Fe55_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Fe54_to_Fe55_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Fe54_to_Fe55_starlib) = rate;
+            rate_Fe54_n_to_Fe55_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Fe54_n_to_Fe55_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Fe54_to_Fe55_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe54_n_to_Fe55_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Fe55_to_Fe56_starlib
+            // Fe55_n_to_Fe56_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Fe55_to_Fe56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Fe55_to_Fe56_starlib) = rate;
+            rate_Fe55_n_to_Fe56_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Fe55_n_to_Fe56_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Fe55_to_Fe56_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe55_n_to_Fe56_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Ni56_to_Ni57_starlib
+            // Ni56_n_to_Ni57_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Ni56_to_Ni57_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Ni56_to_Ni57_starlib) = rate;
+            rate_Ni56_n_to_Ni57_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ni56_n_to_Ni57_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Ni56_to_Ni57_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Ni56_n_to_Ni57_starlib) = drate_dT;
             }
         }
 
         {
-            // n_Ni57_to_Ni58_starlib
+            // Ni57_n_to_Ni58_starlib
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_n_Ni57_to_Ni58_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_n_Ni57_to_Ni58_starlib) = rate;
+            rate_Ni57_n_to_Ni58_starlib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ni57_n_to_Ni58_starlib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_n_Ni57_to_Ni58_starlib) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Ni57_n_to_Ni58_starlib) = drate_dT;
             }
         }
 
