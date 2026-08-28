@@ -53,16 +53,17 @@ def doit():
 
     net.write_network()
 
-    comp = pyna.Composition(net.get_nuclei())
-    comp.set_solar_like()
+    comp = pyna.Composition(net.get_nuclei(), init="solar")
 
-    rho = 1.e6
+    rho = 1.e4
     T = 1.e8
 
     net.plot(rho, T, comp, outfile="cno_extras.png",
+             node_size=500, node_font_size="9",
              Z_range=[1, 13], N_range=[1, 13])
 
     net.plot(outfile="cno_extras_hide_alpha.png",
+             node_size=500, node_font_size="9",
              Z_range=[1, 13], N_range=[1, 13],
              rotated=True,
              hide_xalpha=True)
