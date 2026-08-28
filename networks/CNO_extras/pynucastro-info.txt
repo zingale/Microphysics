@@ -1,1 +1,1 @@
-pynucastro version: 2.12.0
+pynucastro version: 3.0.0-25-g1299feccc
