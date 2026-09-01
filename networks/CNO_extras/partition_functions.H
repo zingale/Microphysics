@@ -603,16 +603,15 @@ constexpr amrex::Real get_spin_state() {
     if constexpr (
         spec == He4 || spec == C12 || spec == O14 ||
         spec == O16 || spec == O18 || spec == Ne18 ||
-        spec == Ne20 || spec == Mg22 || spec == Mg24 ||
-        spec == Fe56
+        spec == Ne20 || spec == Mg22 || spec == Mg24
                   )
     {
         return 1.0_rt;
     }
     else if constexpr (
-        spec == H1 || spec == C13 || spec == N13 ||
-        spec == N15 || spec == O15 || spec == F19 ||
-        spec == Ne19
+        spec == H1 || spec == He3 || spec == C13 ||
+        spec == N13 || spec == N15 || spec == O15 ||
+        spec == F19 || spec == Ne19
                        )
     {
         return 2.0_rt;
