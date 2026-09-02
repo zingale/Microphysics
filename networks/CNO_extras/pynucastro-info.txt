@@ -1,1 +1,1 @@
-pynucastro version: 3.0.0-30-g70ea76a64
+pynucastro version: 3.0.0-33-g468e5f900

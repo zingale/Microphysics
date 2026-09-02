@@ -4,6 +4,8 @@ import pynucastro as pyna
 def create_network():
 
     net = pyna.common_networks.cno(network_type="amrex")
+    net.add_inert_nucleus("fe56")
+
     return net
 
 

@@ -98,6 +98,9 @@ namespace network
         else if constexpr (spec == Mg24) {
             return 198.2570479679962_rt;
         }
+        else if constexpr (spec == Fe56) {
+            return 492.2599506639962_rt;
+        }
 
 
         // Return zero if we don't recognize the species.
@@ -175,6 +178,9 @@ namespace network
         }
         else if constexpr (spec == Mg24) {
             return 3.9828098739467446e-23_rt;
+        }
+        else if constexpr (spec == Fe56) {
+            return 9.288214565329033e-23_rt;
         }
 
 
@@ -262,13 +268,13 @@ namespace Rates
         k_He3_He3_to_p_p_He4_reaclib = 38,
         k_He3_p_to_He4_beta_pos_reaclib = 39,
         k_He3_He4_to_Be7_reaclib = 40,
-        k_F18_to_Ne18_beta_neg_weaktab = 41,
-        k_F19_to_Ne19_beta_neg_weaktab = 42,
-        k_F17_to_O17_electron_capture_weaktab = 43,
-        k_O17_to_F17_beta_neg_weaktab = 44,
-        k_F18_to_O18_electron_capture_weaktab = 45,
-        k_Ne18_to_F18_electron_capture_weaktab = 46,
-        k_O18_to_F18_beta_neg_weaktab = 47,
+        k_F17_to_O17_electron_capture_weaktab = 41,
+        k_O17_to_F17_beta_neg_weaktab = 42,
+        k_F18_to_Ne18_beta_neg_weaktab = 43,
+        k_F18_to_O18_electron_capture_weaktab = 44,
+        k_Ne18_to_F18_electron_capture_weaktab = 45,
+        k_O18_to_F18_beta_neg_weaktab = 46,
+        k_F19_to_Ne19_beta_neg_weaktab = 47,
         k_Ne19_to_F19_electron_capture_weaktab = 48,
         k_Ne18_He4_to_Mg22_approx = 49,
         k_Ne19_3p_to_Mg22_beta_pos_modified = 50,
@@ -391,13 +397,13 @@ namespace Rates
         "He3_He3_to_p_p_He4_reaclib",  // 38,
         "He3_p_to_He4_beta_pos_reaclib",  // 39,
         "He3_He4_to_Be7_reaclib",  // 40,
-        "F18_to_Ne18_beta_neg_weaktab",  // 41,
-        "F19_to_Ne19_beta_neg_weaktab",  // 42,
-        "F17_to_O17_electron_capture_weaktab",  // 43,
-        "O17_to_F17_beta_neg_weaktab",  // 44,
-        "F18_to_O18_electron_capture_weaktab",  // 45,
-        "Ne18_to_F18_electron_capture_weaktab",  // 46,
-        "O18_to_F18_beta_neg_weaktab",  // 47,
+        "F17_to_O17_electron_capture_weaktab",  // 41,
+        "O17_to_F17_beta_neg_weaktab",  // 42,
+        "F18_to_Ne18_beta_neg_weaktab",  // 43,
+        "F18_to_O18_electron_capture_weaktab",  // 44,
+        "Ne18_to_F18_electron_capture_weaktab",  // 45,
+        "O18_to_F18_beta_neg_weaktab",  // 46,
+        "F19_to_Ne19_beta_neg_weaktab",  // 47,
         "Ne19_to_F19_electron_capture_weaktab",  // 48,
         "Ne18_He4_to_Mg22_approx",  // 49,
         "Ne19_3p_to_Mg22_beta_pos_modified",  // 50,
