@@ -3966,72 +3966,6 @@ namespace derived_rates {
 
     template <int do_T_derivatives, typename T>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_Fe54_to_n_Fe53_derived(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT, [[maybe_unused]] const T& rate_eval, [[maybe_unused]] part_fun::pf_cache_t& pf_cache) {
-
-        // Fe54 --> n + Fe53
-
-        rate = 0.0;
-        drate_dT = 0.0;
-
-        // Evaluate partition function terms
-
-        amrex::Real n_log_pf, dn_log_pf_dT9;
-
-        // setting n log(partition function) to 0.0 by default, independent of T
-        n_log_pf = 0.0_rt;
-        dn_log_pf_dT9 = 0.0_rt;
-
-        amrex::Real Fe53_log_pf, dFe53_log_pf_dT9;
-
-        // interpolating Fe53 partition function
-        get_partition_function_cached(Fe53, tfactors.T9, pf_cache, Fe53_log_pf, dFe53_log_pf_dT9);
-
-        amrex::Real Fe54_log_pf, dFe54_log_pf_dT9;
-
-        // interpolating Fe54 partition function
-        get_partition_function_cached(Fe54, tfactors.T9, pf_cache, Fe54_log_pf, dFe54_log_pf_dT9);
-
-        amrex::Real net_log_pf = n_log_pf + Fe53_log_pf - Fe54_log_pf;
-        [[maybe_unused]] amrex::Real net_dlog_pf_dT9 = dn_log_pf_dT9 + dFe53_log_pf_dT9 - dFe54_log_pf_dT9;
-
-        auto [_rate, _drate_dT] = interp_net::monotone_1d_interp<do_T_derivatives>(
-                                                   tfactors.lnT9,
-                                                   Fe53_n_to_Fe54_starlib_data::log_t9,
-                                                   Fe53_n_to_Fe54_starlib_data::log_rate);
-
-        auto p = Rates::get_p_random<k_Fe53_n_to_Fe54_starlib>();
-        auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
-                                                     tfactors.lnT9,
-                                                     Fe53_n_to_Fe54_starlib_data::log_t9,
-                                                     Fe53_n_to_Fe54_starlib_data::sigma_rate);
-
-        // Add rate uncertainty
-        _rate += p * _sigma;
-
-        // Apply Equilibrium Ratio
-        constexpr amrex::Real Q_kBGK = -13.378418100002976 * 1.0e-9_rt / C::k_MeV;
-        amrex::Real Q_kBT = Q_kBGK * tfactors.T9i;
-        _rate += 25.778945367634943 + Q_kBT + net_log_pf + log_scor;
-        _rate += 1.5 * tfactors.lnT9;
-
-        // avoid underflows by zeroing rates in [0.0, 1.e-100]
-        _rate = std::max(_rate, -230.0);
-        rate = std::exp(_rate);
-
-        // we found dlog(rate)/dlog(T9)
-        if constexpr (std::is_same_v<T, rate_derivs_t>) {
-            // Add rate uncertainty term
-            _drate_dT += p * _dsigma_dlogT9;
-
-            // Convert to dlog(rate)/dT9 first
-            _drate_dT = (_drate_dT + 1.5 - Q_kBT) * tfactors.T9i + net_dlog_pf_dT9 + dlog_scor_dT * 1.0e9_rt;
-            drate_dT = rate * _drate_dT * 1.0e-9_rt;
-        }
-
-    }
-
-    template <int do_T_derivatives, typename T>
-    AMREX_GPU_DEVICE AMREX_INLINE
     void rate_Fe53_to_n_Fe52_derived(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT, [[maybe_unused]] const T& rate_eval, [[maybe_unused]] part_fun::pf_cache_t& pf_cache) {
 
         // Fe53 --> n + Fe52
@@ -4098,9 +4032,9 @@ namespace derived_rates {
 
     template <int do_T_derivatives, typename T>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_Fe56_to_n_Fe55_derived(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT, [[maybe_unused]] const T& rate_eval, [[maybe_unused]] part_fun::pf_cache_t& pf_cache) {
+    void rate_Fe54_to_n_Fe53_derived(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT, [[maybe_unused]] const T& rate_eval, [[maybe_unused]] part_fun::pf_cache_t& pf_cache) {
 
-        // Fe56 --> n + Fe55
+        // Fe54 --> n + Fe53
 
         rate = 0.0;
         drate_dT = 0.0;
@@ -4113,37 +4047,37 @@ namespace derived_rates {
         n_log_pf = 0.0_rt;
         dn_log_pf_dT9 = 0.0_rt;
 
-        amrex::Real Fe56_log_pf, dFe56_log_pf_dT9;
+        amrex::Real Fe53_log_pf, dFe53_log_pf_dT9;
 
-        // interpolating Fe56 partition function
-        get_partition_function_cached(Fe56, tfactors.T9, pf_cache, Fe56_log_pf, dFe56_log_pf_dT9);
+        // interpolating Fe53 partition function
+        get_partition_function_cached(Fe53, tfactors.T9, pf_cache, Fe53_log_pf, dFe53_log_pf_dT9);
 
-        amrex::Real Fe55_log_pf, dFe55_log_pf_dT9;
+        amrex::Real Fe54_log_pf, dFe54_log_pf_dT9;
 
-        // interpolating Fe55 partition function
-        get_partition_function_cached(Fe55, tfactors.T9, pf_cache, Fe55_log_pf, dFe55_log_pf_dT9);
+        // interpolating Fe54 partition function
+        get_partition_function_cached(Fe54, tfactors.T9, pf_cache, Fe54_log_pf, dFe54_log_pf_dT9);
 
-        amrex::Real net_log_pf = n_log_pf + Fe55_log_pf - Fe56_log_pf;
-        [[maybe_unused]] amrex::Real net_dlog_pf_dT9 = dn_log_pf_dT9 + dFe55_log_pf_dT9 - dFe56_log_pf_dT9;
+        amrex::Real net_log_pf = n_log_pf + Fe53_log_pf - Fe54_log_pf;
+        [[maybe_unused]] amrex::Real net_dlog_pf_dT9 = dn_log_pf_dT9 + dFe53_log_pf_dT9 - dFe54_log_pf_dT9;
 
         auto [_rate, _drate_dT] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                    tfactors.lnT9,
-                                                   Fe55_n_to_Fe56_starlib_data::log_t9,
-                                                   Fe55_n_to_Fe56_starlib_data::log_rate);
+                                                   Fe53_n_to_Fe54_starlib_data::log_t9,
+                                                   Fe53_n_to_Fe54_starlib_data::log_rate);
 
-        auto p = Rates::get_p_random<k_Fe55_n_to_Fe56_starlib>();
+        auto p = Rates::get_p_random<k_Fe53_n_to_Fe54_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     Fe55_n_to_Fe56_starlib_data::log_t9,
-                                                     Fe55_n_to_Fe56_starlib_data::sigma_rate);
+                                                     Fe53_n_to_Fe54_starlib_data::log_t9,
+                                                     Fe53_n_to_Fe54_starlib_data::sigma_rate);
 
         // Add rate uncertainty
         _rate += p * _sigma;
 
         // Apply Equilibrium Ratio
-        constexpr amrex::Real Q_kBGK = -11.197078100005754 * 1.0e-9_rt / C::k_MeV;
+        constexpr amrex::Real Q_kBGK = -13.378418100002976 * 1.0e-9_rt / C::k_MeV;
         amrex::Real Q_kBT = Q_kBGK * tfactors.T9i;
-        _rate += 25.086692234523206 + Q_kBT + net_log_pf + log_scor;
+        _rate += 25.778945367634943 + Q_kBT + net_log_pf + log_scor;
         _rate += 1.5 * tfactors.lnT9;
 
         // avoid underflows by zeroing rates in [0.0, 1.e-100]
@@ -4230,9 +4164,9 @@ namespace derived_rates {
 
     template <int do_T_derivatives, typename T>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_Ni58_to_n_Ni57_derived(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT, [[maybe_unused]] const T& rate_eval, [[maybe_unused]] part_fun::pf_cache_t& pf_cache) {
+    void rate_Fe56_to_n_Fe55_derived(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT, [[maybe_unused]] const T& rate_eval, [[maybe_unused]] part_fun::pf_cache_t& pf_cache) {
 
-        // Ni58 --> n + Ni57
+        // Fe56 --> n + Fe55
 
         rate = 0.0;
         drate_dT = 0.0;
@@ -4245,37 +4179,37 @@ namespace derived_rates {
         n_log_pf = 0.0_rt;
         dn_log_pf_dT9 = 0.0_rt;
 
-        amrex::Real Ni57_log_pf, dNi57_log_pf_dT9;
+        amrex::Real Fe56_log_pf, dFe56_log_pf_dT9;
 
-        // interpolating Ni57 partition function
-        get_partition_function_cached(Ni57, tfactors.T9, pf_cache, Ni57_log_pf, dNi57_log_pf_dT9);
+        // interpolating Fe56 partition function
+        get_partition_function_cached(Fe56, tfactors.T9, pf_cache, Fe56_log_pf, dFe56_log_pf_dT9);
 
-        amrex::Real Ni58_log_pf, dNi58_log_pf_dT9;
+        amrex::Real Fe55_log_pf, dFe55_log_pf_dT9;
 
-        // interpolating Ni58 partition function
-        get_partition_function_cached(Ni58, tfactors.T9, pf_cache, Ni58_log_pf, dNi58_log_pf_dT9);
+        // interpolating Fe55 partition function
+        get_partition_function_cached(Fe55, tfactors.T9, pf_cache, Fe55_log_pf, dFe55_log_pf_dT9);
 
-        amrex::Real net_log_pf = n_log_pf + Ni57_log_pf - Ni58_log_pf;
-        [[maybe_unused]] amrex::Real net_dlog_pf_dT9 = dn_log_pf_dT9 + dNi57_log_pf_dT9 - dNi58_log_pf_dT9;
+        amrex::Real net_log_pf = n_log_pf + Fe55_log_pf - Fe56_log_pf;
+        [[maybe_unused]] amrex::Real net_dlog_pf_dT9 = dn_log_pf_dT9 + dFe55_log_pf_dT9 - dFe56_log_pf_dT9;
 
         auto [_rate, _drate_dT] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                    tfactors.lnT9,
-                                                   Ni57_n_to_Ni58_starlib_data::log_t9,
-                                                   Ni57_n_to_Ni58_starlib_data::log_rate);
+                                                   Fe55_n_to_Fe56_starlib_data::log_t9,
+                                                   Fe55_n_to_Fe56_starlib_data::log_rate);
 
-        auto p = Rates::get_p_random<k_Ni57_n_to_Ni58_starlib>();
+        auto p = Rates::get_p_random<k_Fe55_n_to_Fe56_starlib>();
         auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
                                                      tfactors.lnT9,
-                                                     Ni57_n_to_Ni58_starlib_data::log_t9,
-                                                     Ni57_n_to_Ni58_starlib_data::sigma_rate);
+                                                     Fe55_n_to_Fe56_starlib_data::log_t9,
+                                                     Fe55_n_to_Fe56_starlib_data::sigma_rate);
 
         // Add rate uncertainty
         _rate += p * _sigma;
 
         // Apply Equilibrium Ratio
-        constexpr amrex::Real Q_kBGK = -12.216218100000214 * 1.0e-9_rt / C::k_MeV;
+        constexpr amrex::Real Q_kBGK = -11.197078100005754 * 1.0e-9_rt / C::k_MeV;
         amrex::Real Q_kBT = Q_kBGK * tfactors.T9i;
-        _rate += 25.087678975583227 + Q_kBT + net_log_pf + log_scor;
+        _rate += 25.086692234523206 + Q_kBT + net_log_pf + log_scor;
         _rate += 1.5 * tfactors.lnT9;
 
         // avoid underflows by zeroing rates in [0.0, 1.e-100]
@@ -4360,15 +4294,79 @@ namespace derived_rates {
 
     }
 
+    template <int do_T_derivatives, typename T>
+    AMREX_GPU_DEVICE AMREX_INLINE
+    void rate_Ni58_to_n_Ni57_derived(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT, [[maybe_unused]] const T& rate_eval, [[maybe_unused]] part_fun::pf_cache_t& pf_cache) {
+
+        // Ni58 --> n + Ni57
+
+        rate = 0.0;
+        drate_dT = 0.0;
+
+        // Evaluate partition function terms
+
+        amrex::Real n_log_pf, dn_log_pf_dT9;
+
+        // setting n log(partition function) to 0.0 by default, independent of T
+        n_log_pf = 0.0_rt;
+        dn_log_pf_dT9 = 0.0_rt;
+
+        amrex::Real Ni57_log_pf, dNi57_log_pf_dT9;
+
+        // interpolating Ni57 partition function
+        get_partition_function_cached(Ni57, tfactors.T9, pf_cache, Ni57_log_pf, dNi57_log_pf_dT9);
+
+        amrex::Real Ni58_log_pf, dNi58_log_pf_dT9;
+
+        // interpolating Ni58 partition function
+        get_partition_function_cached(Ni58, tfactors.T9, pf_cache, Ni58_log_pf, dNi58_log_pf_dT9);
+
+        amrex::Real net_log_pf = n_log_pf + Ni57_log_pf - Ni58_log_pf;
+        [[maybe_unused]] amrex::Real net_dlog_pf_dT9 = dn_log_pf_dT9 + dNi57_log_pf_dT9 - dNi58_log_pf_dT9;
+
+        auto [_rate, _drate_dT] = interp_net::monotone_1d_interp<do_T_derivatives>(
+                                                   tfactors.lnT9,
+                                                   Ni57_n_to_Ni58_starlib_data::log_t9,
+                                                   Ni57_n_to_Ni58_starlib_data::log_rate);
+
+        auto p = Rates::get_p_random<k_Ni57_n_to_Ni58_starlib>();
+        auto [_sigma, _dsigma_dlogT9] = interp_net::monotone_1d_interp<do_T_derivatives>(
+                                                     tfactors.lnT9,
+                                                     Ni57_n_to_Ni58_starlib_data::log_t9,
+                                                     Ni57_n_to_Ni58_starlib_data::sigma_rate);
+
+        // Add rate uncertainty
+        _rate += p * _sigma;
+
+        // Apply Equilibrium Ratio
+        constexpr amrex::Real Q_kBGK = -12.216218100000214 * 1.0e-9_rt / C::k_MeV;
+        amrex::Real Q_kBT = Q_kBGK * tfactors.T9i;
+        _rate += 25.087678975583227 + Q_kBT + net_log_pf + log_scor;
+        _rate += 1.5 * tfactors.lnT9;
+
+        // avoid underflows by zeroing rates in [0.0, 1.e-100]
+        _rate = std::max(_rate, -230.0);
+        rate = std::exp(_rate);
+
+        // we found dlog(rate)/dlog(T9)
+        if constexpr (std::is_same_v<T, rate_derivs_t>) {
+            // Add rate uncertainty term
+            _drate_dT += p * _dsigma_dlogT9;
+
+            // Convert to dlog(rate)/dT9 first
+            _drate_dT = (_drate_dT + 1.5 - Q_kBT) * tfactors.T9i + net_dlog_pf_dT9 + dlog_scor_dT * 1.0e9_rt;
+            drate_dT = rate * _drate_dT * 1.0e-9_rt;
+        }
+
+    }
+
 
     template <int do_T_derivatives, typename T>
     AMREX_GPU_DEVICE AMREX_INLINE
     void
-    fill_rates(const tf_t& tfactors, T& rate_eval)
+    fill_rates([[maybe_unused]] const tf_t& tfactors,
+               [[maybe_unused]] T& rate_eval)
     {
-
-        amrex::ignore_unused(tfactors);
-        amrex::ignore_unused(rate_eval);
 
         [[maybe_unused]] amrex::Real rate;
         [[maybe_unused]] amrex::Real drate_dT;
@@ -5224,18 +5222,6 @@ namespace derived_rates {
         }
 
         {
-            // Fe54_to_n_Fe53_derived
-
-            amrex::Real log_scor {0.0_rt};
-            amrex::Real dlog_scor_dT {0.0_rt};
-            rate_Fe54_to_n_Fe53_derived<do_T_derivatives, T>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT, rate_eval, pf_cache);
-            rate_eval.screened_rates(k_Fe54_to_n_Fe53_derived) = rate;
-            if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_Fe54_to_n_Fe53_derived) = drate_dT;
-            }
-        }
-
-        {
             // Fe53_to_n_Fe52_derived
 
             amrex::Real log_scor {0.0_rt};
@@ -5248,14 +5234,14 @@ namespace derived_rates {
         }
 
         {
-            // Fe56_to_n_Fe55_derived
+            // Fe54_to_n_Fe53_derived
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_Fe56_to_n_Fe55_derived<do_T_derivatives, T>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT, rate_eval, pf_cache);
-            rate_eval.screened_rates(k_Fe56_to_n_Fe55_derived) = rate;
+            rate_Fe54_to_n_Fe53_derived<do_T_derivatives, T>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT, rate_eval, pf_cache);
+            rate_eval.screened_rates(k_Fe54_to_n_Fe53_derived) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_Fe56_to_n_Fe55_derived) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe54_to_n_Fe53_derived) = drate_dT;
             }
         }
 
@@ -5272,14 +5258,14 @@ namespace derived_rates {
         }
 
         {
-            // Ni58_to_n_Ni57_derived
+            // Fe56_to_n_Fe55_derived
 
             amrex::Real log_scor {0.0_rt};
             amrex::Real dlog_scor_dT {0.0_rt};
-            rate_Ni58_to_n_Ni57_derived<do_T_derivatives, T>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT, rate_eval, pf_cache);
-            rate_eval.screened_rates(k_Ni58_to_n_Ni57_derived) = rate;
+            rate_Fe56_to_n_Fe55_derived<do_T_derivatives, T>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT, rate_eval, pf_cache);
+            rate_eval.screened_rates(k_Fe56_to_n_Fe55_derived) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_Ni58_to_n_Ni57_derived) = drate_dT;
+                rate_eval.dscreened_rates_dT(k_Fe56_to_n_Fe55_derived) = drate_dT;
             }
         }
 
@@ -5292,6 +5278,18 @@ namespace derived_rates {
             rate_eval.screened_rates(k_Ni57_to_n_Ni56_derived) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
                 rate_eval.dscreened_rates_dT(k_Ni57_to_n_Ni56_derived) = drate_dT;
+            }
+        }
+
+        {
+            // Ni58_to_n_Ni57_derived
+
+            amrex::Real log_scor {0.0_rt};
+            amrex::Real dlog_scor_dT {0.0_rt};
+            rate_Ni58_to_n_Ni57_derived<do_T_derivatives, T>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT, rate_eval, pf_cache);
+            rate_eval.screened_rates(k_Ni58_to_n_Ni57_derived) = rate;
+            if constexpr (std::is_same_v<T, rate_derivs_t>) {
+                rate_eval.dscreened_rates_dT(k_Ni58_to_n_Ni57_derived) = drate_dT;
             }
         }
 

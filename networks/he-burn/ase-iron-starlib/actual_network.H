@@ -339,17 +339,17 @@ namespace Rates
         k_Ni58_p_to_Cu59_starlib = 52,
         k_Cu59_n_to_He4_Co56_starlib = 53,
         k_S32_He4_to_Ar36_starlib = 54,
-        k_Cl35_p_to_Ar36_starlib = 55,
-        k_Cl35_p_to_He4_S32_starlib = 56,
+        k_Cl35_p_to_He4_S32_starlib = 55,
+        k_Cl35_p_to_Ar36_starlib = 56,
         k_Ar36_He4_to_Ca40_starlib = 57,
-        k_K39_p_to_Ca40_starlib = 58,
-        k_K39_p_to_He4_Ar36_starlib = 59,
+        k_K39_p_to_He4_Ar36_starlib = 58,
+        k_K39_p_to_Ca40_starlib = 59,
         k_Ca40_He4_to_Ti44_starlib = 60,
-        k_Sc43_p_to_Ti44_starlib = 61,
-        k_Sc43_p_to_He4_Ca40_starlib = 62,
+        k_Sc43_p_to_He4_Ca40_starlib = 61,
+        k_Sc43_p_to_Ti44_starlib = 62,
         k_Ti44_He4_to_Cr48_starlib = 63,
-        k_V47_p_to_Cr48_starlib = 64,
-        k_V47_p_to_He4_Ti44_starlib = 65,
+        k_V47_p_to_He4_Ti44_starlib = 64,
+        k_V47_p_to_Cr48_starlib = 65,
         k_Fe52_n_to_Fe53_starlib = 66,
         k_Fe53_n_to_Fe54_starlib = 67,
         k_Fe54_n_to_Fe55_starlib = 68,
@@ -432,13 +432,13 @@ namespace Rates
         k_Ti44_He4_to_p_V47_derived = 145,
         k_Cr48_to_He4_Ti44_derived = 146,
         k_Cr48_to_p_V47_derived = 147,
-        k_Fe54_to_n_Fe53_derived = 148,
-        k_Fe53_to_n_Fe52_derived = 149,
-        k_Fe56_to_n_Fe55_derived = 150,
-        k_Fe55_to_n_Fe54_derived = 151,
-        k_Ni58_to_n_Ni57_derived = 152,
-        k_Ni57_to_n_Ni56_derived = 153,
-        NumRates = k_Ni57_to_n_Ni56_derived
+        k_Fe53_to_n_Fe52_derived = 148,
+        k_Fe54_to_n_Fe53_derived = 149,
+        k_Fe55_to_n_Fe54_derived = 150,
+        k_Fe56_to_n_Fe55_derived = 151,
+        k_Ni57_to_n_Ni56_derived = 152,
+        k_Ni58_to_n_Ni57_derived = 153,
+        NumRates = k_Ni58_to_n_Ni57_derived
     };
 
     enum ScreenPairs :
@@ -546,17 +546,17 @@ namespace Rates
         "Ni58_p_to_Cu59_starlib",  // 52,
         "Cu59_n_to_He4_Co56_starlib",  // 53,
         "S32_He4_to_Ar36_starlib",  // 54,
-        "Cl35_p_to_Ar36_starlib",  // 55,
-        "Cl35_p_to_He4_S32_starlib",  // 56,
+        "Cl35_p_to_He4_S32_starlib",  // 55,
+        "Cl35_p_to_Ar36_starlib",  // 56,
         "Ar36_He4_to_Ca40_starlib",  // 57,
-        "K39_p_to_Ca40_starlib",  // 58,
-        "K39_p_to_He4_Ar36_starlib",  // 59,
+        "K39_p_to_He4_Ar36_starlib",  // 58,
+        "K39_p_to_Ca40_starlib",  // 59,
         "Ca40_He4_to_Ti44_starlib",  // 60,
-        "Sc43_p_to_Ti44_starlib",  // 61,
-        "Sc43_p_to_He4_Ca40_starlib",  // 62,
+        "Sc43_p_to_He4_Ca40_starlib",  // 61,
+        "Sc43_p_to_Ti44_starlib",  // 62,
         "Ti44_He4_to_Cr48_starlib",  // 63,
-        "V47_p_to_Cr48_starlib",  // 64,
-        "V47_p_to_He4_Ti44_starlib",  // 65,
+        "V47_p_to_He4_Ti44_starlib",  // 64,
+        "V47_p_to_Cr48_starlib",  // 65,
         "Fe52_n_to_Fe53_starlib",  // 66,
         "Fe53_n_to_Fe54_starlib",  // 67,
         "Fe54_n_to_Fe55_starlib",  // 68,
@@ -639,12 +639,12 @@ namespace Rates
         "Ti44_He4_to_p_V47_derived",  // 145,
         "Cr48_to_He4_Ti44_derived",  // 146,
         "Cr48_to_p_V47_derived",  // 147,
-        "Fe54_to_n_Fe53_derived",  // 148,
-        "Fe53_to_n_Fe52_derived",  // 149,
-        "Fe56_to_n_Fe55_derived",  // 150,
-        "Fe55_to_n_Fe54_derived",  // 151,
-        "Ni58_to_n_Ni57_derived",  // 152,
-        "Ni57_to_n_Ni56_derived"  // 153,
+        "Fe53_to_n_Fe52_derived",  // 148,
+        "Fe54_to_n_Fe53_derived",  // 149,
+        "Fe55_to_n_Fe54_derived",  // 150,
+        "Fe56_to_n_Fe55_derived",  // 151,
+        "Ni57_to_n_Ni56_derived",  // 152,
+        "Ni58_to_n_Ni57_derived"  // 153,
     };
 
     template<std::uint8_t rate>
@@ -842,11 +842,11 @@ namespace Rates
             return starlib::prand(48);
         }
 
-        if constexpr (rate == k_Cl35_p_to_Ar36_starlib) {
+        if constexpr (rate == k_Cl35_p_to_He4_S32_starlib) {
             return starlib::prand(49);
         }
 
-        if constexpr (rate == k_Cl35_p_to_He4_S32_starlib) {
+        if constexpr (rate == k_Cl35_p_to_Ar36_starlib) {
             return starlib::prand(50);
         }
 
@@ -854,11 +854,11 @@ namespace Rates
             return starlib::prand(51);
         }
 
-        if constexpr (rate == k_K39_p_to_Ca40_starlib) {
+        if constexpr (rate == k_K39_p_to_He4_Ar36_starlib) {
             return starlib::prand(52);
         }
 
-        if constexpr (rate == k_K39_p_to_He4_Ar36_starlib) {
+        if constexpr (rate == k_K39_p_to_Ca40_starlib) {
             return starlib::prand(53);
         }
 
@@ -866,11 +866,11 @@ namespace Rates
             return starlib::prand(54);
         }
 
-        if constexpr (rate == k_Sc43_p_to_Ti44_starlib) {
+        if constexpr (rate == k_Sc43_p_to_He4_Ca40_starlib) {
             return starlib::prand(55);
         }
 
-        if constexpr (rate == k_Sc43_p_to_He4_Ca40_starlib) {
+        if constexpr (rate == k_Sc43_p_to_Ti44_starlib) {
             return starlib::prand(56);
         }
 
@@ -878,11 +878,11 @@ namespace Rates
             return starlib::prand(57);
         }
 
-        if constexpr (rate == k_V47_p_to_Cr48_starlib) {
+        if constexpr (rate == k_V47_p_to_He4_Ti44_starlib) {
             return starlib::prand(58);
         }
 
-        if constexpr (rate == k_V47_p_to_He4_Ti44_starlib) {
+        if constexpr (rate == k_V47_p_to_Cr48_starlib) {
             return starlib::prand(59);
         }
 
