@@ -22,13 +22,8 @@ def doit():
 
     net.plot(rho, T, comp, outfile="cno_extras.png",
              node_size=500, node_font_size="9",
-             Z_range=[1, 13], N_range=[1, 13])
-
-    net.plot(outfile="cno_extras_hide_alpha.png",
-             node_size=500, node_font_size="9",
-             Z_range=[1, 13], N_range=[1, 13],
-             rotated=True,
-             hide_xalpha=True)
+             Z_range=[0, 13], N_range=[-0.5, 12.5],
+             always_show_p=True)
 
     net.summary()
 

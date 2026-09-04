@@ -2290,42 +2290,6 @@ namespace reaclib_rates {
 
     template <int do_T_derivatives>
     AMREX_GPU_DEVICE AMREX_INLINE
-    void rate_Ne18_He4_to_Mg22_reaclib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
-
-        // Ne18 + He4 --> Mg22
-
-        rate = 0.0;
-        drate_dT = 0.0;
-
-        amrex::Real ln_set_rate{0.0};
-        amrex::Real dln_set_rate_dT9{0.0};
-        amrex::Real set_rate{0.0};
-
-        // ths8r
-        ln_set_rate =  32.8865 + -46.4859 * tfactors.T913i + 0.956741 * tfactors.T913
-                             + -0.914402 * tfactors.T9 + 0.0722478 * tfactors.T953 + -0.666667 * tfactors.lnT9;
-
-        ln_set_rate += log_scor;
-
-        if constexpr (do_T_derivatives) {
-            dln_set_rate_dT9 =  + -(1.0/3.0) * -46.4859 * tfactors.T943i + (1.0/3.0) * 0.956741 * tfactors.T923i
-                                      + -0.914402 + (5.0/3.0) * 0.0722478 * tfactors.T923 + -0.666667 * tfactors.T9i;
-
-            dln_set_rate_dT9 += dlog_scor_dT * 1.0e9_rt;
-        }
-
-        // avoid underflows by zeroing rates in [0.0, 1.e-100]
-        ln_set_rate = std::max(ln_set_rate, -230.0);
-        set_rate = std::exp(ln_set_rate);
-        rate += set_rate;
-        if constexpr (do_T_derivatives) {
-            drate_dT += set_rate * dln_set_rate_dT9 * 1.0e-9;
-        }
-
-    }
-
-    template <int do_T_derivatives>
-    AMREX_GPU_DEVICE AMREX_INLINE
     void rate_Ne18_He4_to_p_Na21_reaclib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
 
         // Ne18 + He4 --> p + Na21
@@ -2388,6 +2352,42 @@ namespace reaclib_rates {
         if constexpr (do_T_derivatives) {
             dln_set_rate_dT9 =  3.8681 * tfactors.T9i * tfactors.T9i + -(1.0/3.0) * 7.09521e-06 * tfactors.T943i + (1.0/3.0) * 34.1789 * tfactors.T923i
                                       + -1.72974 + (5.0/3.0) * -0.0395081 * tfactors.T923 + -7.82759e-07 * tfactors.T9i;
+
+            dln_set_rate_dT9 += dlog_scor_dT * 1.0e9_rt;
+        }
+
+        // avoid underflows by zeroing rates in [0.0, 1.e-100]
+        ln_set_rate = std::max(ln_set_rate, -230.0);
+        set_rate = std::exp(ln_set_rate);
+        rate += set_rate;
+        if constexpr (do_T_derivatives) {
+            drate_dT += set_rate * dln_set_rate_dT9 * 1.0e-9;
+        }
+
+    }
+
+    template <int do_T_derivatives>
+    AMREX_GPU_DEVICE AMREX_INLINE
+    void rate_Ne18_He4_to_Mg22_reaclib(const tf_t& tfactors, const amrex::Real log_scor, const amrex::Real dlog_scor_dT, amrex::Real& rate, amrex::Real& drate_dT) {
+
+        // Ne18 + He4 --> Mg22
+
+        rate = 0.0;
+        drate_dT = 0.0;
+
+        amrex::Real ln_set_rate{0.0};
+        amrex::Real dln_set_rate_dT9{0.0};
+        amrex::Real set_rate{0.0};
+
+        // ths8r
+        ln_set_rate =  32.8865 + -46.4859 * tfactors.T913i + 0.956741 * tfactors.T913
+                             + -0.914402 * tfactors.T9 + 0.0722478 * tfactors.T953 + -0.666667 * tfactors.lnT9;
+
+        ln_set_rate += log_scor;
+
+        if constexpr (do_T_derivatives) {
+            dln_set_rate_dT9 =  + -(1.0/3.0) * -46.4859 * tfactors.T943i + (1.0/3.0) * 0.956741 * tfactors.T923i
+                                      + -0.914402 + (5.0/3.0) * 0.0722478 * tfactors.T923 + -0.666667 * tfactors.T9i;
 
             dln_set_rate_dT9 += dlog_scor_dT * 1.0e9_rt;
         }
@@ -3371,24 +3371,6 @@ namespace reaclib_rates {
         }
 
         {
-            // Ne18_He4_to_Mg22_reaclib
-
-            amrex::Real log_scor {0.0_rt};
-            amrex::Real dlog_scor_dT {0.0_rt};
-#ifdef SCREENING
-            log_scor = rate_eval.log_screen(k_He4_Ne18);
-            if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Ne18);
-            }
-#endif
-            rate_Ne18_He4_to_Mg22_reaclib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-            rate_eval.screened_rates(k_Ne18_He4_to_Mg22_reaclib) = rate;
-            if constexpr (std::is_same_v<T, rate_derivs_t>) {
-                rate_eval.dscreened_rates_dT(k_Ne18_He4_to_Mg22_reaclib) = drate_dT;
-            }
-        }
-
-        {
             // Ne18_He4_to_p_Na21_reaclib
 
             amrex::Real log_scor {0.0_rt};
@@ -3403,6 +3385,24 @@ namespace reaclib_rates {
             rate_eval.screened_rates(k_Ne18_He4_to_p_Na21_reaclib) = rate;
             if constexpr (std::is_same_v<T, rate_derivs_t>) {
                 rate_eval.dscreened_rates_dT(k_Ne18_He4_to_p_Na21_reaclib) = drate_dT;
+            }
+        }
+
+        {
+            // Ne18_He4_to_Mg22_reaclib
+
+            amrex::Real log_scor {0.0_rt};
+            amrex::Real dlog_scor_dT {0.0_rt};
+#ifdef SCREENING
+            log_scor = rate_eval.log_screen(k_He4_Ne18);
+            if constexpr (std::is_same_v<T, rate_derivs_t>) {
+                dlog_scor_dT = rate_eval.dlog_screen_dT(k_He4_Ne18);
+            }
+#endif
+            rate_Ne18_He4_to_Mg22_reaclib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+            rate_eval.screened_rates(k_Ne18_He4_to_Mg22_reaclib) = rate;
+            if constexpr (std::is_same_v<T, rate_derivs_t>) {
+                rate_eval.dscreened_rates_dT(k_Ne18_He4_to_Mg22_reaclib) = drate_dT;
             }
         }
 

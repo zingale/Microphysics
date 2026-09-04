@@ -258,8 +258,8 @@ namespace Rates
         k_F19_p_to_He4_O16_reaclib = 28,
         k_Ne20_p_to_He4_F17_reaclib = 29,
         k_He4_He4_He4_to_C12_reaclib = 30,
-        k_Ne18_He4_to_Mg22_reaclib = 31,
-        k_Ne18_He4_to_p_Na21_reaclib = 32,
+        k_Ne18_He4_to_p_Na21_reaclib = 31,
+        k_Ne18_He4_to_Mg22_reaclib = 32,
         k_Na21_p_to_Mg22_reaclib = 33,
         k_Ne19_p_to_Na20_reaclib = 34,
         k_Ne20_p_to_Na21_reaclib = 35,
@@ -310,9 +310,9 @@ namespace Rates
         k_O16_He4_to_p_F19_derived = 80,
         k_F17_p_to_He4_O14_derived = 81,
         k_F17_He4_to_p_Ne20_derived = 82,
-        k_Mg22_to_p_Na21_derived = 83,
-        k_Na21_p_to_He4_Ne18_derived = 84,
-        NumRates = k_Na21_p_to_He4_Ne18_derived
+        k_Na21_p_to_He4_Ne18_derived = 83,
+        k_Mg22_to_p_Na21_derived = 84,
+        NumRates = k_Mg22_to_p_Na21_derived
     };
 
     enum ScreenPairs :
@@ -387,8 +387,8 @@ namespace Rates
         "F19_p_to_He4_O16_reaclib",  // 28,
         "Ne20_p_to_He4_F17_reaclib",  // 29,
         "He4_He4_He4_to_C12_reaclib",  // 30,
-        "Ne18_He4_to_Mg22_reaclib",  // 31,
-        "Ne18_He4_to_p_Na21_reaclib",  // 32,
+        "Ne18_He4_to_p_Na21_reaclib",  // 31,
+        "Ne18_He4_to_Mg22_reaclib",  // 32,
         "Na21_p_to_Mg22_reaclib",  // 33,
         "Ne19_p_to_Na20_reaclib",  // 34,
         "Ne20_p_to_Na21_reaclib",  // 35,
@@ -439,8 +439,8 @@ namespace Rates
         "O16_He4_to_p_F19_derived",  // 80,
         "F17_p_to_He4_O14_derived",  // 81,
         "F17_He4_to_p_Ne20_derived",  // 82,
-        "Mg22_to_p_Na21_derived",  // 83,
-        "Na21_p_to_He4_Ne18_derived"  // 84,
+        "Na21_p_to_He4_Ne18_derived",  // 83,
+        "Mg22_to_p_Na21_derived"  // 84,
     };
 
     template<std::uint8_t rate>
