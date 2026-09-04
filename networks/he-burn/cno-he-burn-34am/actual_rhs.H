@@ -768,18 +768,6 @@ void get_ydot_weak(const burn_t& state,
     const tf_t tfactors = evaluate_tfactors(state.T);
 
     {
-        // Mg24_p_p_to_Na22_He4_beta_pos_modified
-
-        amrex::Real log_scor {0.0_rt};
-        amrex::Real dlog_scor_dT {0.0_rt};
-#ifdef SCREENING
-        log_scor = rate_eval.log_screen(k_p_Mg24);
-#endif
-        modified_rates::rate_Mg24_p_p_to_Na22_He4_beta_pos_modified<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
-        rate_eval.screened_rates(k_Mg24_p_p_to_Na22_He4_beta_pos_modified) = rate;
-    }
-
-    {
         // N13_to_C13_beta_pos_reaclib
 
         amrex::Real log_scor {0.0_rt};
@@ -804,6 +792,18 @@ void get_ydot_weak(const burn_t& state,
         amrex::Real dlog_scor_dT {0.0_rt};
         reaclib_rates::rate_O15_to_N15_beta_pos_reaclib<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
         rate_eval.screened_rates(k_O15_to_N15_beta_pos_reaclib) = rate;
+    }
+
+    {
+        // Mg24_p_p_to_Na22_He4_beta_pos_modified
+
+        amrex::Real log_scor {0.0_rt};
+        amrex::Real dlog_scor_dT {0.0_rt};
+#ifdef SCREENING
+        log_scor = rate_eval.log_screen(k_p_Mg24);
+#endif
+        modified_rates::rate_Mg24_p_p_to_Na22_He4_beta_pos_modified<do_T_derivatives>(tfactors, log_scor, dlog_scor_dT, rate, drate_dT);
+        rate_eval.screened_rates(k_Mg24_p_p_to_Na22_He4_beta_pos_modified) = rate;
     }
 
     tabular_weak_rates::fill_rates(state.T, rhoy, Y, rate_eval);
