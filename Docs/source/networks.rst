@@ -163,8 +163,10 @@ network <https://docs.mesastar.org/en/latest/net/nets.html>`_ which is
 meant to study hot-CNO burning and the start of the breakout from CNO
 burning.  This network is managed by pynucastro.
 
-.. figure:: ../../networks/CNO_extras/cno_extras_hide_alpha.png
+.. figure:: ../../networks/CNO_extras/cno_extras.png
    :align: center
+
+Overall there are 22 nuclei and 74 rates explicitly connecting the nuclei.
 
 .. note::
 
@@ -185,16 +187,18 @@ This network is composed of 17 nuclei: $\isotm{H}{1,2}$,
 $\isotm{He}{3,4}$, $\isotm{Be}{7}$, $\isotm{B}{8}$,
 $\isotm{C}{12,13}$, $\isotm{N}{13-15}$, $\isotm{O}{14-17}$,
 $\isotm{F}{17,18}$ and is used to model the onset of a classical novae
-thermonuclear runaway. The first set of nuclei, $\isotm{H}{1,2}$,
-$\isotm{He}{3,4}$ represent the pp-chain sector of the reaction
-network, while the second set, of $\isotm{Be}{7}$, and $\isotm{B}{8}$,
-describe the involvement of the x-process. Finally, all the remaining
-nuclei are active participants of the CNO cycle with endpoints at
-$\isotm{F}{17}$ and $\isotm{F}{18}$. The triple-$\alpha$ reaction
+thermonuclear runaway. These are linked together by 55 rates (including reverse rates).
+
+The first set of nuclei, $\isotm{H}{1,2}$, $\isotm{He}{3,4}$ represent
+the pp-chain sector of the reaction network, while the second set, of
+$\isotm{Be}{7}$, and $\isotm{B}{8}$, describe the involvement of the
+x-process. Finally, all the remaining nuclei are active participants
+of the CNO cycle with endpoints at $\isotm{F}{17}$ and
+$\isotm{F}{18}$. The triple-$\alpha$ reaction
 $\alpha(\alpha\alpha,\gamma)\isotm{C}{12}$, serves as bridge between
 the nuclei of first and the last set.
 
-The the cold-CNO chain of reactions of the CN-branch are:
+The cold-CNO chain of reactions of the CN-branch are:
 
 * :math:`\isotm{C}{12}(p,\gamma)\isotm{N}{13}(\beta^{+}\nu_e)\isotm{C}{13}(p,\gamma)`
 
@@ -202,14 +206,18 @@ while the NO-branch chain of reactions is:
 
 * :math:`\isotm{N}{14}(p,\gamma)\isotm{O}{15}(\beta^{+})\isotm{N}{15}(p,\gamma)\isotm{O}{16}(p,\gamma)\isotm{F}{17}(\beta^{+}\nu_e)\isotm{O}{17}`
 
-where the isotopes $\isotm{N}{15}$ and $\isotm{O}{17}$ may decay back into $\isotm{C}{12}$ and $\isotm{N}{14}$ through
-$\isotm{N}{15}(p,\alpha)\isotm{C}{12}$ and $\isotm{O}{17}(p,\alpha)\isotm{N}{14}$ respectively.
+where the isotopes $\isotm{N}{15}$ and $\isotm{O}{17}$ may decay back
+into $\isotm{C}{12}$ and $\isotm{N}{14}$ through
+$\isotm{N}{15}(p,\alpha)\isotm{C}{12}$ and
+$\isotm{O}{17}(p,\alpha)\isotm{N}{14}$ respectively.
 
 .. figure:: ../../networks/nova/nova.png
    :align: center
 
-Once the temperature reaches a threshold of $\gtrsim 10^8\,\mathrm{K}$, the fast $p$-captures, for example,
-$\isotm{N}{13}(p,\gamma)\isotm{O}{14}$, are more likely than the $\beta^{+}$-decays $\isotm{N}{13}(\beta^{+}\nu_e)\isotm{C}{13}$
+Once the temperature reaches a threshold of $\gtrsim
+10^8\,\mathrm{K}$, the fast $p$-captures, for example,
+$\isotm{N}{13}(p,\gamma)\isotm{O}{14}$, are more likely than the
+$\beta^{+}$-decays $\isotm{N}{13}(\beta^{+}\nu_e)\isotm{C}{13}$
 reactions. These rates are also included in this network.
 
 ``nova-li``
@@ -219,6 +227,11 @@ This network builds on ``nova`` and adds $\isotm{Li}{7}$ as well as
 nuclei beyond fluorine.  It should give a more accurate energy in late
 stages of the burst, and can also be used to explore lithium
 production.
+
+To keep the network size down, a filtering process is done to remove
+rates that are not expected to be important under the thermodynamic
+conditions encountered in a nova.  The result is that the network has
+25 nuclei and 54 rates.
 
 .. figure:: ../../networks/nova-li/nova-li.png
    :align: center
@@ -423,6 +436,25 @@ The full network appears as:
    :align: center
 
 Overall there are 28 nuclei with 7 approximated-out nuclei and 153 rates.
+
+``ase-iron-starlib``
+--------------------
+
+This is the same as ``ase-iron``, but uses rates from StarLib
+:cite:`StarLib` instead of ReacLib :cite:`ReacLib`.  This allows for
+an exploration of rate uncertainties by setting
+``network.starlib_seed``.
+
+``ase-big``
+-----------
+
+An even larger NSE-compatible network that contains all of the odd-numbered nuclei
+in the sequence up to the iron group.
+
+.. figure:: ../../networks/he-burn/ase-big/ase-big.png
+   :align: center
+
+Overall there are 61 nuclei and 296 rates.
 
 ``cno_he_burn_33a``
 -------------------

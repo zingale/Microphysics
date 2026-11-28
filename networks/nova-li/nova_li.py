@@ -15,33 +15,23 @@ def create_network():
                   "f17", "f18", "f19",
                   "ne18", "ne19", "ne20", "ne21"]
 
-    nova_library = rl.linking_nuclei(all_nuclei, with_reverse=True)
-
-    tl = pyna.TabularLibrary(ordering=["ffn", "oda", "langanke"])
-    weak_library = tl.linking_nuclei(all_nuclei)
-
-    # remove duplicates
-    all_lib = nova_library + weak_library
-
-    all_lib.eliminate_duplicates(rate_type_preference="tabular")
-
-    net = AmrexAstroCxxNetwork(libraries=[all_lib])
+    net = pyna.network_helper(all_nuclei,
+                              tabular_ordering=["ffn", "langanke", "oda"],
+                              network_type="amrex")
 
     # now remove unimportant rates
 
     # cool state
     rho = 1.7e3
     T = 7.e7
-    comp = pyna.Composition(net.unique_nuclei)
-    comp.set_solar_like()
-    state1 = (rho, T, comp)
+    comp = pyna.Composition(net.unique_nuclei, init="solar")
+    state1 = pyna.ThermoState(rho=rho, T=T, comp=comp)
 
     # hotter state
     rho = 1.e3
     T = 1.e8
-    comp = pyna.Composition(net.unique_nuclei)
-    comp.set_equal()
-    state2 = (rho, T, comp)
+    comp = pyna.Composition(net.unique_nuclei, init="uniform")
+    state2 = pyna.ThermoState(rho=rho, T=T, comp=comp)
 
     cutoff_ratio = 1.e-50
 
